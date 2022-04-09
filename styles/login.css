@@ -1,0 +1,260 @@
+.divdeusdetodos {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.main-div {
+	display: flex;
+	align-items: center;
+	border-radius: 2%;
+	width: 70%;
+	height: 500px;
+	background-color: white;
+
+	justify-content: space-between;
+}
+
+.divinput {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	font-family: Arial, Helvetica, sans-serif;
+
+	width: 80%;
+}
+
+input {
+	width: 90%;
+	margin-bottom: 10%;
+	align-items: center;
+	background-color: rgb(208, 206, 206);
+	border: 0ch;
+	border-radius: 5px;
+	height: 30px;
+}
+
+.divfilha {
+	height: 100%;
+	width: 60%;
+	background-image: url("fundo.jpg");
+	background-size: cover;
+	display: flex;
+	align-items: flex-end;
+}
+
+.imagem {
+	width: 100%;
+	height: 100%;
+}
+
+.icons {
+	padding-top: 20px;
+	width: 90%;
+	display: flex;
+
+	justify-content: space-between;
+}
+
+.redes {
+	width: 8%;
+}
+
+.logindiv {
+	width: 30%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+
+	height: 100%;
+	width: 40%;
+	align-items: center;
+}
+
+.buttonlogin {
+	background-color: rgb(0, 102, 228);
+	color: white;
+	border: 0ch;
+	width: 90%;
+	height: 30px;
+	border-radius: 5px;
+}
+
+.conta {
+	padding-top: 20px;
+	font-size: 11px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.ou {
+	color: rgb(162, 159, 159);
+	display: flex;
+	justify-content: center;
+	margin-top: 3%;
+	border-top: 2 px solid rgb(162, 159, 159);
+	padding-top: 18px;
+	margin-right: 9%;
+	height: 9px;
+}
+
+.checkinput {
+	width: 15px;
+}
+
+.checkdiv {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+
+	width: 90%;
+}
+
+* {
+	--main-color: #002043;
+	--secondary-color: #2ac28a;
+	--terciary-color: #d3b04d;
+	margin: 0;
+}
+
+body {
+	margin: 0;
+	font-family: sans-serif;
+	min-height: 100vh;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+a {
+	text-decoration: none;
+	color: white;
+}
+
+/* HEADER */
+
+.header {
+	display: flex;
+	justify-content: space-evenly;
+	background-color: var(--main-color);
+	position: sticky;
+	top: 0;
+	height: 11vh;
+	z-index: 999;
+	width: 100%;
+}
+
+.nome-empresa {
+	color: #2ac28a;
+	text-shadow: 1px 1px #d3b04d;
+}
+
+.header a:hover {
+	color: var(--terciary-color);
+	text-decoration: underline;
+}
+
+/* logo */
+
+.logo {
+	display: flex;
+	align-items: center;
+}
+
+.logo img {
+	height: 50px;
+	background-color: var(--main-color);
+}
+
+.nome-empresa {
+	padding-left: 10px;
+	font-family: monospace;
+	font-size: 2rem;
+}
+
+/* nav */
+
+.main-nav {
+	display: flex;
+	align-items: center;
+	font-size: 1.4rem;
+}
+
+.main-nav ul {
+	display: flex;
+	align-items: center;
+	list-style-type: none;
+	column-gap: 40px;
+}
+
+.login-nav {
+	display: flex;
+	align-items: center;
+	font-size: 1.4rem;
+}
+
+.login-nav ul {
+	display: flex;
+	list-style-type: none;
+	column-gap: 40px;
+}
+
+/* FOOTER */
+
+.footer-container {
+	background: linear-gradient(to right, #111, rgba(17, 17, 17, 0.95));
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	height: 150px;
+	font-size: 0.8rem;
+}
+
+.footer-links-container {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	row-gap: 15px;
+}
+
+.footer-links-container ul {
+	list-style-type: none;
+	display: flex;
+	padding: 0;
+	column-gap: 10px;
+}
+
+.footer-links-container ul li {
+	border-right: 1px solid white;
+	padding-right: 10px;
+}
+
+.footer-links-container ul li:last-child {
+	border-right: none;
+}
+
+.footer-endereco-container {
+	display: flex;
+	flex-direction: column;
+	row-gap: 15px;
+}
+
+.redes-sociais {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	row-gap: 20px;
+}
+
+.icons-container {
+	display: flex;
+	justify-content: space-between;
+	column-gap: 25px;
+}
+
+.redes-sociais i {
+	font-size: 1.8rem;
+}

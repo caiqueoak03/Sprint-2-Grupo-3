@@ -5,8 +5,14 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Soy Venture</title>
-		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="styles/index.css" />
 		<link rel="shortcut icon" href="images/logo.png" type="image/x-icon" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400&family=Roboto:ital,wght@0,400;0,700;1,700&display=swap"
+			rel="stylesheet"
+		/>
 		<script
 			src="https://kit.fontawesome.com/8c4cdd8d42.js"
 			crossorigin="anonymous"
@@ -23,23 +29,23 @@
 
 			<div class="main-nav">
 				<ul>
-					<li>Inicio</li>
-					<li>Sobre</li>
-					<li>Contato</li>
-					<li>Calculadora</li>
+					<li><a href="index.html#"> Inicio</a></li>
+					<li><a href="index.html#visão-valores">Sobre</a></li>
+					<li><a href="index.html#contato-card">Contato</a></li>
+					<li><a href="">Calculadora</a></li>
 				</ul>
 			</div>
 
 			<div class="login-nav">
 				<ul>
-					<li>Cadastrar</li>
-					<li>Entrar</li>
+					<li><a href="">Cadastrar</a></li>
+					<li><a href="pages/login.html">Entrar</a></li>
 				</ul>
 			</div>
 		</div>
 
 		<!-- BANNER -->
-		<div class="banner">
+		<div id="banner">
 			<div class="text-button-container">
 				<p>
 					Quer simular o lucro que você vai ter caso firmar um contrato conosco?
@@ -52,7 +58,7 @@
 		</div>
 
 		<!-- VISÃO E VALORES -->
-		<div class="visão-valores">
+		<div id="visão-valores">
 			<div class="quem-somos-container visao-containers">
 				<div class="quem-somos-text visao-texts">
 					<h1>Quem somos?</h1>
@@ -104,53 +110,55 @@
 			<div class="lucros-card cards">
 				<i class="fa-solid fa-hand-holding-dollar"></i>
 				<h3>Lucros aumentam!</h3>
-				<p>Lorem ipsum dolor sit, amet consectetur adipisicing.</p>
+				<p>Seu negócio rende mais em menos tempo!</p>
 			</div>
 			<div class="economia-card cards">
-				<img src="" alt="" />
-				<h3>Lorem, ipsum.</h3>
-				<p>Lorem ipsum dolor sit, amet consectetur adipisicing.</p>
+				<i class="fa-solid fa-stopwatch"></i>
+				<h3>Economizará tempo!</h3>
+				<p>Com a automatização do plantio, você polpa seu tempo.</p>
 			</div>
 			<div class="prazo-card cards">
-				<img src="" alt="" />
-				<h3>Lorem, ipsum.</h3>
-				<p>Lorem ipsum dolor sit, amet consectetur adipisicing.</p>
+				<i class="fa-regular fa-calendar-check"></i>
+				<h3>Entregas no prazo</h3>
+				<p>Satisfação dos clientes na nossa qualidade e prazos da proposta.</p>
 			</div>
 			<div class="dados-card cards">
-				<img src="" alt="" />
-				<h3>Lorem, ipsum.</h3>
-				<p>Lorem ipsum dolor sit, amet consectetur adipisicing.</p>
+				<i class="fa-solid fa-chart-line"></i>
+				<h3>Dados em tempo real!</h3>
+				<p>Alertas e notificações em seu dispositivo em questão de segundos!</p>
 			</div>
 		</div>
 
 		<!-- CONTATO CARD -->
-		<div class="contato-card-container">
-			<div class="contato-card">
+		<div id="contato-card">
+			<img src="images/background-image.svg" class="bg-image" alt="" />
+			<div class="contato-card-container">
 				<div class="contato-campos">
-					<h1>Contato</h1>
-					<p>Preencha todos os campos</p>
+					<h1 class="contato">Contato</h1>
+					<p class="padding-text">Preencha todos os campos</p>
 					<p>Nome:</p>
-					<input type="text" id="in_nome" />
+					<input type="text" id="in_nome" class="campos" />
 					<p>E-mail:</p>
-					<input type="text" id="in_email" />
+					<input type="text" id="in_email" class="campos" />
 					<p>Assunto:</p>
-					<input type="text" id="in_assunto" />
+					<input type="text" id="in_assunto" class="campos" />
 					<p>Mensagem:</p>
-					<input type="text" id="in_mensagem" />
-					<input type="checkbox" checked name="" id="" />
-					<p>Aceito receber novidades da lorem</p>
+					<input type="text" id="in_mensagem" class="campos" />
+					<div class="campo-aceito">
+						<input type="checkbox" checked name="" id="checkbox" />
+						<p>Aceito receber novidades da Soy Venture</p>
+					</div>
+					<button id="enviar-btn">ENVIAR</button>
 				</div>
-
-				<img src="" alt="" />
+				<div class="barra-vertical"></div>
+				<img src="images/Contact us-bro (1).svg" alt="" />
 			</div>
-
-			<button>ENVIAR</button>
 		</div>
 
 		<!-- FOOTER -->
 		<div class="footer-container">
 			<div class="footer-links-container">
-				<p>Lorem ipsum dolor sit amet.</p>
+				<p>Soy Venture SA | CNPJ: 56.080.425/0001-02</p>
 				<ul>
 					<li>PORTABILIDADE</li>
 					<li>TRABALHE CONOSCO</li>
@@ -160,19 +168,22 @@
 			</div>
 
 			<div class="footer-endereco-container">
-				<p class="endereco">Lorem ipsum dolor sit amet consectetur.</p>
+				<p class="endereco">
+					Cidade de Deus, S/Nº Vila Yara | Osasco | SP | CEP: 06029-900
+				</p>
 				<p class="copyright">
-					Lorem, ipsum dolor sit amet consectetur adipisicing.
+					Copyright © 2020-2022 Soy Venture Company S.L. Todos os direitos
+					reservados.
 				</p>
 			</div>
 
 			<div class="redes-sociais">
 				<p>Siga-nos nas redes sociais!</p>
 				<div class="icons-container">
-					<img src="" alt="" />
-					<img src="" alt="" />
-					<img src="" alt="" />
-					<img src="" alt="" />
+					<i class="fa-brands fa-twitter"></i>
+					<i class="fa-brands fa-facebook"></i>
+					<i class="fa-brands fa-instagram"></i>
+					<i class="fa-brands fa-linkedin"></i>
 				</div>
 			</div>
 		</div>

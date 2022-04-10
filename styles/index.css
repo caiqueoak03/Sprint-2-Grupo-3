@@ -212,11 +212,12 @@ a {
 
 /* FEATURE CARDS */
 
-.feature-cards-container {
+#feature-cards-container {
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
-	margin: 125px 0 0;
+	height: 90vh;
+	padding-top: 5vh;
 }
 
 .cards {
@@ -225,7 +226,7 @@ a {
 	justify-content: center;
 	text-align: center;
 	row-gap: 7px;
-	padding: 40px 5px 85px;
+	padding: 40px 5px 100px;
 	border-radius: 25px;
 	box-shadow: 0 2px 5px -1px black;
 	width: 18%;
@@ -249,7 +250,7 @@ a {
 /* CONTATO */
 
 #contato-card {
-	height: 145vh;
+	height: 140vh;
 	position: relative;
 	display: flex;
 }
@@ -261,7 +262,7 @@ a {
 	/*
 	-webkit-transform: scaleX(-1);
 	transform: scaleX(-1);
-    */
+  */
 	width: 100%;
 }
 
@@ -273,7 +274,8 @@ a {
 	align-items: center;
 	justify-content: center;
 	width: 80%;
-	margin: auto;
+	height: 80vh;
+	margin: 75px auto;
 	padding: 50px 0 60px;
 }
 

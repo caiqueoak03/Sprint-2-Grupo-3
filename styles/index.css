@@ -25,13 +25,16 @@ a {
 .header {
 	display: flex;
 	justify-content: space-evenly;
-	background-color: var(--main-color);
+	font-family: "Fredoka", sans-serif;
+	box-sizing: border-box;
 	position: sticky;
 	top: 0;
-	height: 11vh;
 	z-index: 999;
+	height: 11vh;
 	width: 100%;
-	font-family: "Fredoka", sans-serif;
+	font-size: 1.2rem;
+	padding: 0 30px;
+	background-color: var(--main-color);
 }
 
 .nome-empresa {
@@ -67,7 +70,6 @@ a {
 .main-nav {
 	display: flex;
 	align-items: center;
-	font-size: 1.4rem;
 }
 
 .main-nav ul {
@@ -80,7 +82,6 @@ a {
 .login-nav {
 	display: flex;
 	align-items: center;
-	font-size: 1.4rem;
 }
 
 .login-nav ul {
@@ -92,14 +93,14 @@ a {
 /* BANNER */
 
 #banner {
-	background: url(../images/banner-img.jpg) no-repeat;
-	background-size: cover;
-	height: 88vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
 	position: relative;
+	background: url(../images/banner-img.jpg) no-repeat;
+	background-size: cover;
+	height: 88vh;
 }
 
 .text-button-container {
@@ -122,22 +123,22 @@ a {
 
 #banner .button,
 #enviar-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	margin-top: 10px;
 	border-radius: 5px;
 	border: none;
 	box-shadow: 0 5px 10px 0px black;
 	width: 250px;
 	height: 60px;
+	text-decoration: none;
 	font-weight: 600;
 	color: white;
 	font-size: 1.1rem;
 	background: linear-gradient(to right, var(--main-color), #002043e3);
 	transition: all 0.2s;
 	cursor: pointer;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	text-decoration: none;
 }
 
 #banner .button:hover,
@@ -154,9 +155,9 @@ a {
 }
 
 .wrapper {
+	position: absolute;
 	width: 100%;
 	height: 100%;
-	position: absolute;
 	z-index: 1;
 	background: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
 }
@@ -250,29 +251,25 @@ a {
 /* CONTATO */
 
 #contato-card {
-	height: 140vh;
-	position: relative;
 	display: flex;
+	position: relative;
+	height: 140vh;
 }
 
 #contato-card .bg-image {
 	position: absolute;
 	z-index: -1;
 	bottom: 0;
-	/*
-	-webkit-transform: scaleX(-1);
-	transform: scaleX(-1);
-  */
 	width: 100%;
 }
 
 .contato-card-container {
-	background-color: rgba(221, 218, 218, 0.97);
-	border-radius: 25px;
-	box-shadow: 0 0 10px -2px black;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	background-color: rgba(221, 218, 218, 0.97);
+	border-radius: 25px;
+	box-shadow: 0 0 10px -2px black;
 	width: 80%;
 	height: 80vh;
 	margin: 75px auto;
@@ -336,12 +333,12 @@ a {
 /* FOOTER */
 
 .footer-container {
-	background: linear-gradient(to right, #111, rgba(17, 17, 17, 0.95));
-	color: white;
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
+	background: linear-gradient(to right, #111, rgba(17, 17, 17, 0.95));
 	height: 150px;
+	color: white;
 	font-size: 0.8rem;
 }
 
@@ -353,8 +350,8 @@ a {
 }
 
 .footer-links-container ul {
-	list-style-type: none;
 	display: flex;
+	list-style-type: none;
 	padding: 0;
 	column-gap: 10px;
 }

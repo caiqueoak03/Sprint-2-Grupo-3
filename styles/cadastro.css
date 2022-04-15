@@ -20,18 +20,130 @@ a {
 	color: white;
 }
 
+/* CADASTRO */
+
+.cadastro {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: url(../images/banner-img.jpg) no-repeat;
+	background-size: cover;
+	height: 100vh;
+}
+
+.box {
+	height: 95vh;
+	width: 750px;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	margin: 0;
+	padding: 0;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.card_cadastro2 {
+	display: flex;
+}
+
+.container {
+	height: 73vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.frase {
+	color: white;
+	font-size: x-large;
+	list-style: none;
+	margin-top: 80px;
+}
+
+.card_cadastro2 li {
+	margin-bottom: 30px;
+	list-style: none;
+}
+
+.li_card {
+	margin-top: 58px;
+}
+
+.card_cadastro2 h2 {
+	margin-bottom: 30px;
+}
+li button {
+	color: white;
+	background-color: transparent;
+	height: 50px;
+	width: 150px;
+	border-radius: 0 10px 0 10px;
+	border: #2ac28a 1px solid;
+	margin-left: 100px;
+	cursor: pointer;
+	transition: 1s ease;
+}
+
+li button:hover {
+	background: #2ac28a;
+	border: #2ac28a 1px solid;
+}
+
+.card_cadastro2 ul {
+	width: 325px;
+}
+li input {
+	width: 100%;
+	height: 35px;
+	border-radius: 10px 10px 10px 10px;
+	border: none;
+	background-color: transparent;
+	border-bottom: #2ac28a solid 1px;
+	outline: none;
+}
+
+ul {
+	color: white;
+}
+
+.feito {
+	text-align: center;
+	justify-content: center;
+	color: white;
+	margin-top: 40px;
+}
+
+.linha {
+	width: 300px;
+	border-bottom: 1px #2ac28a solid;
+	margin-top: 10px;
+	margin: auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.ou {
+	text-align: center;
+	justify-content: center;
+	color: white;
+}
+
 /* HEADER */
 
 .header {
 	display: flex;
 	justify-content: space-evenly;
-	background-color: var(--main-color);
+	font-family: "Fredoka", sans-serif;
+	box-sizing: border-box;
 	position: sticky;
 	top: 0;
-	height: 11vh;
 	z-index: 999;
+	height: 11vh;
 	width: 100%;
-	font-family: "Fredoka", sans-serif;
+	font-size: 1.15rem;
+	padding: 0 30px;
+	background-color: var(--main-color);
 }
 
 .nome-empresa {
@@ -39,7 +151,8 @@ a {
 	text-shadow: 1px 1px #d3b04d;
 }
 
-.header a:hover {
+.main-nav a:hover,
+.login-nav a:hover {
 	color: var(--terciary-color);
 	text-decoration: underline;
 }
@@ -67,7 +180,6 @@ a {
 .main-nav {
 	display: flex;
 	align-items: center;
-	font-size: 1.4rem;
 }
 
 .main-nav ul {
@@ -80,7 +192,6 @@ a {
 .login-nav {
 	display: flex;
 	align-items: center;
-	font-size: 1.4rem;
 }
 
 .login-nav ul {
@@ -89,261 +200,16 @@ a {
 	column-gap: 40px;
 }
 
-/* BANNER */
-
-#banner {
-	background: url(../images/banner-img.jpg) no-repeat;
-	background-size: cover;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 140vh;
-}
-
-.text-button-container {
-	margin-left: 100px;
-	z-index: 2;
-	width: 525px;
-}
-
-#banner p {
-	font-size: 2.7rem;
-	color: white;
-}
-
-.button-container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 200px;
-}
-
-#banner .button,
-#enviar-btn {
-	margin-top: 10px;
-	border-radius: 5px;
-	border: none;
-	box-shadow: 0 5px 10px 0px black;
-	width: 250px;
-	height: 60px;
-	font-weight: 600;
-	color: white;
-	font-size: 1.1rem;
-	background: linear-gradient(to right, var(--main-color), #002043e3);
-	transition: all 0.2s;
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	text-decoration: none;
-}
-
-#banner .button:hover,
-#enviar-btn:hover {
-	box-shadow: 0 4px 5px 0px black;
-}
-
-#banner .button:active,
-#enviar-btn:active {
-	transform: translateY(4px);
-	width: 245px;
-	box-shadow: none;
-	background: #034fa0;
-}
-
-.wrapper {
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	z-index: 1;
-	background: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
-}
-
-/* VISÃO E VALORES */
-
-#visão-valores {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	padding: 55px 200px;
-	background-color: rgb(216, 211, 211, 0.5);
-}
-
-.visao-containers {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	column-gap: 50px;
-	height: 300px;
-}
-
-.visao-texts {
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-	row-gap: 20px;
-}
-
-#visão-valores img {
-	height: 100%;
-}
-
-.borders {
-	border-bottom: 1px solid rgb(182, 180, 180);
-	width: 75%;
-	padding-top: 35px;
-	margin-bottom: 25px;
-}
-
-.quem-somos-border {
-	align-self: flex-end;
-}
-
-.porque-text {
-	text-align: right;
-}
-
-.porque-border {
-	align-self: flex-start;
-}
-
-/* FEATURE CARDS */
-
-#feature-cards-container {
-	display: flex;
-	align-items: center;
-	justify-content: space-evenly;
-	height: 90vh;
-	padding-top: 5vh;
-}
-
-.cards {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	text-align: center;
-	row-gap: 7px;
-	padding: 40px 5px 100px;
-	border-radius: 25px;
-	box-shadow: 0 2px 5px -1px black;
-	width: 18%;
-	background-color: var(--main-color);
-	color: rgb(226, 226, 226);
-	font-family: "Fredoka", sans-serif;
-}
-
-.cards i {
-	font-size: 5rem;
-	padding-bottom: 20px;
-	color: var(--terciary-color);
-}
-
-.cards p {
-	font-size: 0.9rem;
-	line-height: 1.1rem;
-	font-weight: 500;
-}
-
-/* CONTATO */
-
-#contato-card {
-	height: 140vh;
-	position: relative;
-	display: flex;
-}
-
-#contato-card .bg-image {
-	position: absolute;
-	z-index: -1;
-	bottom: 0;
-	/*
-	-webkit-transform: scaleX(-1);
-	transform: scaleX(-1);
-  */
-	width: 100%;
-}
-
-.contato-card-container {
-	background-color: rgba(221, 218, 218, 0.97);
-	border-radius: 25px;
-	box-shadow: 0 0 10px -2px black;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 80%;
-	height: 80vh;
-	margin: 75px auto;
-	padding: 50px 0 60px;
-}
-
-.contato-campos {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	width: 40%;
-}
-
-.contato-campos h1 {
-	padding-bottom: 10px;
-}
-
-.contato-campos .padding-text {
-	padding-bottom: 20px;
-}
-
-.contato-campos .campos {
-	width: 100%;
-	margin-bottom: 15px;
-	margin-top: 3px;
-	border-radius: 2px;
-	border: none;
-	box-shadow: 0 0 2px 0px black;
-	padding: 3px 0;
-}
-
-#in_mensagem {
-	height: 100px;
-}
-
-.campo-aceito {
-	display: flex;
-	column-gap: 10px;
-	margin-left: 5px;
-	margin-bottom: 20px;
-}
-
-#enviar-btn {
-	margin-top: 0;
-	margin: auto;
-}
-
-.barra-vertical {
-	border-right: 3px solid rgb(184, 182, 182);
-	width: 10px;
-	height: 290px;
-	margin-bottom: 20px;
-	padding-left: 50px;
-}
-
-.contato-card-container img {
-	width: 40%;
-	padding-left: 30px;
-}
-
 /* FOOTER */
 
 .footer-container {
-	background: linear-gradient(to right, #111, rgba(17, 17, 17, 0.95));
-	color: white;
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
-	height: 15vh;
+	background: linear-gradient(to right, #111, rgba(17, 17, 17, 0.95));
+	height: 150px;
+	color: white;
 	font-size: 0.8rem;
-	
-	bottom: 0;
-	width: 100vw;
 }
 
 .footer-links-container {
@@ -354,8 +220,8 @@ a {
 }
 
 .footer-links-container ul {
-	list-style-type: none;
 	display: flex;
+	list-style-type: none;
 	padding: 0;
 	column-gap: 10px;
 }
@@ -390,111 +256,4 @@ a {
 
 .redes-sociais i {
 	font-size: 1.8rem;
-	margin-top: 30px;
-	color: white;
 }
-
-
-
-
-
-.box {
-	height: 120vh;
-	width: 750px;
-	background-color: rgba(0, 0, 0, 0.5);
-	display: flex;
-	align-self: auto;
-	margin: 0;
-	padding: 0;
-	justify-content: center;
-	flex-direction: column;
-}
-
-.card_cadastro2 {
-	display: flex;
-}
-
-.container {
-	height: 73vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-
-.frase {
-	color: white;
-	font-size: x-large;
-	list-style: none;
-	margin-top: 80px;
-} 
-
-.card_cadastro2 li {
-	margin-bottom: 30px;
-	list-style: none;
-}
-
-.li_card {
-	margin-top: 58px;
-}
-
-.card_cadastro2 h2 {
-	margin-bottom: 30px;
-}
-li button {
-	color: white;
-	background-color: transparent;
-	height: 50px;
-	width: 150px;
-	border-radius:  0 10px 0 10px;
-	border: #2ac28a 1px solid;
-	margin-left: 100px;
-	cursor: pointer;
-	transition: 1s ease;
-	
-}
-
-li button:hover{
-    background: #2ac28a;
-	border: #2ac28a 1px solid;
-}
-	
-.card_cadastro2 ul {
-	width: 325px;
-}
-li input {
-	width: 100%;
-	height: 35px;
-	border-radius:  10px 10px 10px 10px;
-	border: none;
-	background-color: transparent;
-	border-bottom: #2ac28a solid 1px;
-	outline: none;
-}
-
-ul {
-	color: white;
-}
-
-.feito {
-	text-align: center;
-	justify-content: center;
-	color: white;
-	margin-top: 40px;
-}
-
-.linha {
-	width: 300px;
-	border-bottom: 1px #2ac28a solid;
-	margin-top: 10px;
-	margin: auto;
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-
-.ou {
-	text-align: center;
-	justify-content: center;
-	color: white;
-}
-

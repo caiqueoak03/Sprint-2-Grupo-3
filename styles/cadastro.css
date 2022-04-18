@@ -341,9 +341,8 @@ a {
 	justify-content: space-evenly;
 	height: 15vh;
 	font-size: 0.8rem;
-	
 	bottom: 0;
-	width: 100vw;
+	width: 98.75vw;
 }
 
 .footer-links-container {
@@ -450,8 +449,7 @@ li button {
 	border: #2ac28a 1px solid;
 	margin-left: 100px;
 	cursor: pointer;
-	transition: 1s ease;
-	
+	transition: 0.3s ease;
 }
 
 li button:hover{
@@ -470,6 +468,22 @@ li input {
 	background-color: transparent;
 	border-bottom: #2ac28a solid 1px;
 	outline: none;
+	transition: 0.3s ease;
+	color: white;
+}
+
+input::placeholder {
+	color: rgba(255, 255, 255, 0.648);
+  }
+
+li input:focus {
+	background-color: rgb(42, 194, 138, 0.3);
+	border-bottom: #2ac28a solid 2px;
+
+	
+}
+li input:hover {
+	background-color: rgb(42, 194, 138, 0.3);
 }
 
 ul {
@@ -498,3 +512,57 @@ ul {
 	color: white;
 }
 
+.destaque {
+	text-decoration: underline;
+	color: #ffffff;
+	font-weight: bolder;
+}
+
+.destaque:hover {
+	color: #d3b04d;
+
+}
+
+input[type='checkbox']::before {
+	content: ' ';
+	width: inherit;
+	height: inherit;
+	position: absolute;
+	background-color: #fff;
+	border: 1px solid #2ac28a;
+  }
+  input[type='checkbox']:checked::after {
+	content: ' ';
+	width: 0.2rem;
+	height: 0.5rem;
+	margin-left: 0.3rem;
+	border-color: #2ac28a;
+	border-style: solid;
+	border-width: 0 3px 3px 0;
+	position: absolute;
+	transform: rotate(45deg);
+  }
+
+
+  /*li button {
+	width: 200px;
+	height: 70px;
+	border-radius: 45px;
+	font-size: 1.2rem;
+	font-weight: 900;
+	background-color: transparent;
+	color: #fff;
+	border: 1px solid;
+	transition: all 1s ease;
+	border: 1px solid #a8eb12;
+	transition-delay: 0.2s;
+	cursor: pointer;
+}
+
+li button:hover{
+    box-shadow: 0 0 20px #a8eb12, 0 0 40px #00E486;
+	border: 4px solid #a8eb12;
+	background: #a8eb12;
+	color: #000;
+	transition: box-shadow 7s, border 3s, background 3s, color 3s;
+}*/

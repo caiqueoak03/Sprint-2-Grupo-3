@@ -1,3 +1,98 @@
+* {
+	--main-color: #002043;
+	--secondary-color: #2ac28a;
+	--terciary-color: #d3b04d;
+	margin: 0;
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+	font-family: sans-serif;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+a {
+	text-decoration: none;
+	color: white;
+}
+
+/* HEADER */
+
+.header {
+	display: flex;
+	justify-content: space-evenly;
+	font-family: "Fredoka", sans-serif;
+	box-sizing: border-box;
+	position: sticky;
+	top: 0;
+	z-index: 999;
+	height: 11vh;
+	width: 100%;
+	font-size: 1.15rem;
+	padding: 0 30px;
+	background-color: var(--main-color);
+}
+
+.nome-empresa {
+	color: #2ac28a;
+	text-shadow: 1px 1px #d3b04d;
+}
+
+.main-nav a:hover,
+.login-nav a:hover {
+	color: var(--terciary-color);
+	text-decoration: underline;
+}
+
+/* logo */
+
+.logo {
+	display: flex;
+	align-items: center;
+}
+
+.logo img {
+	height: 50px;
+	background-color: var(--main-color);
+}
+
+.nome-empresa {
+	padding-left: 10px;
+	font-family: monospace;
+	font-size: 2rem;
+}
+
+/* nav */
+
+.main-nav {
+	display: flex;
+	align-items: center;
+}
+
+.main-nav ul {
+	display: flex;
+	align-items: center;
+	list-style-type: none;
+	column-gap: 40px;
+}
+
+.login-nav {
+	display: flex;
+	align-items: center;
+}
+
+.login-nav ul {
+	display: flex;
+	list-style-type: none;
+	column-gap: 40px;
+}
+
+/* LOGIN */
+
 .divdeusdetodos {
 	display: flex;
 	flex-direction: row;
@@ -109,96 +204,6 @@ input {
 	align-items: center;
 
 	width: 90%;
-}
-
-* {
-	--main-color: #002043;
-	--secondary-color: #2ac28a;
-	--terciary-color: #d3b04d;
-	margin: 0;
-}
-
-body {
-	margin: 0;
-	font-family: sans-serif;
-	min-height: 100vh;
-}
-
-html {
-	scroll-behavior: smooth;
-}
-
-a {
-	text-decoration: none;
-	color: white;
-}
-
-/* HEADER */
-
-.header {
-	display: flex;
-	justify-content: space-evenly;
-	background-color: var(--main-color);
-	position: sticky;
-	top: 0;
-	height: 11vh;
-	z-index: 999;
-	width: 100%;
-}
-
-.nome-empresa {
-	color: #2ac28a;
-	text-shadow: 1px 1px #d3b04d;
-}
-
-.header a:hover {
-	color: var(--terciary-color);
-	text-decoration: underline;
-}
-
-/* logo */
-
-.logo {
-	display: flex;
-	align-items: center;
-}
-
-.logo img {
-	height: 50px;
-	background-color: var(--main-color);
-}
-
-.nome-empresa {
-	padding-left: 10px;
-	font-family: monospace;
-	font-size: 2rem;
-}
-
-/* nav */
-
-.main-nav {
-	display: flex;
-	align-items: center;
-	font-size: 1.4rem;
-}
-
-.main-nav ul {
-	display: flex;
-	align-items: center;
-	list-style-type: none;
-	column-gap: 40px;
-}
-
-.login-nav {
-	display: flex;
-	align-items: center;
-	font-size: 1.4rem;
-}
-
-.login-nav ul {
-	display: flex;
-	list-style-type: none;
-	column-gap: 40px;
 }
 
 /* FOOTER */

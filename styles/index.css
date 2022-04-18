@@ -32,7 +32,7 @@ a {
 	z-index: 999;
 	height: 11vh;
 	width: 100%;
-	font-size: 1.2rem;
+	font-size: 1.15rem;
 	padding: 0 30px;
 	background-color: var(--main-color);
 }
@@ -42,7 +42,8 @@ a {
 	text-shadow: 1px 1px #d3b04d;
 }
 
-.header a:hover {
+.main-nav a:hover,
+.login-nav a:hover {
 	color: var(--terciary-color);
 	text-decoration: underline;
 }
@@ -185,6 +186,7 @@ a {
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
+	text-align: justify;
 	row-gap: 20px;
 }
 
@@ -201,10 +203,6 @@ a {
 
 .quem-somos-border {
 	align-self: flex-end;
-}
-
-.porque-text {
-	text-align: right;
 }
 
 .porque-border {
@@ -299,9 +297,6 @@ a {
 	border: none;
 	box-shadow: 0 0 2px 0px black;
 	padding: 3px 0;
-}
-
-#in_mensagem {
 }
 
 .campo-aceito {

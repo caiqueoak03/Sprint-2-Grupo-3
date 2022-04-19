@@ -115,12 +115,9 @@ a {
 }
 
 .preço_saca {
-	color: black;
+	color: white;
+	text-shadow: 1px 0 black;
 	font-size: 1.1rem;
-}
-
-.preço_saca a{
-	color: rgb(14, 14, 14);
 }
 
 .card_cadastro2 ul {

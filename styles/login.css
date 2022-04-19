@@ -1,95 +1,94 @@
 * {
-    --main-color: #002043;
-    --secondary-color: #2ac28a;
-    --terciary-color: #d3b04d;
-    margin: 0;
+	--main-color: #002043;
+	--secondary-color: #2ac28a;
+	--terciary-color: #d3b04d;
+	margin: 0;
 }
 
 body {
-    margin: 0;
-    min-height: 100vh;
-    font-family: sans-serif;
-   
+	margin: 0;
+	min-height: 100vh;
+	font-family: sans-serif;
 }
 
 html {
-    scroll-behavior: smooth;
+	scroll-behavior: smooth;
 }
 
 a {
-    text-decoration: none;
-    color: white;
+	text-decoration: none;
+	color: white;
 }
 
 /* HEADER */
 
 .header {
-    display: flex;
-    justify-content: space-evenly;
-    font-family: "Fredoka", sans-serif;
-    box-sizing: border-box;
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    height: 11vh;
-    width: 100%;
-    font-size: 1.15rem;
-    padding: 0 30px;
-    background-color: var(--main-color);
+	display: flex;
+	justify-content: space-evenly;
+	font-family: "Fredoka", sans-serif;
+	box-sizing: border-box;
+	position: sticky;
+	top: 0;
+	z-index: 999;
+	height: 11vh;
+	width: 100%;
+	font-size: 1.15rem;
+	padding: 0 30px;
+	background-color: var(--main-color);
 }
 
 .nome-empresa {
-    color: #2ac28a;
-    text-shadow: 1px 1px #d3b04d;
+	color: #2ac28a;
+	text-shadow: 1px 1px #d3b04d;
 }
 
 .main-nav a:hover,
 .login-nav a:hover {
-    color: var(--terciary-color);
-    text-decoration: underline;
+	color: var(--terciary-color);
+	text-decoration: underline;
 }
 
 /* logo */
 
 .logo {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .logo img {
-    height: 50px;
-    background-color: var(--main-color);
+	height: 50px;
+	background-color: var(--main-color);
 }
 
 .nome-empresa {
-    padding-left: 10px;
-    font-family: monospace;
-    font-size: 2rem;
+	padding-left: 10px;
+	font-family: monospace;
+	font-size: 2rem;
 }
 
 /* nav */
 
 .main-nav {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .main-nav ul {
-    display: flex;
-    align-items: center;
-    list-style-type: none;
-    column-gap: 40px;
+	display: flex;
+	align-items: center;
+	list-style-type: none;
+	column-gap: 40px;
 }
 
 .login-nav {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .login-nav ul {
-    display: flex;
-    list-style-type: none;
-    column-gap: 40px;
+	display: flex;
+	list-style-type: none;
+	column-gap: 40px;
 }
 
 /* LOGIN */
@@ -101,30 +100,25 @@ a {
     align-items: center;
     background: url(../images/banner-img.jpg) no-repeat;
     background-size: cover;
-    height: 100vh;
+    height: 90vh;
+}
+
+.container {
+    height: 90%;
 }
 
 .box {
-    height: 95vh;
-    width: 550px;
+    height: 100%;
+    width: 500px;
+    border-radius: 10px;
     background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
     margin: 0;
     padding: 0;
+    display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-
 }
-
-
-
-.container {
-    height: 91vh;
-   
-}
-
-
 
 .card_login li {
     margin-bottom: 20px;
@@ -154,6 +148,8 @@ li button:hover {
 
 .card_login  ul {
     width: 325px;
+    color: white;
+    margin-right: 160px;
 }
 li input {
     width: 100%;
@@ -163,13 +159,6 @@ li input {
     background-color: transparent;
     border-bottom: #2ac28a solid 1px;
     outline: none;
-}
-
-ul {
-    color: white;
-    margin-right: 160px;
-
-
 }
 
 .titulo {
@@ -187,62 +176,60 @@ font-size: 20px;
     color: rgb(171, 169, 169);
 }
 
-
-
 /* FOOTER */
 
 .footer-container {
-    background: linear-gradient(to right, #111, rgba(17, 17, 17, 0.95));
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    height: 150px;
-    font-size: 0.8rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	background: linear-gradient(to right, #111, rgba(17, 17, 17, 0.95));
+	height: 150px;
+	color: white;
+	font-size: 0.8rem;
 }
 
 .footer-links-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    row-gap: 15px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	row-gap: 15px;
 }
 
 .footer-links-container ul {
-    list-style-type: none;
-    display: flex;
-    padding: 0;
-    column-gap: 10px;
+	display: flex;
+	list-style-type: none;
+	padding: 0;
+	column-gap: 10px;
 }
 
 .footer-links-container ul li {
-    border-right: 1px solid white;
-    padding-right: 10px;
+	border-right: 1px solid white;
+	padding-right: 10px;
 }
 
 .footer-links-container ul li:last-child {
-    border-right: none;
+	border-right: none;
 }
 
 .footer-endereco-container {
-    display: flex;
-    flex-direction: column;
-    row-gap: 15px;
+	display: flex;
+	flex-direction: column;
+	row-gap: 15px;
 }
 
 .redes-sociais {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    row-gap: 20px;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	row-gap: 20px;
 }
 
 .icons-container {
-    display: flex;
-    justify-content: space-between;
-    column-gap: 25px;
+	display: flex;
+	justify-content: space-between;
+	column-gap: 25px;
 }
 
 .redes-sociais i {
-    font-size: 1.8rem;
+	font-size: 1.8rem;
 }

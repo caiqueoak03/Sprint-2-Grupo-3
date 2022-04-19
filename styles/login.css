@@ -1,265 +1,248 @@
 * {
-	--main-color: #002043;
-	--secondary-color: #2ac28a;
-	--terciary-color: #d3b04d;
-	margin: 0;
+    --main-color: #002043;
+    --secondary-color: #2ac28a;
+    --terciary-color: #d3b04d;
+    margin: 0;
 }
 
 body {
-	margin: 0;
-	min-height: 100vh;
-	font-family: sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    font-family: sans-serif;
+   
 }
 
 html {
-	scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 a {
-	text-decoration: none;
-	color: white;
+    text-decoration: none;
+    color: white;
 }
 
 /* HEADER */
 
 .header {
-	display: flex;
-	justify-content: space-evenly;
-	font-family: "Fredoka", sans-serif;
-	box-sizing: border-box;
-	position: sticky;
-	top: 0;
-	z-index: 999;
-	height: 11vh;
-	width: 100%;
-	font-size: 1.15rem;
-	padding: 0 30px;
-	background-color: var(--main-color);
+    display: flex;
+    justify-content: space-evenly;
+    font-family: "Fredoka", sans-serif;
+    box-sizing: border-box;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    height: 11vh;
+    width: 100%;
+    font-size: 1.15rem;
+    padding: 0 30px;
+    background-color: var(--main-color);
 }
 
 .nome-empresa {
-	color: #2ac28a;
-	text-shadow: 1px 1px #d3b04d;
+    color: #2ac28a;
+    text-shadow: 1px 1px #d3b04d;
 }
 
 .main-nav a:hover,
 .login-nav a:hover {
-	color: var(--terciary-color);
-	text-decoration: underline;
+    color: var(--terciary-color);
+    text-decoration: underline;
 }
 
 /* logo */
 
 .logo {
-	display: flex;
-	align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .logo img {
-	height: 50px;
-	background-color: var(--main-color);
+    height: 50px;
+    background-color: var(--main-color);
 }
 
 .nome-empresa {
-	padding-left: 10px;
-	font-family: monospace;
-	font-size: 2rem;
+    padding-left: 10px;
+    font-family: monospace;
+    font-size: 2rem;
 }
 
 /* nav */
 
 .main-nav {
-	display: flex;
-	align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .main-nav ul {
-	display: flex;
-	align-items: center;
-	list-style-type: none;
-	column-gap: 40px;
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    column-gap: 40px;
 }
 
 .login-nav {
-	display: flex;
-	align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .login-nav ul {
-	display: flex;
-	list-style-type: none;
-	column-gap: 40px;
+    display: flex;
+    list-style-type: none;
+    column-gap: 40px;
 }
 
 /* LOGIN */
 
-.divdeusdetodos {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
+.login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: url(../images/banner-img.jpg) no-repeat;
+    background-size: cover;
+    height: 100vh;
 }
 
-.main-div {
-	display: flex;
-	align-items: center;
-	border-radius: 2%;
-	width: 70%;
-	height: 500px;
-	background-color: white;
+.box {
+    height: 95vh;
+    width: 550px;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 
-	justify-content: space-between;
 }
 
-.divinput {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	font-family: Arial, Helvetica, sans-serif;
 
-	width: 80%;
+
+.container {
+    height: 91vh;
+   
 }
 
-input {
-	width: 90%;
-	margin-bottom: 10%;
-	align-items: center;
-	background-color: rgb(208, 206, 206);
-	border: 0ch;
-	border-radius: 5px;
-	height: 30px;
+
+
+.card_login li {
+    margin-bottom: 20px;
+    list-style: none;
 }
 
-.divfilha {
-	height: 100%;
-	width: 60%;
-	background-image: url("fundo.jpg");
-	background-size: cover;
-	display: flex;
-	align-items: flex-end;
+
+.card_login h2 {
+    margin-bottom: 100px;
+}
+li button {
+    color: white;
+    background-color: transparent;
+    height: 50px;
+    width: 150px;
+    border-radius: 0 10px 0 10px;
+    border: #2ac28a 1px solid;
+    margin-left: 100px;
+    cursor: pointer;
+    transition: 1s ease;
 }
 
-.imagem {
-	width: 100%;
-	height: 100%;
+li button:hover {
+    background: #2ac28a;
+    border: #2ac28a 1px solid;
 }
 
-.icons {
-	padding-top: 20px;
-	width: 90%;
-	display: flex;
-
-	justify-content: space-between;
+.card_login  ul {
+    width: 325px;
+}
+li input {
+    width: 100%;
+    height: 35px;
+    border-radius: 10px 10px 10px 10px;
+    border: none;
+    background-color: transparent;
+    border-bottom: #2ac28a solid 1px;
+    outline: none;
 }
 
-.redes {
-	width: 8%;
+ul {
+    color: white;
+    margin-right: 160px;
+
+
 }
 
-.logindiv {
-	width: 30%;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
-
-	height: 100%;
-	width: 40%;
-	align-items: center;
+.titulo {
+    display: flex;
+justify-content: center;
+margin-left: 100px;
+font-size: 20px;
 }
 
-.buttonlogin {
-	background-color: rgb(0, 102, 228);
-	color: white;
-	border: 0ch;
-	width: 90%;
-	height: 30px;
-	border-radius: 5px;
+.input_margin {
+    margin-bottom: 30px;
+    color: white;
+}
+.input_margin::placeholder{
+    color: rgb(171, 169, 169);
 }
 
-.conta {
-	padding-top: 20px;
-	font-size: 11px;
-	font-weight: bold;
-	text-align: center;
-}
 
-.ou {
-	color: rgb(162, 159, 159);
-	display: flex;
-	justify-content: center;
-	margin-top: 3%;
-	border-top: 2 px solid rgb(162, 159, 159);
-	padding-top: 18px;
-	margin-right: 9%;
-	height: 9px;
-}
-
-.checkinput {
-	width: 15px;
-}
-
-.checkdiv {
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-
-	width: 90%;
-}
 
 /* FOOTER */
 
 .footer-container {
-	background: linear-gradient(to right, #111, rgba(17, 17, 17, 0.95));
-	color: white;
-	display: flex;
-	align-items: center;
-	justify-content: space-evenly;
-	height: 150px;
-	font-size: 0.8rem;
+    background: linear-gradient(to right, #111, rgba(17, 17, 17, 0.95));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 150px;
+    font-size: 0.8rem;
 }
 
 .footer-links-container {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	row-gap: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 15px;
 }
 
 .footer-links-container ul {
-	list-style-type: none;
-	display: flex;
-	padding: 0;
-	column-gap: 10px;
+    list-style-type: none;
+    display: flex;
+    padding: 0;
+    column-gap: 10px;
 }
 
 .footer-links-container ul li {
-	border-right: 1px solid white;
-	padding-right: 10px;
+    border-right: 1px solid white;
+    padding-right: 10px;
 }
 
 .footer-links-container ul li:last-child {
-	border-right: none;
+    border-right: none;
 }
 
 .footer-endereco-container {
-	display: flex;
-	flex-direction: column;
-	row-gap: 15px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
 }
 
 .redes-sociais {
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	row-gap: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 20px;
 }
 
 .icons-container {
-	display: flex;
-	justify-content: space-between;
-	column-gap: 25px;
+    display: flex;
+    justify-content: space-between;
+    column-gap: 25px;
 }
 
 .redes-sociais i {
-	font-size: 1.8rem;
+    font-size: 1.8rem;
 }

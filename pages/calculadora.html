@@ -61,14 +61,14 @@
 									/>
 								</li>
 								<li>
-									Quantidade de Sacas:<br /><input
+									Quantidade de Sacas Perdidas:<br /><input
 										id="input_qtd_sacas"
 										type="text"
 										placeholder="sacas"
 									/>
 								</li>
 								<li>
-									Valor da Saca<br /><input
+									Valor da Saca:<br /><input
 										id="input_valor_saca"
 										type="text"
 										placeholder="valor"
@@ -92,7 +92,6 @@
 							><u><b>Cotação da soja</b></u></a
 						>
 					</p>
-					<img src="../images/Calculator-bro.png" />
 				</div>
 			</div>
 		</div>
@@ -135,26 +134,27 @@
 <script>
 	function calcular() {
 		var nome = input_nome.value;
-		var qtd_sacas = Number(input_qtd_sacas.value);
-		var valor = Number(input_valor_saca.value);
-		var perda = qtd_sacas * 0.05;
-		var kg = perda * 60;
-		var preço = valor * perda;
+		var qtd_sacas_perdidas = Number(input_qtd_sacas.value);
+		var valor_saca = Number(input_valor_saca.value);
 
-		// resposta.style.width = `52.35vh`
-		// resposta.style.height = `44%`
-		// resposta.style.border = `solid #2ac28a 1.50px`
-		// resposta.style.backgroundColor = `transparent`
-		// resposta.style.borderRadius = `10px`
-		// resposta.style.marginTop = `10px`
-		// resposta.style.marginLeft = `40px`
-		// resposta.style.color = `white`
+		// O valor médio de redução do prejuízo é 63%
+		var reducao = 1 - 0.63;
+		var perdaTotal = qtd_sacas_perdidas * valor_saca;
+		var perdaReduzida = perdaTotal * reducao;
 
-		respostaText.innerHTML = `Olá <span style="color: green;"><b><u>${nome}</b></u></span> com a AGRO SOLUTIONS você deixará de perder 5% da sua safra. A cada ${qtd_sacas} você perde ${perda.toFixed(
-			0,
-		)} sacas (${kg.toLocaleString("pt-BR")}kg), cerca de ${preço.toLocaleString(
-			"pt-BR",
-			{ style: "currency", currency: "BRL" },
-		)}`;
+		var perdaTotalExibicao = perdaTotal.toLocaleString("pt-BR", {
+			style: "currency",
+			currency: "BRL",
+		});
+		var perdaReduzidaExibicao = perdaReduzida.toLocaleString("pt-BR", {
+			style: "currency",
+			currency: "BRL",
+		});
+		var saldo = (perdaTotal - perdaReduzida).toLocaleString("pt-BR", {
+			style: "currency",
+			currency: "BRL",
+		});
+
+		respostaText.innerHTML = `Olá ${nome}, você está perdendo ${perdaTotalExibicao} na sua produção. Com a Soy Venture você terá uma redução média de 63% no seu prejuízo, tendo um saldo de ${saldo}.`;
 	}
 </script>

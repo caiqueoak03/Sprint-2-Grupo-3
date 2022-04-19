@@ -5,9 +5,6 @@
 	margin: 0;
 }
 
-ul {
-}
-
 body {
 	margin: 0;
 	min-height: 100vh;
@@ -35,17 +32,15 @@ a {
 }
 
 .box {
-	height: 86vh;
-	width: 100vh;
+	height: 85vh;
+	width: 380px;
 	background-color: rgba(0, 0, 0, 0.5);
 	display: flex;
-	align-self: auto;
-	margin-left: 20%;
-	padding: 0;
+	padding: 10px;
 	justify-content: space-between;
 	flex-direction: column;
+	align-items: center;
 	border-radius: 3%;
-	align-items: flex-start;
 }
 
 .card_cadastro2 {
@@ -54,8 +49,11 @@ a {
 
 .container {
 	height: 73vh;
+	width: 100vw;
+	row-gap: 10px;
 	display: flex;
 	justify-content: center;
+	flex-direction: column;
 	align-items: center;
 	/* border: solid 2px blue; */
 }
@@ -113,21 +111,24 @@ a {
 
 .imagem {
 	text-align: center;
+	align-self: flex-end;
 }
 
-.imagem img {
-	width: 500px;
+.preço_saca {
+	color: black;
+	font-size: 1.1rem;
 }
 
-.imagem p {
-	position: relative;
-	font-size: 16px;
-	top: 25px;
+.preço_saca a{
+	color: rgb(14, 14, 14);
 }
 
 .card_cadastro2 ul {
 	width: 325px;
+	color: white;
+	margin: 0;
 }
+
 li input {
 	width: 52.5vh;
 	height: 35px;
@@ -150,11 +151,6 @@ li input:focus {
 
 li input:hover {
 	background-color: rgb(42, 194, 138, 0.3);
-}
-
-.card_cadastro2 ul {
-	margin-top: 25px;
-	color: white;
 }
 
 .feito {

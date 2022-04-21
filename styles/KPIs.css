@@ -1,0 +1,163 @@
+* {
+	--main-color: #002043;
+	--secondary-color: #2ac28a;
+	--terciary-color: #d3b04d;
+	margin: 0;
+}
+
+body {
+	min-height: 100vh;
+	font-family: sans-serif;
+	background: #161618;
+	display: flex;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+a {
+	text-decoration: none;
+	color: white;
+}
+
+/* HEADER */
+
+header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	box-sizing: border-box;
+	padding: 10px 0;
+	font-family: "Fredoka", sans-serif;
+	height: 100vh;
+	width: 30%;
+	font-size: 1.15rem;
+	background: linear-gradient(to bottom, #002043, #002043e8);
+	border-right: 4px solid #d3b04d;
+}
+
+.nome-empresa {
+	color: #2ac28a;
+	text-shadow: 1px 1px #d3b04d;
+}
+
+.main-nav a:hover,
+.login-nav a:hover,
+.usuario-container a:hover {
+	color: white;
+}
+
+/* logo */
+
+.logo {
+	display: flex;
+	align-items: center;
+}
+
+.logo img {
+	height: 50px;
+	background-color: var(--main-color);
+}
+
+.nome-empresa {
+	padding-left: 10px;
+	font-family: monospace;
+	font-size: 2rem;
+}
+
+/* Usuario Container */
+
+.usuario-container {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	row-gap: 10px;
+	margin: 50px 0;
+}
+
+.usuario-container b {
+	font-weight: 1000;
+	font-size: 1.25rem;
+}
+
+.usuario-container img {
+	width: 100px;
+	border-radius: 50%;
+	border: 1px solid #2ac28a;
+}
+
+.usuario-nome {
+	color: var(--secondary-color);
+}
+
+/* nav */
+
+.main-nav {
+	display: flex;
+	align-items: center;
+}
+
+.main-nav ul {
+	display: flex;
+	flex-direction: column;
+	list-style-type: none;
+	row-gap: 15px;
+	padding: 0;
+}
+
+.navs {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #2ac28a !important;
+	width: 300px;
+	height: 50px;
+	border-radius: 10px;
+	text-align: center;
+	color: #002043;
+	font-size: 1.25rem;
+	font-weight: 700;
+	box-shadow: 0 3px 5px -2px #000;
+	border: 3px solid #000;
+	transition: all 0.1s;
+}
+
+.main-nav a:hover {
+	box-shadow: none;
+}
+
+.main-nav .nav2 {
+	background-color: #d3b04d !important;
+}
+
+/* MONITORAMENTO POR HORA */
+
+.tela-por-hora-container {
+	color: white;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	text-align: center;
+	width: 70%;
+	height: 100vh;
+}
+
+.cards-grupos {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	row-gap: 20px;
+}
+
+.cards {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-color: #bbb;
+	width: 200px;
+	border-radius: 10px;
+	height: 185px;
+}

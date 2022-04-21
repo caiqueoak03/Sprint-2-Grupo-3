@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Soy Venture</title>
-		<link rel="stylesheet" href="../styles/dashboard.css" />
+		<link rel="stylesheet" href="../styles/KPIs.css" />
 		<link rel="shortcut icon" href="../images/logo.png" type="image/x-icon" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,7 +17,6 @@
 			src="https://kit.fontawesome.com/8c4cdd8d42.js"
 			crossorigin="anonymous"
 		></script>
-		<link rel="stylesheet" href="../styles/dashboard.css" />
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	</head>
 	<body>
@@ -48,43 +47,40 @@
 			</div>
 		</header>
 
-		<!-- MONITORAMENTO POR HORA -->
 		<div class="tela-por-hora-container">
-			<div class="selects">
-				<select onchange="verificar()" name="" id="grafico">
-					<option value="porHora">Registro por hora</option>
-					<option value="porArea">Registro por área</option>
-				</select>
-
-				<select name="" id="fazenda">
-					<option value="fazendaA">Fazenda São João</option>
-					<option value="fazendaB">Fazenda Rio Bonito</option>
-				</select>
-
-				<select name="" id="dia" style="display: none">
-					<option value="01/01/2022">01/01/2022</option>
-					<option value="02/01/2022">02/01/2022</option>
-					<option value="03/01/2022">03/01/2022</option>
-				</select>
-
-				<select name="" id="area">
-					<option value="areaA">Área A</option>
-					<option value="areaB">Área B</option>
-				</select>
-
-				<button onclick="mostrar()">Mostrar Gráficos</button>
-			</div>
-
-			<div class="graficos-container">
-				<div class="graficos">
-					<canvas id="graficoTemperatura"></canvas>
+			<div class="cards-grupo1 cards-grupos">
+				<div class="cards">
+					<h2>Temperatura Ideal</h2>
+					<h1>7°C</h1>
 				</div>
 
-				<div class="graficos">
-					<canvas id="graficoUmidade"></canvas>
+				<div class="cards">
+					<h2>Maior Registro de Temperatura</h2>
+					<h1>20°C</h1>
+				</div>
+
+				<div class="cards">
+					<h2>Temperatura Ideal</h2>
+					<h1>7°C</h1>
+				</div>
+			</div>
+
+			<div class="cards-grupo2 cards-grupos">
+				<div class="cards">
+					<h2>Temperatura Ideal</h2>
+					<h1>7°C</h1>
+				</div>
+
+				<div class="cards">
+					<h2>Temperatura Ideal</h2>
+					<h1>7°C</h1>
+				</div>
+
+				<div class="cards">
+					<h2>Temperatura Ideal</h2>
+					<h1>7°C</h1>
 				</div>
 			</div>
 		</div>
 	</body>
 </html>
-<script src="../scripts/dashboard.js"></script>

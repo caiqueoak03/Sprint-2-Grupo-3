@@ -33,7 +33,7 @@ a {
 
 .box {
 	height: 85vh;
-	width: 380px;
+	width: 30%;
 	background-color: rgba(0, 0, 0, 0.5);
 	display: flex;
 	padding: 10px;
@@ -123,7 +123,7 @@ a {
 .card_cadastro2 ul {
 	width: 325px;
 	color: white;
-	margin: 0;
+	margin-right: 110px;
 }
 
 li input {

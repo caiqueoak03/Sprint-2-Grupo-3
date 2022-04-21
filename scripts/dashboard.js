@@ -1,23 +1,28 @@
+// Variáveis globais do chartJS
 var temperaturaValues = [10, 8, 7, 3, 7, 12, 0];
 var umidadeValues = [12, 15, 7, 9, 7, 12, 14];
 var nomeTemp = "Temperatura por Hora";
 var nomeUmid = "Umidade por Hora";
 var labels = ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"];
 var tipoGrafico = "line";
-
 var graficoUmid = {};
 var graficoTemp = {};
+
+// Flag para verificar se é a primeira renderização
 var primeiroRender = true;
 
+// Primeira renderização
 renderizarGraficos();
 
+// Renderiza o gráfico usando o chartJS
 function renderizarGraficos() {
+	// Caso não seja a primeira renderização, destruir os gráficos para recriá-los abaixo
 	if (primeiroRender == false) {
 		graficoUmid.destroy();
 		graficoTemp.destroy();
 	}
 
-	// TEMPERATURA
+	// Temperatura chartJS
 	const dataTemp = {
 		labels: labels,
 		datasets: [
@@ -41,7 +46,7 @@ function renderizarGraficos() {
 		configTemp,
 	);
 
-	// UMIDADE
+	// Umidade chartJS
 	const dataUmid = {
 		labels: labels,
 		datasets: [
@@ -66,6 +71,7 @@ function renderizarGraficos() {
 	);
 }
 
+// Verifica qual gráfico foi selecionado e aplica as alterações necessárias do gráfico
 function verificar() {
 	fazenda.value = "fazendaA";
 
@@ -101,6 +107,7 @@ function verificar() {
 	}
 }
 
+// Aplica valores exemplo
 function mostrar() {
 	if (fazenda.value == "fazendaA") {
 		if (area.value == "areaA") {
@@ -138,6 +145,7 @@ function mostrar() {
 		}
 	}
 
+	// Renderiza os graficos denovo
 	primeiroRender = false;
 	renderizarGraficos();
 }

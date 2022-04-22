@@ -27,7 +27,7 @@ a {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-    color: #2ac28a;
+	color: #2ac28a;
 	background: url(../images/func.png) no-repeat;
 	background-size: cover;
 	height: 100vh;
@@ -46,7 +46,6 @@ a {
 
 .card_cadastro2 {
 	display: flex;
-	
 }
 
 .container {
@@ -66,11 +65,10 @@ a {
 .card_cadastro2 li {
 	margin-bottom: 30px;
 	list-style: none;
-	
 }
 
-input::placeholder{
-	color:#2ac28a;
+input::placeholder {
+	color: #2ac28a;
 }
 .li_card {
 	margin-top: 58px;
@@ -91,18 +89,9 @@ li button {
 	transition: 1s ease;
 }
 
-li button:hover {
-	background: #2ac28a;
-	border: #2ac28a 1px solid;
-}
-
 .card_cadastro2 ul {
 	width: 325px;
 	text-decoration: white;
-	
-
-
-	
 }
 li input {
 	width: 100%;
@@ -112,6 +101,19 @@ li input {
 	background-color: transparent;
 	border-bottom: #2ac28a solid 1px;
 	outline: none;
+}
+
+li input::placeholder {
+	color: rgba(255, 255, 255, 0.648);
+}
+
+li input:focus {
+	background-color: rgb(42, 194, 138, 0.3);
+	border-bottom: #2ac28a solid 2px;
+}
+
+li input:hover {
+	background-color: rgb(42, 194, 138, 0.3);
 }
 
 ul {
@@ -258,7 +260,6 @@ ul {
 	flex-direction: column;
 	row-gap: 20px;
 	color: white;
-	
 }
 
 .icons-container {
@@ -270,4 +271,3 @@ ul {
 .redes-sociais i {
 	font-size: 1.8rem;
 }
-

@@ -42,12 +42,6 @@ header {
 	text-shadow: 1px 1px #d3b04d;
 }
 
-.main-nav a:hover,
-.login-nav a:hover,
-.usuario-container a:hover {
-	color: white;
-}
-
 /* logo */
 
 .logo {
@@ -73,12 +67,17 @@ header {
 	align-items: center;
 	flex-direction: column;
 	row-gap: 10px;
-	margin: 50px 0;
+	margin: 40px 0;
 }
 
 .usuario-container b {
 	font-weight: 1000;
 	font-size: 1.25rem;
+}
+
+.usuario-container a:hover {
+	color: #d3b04d;
+	text-decoration: underline;
 }
 
 .usuario-container img {

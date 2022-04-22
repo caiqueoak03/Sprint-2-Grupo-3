@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Soy Venture</title>
+		<link rel="stylesheet" href="../styles/dashboard.css" />
+		<link rel="shortcut icon" href="../images/logo.png" type="image/x-icon" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400&family=Roboto:ital,wght@0,400;0,700;1,700&display=swap"
+			rel="stylesheet"
+		/>
+		<script
+			src="https://kit.fontawesome.com/8c4cdd8d42.js"
+			crossorigin="anonymous"
+		></script>
+		<link rel="stylesheet" href="../styles/dashboard.css" />
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	</head>
+	<body>
+		<!-- HEADER -->
+		<header>
+			<span class="logo">
+				<img src="../images/logo.png" alt="" class="logo-img" />
+				<h1 class="nome-empresa">Soy Venture</h1>
+			</span>
+
+			<div class="usuario-container">
+				<img src="../images/gerente-img.png" alt="" class="img" />
+				<p class="usuario-nome">Olá, <b>Luís Nascimento</b></p>
+				<a href="../index.html">Sair</a>
+			</div>
+
+			<div class="main-nav">
+				<ul>
+					<a class="navs nav1" href="dashboard.html">Gráficos</a>
+					<a class="navs nav2" href="KPIs.html">Indicadores de Performance</a>
+					<a class="navs nav3" href="cadastroFazenda.html">Cadastrar Fazenda</a>
+					<a class="navs nav4" href="cadastro_funcionario.html"
+						>Cadastrar Funcionário</a
+					>
+				</ul>
+			</div>
+		</header>
+
+		<!-- DASHBOARD -->
+
+		<div class="main-container">
+			<div class="selects">
+				<select onchange="verificar()" name="" id="grafico">
+					<option value="porHora">Registro por hora</option>
+					<option value="porArea">Registro por área</option>
+				</select>
+
+				<select name="" id="fazenda">
+					<option value="fazendaA">Fazenda São João</option>
+					<option value="fazendaB">Fazenda Rio Bonito</option>
+				</select>
+
+				<select name="" id="dia" style="display: none">
+					<option value="01/01/2022">01/01/2022</option>
+					<option value="02/01/2022">02/01/2022</option>
+					<option value="03/01/2022">03/01/2022</option>
+				</select>
+
+				<select name="" id="area">
+					<option value="areaA">Área A</option>
+					<option value="areaB">Área B</option>
+				</select>
+
+				<button onclick="mostrar()">Mostrar Gráficos</button>
+			</div>
+
+			<div class="graficos-main-container">
+				<div class="indicadores-container">
+					<div class="temperatura-container indicadores-row">
+						<h3>Temperatura</h3>
+						<div class="cards-container">
+							<div style="background-color: yellow" class="cards">
+								<p>Alerta</p>
+								<div class="indicador-valores">10°C</div>
+							</div>
+							<div style="background-color: green" class="cards">
+								<p>Ideal</p>
+								<div class="indicador-valores">25°C</div>
+							</div>
+							<div style="background-color: red" class="cards">
+								<p>Alerta</p>
+								<div class="indicador-valores">35°C</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="umidade-container indicadores-row">
+						<h3>Umidade</h3>
+						<div class="cards-container">
+							<div style="background-color: yellow" class="cards">
+								<p>Alerta</p>
+								<div class="indicador-valores">30%</div>
+							</div>
+							<div style="background-color: green" class="cards">
+								<p>Ideal</p>
+								<div class="indicador-valores">65%</div>
+							</div>
+							<div style="background-color: red" class="cards">
+								<p>Alerta</p>
+								<div class="indicador-valores">80%</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="graficos-container">
+					<div class="graficos">
+						<canvas id="graficoTemperatura"></canvas>
+					</div>
+
+					<div class="graficos">
+						<canvas id="graficoUmidade"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script src="../scripts/dashboard.js"></script>

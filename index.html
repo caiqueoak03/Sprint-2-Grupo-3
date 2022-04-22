@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Soy Venture</title>
+		<link rel="stylesheet" href="styles/index.css" />
+		<link rel="shortcut icon" href="images/logo.png" type="image/x-icon" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400&family=Roboto:ital,wght@0,400;0,700;1,700&display=swap"
+			rel="stylesheet"
+		/>
+		<script
+			src="https://kit.fontawesome.com/8c4cdd8d42.js"
+			crossorigin="anonymous"
+		></script>
+	</head>
+
+	<body>
+		<!-- HEADER -->
+		<div class="header">
+			<a href="index.html#" class="logo">
+				<img src="images/logo.png" alt="" class="logo-img" />
+				<h1 class="nome-empresa">Soy Venture</h1>
+			</a>
+
+			<div class="main-nav">
+				<ul>
+					<li><a href="index.html#visão-valores">Sobre</a></li>
+					<li><a href="index.html#feature-cards-container">Serviços</a></li>
+					<li><a href="index.html#contato-card">Fale Conosco</a></li>
+					<li><a href="pages/calculadora.html">Calculadora</a></li>
+				</ul>
+			</div>
+
+			<div class="login-nav">
+				<ul>
+					<li><a href="pages/cadastro.html">Cadastrar</a></li>
+					<li><a href="pages/login.html">Entrar</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- BANNER -->
+		<div id="banner">
+			<div class="text-button-container">
+				<p>
+					Quer simular o lucro que você vai ter caso firmar um contrato conosco?
+				</p>
+				<div class="button-container">
+					<a href="pages/calculadora.html" class="button">Simular</a>
+				</div>
+			</div>
+			<div class="wrapper"></div>
+		</div>
+
+		<!-- VISÃO E VALORES -->
+		<div id="visão-valores">
+			<div class="quem-somos-container visao-containers">
+				<div class="quem-somos-text visao-texts">
+					<h1>Quem somos?</h1>
+					<p>
+						A Soy Venture é uma empresa voltada para a agricultura com foco em
+						grandes empresas, somos especializados em solucionar lacunas de
+						mercado que ocorrem pela tecnologia precária, muitas vezes empregada
+						nesse tipo de negócio, trazendo mais assertividade e economia na
+						produção.
+					</p>
+					<p>
+						Nossa equipe faz uma análise do solo e de outros fatores que podem
+						influenciar no plantio de soja, depois instalamos nossos sistemas
+						que auxiliaram o produtor a controlar e monitorar sua safra.
+					</p>
+				</div>
+
+				<img class="quem-somos-img" src="images/quem-somos.png" alt="" />
+			</div>
+
+			<div class="quem-somos-border borders"></div>
+
+			<div class="porque-container visao-containers">
+				<img class="porque-img" src="images/porque.png" alt="" />
+
+				<div class="porque-text visao-texts">
+					<h1>Por quê?</h1>
+					<p>
+						A agricultura é uma atividade diretamente influenciada por fatores
+						climáticos, em destaque umidade e temperatura. Portanto, qualquer
+						mudança no clima pode impactar a produção de diferentes maneiras,
+						desde a perda da produtividade até a disseminação de pragas e
+						doenças.
+					</p>
+					<p>
+						Em lavouras sem tecnologia de controle de plantio, a perda na safra
+						estimada chegou a 114 quilos por hectare no Mato Grosso, enquanto
+						produtores que usam tecnologia, o prejuízo foi de 26 quilos por
+						hectare na mesma região, ou seja, havendo um sistema de controle
+						adequado para plantio, pode haver uma redução de perda na safra de
+						77%.
+					</p>
+				</div>
+			</div>
+
+			<div class="porque-border borders"></div>
+		</div>
+
+		<!-- FEATURE CARDS -->
+		<div id="feature-cards-container">
+			<div class="lucros-card cards">
+				<i class="fa-solid fa-hand-holding-dollar"></i>
+				<h3>Lucros aumentam!</h3>
+				<p>Seu negócio rende mais em menos tempo!</p>
+			</div>
+			<div class="economia-card cards">
+				<i class="fa-solid fa-stopwatch"></i>
+				<h3>Economizará tempo!</h3>
+				<p>Com a automatização do plantio, você polpa seu tempo.</p>
+			</div>
+			<div class="prazo-card cards">
+				<i class="fa-regular fa-calendar-check"></i>
+				<h3>Entregas no prazo</h3>
+				<p>Satisfação dos clientes na nossa qualidade e prazos da proposta.</p>
+			</div>
+			<div class="dados-card cards">
+				<i class="fa-solid fa-chart-line"></i>
+				<h3>Dados em tempo real!</h3>
+				<p>Alertas e notificações em seu dispositivo em questão de segundos!</p>
+			</div>
+		</div>
+
+		<!-- CONTATO CARD -->
+		<div id="contato-card">
+			<img src="images/background-image.svg" class="bg-image" alt="" />
+			<div class="contato-card-container">
+				<div class="contato-campos">
+					<h1 class="contato">Contato</h1>
+					<p class="padding-text">Preencha todos os campos</p>
+					<p>Nome:</p>
+					<input type="text" id="in_nome" class="campos" />
+					<p>E-mail:</p>
+					<input type="text" id="in_email" class="campos" />
+					<p>Assunto:</p>
+					<input type="text" id="in_assunto" class="campos" />
+					<p>Mensagem:</p>
+					<textarea
+						maxlength="1000"
+						style="resize: none"
+						name=""
+						id="in_mensagem"
+						class="campos"
+						cols="1"
+						rows="8"
+					></textarea>
+					<!-- <input type="text" id="in_mensagem" class="campos" /> -->
+					<div class="campo-aceito">
+						<input type="checkbox" checked name="" id="checkbox" />
+						<p>Aceito receber novidades da Soy Venture</p>
+					</div>
+					<button id="enviar-btn">ENVIAR</button>
+				</div>
+				<div class="barra-vertical"></div>
+				<img src="images/Contact us-bro (1).svg" alt="" />
+			</div>
+		</div>
+
+		<!-- FOOTER -->
+		<div class="footer-container">
+			<div class="footer-links-container">
+				<p>Soy Venture SA | CNPJ: 56.080.425/0001-02</p>
+				<ul>
+					<li>PORTABILIDADE</li>
+					<li>TRABALHE CONOSCO</li>
+					<li>SEGURANÇA</li>
+					<li>INVESTIDORES</li>
+				</ul>
+			</div>
+
+			<div class="footer-endereco-container">
+				<p class="endereco">
+					Cidade de Deus, S/Nº Vila Yara | Osasco | SP | CEP: 06029-900
+				</p>
+				<p class="copyright">
+					Copyright © 2020-2022 Soy Venture Company S.L. Todos os direitos
+					reservados.
+				</p>
+			</div>
+
+			<div class="redes-sociais">
+				<p>Siga-nos nas redes sociais!</p>
+				<div class="icons-container">
+					<i class="fa-brands fa-twitter"></i>
+					<i class="fa-brands fa-facebook"></i>
+					<i class="fa-brands fa-instagram"></i>
+					<i class="fa-brands fa-linkedin"></i>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

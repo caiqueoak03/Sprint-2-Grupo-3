@@ -75,9 +75,13 @@ header {
 	font-size: 1.25rem;
 }
 
+.usuario-container a {
+	text-decoration: underline;
+	text-underline-offset: 1px;
+}
+
 .usuario-container a:hover {
 	color: #d3b04d;
-	text-decoration: underline;
 }
 
 .usuario-container img {
@@ -124,6 +128,7 @@ header {
 
 .main-nav a:hover {
 	box-shadow: none;
+	color: white;
 }
 
 .nav1 {
@@ -144,9 +149,7 @@ header {
 }
 
 .selects {
-	align-self: flex-end;
-	margin-right: 20px;
-	margin-top: 20px;
+	width: 100%;
 }
 
 select {

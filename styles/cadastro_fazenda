@@ -69,9 +69,19 @@ a {
 	
 }
 
-input::placeholder{
-	color:#2ac28a;
+li input::placeholder {
+	color: rgba(255, 255, 255, 0.648);
 }
+
+li input:focus {
+	background-color: rgb(42, 194, 138, 0.3);
+	border-bottom: #2ac28a solid 2px;
+}
+
+li input:hover {
+	background-color: rgb(42, 194, 138, 0.3);
+}
+
 .li_card {
 	margin-top: 58px;
 }

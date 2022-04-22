@@ -1,6 +1,6 @@
 // Variáveis globais do chartJS
-var temperaturaValues = [10, 8, 7, 3, 7, 12, 0];
-var umidadeValues = [12, 15, 7, 9, 7, 12, 14];
+var temperaturaValues = [20, 25, 30, 27, 21, 23, 25];
+var umidadeValues = [50, 65, 70, 85, 88, 95, 87];
 var nomeTemp = "Temperatura por Hora (°C)";
 var nomeUmid = "Umidade por Hora (%)";
 var labels = ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"];

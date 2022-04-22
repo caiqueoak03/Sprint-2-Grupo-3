@@ -1,3 +1,0 @@
-https://www.softr.io/ --Gerador de waves
-storyset --Imagens stock
-fontawesome --Icones

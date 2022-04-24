@@ -34,7 +34,7 @@ a {
 .box {
 	height: 85vh;
 	width: 33%;
-	background-color: rgba(0, 0, 0, 0.5);
+	background-color: rgba(0, 0, 0, 0.8);
 	display: flex;
 	padding: 10px;
 	justify-content: space-between;

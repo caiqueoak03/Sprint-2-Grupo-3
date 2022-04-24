@@ -1,7 +1,7 @@
 * {
 	--main-color: #002043;
 	--secondary-color: #2ac28a;
-	--terciary-color: #d3b04d;
+	--terciary-color: #d3b04d; /* Variáveis */
 	margin: 0;
 }
 
@@ -12,7 +12,7 @@ body {
 }
 
 html {
-	scroll-behavior: smooth;
+	scroll-behavior: smooth; /* deixa a rolagem da página suave */
 }
 
 a {
@@ -26,10 +26,10 @@ a {
 	display: flex;
 	justify-content: space-evenly;
 	font-family: "Fredoka", sans-serif;
-	box-sizing: border-box;
-	position: sticky;
+	box-sizing: border-box; /* Amassa os elementos para dentro */
+	position: sticky; /* Deixa o header grudado no topo da tela */
 	top: 0;
-	z-index: 999;
+	z-index: 999; /* Define a dimensão do elemento */
 	height: 11vh;
 	width: 100%;
 	font-size: 1.15rem;

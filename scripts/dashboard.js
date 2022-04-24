@@ -1,8 +1,8 @@
 // Variáveis globais do chartJS
-var temperaturaValues = [10, 8, 7, 3, 7, 12, 0];
-var umidadeValues = [12, 15, 7, 9, 7, 12, 14];
-var nomeTemp = "Temperatura por Hora";
-var nomeUmid = "Umidade por Hora";
+var temperaturaValues = [20, 25, 30, 27, 21, 23, 25];
+var umidadeValues = [50, 65, 70, 85, 88, 95, 87];
+var nomeTemp = "Temperatura por Hora (°C)";
+var nomeUmid = "Umidade por Hora (%)";
 var labels = ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"];
 var tipoGrafico = "line";
 var graficoUmid = {};
@@ -81,8 +81,8 @@ function verificar() {
 		area.style.display = "inline";
 		dia.style.display = "none";
 		tipoGrafico = "line";
-		nomeTemp = "Temperatura por Hora";
-		nomeUmid = "Umidade por Hora";
+		nomeTemp = "Temperatura por Hora (°C)";
+		nomeUmid = "Umidade por Hora (%)";
 		labels = ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"];
 		mostrar();
 	} else {
@@ -91,8 +91,8 @@ function verificar() {
 		area.style.display = "none";
 		dia.style.display = "inline";
 		tipoGrafico = "bar";
-		nomeTemp = "Temperatura Média por Área";
-		nomeUmid = "Umidade Média por Área";
+		nomeTemp = "Temperatura Média por Área (°C)";
+		nomeUmid = "Umidade Média por Área (%)";
 		labels = [
 			"Área A",
 			"Area B",
@@ -102,7 +102,6 @@ function verificar() {
 			"Area F",
 			"Area G",
 		];
-
 		mostrar();
 	}
 }
@@ -111,37 +110,37 @@ function verificar() {
 function mostrar() {
 	if (fazenda.value == "fazendaA") {
 		if (area.value == "areaA") {
-			temperaturaValues = [10, 8, 7, 3, 7, 12, 7];
-			umidadeValues = [12, 15, 7, 9, 7, 12, 14];
+			temperaturaValues = [20, 25, 30, 27, 21, 23, 25];
+			umidadeValues = [50, 65, 70, 85, 88, 95, 87];
 		} else if (area.value == "areaB") {
-			temperaturaValues = [7, 9, 3, 5, 11, 15, 12];
-			umidadeValues = [15, 17, 8, 5, 3, 5, 17];
+			temperaturaValues = [18, 17, 18, 22, 20, 19, 23];
+			umidadeValues = [30, 45, 55, 65, 70, 50, 65];
 		} else if (dia.value == "01/01/2022") {
-			temperaturaValues = [5, 1, 5, 6, 12, 17, 9];
-			umidadeValues = [15, 40, 45, 18, 30, 25, 15];
+			temperaturaValues = [23, 25, 27, 20, 15, 17, 20];
+			umidadeValues = [50, 55, 60, 75, 65, 60, 68];
 		} else if (dia.value == "02/01/2022") {
-			temperaturaValues = [12, 6, 3, 12, 15, 8, 3];
-			umidadeValues = [4, 30, 12, 19, 25, 11, 4];
+			temperaturaValues = [22, 26, 32, 35, 37, 32, 30];
+			umidadeValues = [40, 41, 45, 47, 50, 55, 60];
 		} else if (dia.value == "03/01/2022") {
-			temperaturaValues = [8, 5, 3, 2, 7, 12, 7];
-			umidadeValues = [18, 25, 30, 35, 12, 20, 10];
+			temperaturaValues = [15, 17, 19, 22, 26, 30, 28];
+			umidadeValues = [30, 25, 22, 20, 24, 26, 25];
 		}
 	} else if (fazenda.value == "fazendaB") {
 		if (area.value == "areaA") {
-			temperaturaValues = [13, 7, 2, 5, 8, 16, 2];
-			umidadeValues = [7, 12, 6, 2, 6, 25, 10];
+			temperaturaValues = [25, 30, 32, 35, 38, 36, 32];
+			umidadeValues = [55, 60, 62, 67, 70, 68, 65];
 		} else if (area.value == "areaB") {
-			temperaturaValues = [9, 12, 5, 7, 13, 17, 20];
-			umidadeValues = [12, 13, 12, 12, 15, 17, 19];
+			temperaturaValues = [23, 25, 22, 21, 26, 25, 27];
+			umidadeValues = [30, 35, 37, 38, 35, 40, 38];
 		} else if (dia.value == "01/01/2022") {
-			temperaturaValues = [7, 8, 7, 12, 5, 8, 13];
-			umidadeValues = [13, 30, 25, 40, 30, 26, 20];
+			temperaturaValues = [17, 18, 22, 25, 28, 26, 25];
+			umidadeValues = [40, 42, 45, 50, 52, 50, 47];
 		} else if (dia.value == "02/01/2022") {
-			temperaturaValues = [13, 12, 5, 7, 9, 3, 5];
-			umidadeValues = [40, 20, 25, 30, 30, 45, 50];
+			temperaturaValues = [20, 22, 26, 22, 21, 20, 23];
+			umidadeValues = [32, 35, 37, 38, 40, 42, 45];
 		} else if (dia.value == "03/01/2022") {
-			temperaturaValues = [12, 3, 5, 12, 9, 15, 12];
-			umidadeValues = [18, 40, 20, 12, 18, 30, 40];
+			temperaturaValues = [10, 12, 15, 18, 18, 17, 15];
+			umidadeValues = [60, 65, 65, 65, 68, 70, 88];
 		}
 	}
 

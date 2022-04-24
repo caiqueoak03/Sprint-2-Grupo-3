@@ -86,6 +86,11 @@ header {
 	text-decoration: underline;
 }
 
+.usuario-container a {
+	text-decoration: underline;
+	text-underline-offset: 1px;
+}
+
 .usuario-container img {
 	width: 100px;
 	border-radius: 50%;
@@ -162,8 +167,22 @@ header {
 	align-items: center;
 	justify-content: space-evenly;
 	background-color: rgba(187, 187, 187, 0.753);
-	width: 250px;
+	width: 310px;
 	border-radius: 10px;
 	height: 180px;
 	box-shadow: 0 0 5px -1px black;
+}
+
+.cards h2 {
+	border-bottom: 2px solid white;
+	padding-bottom: 1px;
+}
+
+.cards h3 {
+	font-size: 1.34rem;
+}
+
+.kpi-valores {
+	font-size: 1.5rem;
+	font-weight: 1000;
 }

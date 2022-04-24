@@ -9,6 +9,10 @@ body {
 	margin: 0;
 	min-height: 100vh;
 	font-family: sans-serif;
+	min-height: 100vh;
+	font-family: sans-serif;
+	background: #161618;
+	display: flex;
 }
 
 html {
@@ -27,8 +31,8 @@ a {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-    color: #2ac28a;
-	background: url(../images/func.png) no-repeat;
+	color: #2ac28a;
+	background: url(../images/fazenda.jpg) no-repeat;
 	background-size: cover;
 	height: 100vh;
 }
@@ -36,17 +40,17 @@ a {
 .box {
 	height: 95vh;
 	width: 750px;
-	background-color: rgba(0, 0, 0, 0.5);
+	background-color: rgba(0, 0, 0, 0.705);
 	display: flex;
 	margin: 0;
 	padding: 0;
 	justify-content: center;
 	flex-direction: column;
+	border-radius: 20px 40px 20px 40px;
 }
 
 .card_cadastro2 {
 	display: flex;
-	
 }
 
 .container {
@@ -66,7 +70,6 @@ a {
 .card_cadastro2 li {
 	margin-bottom: 30px;
 	list-style: none;
-	
 }
 
 li input::placeholder {
@@ -89,6 +92,7 @@ li input:hover {
 .card_cadastro2 h2 {
 	margin-bottom: 30px;
 }
+
 li button {
 	color: white;
 	background-color: transparent;
@@ -109,11 +113,8 @@ li button:hover {
 .card_cadastro2 ul {
 	width: 325px;
 	text-decoration: white;
-	
-
-
-	
 }
+
 li input {
 	width: 100%;
 	height: 35px;
@@ -128,13 +129,6 @@ ul {
 	color: white;
 }
 
-.feito {
-	text-align: center;
-	justify-content: center;
-	color: white;
-	margin-top: 40px;
-}
-
 .linha {
 	width: 300px;
 	border-bottom: 1px #2ac28a solid;
@@ -144,28 +138,7 @@ ul {
 	margin-bottom: 10px;
 }
 
-.ou {
-	text-align: center;
-	justify-content: center;
-	color: white;
-}
-
 /* HEADER */
-
-.header {
-	display: flex;
-	justify-content: space-evenly;
-	font-family: "Fredoka", sans-serif;
-	box-sizing: border-box;
-	position: sticky;
-	top: 0;
-	z-index: 999;
-	height: 11vh;
-	width: 100%;
-	font-size: 1.15rem;
-	padding: 0 30px;
-	background-color: var(--main-color);
-}
 
 .nome-empresa {
 	color: #2ac28a;
@@ -175,7 +148,6 @@ ul {
 .main-nav a:hover,
 .login-nav a:hover {
 	color: var(--terciary-color);
-	text-decoration: underline;
 }
 
 /* logo */
@@ -196,71 +168,7 @@ ul {
 	font-size: 2rem;
 }
 
-/* nav */
-
-.main-nav {
-	display: flex;
-	align-items: center;
-}
-
-.main-nav ul {
-	display: flex;
-	align-items: center;
-	list-style-type: none;
-	column-gap: 40px;
-}
-
-.login-nav {
-	display: flex;
-	align-items: center;
-}
-
-.login-nav ul {
-	display: flex;
-	list-style-type: none;
-	column-gap: 40px;
-}
-
 /* FOOTER */
-
-.footer-container {
-	display: flex;
-	align-items: center;
-	justify-content: space-evenly;
-	background: linear-gradient(to right, #111, rgba(17, 17, 17, 0.95));
-	height: 150px;
-	color: white;
-	font-size: 0.8rem;
-}
-
-.footer-links-container {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	row-gap: 15px;
-}
-
-.footer-links-container ul {
-	display: flex;
-	list-style-type: none;
-	padding: 0;
-	column-gap: 10px;
-}
-
-.footer-links-container ul li {
-	border-right: 1px solid white;
-	padding-right: 10px;
-}
-
-.footer-links-container ul li:last-child {
-	border-right: none;
-}
-
-.footer-endereco-container {
-	display: flex;
-	flex-direction: column;
-	row-gap: 15px;
-}
 
 .redes-sociais {
 	display: flex;
@@ -268,7 +176,6 @@ ul {
 	flex-direction: column;
 	row-gap: 20px;
 	color: white;
-	
 }
 
 .icons-container {
@@ -281,3 +188,123 @@ ul {
 	font-size: 1.8rem;
 }
 
+/* HEADER */
+
+header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	box-sizing: border-box;
+	padding: 10px 0;
+	font-family: "Fredoka", sans-serif;
+	height: 100vh;
+	width: 30%;
+	font-size: 1.15rem;
+	background: linear-gradient(to bottom, #002043, #002043e8);
+	border-right: 4px solid #d3b04d;
+}
+
+/* logo */
+
+.logo {
+	display: flex;
+	align-items: center;
+}
+
+.logo img {
+	height: 50px;
+	background-color: var(--main-color);
+}
+
+.nome-empresa {
+	padding-left: 10px;
+	font-family: monospace;
+	font-size: 2rem;
+	color: #2ac28a;
+	text-shadow: 1px 1px #d3b04d;
+}
+
+/* Usuario Container */
+
+.usuario-container {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	row-gap: 10px;
+	margin: 40px 0;
+}
+
+.usuario-container b {
+	font-weight: 1000;
+	font-size: 1.25rem;
+}
+
+.usuario-container a {
+	text-decoration: underline;
+	text-underline-offset: 1px;
+}
+
+.usuario-container a:hover {
+	color: #d3b04d;
+}
+
+.usuario-container img {
+	width: 100px;
+	border-radius: 50%;
+	border: 1px solid #2ac28a;
+}
+
+.usuario-nome {
+	color: var(--secondary-color);
+}
+
+/* nav */
+
+.main-nav {
+	display: flex;
+	align-items: center;
+}
+
+.main-nav ul {
+	display: flex;
+	flex-direction: column;
+	list-style-type: none;
+	row-gap: 15px;
+	padding: 0;
+}
+
+.main-nav a:hover {
+	box-shadow: none;
+	color: white;
+}
+
+.navs {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #2ac28a;
+	width: 300px;
+	height: 50px;
+	border-radius: 10px;
+	text-align: center;
+	color: #002043;
+	font-size: 1.25rem;
+	font-weight: 700;
+	box-shadow: 0 3px 5px -2px #000;
+	border: 3px solid #000;
+	transition: all 0.1s;
+}
+
+.nav3 {
+	background-color: #d3b04d;
+}
+
+.main-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	justify-content: space-between;
+	box-sizing: border-box;
+	width: 70%;
+	height: 100vh;
+}

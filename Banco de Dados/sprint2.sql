@@ -71,3 +71,59 @@ select * from funcionario where sobrenome like 'Evan';
 select * from funcionario where sobrenome like '%s%';
 
 select * from cliente join fazenda on fkCliente = idCliente join funcionario on fkFazenda = idFazenda;
+
+
+
+create table sensor (
+idSensor int primary key auto_increment,
+modelo varchar(45),
+longitude varchar(45),
+latitude varchar(45),
+fkFazenda int, foreign key(fkFazenda) references fazenda(idFazenda)
+
+
+
+
+);
+
+create table dados (
+idDados int,
+temperatura decimal (4,2),
+umidade decimal (5,2),
+dataHorario datetime,
+fkSensor int, foreign key (fkSensor) references sensor(idSensor),
+primary key (idDados,fkSensor)
+
+
+
+
+);
+
+
+  
+insert into sensor values
+(null, 'DHT11', '120°', '43°', 1),
+(null, 'DHT11', '168°', '11°', 2),
+(null, 'DHT11', '124°', '29°', 3),
+(null, 'DHT11', '23°', '65°', 4),
+(null, 'DHT11', '34°', '21°', 5),
+(null, 'DHT11', '79°', '90°', 7),
+(null, 'DHT11', '56°', '87°', 8),
+(null, 'DHT11', '12°', '40°', 9),
+(null, 'DHT11', '31°', '20°', 10),
+(null, 'DHT11', '76°', '10°', 11),
+(null, 'DHT11', '33°', '150°', 12);
+
+
+insert into dados values
+( 1, 21, 2.05, '2021-05-13 12:09:01', 1),
+( 2, 34, 32.5, '2020-05-13 13:11:12', 2),
+( 3, 40, 14, '2022-05-13 10:24:50', 3),
+( 4, 15, 25.5, '2020-05-13 11:07:45', 4),
+( 5, -10, 44.9, '2021-05-13 22:10:16', 5),
+( 6, 5, 42.2, '2021-05-13 19:10:02', 6),
+( 7, 25, 35, '2019-05-13 13:15:17', 7),
+( 8, 30, 15, '2020-05-13 21:18:02', 8),
+( 9, 22, 10.7, '2021-05-13 15:40:33', 9),
+( 10, 26, 40.5, '2021-12-15 07:11:55', 10);
+

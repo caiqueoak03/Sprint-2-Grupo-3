@@ -8,7 +8,7 @@
 body {
 	min-height: 100vh;
 	font-family: sans-serif;
-	background: #161618;
+	background: #161618e1;
 	display: flex;
 }
 
@@ -75,9 +75,13 @@ header {
 	font-size: 1.25rem;
 }
 
+.usuario-container a {
+	text-decoration: underline;
+	text-underline-offset: 1px;
+}
+
 .usuario-container a:hover {
 	color: #d3b04d;
-	text-decoration: underline;
 }
 
 .usuario-container img {
@@ -124,19 +128,19 @@ header {
 
 .main-nav a:hover {
 	box-shadow: none;
+	color: white;
 }
 
 .nav1 {
 	background-color: #d3b04d;
 }
 
-/* MONITORAMENTO POR HORA */
+/* DASHBOARD */
 
 .main-container {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	justify-content: space-between;
+	justify-content: space-evenly;
 	box-sizing: border-box;
 	width: 70%;
 	padding: 10px 0;
@@ -144,9 +148,11 @@ header {
 }
 
 .selects {
-	align-self: flex-end;
-	margin-right: 20px;
-	margin-top: 20px;
+	width: 99%;
+	display: flex;
+	align-items: center;
+	column-gap: 5px;
+	justify-content: flex-end;
 }
 
 select {
@@ -158,33 +164,95 @@ select {
 
 button {
 	padding: 6px;
+	margin-left: 20px;
 	border-radius: 10px;
-	border: 1px groove #000;
+	border: 1px groove #fff;
 	transition: all 0.1s;
 }
 
 button:hover {
-	box-shadow: 0 2px 5px black;
+	box-shadow: 0 2px 5px #bbb;
 }
 
 button:active {
 	box-shadow: none;
 }
 
+.graficos-main-container {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	flex-direction: row-reverse;
+	background-color: rgb(218, 218, 219);
+	border-radius: 10px;
+	margin: 0 auto;
+	box-shadow: 0 0 5px 0 black;
+	width: 99%;
+	height: 90%;
+}
+
+.indicadores-container {
+	width: 40%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.umidade-container {
+	padding: 75px 0 50px;
+}
+
+.indicadores-row {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	row-gap: 25px;
+}
+
+.indicadores-row h3 {
+	text-decoration: underline;
+}
+
+.cards-container {
+	display: flex;
+	column-gap: 25px;
+}
+
+.cards {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 100px;
+	border-radius: 10px;
+	height: 100px;
+	box-shadow: 0 0 5px -1px black;
+	font-weight: 1000;
+}
+
+.cards p {
+	text-decoration: underline;
+}
+
+.indicador-valores {
+	font-weight: 600;
+	font-size: 1.5rem;
+}
+
 .graficos-container {
 	display: flex;
-	margin: auto;
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-evenly;
 	background-color: rgb(218, 218, 219);
-	width: 95%;
-	height: 85vh;
+	width: 58%;
+	height: 100%;
 	border-radius: 10px;
-	box-shadow: 0 0 5px 0 black;
 }
 
 .graficos {
 	align-self: center;
-	width: 50%;
+	width: 98%;
 }

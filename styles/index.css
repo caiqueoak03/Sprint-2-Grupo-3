@@ -251,6 +251,7 @@ a {
 #contato-card {
 	display: flex;
 	position: relative;
+	justify-content: center;
 	height: 140vh;
 }
 

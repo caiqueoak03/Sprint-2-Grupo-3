@@ -31,20 +31,33 @@
 			<div class="usuario-container">
 				<img src="../images/gerente-img.png" alt="" class="img" />
 				<p class="usuario-nome">Olá, <b>Luís Nascimento</b></p>
-				<a href="../index.html">Sair</a>
 			</div>
 
 			<div class="main-nav">
 				<ul>
 					<a class="navs nav1" href="dashboard.html">Gráficos</a>
 					<a class="navs nav2" href="KPIs.html">Indicadores de Performance</a>
-					<a class="navs nav4" href="cadastro_funcionario.html"
+					<a class="navs nav3" href="cadastro_funcionario.html"
 						>Cadastrar Funcionário</a
 					>
-					<a class="navs nav3" href="cadastroFazenda.html">Cadastrar Fazenda</a>
+					<a class="navs nav4" href="cadastroFazenda.html">Cadastrar Fazenda</a>
+					<a class="navs nav5" href="configuracoes.html">Configurações</a>
+					<a class="navs nav5" href="configuracoes.html">Relatório</a>
+					<a class="navs nav6" onclick="mostrarBox()">Sair</a>
 				</ul>
 			</div>
 		</header>
+
+		<!-- Confirmation Box -->
+		<div id="confirmation_wrapper">
+			<div class="confirmation-box">
+				<p>Deseja sair da sua conta?</p>
+				<div class="sim-ou-nao">
+					<a href="../index.html">sim</a>
+					<a onclick="esconderBox()">não</a>
+				</div>
+			</div>
+		</div>
 
 		<!-- DASHBOARD -->
 
@@ -126,4 +139,13 @@
 		</div>
 	</body>
 </html>
+<script>
+	function esconderBox() {
+		confirmation_wrapper.style.display = "none";
+	}
+
+	function mostrarBox() {
+		confirmation_wrapper.style.display = "flex";
+	}
+</script>
 <script src="../scripts/dashboard.js"></script>

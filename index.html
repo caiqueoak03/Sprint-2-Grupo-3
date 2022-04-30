@@ -145,6 +145,7 @@
 					<input type="text" id="in_assunto" class="campos" />
 					<p>Mensagem:</p>
 					<textarea
+						id="in_mensagem"
 						maxlength="1000"
 						style="resize: none"
 						name=""
@@ -153,12 +154,11 @@
 						cols="1"
 						rows="8"
 					></textarea>
-					<!-- <input type="text" id="in_mensagem" class="campos" /> -->
 					<div class="campo-aceito">
 						<input type="checkbox" checked name="" id="checkbox" />
 						<p>Aceito receber novidades da Soy Venture</p>
 					</div>
-					<button id="enviar-btn">ENVIAR</button>
+					<button onclick="validar()" id="enviar-btn">ENVIAR</button>
 				</div>
 				<div class="barra-vertical"></div>
 				<img src="images/Contact us-bro (1).svg" alt="" />
@@ -199,3 +199,53 @@
 		</div>
 	</body>
 </html>
+<script>
+	function validar() {
+		var nome = in_nome.value;
+		var email = in_email.value;
+		var assunto = in_assunto.value;
+		var mensagem = in_mensagem.value;
+		var alerta = "";
+
+		if (nome == "") {
+			alerta += "*Insira seu nome";
+		} else if (nome.length < 3) {
+			alerta += "*Seu nome deve ter pelo menos 3 caracteres";
+		}
+
+		if (email == "") {
+			alerta += "\n*insira seu email";
+		} else {
+			if (email.indexOf("@") == -1) {
+				alerta += "\n*Seu email deve conter @";
+			}
+			if (email.indexOf(".com") == -1) {
+				alerta += "\n*Seu email deve conter .com";
+			}
+		}
+
+		if (assunto == "") {
+			alerta += "\n*Insira um assunto";
+		}
+
+		if (mensagem == "") {
+			alerta += "\n*Insira uma mensagem";
+		} else if (mensagem.length < 3) {
+			alerta += "\n*Insira uma mensagem maior que 3 caracteres";
+		}
+
+		if (alerta != "") {
+			alert(alerta.trim());
+		} else {
+			alert("Mensagem enviada com sucesso. Obrigado!");
+
+			// Reset
+			/*
+			in_nome.value = '';
+			in_email.value = '';
+			in_assunto.value = '';
+			in_mensagem.value = '';
+			*/
+		}
+	}
+</script>

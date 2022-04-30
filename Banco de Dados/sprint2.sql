@@ -51,6 +51,8 @@ create table funcionario (
 idFunc int primary key auto_increment,
 nomeFunc varchar(45),
 sobrenome varchar(45),
+login varchar(45),
+senha varchar(45),
 telFixoFunc char(12),
 telCelularFunc char(13),
 cargo varchar(45), check (cargo in('funcionario','supervisor','gerente')),

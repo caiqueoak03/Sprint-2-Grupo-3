@@ -68,28 +68,75 @@
 							<div class="card_cadastro2">
 								<ul>
 									<h2>Cadastro De Funcionário</h2>
-									<li>Primeiro nome:<br><input placeholder="Nome" type="text"> </li>
-									<li>Email:<br><input placeholder="Digite o email" type="text"> </li>
-									<li>Numero de telefone: <br><input placeholder="(00) 00000-0000" type="text"></li>
-									<li>Selecione o Cargo<select id="select_cargo">
-										<option value="analista">Analista</option>
-										<option value="Supervisor">Supervisor</option>
-										<option value="gerente">Gerente</option>
-
-									</select></li>
-									
-									
+									<li>
+										Primeiro nome:<br /><input
+											id="input_nome"
+											placeholder="Nome"
+											type="text"
+										/>
+									</li>
+									<li>
+										Email:<br /><input
+											id="input_email"
+											placeholder="Digite o email"
+											type="text"
+										/>
+									</li>
+									<li>
+										Numero de telefone: <br /><input
+											id="input_telefone_fixo"
+											placeholder="(00) 00000-0000"
+											type="text"
+										/>
+									</li>
+									<li>
+										Selecione o Cargo<select id="select_cargo">
+											<option value="analista">Analista</option>
+											<option value="Supervisor">Supervisor</option>
+											<option value="gerente">Gerente</option>
+										</select>
+									</li>
 								</ul>
 								<div class="li_card">
-									<ul class="input_color" >
-										<li>Sobrenome: <br><input placeholder="Sobrenome" type="text"></li>
-										<li>Senha<br><input placeholder="Digite a senha" type="password"> </li>
-										<li>Telefone Celular <br><input placeholder="(00) 00000-0000" type="text"></li>
-										<li><button>Cadastrar Funcionario</button></li>
+									<ul class="input_color">
+										<li>
+											Sobrenome: <br /><input
+												id="input_sobrenome"
+												placeholder="Sobrenome"
+												type="text"
+											/>
+										</li>
+										<li>
+											Senha<br /><input
+												id="input_senha"
+												placeholder="Digite a senha"
+												type="password"
+											/>
+										</li>
+										<li>
+											Confirme a Senha<br /><input
+												id="input_cofirmar_senha"
+												placeholder="Confirme a senha"
+												type="password"
+											/>
+										</li>
+										<li>
+											Telefone Celular <br /><input
+												id="input_telefone_celular"
+												placeholder="(00) 00000-0000"
+												type="text"
+											/>
+										</li>
+										<li>
+											<button onclick="validar()">Cadastrar Funcionario</button>
+										</li>
 									</ul>
 								</div>
 							</div>
 						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>
@@ -100,5 +147,34 @@
 
 	function mostrarBox() {
 		confirmation_wrapper.style.display = "flex";
+	}
+	function validar() {
+		var nome = input_nome.value;
+		var sobrenome = input_sobrenome.value;
+		var email = input_email.value;
+		var telefone_fixo = input_telefone_fixo.value;
+		var telefone_celular = input_telefone_celular.value;
+		var senha = input_senha.value;
+		var confirmar_senha = input_cofirmar_senha.value;
+
+		if (nome.length < 3) {
+			alert("Nome incorreto, insira novamente!!");
+		}
+
+		if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
+			alert("Email incorreto, insira novamente!!");
+		}
+
+		if (senha != confirmar_senha) {
+			alert("As senhas não conferem!!");
+		}
+
+		if (telefone_fixo.length > 13 || telefone_fixo.length < 13) {
+			alert("Telefone Fixo incorreto, insira novamente!!");
+		}
+
+		if (telefone_celular.length > 15 || telefone_celular.length < 15) {
+			alert("Telefone Celular incorreto, insira novamente!!");
+		}
 	}
 </script>

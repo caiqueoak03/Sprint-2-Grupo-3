@@ -5,7 +5,8 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Soy Venture</title>
-		<link rel="stylesheet" href="../styles/dashboard.css" />
+		<link rel="stylesheet" href="../styles/headerDashboard.css" />
+		<link rel="stylesheet" href="../styles/confirmationBox.css" />
 		<link rel="stylesheet" href="../styles/cadastro_funcionario.css" />
 		<link rel="shortcut icon" href="../images/logo.png" type="image/x-icon" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -30,22 +31,33 @@
 			<div class="usuario-container">
 				<img src="../images/gerente-img.png" alt="" class="img" />
 				<p class="usuario-nome">Olá, <b>Luís Nascimento</b></p>
-				<a href="../index.html">Sair</a>
 			</div>
 
 			<div class="main-nav">
 				<ul>
 					<a class="navs nav1" href="dashboard.html">Gráficos</a>
 					<a class="navs nav2" href="KPIs.html">Indicadores de Performance</a>
-					<a class="navs nav3" href="cadastro_fazenda.html"
-						>Cadastrar Fazenda</a
-					>
-					<a class="navs nav4" href="cadastro_funcionario.html"
+					<a class="navs nav3" href="cadastro_funcionario.html"
 						>Cadastrar Funcionário</a
 					>
+					<a class="navs nav4" href="cadastroFazenda.html">Cadastrar Fazenda</a>
+					<a class="navs nav5" href="alterarDados.html">Alterar Dados</a>
+					<a class="navs nav6" href="relatorio.html">Relatório</a>
+					<a class="navs nav7" onclick="mostrarBox()">Sair</a>
 				</ul>
 			</div>
 		</header>
+
+		<!-- Confirmation Box -->
+		<div id="confirmation_wrapper">
+			<div class="confirmation-box">
+				<p>Deseja sair da sua conta?</p>
+				<div class="sim-ou-nao">
+					<a href="../index.html">sim</a>
+					<a onclick="esconderBox()">não</a>
+				</div>
+			</div>
+		</div>
 
 		<!-- MONITORAMENTO POR HORA -->
 		<div class="main-container">
@@ -57,7 +69,7 @@
 								<ul>
 									<h2>Cadastro De Funcionário</h2>
 									<li>Primeiro nome:<br><input placeholder="Nome" type="text"> </li>
-									<li>Login<br><input placeholder="Digite o login" type="text"> </li>
+									<li>Email:<br><input placeholder="Digite o email" type="text"> </li>
 									<li>Numero de telefone: <br><input placeholder="(00) 00000-0000" type="text"></li>
 									<li>Selecione o Cargo<select id="select_cargo">
 										<option value="analista">Analista</option>
@@ -81,3 +93,12 @@
 		</div>
 	</body>
 </html>
+<script>
+	function esconderBox() {
+		confirmation_wrapper.style.display = "none";
+	}
+
+	function mostrarBox() {
+		confirmation_wrapper.style.display = "flex";
+	}
+</script>

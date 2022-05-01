@@ -7,7 +7,7 @@
 		<title>Soy Venture</title>
 		<link rel="stylesheet" href="../styles/headerDashboard.css" />
 		<link rel="stylesheet" href="../styles/confirmationBox.css" />
-		<link rel="stylesheet" href="../styles/dashboard.css" />
+		<link rel="stylesheet" href="../styles/alterarDados.css" />
 		<link rel="shortcut icon" href="../images/logo.png" type="image/x-icon" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -60,82 +60,32 @@
 			</div>
 		</div>
 
-		<!-- DASHBOARD -->
+		<!-- Alterar Dados -->
 
 		<div class="main-container">
-			<div class="selects">
-				<select onchange="verificar()" name="" id="grafico">
-					<option value="porHora">Registro por hora</option>
-					<option value="porArea">Registro por área</option>
-				</select>
-
-				<select name="" id="fazenda">
-					<option value="fazendaA">Fazenda São João</option>
-					<option value="fazendaB">Fazenda Rio Bonito</option>
-				</select>
-
-				<select name="" id="dia" style="display: none">
-					<option value="01/01/2022">01/01/2022</option>
-					<option value="02/01/2022">02/01/2022</option>
-					<option value="03/01/2022">03/01/2022</option>
-				</select>
-
-				<select name="" id="setor">
-					<option value="setorA">Setor A</option>
-					<option value="setorB">Setor B</option>
-				</select>
-
-				<button onclick="mostrar()">Mostrar Gráficos</button>
-			</div>
-
-			<div class="graficos-main-container">
-				<div class="indicadores-container">
-					<div class="temperatura-container indicadores-row">
-						<h3>Temperatura</h3>
-						<div class="cards-container">
-							<div style="background-color: yellow" class="cards">
-								<p>Alerta</p>
-								<div class="indicador-valores">10°C</div>
-							</div>
-							<div style="background-color: green" class="cards">
-								<p>Ideal</p>
-								<div class="indicador-valores">25°C</div>
-							</div>
-							<div style="background-color: red" class="cards">
-								<p>Alerta</p>
-								<div class="indicador-valores">35°C</div>
-							</div>
-						</div>
+			<div class="alterar-dados-container">
+				<h1>Alterar Dados</h1>
+				<div class="inputs-container">
+					<div class="inputs1">
+						<p>Primeiro nome:</p>
+						<input type="text" id="primeiro_nome" value="Luís Nascimento" />
+						<p>Email</p>
+						<input type="text" id="email" value="luis_nascimento@gmail.com" />
+						<p>Telefone fixo</p>
+						<input type="text" id="email" value="(11) 5921-8598" />
 					</div>
-
-					<div class="umidade-container indicadores-row">
-						<h3>Umidade</h3>
-						<div class="cards-container">
-							<div style="background-color: yellow" class="cards">
-								<p>Alerta</p>
-								<div class="indicador-valores">30%</div>
-							</div>
-							<div style="background-color: green" class="cards">
-								<p>Ideal</p>
-								<div class="indicador-valores">65%</div>
-							</div>
-							<div style="background-color: red" class="cards">
-								<p>Alerta</p>
-								<div class="indicador-valores">80%</div>
-							</div>
-						</div>
+					<div class="inputs2">
+						<p>Sobrenome:</p>
+						<input type="text" id="primeiro_nome" value="Luís Nascimento" />
+						<p>Telefone celular</p>
+						<input type="text" id="email" value="(11) 99536-0354" />
+						<p>Senha</p>
+						<input type="text" id="email" value="luis_nascimento@gmail.com" />
+						<p>Confirmação de senha:</p>
+						<input type="text" id="email" value="(11) 5921-8598" />
 					</div>
 				</div>
-
-				<div class="graficos-container">
-					<div class="graficos">
-						<canvas id="graficoTemperatura"></canvas>
-					</div>
-
-					<div class="graficos">
-						<canvas id="graficoUmidade"></canvas>
-					</div>
-				</div>
+				<button>Confirmar Alteração</button>
 			</div>
 		</div>
 	</body>
@@ -149,4 +99,3 @@
 		confirmation_wrapper.style.display = "flex";
 	}
 </script>
-<script src="../scripts/dashboard.js"></script>

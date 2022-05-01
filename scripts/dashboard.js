@@ -76,9 +76,9 @@ function verificar() {
 	fazenda.value = "fazendaA";
 
 	if (grafico.value == "porHora") {
-		area.value = "areaA";
+		setor.value = "setorA";
 		dia.value = "";
-		area.style.display = "inline";
+		setor.style.display = "inline";
 		dia.style.display = "none";
 		tipoGrafico = "line";
 		nomeTemp = "Temperatura por Hora (°C)";
@@ -86,21 +86,21 @@ function verificar() {
 		labels = ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"];
 		mostrar();
 	} else {
-		area.value = "";
+		setor.value = "";
 		dia.value = "01/01/2022";
-		area.style.display = "none";
+		setor.style.display = "none";
 		dia.style.display = "inline";
 		tipoGrafico = "bar";
 		nomeTemp = "Temperatura Média por Área (°C)";
 		nomeUmid = "Umidade Média por Área (%)";
 		labels = [
-			"Área A",
-			"Area B",
-			"Area C",
-			"Area D",
-			"Area E",
-			"Area F",
-			"Area G",
+			"Setor A",
+			"Setor B",
+			"Setor C",
+			"Setor D",
+			"Setor E",
+			"Setor F",
+			"Setor G",
 		];
 		mostrar();
 	}
@@ -109,10 +109,10 @@ function verificar() {
 // Aplica valores exemplo
 function mostrar() {
 	if (fazenda.value == "fazendaA") {
-		if (area.value == "areaA") {
+		if (setor.value == "setorA") {
 			temperaturaValues = [20, 25, 30, 27, 21, 23, 25];
 			umidadeValues = [50, 65, 70, 85, 88, 95, 87];
-		} else if (area.value == "areaB") {
+		} else if (setor.value == "setorB") {
 			temperaturaValues = [18, 17, 18, 22, 20, 19, 23];
 			umidadeValues = [30, 45, 55, 65, 70, 50, 65];
 		} else if (dia.value == "01/01/2022") {
@@ -126,10 +126,10 @@ function mostrar() {
 			umidadeValues = [30, 25, 22, 20, 24, 26, 25];
 		}
 	} else if (fazenda.value == "fazendaB") {
-		if (area.value == "areaA") {
+		if (setor.value == "setorA") {
 			temperaturaValues = [25, 30, 32, 35, 38, 36, 32];
 			umidadeValues = [55, 60, 62, 67, 70, 68, 65];
-		} else if (area.value == "areaB") {
+		} else if (setor.value == "setorB") {
 			temperaturaValues = [23, 25, 22, 21, 26, 25, 27];
 			umidadeValues = [30, 35, 37, 38, 35, 40, 38];
 		} else if (dia.value == "01/01/2022") {

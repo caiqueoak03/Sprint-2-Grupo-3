@@ -1,0 +1,15 @@
+.nav6 {
+	background-color: #d3b04d;
+}
+
+/* RELATORIO */
+
+.main-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	box-sizing: border-box;
+	width: 70%;
+	padding: 10px 0;
+	height: 100vh;
+}

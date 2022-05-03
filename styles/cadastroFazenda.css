@@ -60,6 +60,7 @@
 
 li input::placeholder {
 	color: rgba(255, 255, 255, 0.648);
+
 }
 
 li input:focus {
@@ -109,6 +110,7 @@ li input {
 	background-color: transparent;
 	border-bottom: #2ac28a solid 1px;
 	outline: none;
+	color: white;
 }
 
 ul {

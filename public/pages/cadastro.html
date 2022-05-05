@@ -29,21 +29,21 @@
 		<div class="main-nav">
 
 			<ul>
-					<li><a href="../index.html#visão-valores">Sobre</a></li>
-					<li><a href="../index.html#feature-cards-container">Serviços</a></li>
-					<li><a href="../index.html#contato-card">Fale Conosco</a></li>
-					<li><a href="calculadora.html">Calculadora</a></li>
+				<li><a href="../index.html#visão-valores">Sobre</a></li>
+				<li><a href="../index.html#feature-cards-container">Serviços</a></li>
+				<li><a href="../index.html#contato-card">Fale Conosco</a></li>
+				<li><a href="calculadora.html">Calculadora</a></li>
 			</ul>
 
-	</div>
+		</div>
 
-	<div class="login-nav">
+		<div class="login-nav">
 			<ul>
 
-					<li><a href="cadastro.html">Cadastrar</a></li>
-					<li><a href="login.html">Entrar</a></li>
-			
-	    	</ul>
+				<li><a href="cadastro.html">Cadastrar</a></li>
+				<li><a href="login.html">Entrar</a></li>
+
+			</ul>
 
 		</div>
 
@@ -63,27 +63,29 @@
 						<ul>
 
 							<h2>Cadastro</h2>
-							<li>Empresa:<br><input placeholder="Nome" type="text"> </li>
-							<li>Telefone Fixo: <br><input id="inp_telefone_fixo" placeholder="(00)0000-0000" type="text"></li>
-							<li>Senha:<br><input id="inp_senha" placeholder="Inserir Senha" type="password"></li>
-							<li>Cnpj:<br><input id="inp_cnpj" placeholder="Cnpj" type="text"></li>
+							<li>Empresa:<br><input placeholder="Nome" type="text" id="in_nomeEmpresa"> </li>
+							<li>Telefone Fixo: <br><input id="in_telFixo" placeholder="(00)0000-0000" type="text"></li>
+							<li>Senha:<br><input id="in_senha" placeholder="Inserir Senha" type="password"></li>
+							<li>Cnpj:<br><input id="in_cnpj" placeholder="Cnpj" type="text"></li>
 							<input type="checkbox"> Sim, eu aceito receber emails da Soy Venture</input> <br><br>
 							<input type="checkbox"> Eu li e concordo com os Termos</input>
-						
+
 						</ul>
 
 						<div class="li_card">
 
 							<ul>
 
-								<li>E-mail:<br><input id="inp_email" placeholder="E-mail" type="text"></li>
-								<li>Telefone Celular: <br><input id="inp_telefone_celular" placeholder="(00)00000-0000" type="text"></li>
-								<li>Confirmar Senha: <br><input id="inp_cofirmar_senha" placeholder="Repetir Senha" type="password"></li>
+								<li>E-mail:<br><input id="in_email" placeholder="E-mail" type="text"></li>
+								<li>Telefone Celular: <br><input id="in_telCelular" placeholder="(00)00000-0000"
+										type="text"></li>
+								<li>Confirmar Senha: <br><input id="in_confirmarSenha" placeholder="Repetir Senha"
+										type="password"></li>
 								<li><button onclick="validacao()">Criar Conta</button></li>
-								
+
 							</ul>
 
-						
+
 						</div>
 
 					</div>
@@ -127,7 +129,7 @@
 
 				Copyright © 2020-2022 Soy Venture Company S.L. Todos os direitos
 				reservados.
-			
+
 			</p>
 
 		</div>
@@ -142,7 +144,7 @@
 				<i class="fa-brands fa-facebook"></i>
 				<i class="fa-brands fa-instagram"></i>
 				<i class="fa-brands fa-linkedin"></i>
-			
+
 			</div>
 
 		</div>
@@ -150,41 +152,96 @@
 	</div>
 
 	<script>
-		function validacao(){
-			
-			var telefone_fixo = inp_telefone_fixo.value
-			var senha = inp_senha.value
-			var cnpj = inp_cnpj.value
-			var email  = inp_email.value
-			var telefone_celular  = inp_telefone_celular.values
-			var confirmar_senha = inp_cofirmar_senha.value
 
-       
+		function cadastrar() {
+			//aguardar();
 
-        if (cnpj.length > 11 || cnpj.length <11) {
-           alert("CNPJ incorreto, insira novamente!!") 
-        }
-        
-        if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
-            alert("Email incorreto, insira novamente!!")
-		 }
-       
-        if (senha != confirmar_senha) {
-            alert("As senhas não conferem!!")
-        }
+			//Recupere o valor da nova input pelo nome do id
+			// Agora vá para o método fetch logo abaixo
+			var nomeEmpresaVar = in_nomeEmpresa.value
+			var emailVar = in_email.value
+			var telFixoVar = in_telFixo.value;
+			var telCelularVar = in_telFixo.value;
+			var senhaVar = in_senha.value
+			var cnpjVar = in_cnpj.value
 
-		if(telefone_fixo.length >13 || telefone_fixo.length <13){
-			alert("Telefone Fixo incorreto, insira novamente!!")
+			// Enviando o valor da nova input
+			fetch("/usuarios/cadastrar", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({
+					// crie um atributo que recebe o valor recuperado aqui
+					// Agora vá para o arquivo routes/usuario.js
+					nomeServer: nomeEmpresaVar,
+					emailServer: emailVar,
+					senhaServer: senhaVar,
+					telFixoServer: telFixoVar,
+					telCelularServer: telCelularVar,
+					cnpjServer: cnpjVar
+				})
+			}).then(function (resposta) {
+
+				console.log("resposta: ", resposta);
+
+				if (resposta.ok) {
+					setTimeout(() => {
+						window.location = "login.html";
+					}, "2000")
+
+				} else {
+					throw ("Houve um erro ao tentar realizar o cadastro!");
+				}
+			}).catch(function (resposta) {
+				console.log(`#ERRO: ${resposta}`);
+			});
+
+			return false;
 		}
 
-		if(telefone_celular.length >15 || telefone_celular.length <15){
-			alert("Telefone Celular incorreto, insira novamente!!")
-		}
-        
+		function validacao() {
 
+			var nomeEmpresa = in_nomeEmpresa.value;
+			var telFixo = in_telFixo.value;
+			var senha = in_senha.value
+			var cnpj = in_cnpj.value
+			var email = in_email.value
+			var telCelular = in_telCelular.value
+			var confirmarSenha = in_confirmarSenha.value
+			var alerta = '';
+
+			if(nomeEmpresa == '') {
+				alerta += 'Insira um nome'
+			}
+			if (cnpj.length != 14) {
+				alerta += ("*CNPJ deve ter 14 números\n");
+			}
+
+			if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
+				alerta += ("*Email deve ter @ e .com/n");
+			}
+
+			if (senha != confirmarSenha) {
+				alerta += ("As senhas não conferem!!/n")
+			}
+
+			if (telFixo.length != 10) {
+				alerta += ("Telefone Fixo incorreto/n")
+			}
+
+			if (telCelular.length != 11) {
+				alerta += ("Telefone Celular incorreto/n")
+			}
+
+			if (alerta != '') {
+				alert(alerta)
+			} else {
+				cadastrar()
+			}
 		}
 	</script>
-	
+
 </body>
 
 </html>

@@ -8,8 +8,89 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
-	box-sizing: border-box;
+	align-items: center;
 	width: 70%;
-	padding: 10px 0;
-	height: 100vh;
+	background: url(../images/alterar\ dados.png);
+	background-size: cover;
+	color: white;
+}
+.alterar-dados-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 95vh;
+	width: 750px;
+	background-color: rgba(0, 0, 0, 0.5);
+	border-radius: 20px 40px 20px 40px;
+}
+
+h2 {
+	margin-left: 50px;
+	margin-bottom: 20px;
+}
+
+.inputs-container {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	column-gap: 50px;
+}
+
+.inputs2 {
+	display: flex;
+	flex-direction: column;
+}
+
+ul {
+	padding: 0;
+}
+
+.inputs-container li {
+	margin-bottom: 30px;
+	list-style-type: none;
+}
+
+button {
+	color: white;
+	background-color: transparent;
+	height: 50px;
+	width: 150px;
+	border-radius: 0 10px 0 10px;
+	border: #2ac28a 1px solid;
+	cursor: pointer;
+	transition: 1s ease;
+	margin: 0 auto 20px;
+}
+
+button:hover {
+	background: #2ac28a;
+	border: #2ac28a 1px solid;
+}
+
+li {
+	width: 300px;
+}
+
+li input {
+	width: 100%;
+	height: 35px;
+	border-radius: 10px 10px 10px 10px;
+	border: none;
+	background-color: transparent;
+	border-bottom: #2ac28a solid 1px;
+	outline: none;
+	color: white;
+}
+
+li input::placeholder {
+	color: rgba(255, 255, 255, 0.648);
+}
+
+li input:focus {
+	background-color: rgb(42, 194, 138, 0.3);
+	border-bottom: #2ac28a solid 2px;
+}
+
+li input:hover {
+	background-color: rgb(42, 194, 138, 0.3);
 }

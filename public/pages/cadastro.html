@@ -153,53 +153,6 @@
 
 	<script>
 
-		function cadastrar() {
-			//aguardar();
-
-			//Recupere o valor da nova input pelo nome do id
-			// Agora vá para o método fetch logo abaixo
-			var nomeEmpresaVar = in_nomeEmpresa.value
-			var emailVar = in_email.value
-			var telFixoVar = in_telFixo.value;
-			var telCelularVar = in_telFixo.value;
-			var senhaVar = in_senha.value
-			var cnpjVar = in_cnpj.value
-
-			// Enviando o valor da nova input
-			fetch("/usuarios/cadastrar", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json"
-				},
-				body: JSON.stringify({
-					// crie um atributo que recebe o valor recuperado aqui
-					// Agora vá para o arquivo routes/usuario.js
-					nomeServer: nomeEmpresaVar,
-					emailServer: emailVar,
-					senhaServer: senhaVar,
-					telFixoServer: telFixoVar,
-					telCelularServer: telCelularVar,
-					cnpjServer: cnpjVar
-				})
-			}).then(function (resposta) {
-
-				console.log("resposta: ", resposta);
-
-				if (resposta.ok) {
-					setTimeout(() => {
-						window.location = "login.html";
-					}, "2000")
-
-				} else {
-					throw ("Houve um erro ao tentar realizar o cadastro!");
-				}
-			}).catch(function (resposta) {
-				console.log(`#ERRO: ${resposta}`);
-			});
-
-			return false;
-		}
-
 		function validacao() {
 
 			var nomeEmpresa = in_nomeEmpresa.value;
@@ -237,8 +190,47 @@
 			if (alerta != '') {
 				alert(alerta)
 			} else {
-				cadastrar()
+				cadastrarCliente()
 			}
+		}
+		function cadastrarCliente() {
+			//Recupere o valor da nova input pelo nome do id
+			// Agora vá para o método fetch logo abaixo
+			var nomeEmpresaVar = in_nomeEmpresa.value
+			var emailVar = in_email.value
+			var senhaVar = in_senha.value
+
+			// Enviando o valor da nova input
+			fetch("/usuarios/cadastrarCliente", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({
+					// crie um atributo que recebe o valor recuperado aqui
+					// Agora vá para o arquivo routes/usuario.js
+					nomeServer: nomeEmpresaVar,
+					emailServer: emailVar,
+					senhaServer: senhaVar
+				})
+			})
+			.then(function (resposta) {
+
+				console.log("resposta: ", resposta);
+				// Somente para o cadastro de cliente
+				if (resposta.ok) {
+					setTimeout(() => {
+						window.location = "login.html";
+					}, "2000")
+
+				} else {
+					throw ("Houve um erro ao tentar realizar o cadastro!");
+				}
+			}).catch(function (resposta) {
+				console.log(`#ERRO: ${resposta}`);
+			});
+
+			return false;
 		}
 	</script>
 

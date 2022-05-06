@@ -8,7 +8,11 @@
 		<link rel="stylesheet" href="../../styles/headerDashboard.css" />
 		<link rel="stylesheet" href="../../styles/confirmationBox.css" />
 		<link rel="stylesheet" href="../../styles/alterarDados.css" />
-		<link rel="shortcut icon" href="../../images/logo.png" type="image/x-icon" />
+		<link
+			rel="shortcut icon"
+			href="../../images/logo.png"
+			type="image/x-icon"
+		/>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -43,7 +47,6 @@
 					>
 					<a class="navs nav4" href="cadastroFazenda.html">Cadastrar Fazenda</a>
 					<a class="navs nav5" href="alterarDados.html">Alterar Dados</a>
-					<a class="navs nav6" href="relatorio.html">Relatório</a>
 					<a class="navs nav7" onclick="mostrarBox()">Sair</a>
 				</ul>
 			</div>
@@ -61,31 +64,44 @@
 		</div>
 
 		<!-- Alterar Dados -->
-
 		<div class="main-container">
 			<div class="alterar-dados-container">
-				<h1>Alterar Dados</h1>
+				<h2>Alterar Dados</h2>
 				<div class="inputs-container">
-					<div class="inputs1">
-						<p>Primeiro nome:</p>
-						<input type="text" id="primeiro_nome" value="Luís Nascimento" />
-						<p>Email</p>
-						<input type="text" id="email" value="luis_nascimento@gmail.com" />
-						<p>Telefone fixo</p>
-						<input type="text" id="email" value="(11) 5921-8598" />
-					</div>
-					<div class="inputs2">
-						<p>Sobrenome:</p>
-						<input type="text" id="primeiro_nome" value="Luís Nascimento" />
-						<p>Telefone celular</p>
-						<input type="text" id="email" value="(11) 99536-0354" />
-						<p>Senha</p>
-						<input type="text" id="email" value="luis_nascimento@gmail.com" />
-						<p>Confirmação de senha:</p>
-						<input type="text" id="email" value="(11) 5921-8598" />
-					</div>
+					<ul class="inputs1">
+						<li>
+							<p>Primeiro nome:</p>
+							<input type="text" id="primeiro_nome" value="Luís" />
+						</li>
+						<li>
+							<p>Telefone fixo</p>
+							<input type="text" id="email" value="(11) 5921-8598" />
+						</li>
+						<li>
+							<p>Email</p>
+							<input type="text" id="email" value="luis_nascimento@gmail.com" />
+						</li>
+						<li>
+							<p>Confirmação de senha:</p>
+							<input type="text" id="email" value="" />
+						</li>
+					</ul>
+					<ul class="inputs2">
+						<li>
+							<p>Sobrenome:</p>
+							<input type="text" id="primeiro_nome" value="Nascimento" />
+						</li>
+						<li>
+							<p>Telefone celular</p>
+							<input type="text" id="email" value="(11) 99536-0354" />
+						</li>
+						<li>
+							<p>Senha</p>
+							<input type="text" id="email" value="123456" />
+						</li>
+						<button>Confirmar Alteração</button>
+					</ul>
 				</div>
-				<button>Confirmar Alteração</button>
 			</div>
 		</div>
 	</body>

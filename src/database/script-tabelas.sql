@@ -49,6 +49,31 @@ create table contrato (
 	primary key (idContrato, fkFuncionario, fkFazenda)
 );
 
+create table sensor (
+	idSensor int primary key AUTO_INCREMENT,
+	modelo varchar(45),
+	longitude decimal(4,2),
+	latitude decimal(4,2)
+);
+
+create table dados (
+	idDados int primary key AUTO_INCREMENT,
+	temperatura decimal(4,2),
+	umidade decimal(5,2),
+	dtDado date,
+	tempo time,
+	fkSensor int,
+	foreign key (fkSensor) references sensor(idSensor)
+);
+
+create table setor (
+	idSetor int AUTO_INCREMENT,
+	nome varchar(45),
+	fkSensor int,
+	fkFazenda int,
+	primary key (idSetor, fkFazenda),
+	foreign key (fkSensor) references sensor(idSensor)
+);
 
 
 

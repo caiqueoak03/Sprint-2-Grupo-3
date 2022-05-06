@@ -24,7 +24,7 @@
 
 			<img src="../images/logo.png" alt="" class="logo-img" />
 			<h1 class="nome-empresa">Soy Venture</h1>
-		
+
 		</a>
 
 
@@ -36,7 +36,7 @@
 				<li><a href="../index.html#feature-cards-container">Serviços</a></li>
 				<li><a href="../index.html#contato-card">Fale Conosco</a></li>
 				<li><a href="calculadora.html">Calculadora</a></li>
-			
+
 			</ul>
 
 		</div>
@@ -68,29 +68,29 @@
 							<div class="titulo">
 
 								<h2>Login</h2>
-							
+
 							</div>
 
 							<div class="li_card">
 
 								<ul class="teste">
-									
+
 									<li>
-										
+
 										<span style="font-size: 20px">Email: </span><br /><input
-											placeholder="Exemplo@hotmail.com" type="text" class="input_margin" />
+											placeholder="Exemplo@hotmail.com" type="text" id="in_email" />
 									</li>
-									
+
 									<li>
 
 										<span style="font-size: 20px"> Senha: </span> <br /><input
-											placeholder="Inserir Senha" type="password" class="input_margin" />
-									
+											placeholder="Inserir Senha" type="password" id="in_senha" />
+
 									</li>
 									<li>
-								
-										<a href="./dashboard/dashboard.html" class="entrar-btn">Entrar</a>
-									
+
+										<a onclick="entrar()" class="entrar-btn">Entrar</a>
+
 									</li>
 								</ul>
 							</div>
@@ -114,7 +114,7 @@
 				<li>TRABALHE CONOSCO</li>
 				<li>SEGURANÇA</li>
 				<li>INVESTIDORES</li>
-			
+
 			</ul>
 
 		</div>
@@ -133,19 +133,95 @@
 		</div>
 
 		<div class="redes-sociais">
-	
+
 			<p>Siga-nos nas redes sociais!</p>
-			
+
 			<div class="icons-container">
 
 				<i class="fa-brands fa-twitter"></i>
 				<i class="fa-brands fa-facebook"></i>
 				<i class="fa-brands fa-instagram"></i>
 				<i class="fa-brands fa-linkedin"></i>
-			
+
 			</div>
 		</div>
 	</div>
 </body>
 
 </html>
+<script>
+	function entrar() {
+		var emailVar = in_email.value;
+		var senhaVar = in_senha.value;
+
+		if (emailVar == "" || senhaVar == "") {
+			return false;
+		}
+
+		console.log("FORM LOGIN: ", emailVar);
+		console.log("FORM SENHA: ", senhaVar);
+
+		fetch("/usuarios/autenticar", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({
+				emailServer: emailVar,
+				senhaServer: senhaVar
+			})
+		}).then(function (resposta) {
+			console.log("ESTOU NO THEN DO entrar()!")
+
+			if (resposta.ok) {
+				console.log(resposta);
+
+				resposta.json().then(json => {
+					console.log(json);
+					console.log(JSON.stringify(json));
+
+					sessionStorage.NOME = json.nome;
+					sessionStorage.SOBRENOME = json.sobrenome;
+					sessionStorage.EMAIL = json.email;
+					sessionStorage.CARGO = json.cargo;
+
+					sessionStorage.FUNCIONARIO = 'block'
+					sessionStorage.FAZENDA = 'block'
+
+					var primeiroAcesso = json.primeiroAcesso;
+
+					if (typeof sessionStorage.CARGO == "undefined") {
+						if (primeiroAcesso) {
+							window.location = 'primeiroCadastro.html'
+						} else {
+							window.location = 'dashboard/dashboard.html'
+						}
+					} else if (sessionStorage.CARGO == 'analista') {
+						sessionStorage.FUNCIONARIO = 'none'
+						sessionStorage.FAZENDA = 'none'
+					} else if (sessionStorage.CARGO == 'supervisor') {
+						sessionStorage.FUNCIONARIO = 'block'
+						sessionStorage.FAZENDA = 'none'
+					} else if (sessionStorage.CARGO == 'gerente') {
+						sessionStorage.FUNCIONARIO = 'block'
+						sessionStorage.FAZENDA = 'block'
+					}
+
+				});
+
+			} else {
+
+				console.log("Houve um erro ao tentar realizar o login!");
+
+				resposta.text().then(texto => {
+					console.error(texto);
+				});
+			}
+
+		}).catch(function (erro) {
+			console.log(erro);
+		})
+
+		return false;
+	}
+</script>

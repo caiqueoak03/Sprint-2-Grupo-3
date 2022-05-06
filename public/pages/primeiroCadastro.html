@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Soy Venture</title>
+		<link rel="stylesheet" href="../../styles/cadastro_funcionario.css" />
+		<link rel="shortcut icon" href="../../images/logo.png" type="image/x-icon" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400&family=Roboto:ital,wght@0,400;0,700;1,700&display=swap"
+			rel="stylesheet"
+		/>
+		<script
+			src="https://kit.fontawesome.com/8c4cdd8d42.js"
+			crossorigin="anonymous"
+		></script>
+	</head>
+	<body>
+		<!-- HEADER -->
+		<header>
+			<span class="logo">
+				<img src="../../images/logo.png" alt="" class="logo-img" />
+				<h1 class="nome-empresa">Soy Venture</h1>
+			</span>
+
+			<div class="usuario-container">
+				<img src="../../images/gerente-img.png" alt="" class="img" />
+				<p class="usuario-nome">Olá, <b>Luís Nascimento</b></p>
+			</div>
+
+			<div class="main-nav">
+				<ul>
+					<a class="navs nav1" href="dashboard.html">Gráficos</a>
+					<a class="navs nav2" href="KPIs.html">Indicadores de Performance</a>
+					<a class="navs nav3" href="cadastro_funcionario.html"
+						>Cadastrar Funcionário</a
+					>
+					<a class="navs nav4" href="cadastroFazenda.html">Cadastrar Fazenda</a>
+					<a class="navs nav5" href="alterarDados.html">Alterar Dados</a>
+					<a class="navs nav7" onclick="mostrarBox()">Sair</a>
+				</ul>
+			</div>
+		</header>
+
+		<!-- MONITORAMENTO POR HORA -->
+		<div class="main-container">
+			<div class="cadastro">
+				<div class="container">
+					<div class="box">
+						<div class="box_container">
+							<div class="card_cadastro2">
+								<ul>
+									<h2>Cadastro De Funcionário</h2>
+									<li>
+										Primeiro nome:<br /><input
+											id="input_nome"
+											placeholder="Nome"
+											type="text"
+										/>
+									</li>
+									<li>
+										Email:<br /><input
+											id="input_email"
+											placeholder="Digite o email"
+											type="text"
+										/>
+									</li>
+									<li>
+										Numero de telefone: <br /><input
+											id="input_telefone_fixo"
+											placeholder="(00) 00000-0000"
+											type="text"
+										/>
+									</li>
+									<li>
+										Selecione o Cargo<select id="select_cargo">
+											<option value="analista">Analista</option>
+											<option value="Supervisor">Supervisor</option>
+											<option value="gerente">Gerente</option>
+										</select>
+									</li>
+								</ul>
+								<div class="li_card">
+									<ul class="input_color">
+										<li>
+											Sobrenome: <br /><input
+												id="input_sobrenome"
+												placeholder="Sobrenome"
+												type="text"
+											/>
+										</li>
+										<li>
+											Senha<br /><input
+												id="input_senha"
+												placeholder="Digite a senha"
+												type="password"
+											/>
+										</li>
+										<li>
+											Confirme a Senha<br /><input
+												id="input_cofirmar_senha"
+												placeholder="Confirme a senha"
+												type="password"
+											/>
+										</li>
+										<li>
+											Telefone Celular <br /><input
+												id="input_telefone_celular"
+												placeholder="(00) 00000-0000"
+												type="text"
+											/>
+										</li>
+										<li>
+											<button onclick="validar()">Cadastrar Funcionario</button>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script>
+	function validar() {
+		var nome = input_nome.value;
+		var sobrenome = input_sobrenome.value;
+		var email = input_email.value;
+		var telefone_fixo = input_telefone_fixo.value;
+		var telefone_celular = input_telefone_celular.value;
+		var senha = input_senha.value;
+		var confirmar_senha = input_cofirmar_senha.value;
+
+		if (nome.length < 3) {
+			alert("Nome incorreto, insira novamente!!");
+		}
+
+		if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
+			alert("Email incorreto, insira novamente!!");
+		}
+
+		if (senha != confirmar_senha) {
+			alert("As senhas não conferem!!");
+		}
+
+		if (telefone_fixo.length > 13 || telefone_fixo.length < 13) {
+			alert("Telefone Fixo incorreto, insira novamente!!");
+		}
+
+		if (telefone_celular.length > 15 || telefone_celular.length < 15) {
+			alert("Telefone Celular incorreto, insira novamente!!");
+		}
+	}
+</script>

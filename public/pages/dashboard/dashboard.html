@@ -21,7 +21,7 @@
 		></script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	</head>
-	<body>
+	<body onload="iniciarSessao()">
 		<!-- HEADER -->
 		<header>
 			<span class="logo">
@@ -31,7 +31,7 @@
 
 			<div class="usuario-container">
 				<img src="../../images/gerente-img.png" alt="" class="img" />
-				<p class="usuario-nome">Olá, <b>Luís Nascimento</b></p>
+				<p class="usuario-nome">Olá, <b id="nome_usuario">Luís Nascimento</b></p>
 			</div>
 
 			<div class="main-nav">
@@ -140,6 +140,9 @@
 	</body>
 </html>
 <script>
+	function iniciarSessao() {
+		nome_usuario.innerHTML = `${sessionStorage.NOME + sessionStorage.SOBRENOME}`
+	}
 	function esconderBox() {
 		confirmation_wrapper.style.display = "none";
 	}

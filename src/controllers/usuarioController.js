@@ -66,25 +66,31 @@ function cadastrarCliente(req, res) {
 	// Crie uma variável que vá recuperar os valores do arquivo cadastro.html
 	var nomeEmpresa = req.body.nomeServer;
 	var email = req.body.emailServer;
+	var cnpj = req.body.cnpjServer;
+	var telFixo = req.body.telFixoServer;
+	var telCelular = req.body.telCelularServer;
+	var senha = req.body.senhaServer;
 
 	// Faça as validações dos valores
 	if (nomeEmpresa == undefined) {
 		res.status(400).send("Seu nome está undefined!");
+		console.log('nome empresa: ' + nomeEmpresa)
 	} else if (email == undefined) {
 		res.status(400).send("Seu email está undefined!");
-	} else if (senha == undefined) {
+	} else if (cnpj == undefined) {
 		res.status(400).send("Sua senha está undefined!");
 	} else if (telFixo == undefined) {
 		res.status(400).send("Seu telefone fixo está undefined!");
 	} else if (telCelular == undefined) {
 		res.status(400).send("Sua telefone celular está undefined!");
-	} else if (cnpj == undefined) {
+	} else if (senha == undefined) {
 		res.status(400).send("Sua cnpj está undefined!");
 	} else {
 		// Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
 		usuarioModel
-			.cadastrarCliente(nomeEmpresa, email)
+			.cadastrarCliente(nomeEmpresa, email, cnpj, telFixo, telCelular, senha)
 			.then(function (resultado) {
+				console.log('Resultado: ' + resultado)
 				res.json(resultado);
 			})
 			.catch(function (erro) {

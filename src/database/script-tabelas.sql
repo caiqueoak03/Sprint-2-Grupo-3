@@ -9,40 +9,40 @@ USE soyventure;
 
 CREATE TABLE cliente (
 	idCliente int primary key AUTO_INCREMENT,
-	nomeEmpresa varchar(45) not null,
-	cnpj char(14) not null,
-	email varchar(45) not null,
+	nomeEmpresa varchar(45) unique,
+	cnpj char(14) unique,
+	email varchar(45) unique,
 	telFixo char(10),
-	telCelular char(11) not null,
-	senha varchar(45) not null
+	telCelular char(11),
+	primeiroAcesso tinyint
 );
 
 CREATE TABLE fazenda (
 	idFazenda INT PRIMARY KEY AUTO_INCREMENT,
 	fkCliente int,
-	nome varchar(45) not null,
-	cep char(8) not null,
+	nome varchar(45),
+	cep char(8) unique,
 	telFixo char(10),
-	telCelular char(11) not null,
-	areaHectare int not null,
-	qtdSensores int not null,
+	telCelular char(11),
+	areaHectare int,
+	qtdSensores int,
 	foreign key (fkCliente) references cliente(idCliente)
 ); 
 
 CREATE TABLE funcionario (
 	idFuncionario int primary key AUTO_INCREMENT,
-	nome varchar(45) not null,
-	sobrenome varchar(45) not null,
-	email varchar(45) not null,
-	senha varchar(45) not null,
+	nome varchar(45),
+	sobrenome varchar(45),
+	email varchar(45) unique,
+	senha varchar(45) ,
 	telFixo char(10),
-	telCelular char(11) not null
+	telCelular char(11)
 );
 
 create table contrato (
 	idContrato int AUTO_INCREMENT,
-	fkFuncionario int not null,
-	fkFazenda int not null,
+	fkFuncionario int,
+	fkFazenda int,
 	cargo varchar(45), check (cargo in ('analista', 'supervisor', 'gerente')),
 	foreign key (fkFuncionario) references funcionario(idFuncionario),
 	foreign key (fkFazenda) references fazenda(idFazenda),
@@ -74,7 +74,6 @@ create table setor (
 	primary key (idSetor, fkFazenda),
 	foreign key (fkSensor) references sensor(idSensor)
 );
-
 
 
 /* para sql server - remoto - produção */

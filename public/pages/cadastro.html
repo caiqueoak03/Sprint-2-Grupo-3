@@ -154,7 +154,6 @@
 	<script>
 
 		function validacao() {
-
 			var nomeEmpresa = in_nomeEmpresa.value;
 			var telFixo = in_telFixo.value;
 			var senha = in_senha.value
@@ -196,9 +195,12 @@
 		function cadastrarCliente() {
 			//Recupere o valor da nova input pelo nome do id
 			// Agora vá para o método fetch logo abaixo
-			var nomeEmpresaVar = in_nomeEmpresa.value
-			var emailVar = in_email.value
-			var senhaVar = in_senha.value
+			var nomeEmpresaVar = in_nomeEmpresa.value;
+			var cnpjVar = in_cnpj.value;
+			var emailVar = in_email.value;
+			var telFixoVar = in_telFixo.value;
+			var telCelularVar = in_telCelular.value;
+			var senhaVar = in_senha.value;
 
 			// Enviando o valor da nova input
 			fetch("/usuarios/cadastrarCliente", {
@@ -210,7 +212,10 @@
 					// crie um atributo que recebe o valor recuperado aqui
 					// Agora vá para o arquivo routes/usuario.js
 					nomeServer: nomeEmpresaVar,
+					cnpjServer: cnpjVar,
 					emailServer: emailVar,
+					telFixoServer: telFixoVar,
+					telCelularServer: telCelularVar,
 					senhaServer: senhaVar
 				})
 			})

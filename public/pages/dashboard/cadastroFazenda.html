@@ -137,44 +137,72 @@
 	</body>
 </html>
 <script>
+		function esconderBox() {
+			confirmation_wrapper.style.display = "none";
+		}
+
+		function mostrarBox() {
+			confirmation_wrapper.style.display = "flex";
+		}
 		function verificar(){
-		var nome = fazenda.value
-		var fixo = telefone_fixo.value
-		var celular = telefone_celular.value
-		var cep = in_cep.value
-		var hectare = area.value
-		var senha = in_senha.value
+		var nome = fazenda.value;
+		var fixo = telefone_fixo.value;
+		var celular = telefone_celular.value;
+		var cep = in_cep.value;
+		var hectare = area.value;
+		var senha = in_senha.value;
+		var vazio = "";
 		
+		if (nome == "") {
+			vazio += "\n-Insira seu nome";
+		} else if (nome.length < 3) {
+			
+			vazio += "\n-Seu nome deve conter pelo menos 3 caracteres";
+		}	
+			 if (fixo == ""){
+				vazio +="\n-Telefone fixo nao pode ser vazio";
+			}
+			else if (fixo.length != 10){
+				vazio +="\n-O seu telefone celular precisa ter exatamente 10 digitos (somente numeros)";
+			}
+			if (celular == ""){
+				vazio +="\n-Telefone celular nao pode ser vazio";
+			}
+			
+			else if (celular.length != 11){
+				vazio +="\n-O seu telefone fixo precisa ter exatamente 11 digitos (somente numeros)";
+			}
+			 if (cep == ""){
+				vazio +="\n-CEP nao pode ser vazio";
+			}
+			else if (cep.length != 8 ){
+				vazio +="\n-O seu cep precisa ter exatamente 8 digitos (somente numeros)";
+			}
 
+			 if (hectare == ""){
+				vazio +="\n-Precisamos da area em hectare da sua Fazenda";
+			}
+			 if (senha == ""){
+				vazio +="\n-Senha nao pode ser vazio";
+			}
+			else if (senha.length <6 || senha.length >=30){
+				vazio += "\n-preencha uma senha com mais de 6 caracteres até 30 caracteres";
+			}	
 
-		if(nome == "" || fixo == "" || celular == ""|| cep == "" || hectare == "" || senha == ""){
-			alert(`preencha todos os campos`)
-		}
-		else if (nome.length <3 || nome.length >=30){
-			alert(`preencha um nome com mais de 3 letras e que tenha menos de 30 letras`)
-		}
-		else if (fixo.length == 13){
-			alert(`O seu telefone celular precisa ter exatamente 13 digitos (somente numeros)`)
-		}
-		else if (celular.length == 11){
-			alert(`O seu telefone fixo precisa ter exatamente 12 digitos (somente numeros)`)
-		}
-		else if (cep.length == 8){
-			alert(`O seu cep precisa ter exatamente 8 digitos (somente numeros)`)
-		}
-
-		else if (senha.length <6 || senha.length >=30){
-			alert(`preencha uma senha com mais de 6 caracteres até 30 caracteres`)
-		}
+			if(vazio != ""){
+				alert(vazio.trim());
+			} else{
+				alert("cadastro feito com sucesso")
+			}
 		
 		
-	} 
-	function esconderBox() {
-		confirmation_wrapper.style.display = "none";
+		
+		
+		
+		
+		
+		
 	}
-
-	function mostrarBox() {
-		confirmation_wrapper.style.display = "flex";
-	}
+	
 
 </script>

@@ -8,7 +8,12 @@
 		<link rel="stylesheet" href="../../styles/headerDashboard.css" />
 		<link rel="stylesheet" href="../../styles/confirmationBox.css" />
 		<link rel="stylesheet" href="../../styles/cadastro_funcionario.css" />
-		<link rel="shortcut icon" href="../../images/logo.png" type="image/x-icon" />
+		<link rel="stylesheet" href="../../styles/checkBoxes.css" />
+		<link
+			rel="shortcut icon"
+			href="../../images/logo.png"
+			type="image/x-icon"
+		/>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -20,7 +25,7 @@
 			crossorigin="anonymous"
 		></script>
 	</head>
-	<body>
+	<body onload="iniciarSessao(), carregarFazendas()">
 		<!-- HEADER -->
 		<header>
 			<span class="logo">
@@ -30,17 +35,22 @@
 
 			<div class="usuario-container">
 				<img src="../../images/gerente-img.png" alt="" class="img" />
-				<p class="usuario-nome">Olá, <b>Luís Nascimento</b></p>
+				<p class="usuario-nome">Olá, <b id="nome_usuario"></b></p>
 			</div>
 
 			<div class="main-nav">
 				<ul>
 					<a class="navs nav1" href="dashboard.html">Gráficos</a>
 					<a class="navs nav2" href="KPIs.html">Indicadores de Performance</a>
-					<a class="navs nav3" href="cadastro_funcionario.html"
+					<a
+						class="navs nav3"
+						id="cad_funcionario"
+						href="cadastro_funcionario.html"
 						>Cadastrar Funcionário</a
 					>
-					<a class="navs nav4" href="cadastroFazenda.html">Cadastrar Fazenda</a>
+					<a class="navs nav4" id="cad_fazenda" href="cadastroFazenda.html"
+						>Cadastrar Fazenda</a
+					>
 					<a class="navs nav5" href="alterarDados.html">Alterar Dados</a>
 					<a class="navs nav7" onclick="mostrarBox()">Sair</a>
 				</ul>
@@ -52,7 +62,7 @@
 			<div class="confirmation-box">
 				<p>Deseja sair da sua conta?</p>
 				<div class="sim-ou-nao">
-					<a href="../../index.html">sim</a>
+					<a onclick="limparSessao()">sim</a>
 					<a onclick="esconderBox()">não</a>
 				</div>
 			</div>
@@ -69,59 +79,84 @@
 									<h2>Cadastro De Funcionário</h2>
 									<li>
 										Primeiro nome:<br /><input
-											id="input_nome"
+											id="in_nome"
+											value="teste"
 											placeholder="Nome"
 											type="text"
 										/>
 									</li>
 									<li>
 										Email:<br /><input
-											id="input_email"
+											id="in_email"
+											value="teste123@gmail.com"
 											placeholder="Digite o email"
 											type="text"
 										/>
 									</li>
 									<li>
 										Numero de telefone: <br /><input
-											id="input_telefone_fixo"
+											id="in_telFixo"
+											value="1112341234"
 											placeholder="(00) 00000-0000"
 											type="text"
 										/>
 									</li>
 									<li>
-										Selecione o Cargo<select id="select_cargo">
+										Selecione o Cargo<select
+											id="in_cargo"
+											onchange="checkGerente()"
+										>
 											<option value="analista">Analista</option>
-											<option value="Supervisor">Supervisor</option>
+											<option value="supervisor">Supervisor</option>
 											<option value="gerente">Gerente</option>
 										</select>
+									</li>
+									<li id="select_container">
+										Selecione as fazendas
+										<form action="" class="form-container">
+											<div
+												class="select-box-container"
+												onclick="mostrarBoxes()"
+											>
+												<select id="select-box">
+													<option>Selecione as fazendas</option>
+												</select>
+												<div class="overSelect"></div>
+											</div>
+											<ul id="checkBoxes"></ul>
+										</form>
 									</li>
 								</ul>
 								<div class="li_card">
 									<ul class="input_color">
 										<li>
 											Sobrenome: <br /><input
-												id="input_sobrenome"
+												id="in_sobrenome"
+												value="testee"
 												placeholder="Sobrenome"
 												type="text"
 											/>
 										</li>
 										<li>
 											Senha<br /><input
-												id="input_senha"
+												id="in_senha"
+												value="123"
 												placeholder="Digite a senha"
 												type="password"
 											/>
 										</li>
 										<li>
 											Confirme a Senha<br /><input
-												id="input_cofirmar_senha"
+												id="in_confirmarSenha"
+												value="123"
 												placeholder="Confirme a senha"
 												type="password"
 											/>
 										</li>
 										<li>
 											Telefone Celular <br /><input
-												id="input_telefone_celular"
+												id="in_telCelular"
+												value="11912341234"
 												placeholder="(00) 00000-0000"
 												type="text"
 											/>
@@ -140,6 +175,8 @@
 	</body>
 </html>
 <script>
+	var idFazendasChecadasVar = [];
+
 	function esconderBox() {
 		confirmation_wrapper.style.display = "none";
 	}
@@ -148,32 +185,158 @@
 		confirmation_wrapper.style.display = "flex";
 	}
 	function validar() {
-		var nome = input_nome.value;
-		var sobrenome = input_sobrenome.value;
-		var email = input_email.value;
-		var telefone_fixo = input_telefone_fixo.value;
-		var telefone_celular = input_telefone_celular.value;
-		var senha = input_senha.value;
-		var confirmar_senha = input_cofirmar_senha.value;
+		var nome = in_nome.value;
+		var sobrenome = in_sobrenome.value;
+		var email = in_email.value;
+		var telFixo = in_telFixo.value;
+		var telCelular = in_telCelular.value;
+		var senha = in_senha.value;
+		var confirmarSenha = in_confirmarSenha.value;
+		var cargo = in_cargo.value;
 
-		if (nome.length < 3) {
-			alert("Nome incorreto, insira novamente!!");
+		var alerta = "";
+		var idFazendaLength = sessionStorage.ID_FAZENDAS.length;
+		var inputFazendas = [...document.querySelectorAll(".boxes")];
+
+		try {
+			for (let i = 0; i < idFazendaLength; i++) {
+				if (inputFazendas[i].checked) {
+					idFazendasChecadasVar.push(inputFazendas[i].id);
+				}
+			}
+		} catch {}
+
+		if (nome == "") {
+			alerta += "*Insira um nome\n";
+		}
+		if (sobrenome == "") {
+			alerta += "*Insira um sobrenome\n";
+		}
+
+		if (cargo == "") {
+			alerta += "Escolha um cargo\n";
 		}
 
 		if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
-			alert("Email incorreto, insira novamente!!");
+			alerta += "*Email deve ter @ e .com\n";
 		}
 
-		if (senha != confirmar_senha) {
-			alert("As senhas não conferem!!");
+		if (senha != confirmarSenha) {
+			alerta += "*As senhas não conferem!!\n";
 		}
 
-		if (telefone_fixo.length > 13 || telefone_fixo.length < 13) {
-			alert("Telefone Fixo incorreto, insira novamente!!");
+		if (telFixo.length != 10) {
+			alerta += "*Telefone Fixo incorreto\n";
 		}
 
-		if (telefone_celular.length > 15 || telefone_celular.length < 15) {
-			alert("Telefone Celular incorreto, insira novamente!!");
+		if (telCelular.length != 11) {
+			alerta += "*Telefone Celular incorreto";
+		}
+
+		if (idFazendasChecadasVar.length == 0 && cargo != "gerente") {
+			alerta += "*Selecione uma fazenda ao funcionário!";
+		}
+
+		if (alerta != "") {
+			alert(alerta);
+		} else {
+			cadastrarFuncionario(sessionStorage.ID_CLIENTE);
 		}
 	}
+
+	function cadastrarFuncionario(idCliente) {
+		var nomeVar = in_nome.value;
+		var sobrenomeVar = in_sobrenome.value;
+		var emailVar = in_email.value;
+		var telFixoVar = in_telFixo.value;
+		var telCelularVar = in_telCelular.value;
+		var senhaVar = in_senha.value;
+		var idClienteVar = idCliente;
+		var cargoVar = in_cargo.value;
+
+		// Enviando o valor da nova input
+		fetch("/usuarios/cadastrarFuncionario", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				// crie um atributo que recebe o valor recuperado aqui
+				// Agora vá para o arquivo routes/usuario.js
+				nomeServer: nomeVar,
+				sobrenomeServer: sobrenomeVar,
+				emailServer: emailVar,
+				telFixoServer: telFixoVar,
+				telCelularServer: telCelularVar,
+				senhaServer: senhaVar,
+				idClienteServer: idClienteVar,
+				cargoServer: cargoVar,
+			}),
+		})
+			.then(function (resposta) {
+				console.log("resposta: ", resposta);
+
+				if (resposta.ok) {
+					resposta.json().then((json) => {
+						console.log("json novo: " + json[0]);
+						console.log(JSON.stringify(json));
+
+						console.log("status: funcionario cadastrado!");
+
+						console.log("idFuncionario: " + json[1][0].idFuncionario);
+
+						firmarContrato(json[1][0].idFuncionario);
+					});
+				} else {
+					alert("Funcionario já cadastrado!");
+				}
+			})
+			.catch(function (resposta) {
+				console.log(`#ERRO: ${resposta}`);
+			});
+
+		return false;
+	}
+
+	function firmarContrato(idFuncionario) {
+		var idFuncionarioVar = idFuncionario;
+		var cargoVar = in_cargo.value;
+
+		fetch("/usuarios/firmarContrato", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				// crie um atributo que recebe o valor recuperado aqui
+				// Agora vá para o arquivo routes/usuario.js
+				idFuncionarioServer: idFuncionarioVar,
+				idFazendasChecadasServer: idFazendasChecadasVar,
+				cargoServer: cargoVar,
+			}),
+		})
+			.then(function (resposta) {
+				console.log("resposta: ", resposta);
+
+				// Somente para o cadastro de cliente
+				if (resposta.ok) {
+					resposta.json().then((json) => {
+						console.log(json);
+						console.log(JSON.stringify(json));
+
+						console.log("status: contrato firmado!");
+
+						alert("Funcionário cadastrado com sucesso!");
+					});
+				} else {
+					alert("Funcionario já cadastrado!");
+				}
+			})
+			.catch(function (resposta) {
+				console.log(`#ERRO: ${resposta}`);
+			});
+
+		return false;
+	}
 </script>
+<script src="../../js/funcoes.js"></script>

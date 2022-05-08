@@ -134,3 +134,7 @@ header {
 .nav7 {
 	cursor: pointer;
 }
+
+#nome_usuario {
+	text-transform: capitalize;
+}

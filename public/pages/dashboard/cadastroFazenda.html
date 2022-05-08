@@ -8,7 +8,11 @@
 		<link rel="stylesheet" href="../../styles/headerDashboard.css" />
 		<link rel="stylesheet" href="../../styles/confirmationBox.css" />
 		<link rel="stylesheet" href="../../styles/cadastroFazenda.css" />
-		<link rel="shortcut icon" href="../../images/logo.png" type="image/x-icon" />
+		<link
+			rel="shortcut icon"
+			href="../../images/logo.png"
+			type="image/x-icon"
+		/>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -20,7 +24,7 @@
 			crossorigin="anonymous"
 		></script>
 	</head>
-	<body>
+	<body onload="iniciarSessao()">
 		<!-- HEADER -->
 		<header>
 			<span class="logo">
@@ -30,17 +34,22 @@
 
 			<div class="usuario-container">
 				<img src="../../images/gerente-img.png" alt="" class="img" />
-				<p class="usuario-nome">Olá, <b>Luís Nascimento</b></p>
+				<p class="usuario-nome">Olá, <b id="nome_usuario"></b></p>
 			</div>
 
 			<div class="main-nav">
 				<ul>
 					<a class="navs nav1" href="dashboard.html">Gráficos</a>
 					<a class="navs nav2" href="KPIs.html">Indicadores de Performance</a>
-					<a class="navs nav3" href="cadastro_funcionario.html"
+					<a
+						class="navs nav3"
+						id="cad_funcionario"
+						href="cadastro_funcionario.html"
 						>Cadastrar Funcionário</a
 					>
-					<a class="navs nav4" href="cadastroFazenda.html">Cadastrar Fazenda</a>
+					<a class="navs nav4" id="cad_fazenda" href="cadastroFazenda.html"
+						>Cadastrar Fazenda</a
+					>
 					<a class="navs nav5" href="alterarDados.html">Alterar Dados</a>
 					<a class="navs nav7" onclick="mostrarBox()">Sair</a>
 				</ul>
@@ -52,7 +61,7 @@
 			<div class="confirmation-box">
 				<p>Deseja sair da sua conta?</p>
 				<div class="sim-ou-nao">
-					<a href="../../index.html">sim</a>
+					<a onclick="limparSessao()">sim</a>
 					<a onclick="esconderBox()">não</a>
 				</div>
 			</div>
@@ -71,18 +80,21 @@
 									<li>
 										Nome da Fazenda<br /><input
 											placeholder="Nome da Fazenda"
+											id="in_nomeFazenda"
 											type="text"
 										/>
 									</li>
 									<li>
 										Numero de Telefone Fixo: <br /><input
 											placeholder="(00) 00000-0000"
+											id="in_telFixo"
 											type="text"
 										/>
 									</li>
 									<li>
 										Numero de Telefone Celular: <br /><input
 											placeholder="(00) 00000-0000"
+											id="in_telCelular"
 											type="text"
 										/>
 									</li>
@@ -93,6 +105,7 @@
 										<li>
 											CEP <br /><input
 												placeholder="CEP(000-00-000)"
+												id="in_cep"
 												type="text"
 											/>
 										</li>
@@ -123,4 +136,76 @@
 	function mostrarBox() {
 		confirmation_wrapper.style.display = "flex";
 	}
+
+	function validar() {
+		var nomeFazenda = in_nomeFazenda.value;
+		var telFixo = in_telFixo.value;
+		var telcelular = in_telcelular.value;
+		var cep = in_cep.value;
+		var alerta = "";
+
+		if (nomeFazenda == "") {
+			alerta += "\n*Insira o nome da fazenda";
+		}
+
+		if (telefone_fixo == "") {
+			alerta += "\n*Digite um telefone fixo";
+		} else if (telefone_fixo.length != 10) {
+			alerta += "\n*Telefone Fixo incorreto, insira novamente!!";
+		}
+
+		if (telefone_celular == "") {
+			alerta += "\n*Digite um telefone celular";
+		} else if (telefone_celular.length != 11) {
+			alerta += "\n*Telefone Celular incorreto, insira novamente!!";
+		}
+
+		if (alerta != "") {
+			alert(alerta.trim());
+		} else {
+			cadastrarFazenda();
+		}
+	}
+	function cadastrarFazenda() {
+		//Recupere o valor da nova input pelo nome do id
+		// Agora vá para o método fetch logo abaixo
+		var nomeFazendaVar = in_nomeFazenda.value;
+		var telFixoVar = in_telFixo.value;
+		var telcelularVar = in_telcelular.value;
+		var cepVar = in_cep.value;
+
+		// Enviando o valor da nova input
+		fetch("/usuarios/cadastrarFazenda", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				// crie um atributo que recebe o valor recuperado aqui
+				// Agora vá para o arquivo routes/usuario.js
+				nomeFazendaServer: nomeFazendaVar,
+				telFixoServer: telFixoVar,
+				telCelularServer: telCelularVar,
+				cepServer: cepVar,
+			}),
+		})
+			.then(function (resposta) {
+				console.log("resposta: ", resposta);
+
+				if (resposta.ok) {
+					in_nomeFazenda.value = "";
+					in_telFixo.value = "";
+					in_telcelular.value = "";
+					in_cep.value = "";
+				} else {
+					alert("Fazenda já cadastrada!");
+				}
+			})
+			.catch(function (resposta) {
+				console.log(`#ERRO: ${resposta}`);
+			});
+
+		return false;
+	}
 </script>
+<script src="../../js/funcoes.js"></script>

@@ -1,153 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Soy Venture</title>
+		<link rel="stylesheet" href="../styles/login.css" />
+		<link rel="shortcut icon" href="../images/logo.png" type="image/x-icon" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400&family=Roboto:ital,wght@0,400;0,700;1,700&display=swap"
+			rel="stylesheet"
+		/>
+		<script
+			src="https://kit.fontawesome.com/8c4cdd8d42.js"
+			crossorigin="anonymous"
+		></script>
+	</head>
 
-<head>
-	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Soy Venture</title>
-	<link rel="stylesheet" href="../styles/login.css" />
-	<link rel="shortcut icon" href="../images/logo.png" type="image/x-icon" />
-	<link rel="preconnect" href="https://fonts.googleapis.com" />
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-	<link
-		href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400&family=Roboto:ital,wght@0,400;0,700;1,700&display=swap"
-		rel="stylesheet" />
-	<script src="https://kit.fontawesome.com/8c4cdd8d42.js" crossorigin="anonymous"></script>
-</head>
+	<body>
+		<!-- HEADER -->
+		<div class="header">
+			<a href="../index.html#" class="logo">
+				<img src="../images/logo.png" alt="" class="logo-img" />
+				<h1 class="nome-empresa">Soy Venture</h1>
+			</a>
 
-<body>
-	<!-- HEADER -->
-	<div class="header">
+			<div class="main-nav">
+				<ul>
+					<li><a href="../index.html#visão-valores">Sobre</a></li>
+					<li><a href="../index.html#feature-cards-container">Serviços</a></li>
+					<li><a href="../index.html#contato-card">Fale Conosco</a></li>
+					<li><a href="calculadora.html">Calculadora</a></li>
+				</ul>
+			</div>
 
-		<a href="../index.html#" class="logo">
-
-			<img src="../images/logo.png" alt="" class="logo-img" />
-			<h1 class="nome-empresa">Soy Venture</h1>
-
-		</a>
-
-
-		<div class="main-nav">
-
-			<ul>
-
-				<li><a href="../index.html#visão-valores">Sobre</a></li>
-				<li><a href="../index.html#feature-cards-container">Serviços</a></li>
-				<li><a href="../index.html#contato-card">Fale Conosco</a></li>
-				<li><a href="calculadora.html">Calculadora</a></li>
-
-			</ul>
-
+			<div class="login-nav">
+				<ul>
+					<li><a href="cadastro.html">Cadastrar</a></li>
+					<li><a href="login.html">Entrar</a></li>
+				</ul>
+			</div>
 		</div>
 
-		<div class="login-nav">
+		<!-- LOGIN -->
+		<div class="login">
+			<div class="container">
+				<div class="box">
+					<div>
+						<div class="card_login">
+							<ul>
+								<div class="titulo">
+									<h2>Login</h2>
+								</div>
 
-			<ul>
-				<li><a href="cadastro.html">Cadastrar</a></li>
-				<li><a href="login.html">Entrar</a></li>
-			</ul>
+								<div class="li_card">
+									<ul class="teste">
+										<li>
+											<span style="font-size: 20px">Email: </span><br /><input
+												placeholder="Exemplo@hotmail.com"
+												type="text"
+												id="in_email"
+											/>
+										</li>
 
-		</div>
-
-	</div>
-
-	<!-- LOGIN -->
-	<div class="login">
-
-		<div class="container">
-
-			<div class="box">
-
-				<div>
-
-					<div class="card_login">
-
-						<ul>
-
-							<div class="titulo">
-
-								<h2>Login</h2>
-
-							</div>
-
-							<div class="li_card">
-
-								<ul class="teste">
-
-									<li>
-
-										<span style="font-size: 20px">Email: </span><br /><input
-											placeholder="Exemplo@hotmail.com" type="text" id="in_email" />
-									</li>
-
-									<li>
-
-										<span style="font-size: 20px"> Senha: </span> <br /><input
-											placeholder="Inserir Senha" type="password" id="in_senha" />
-
-									</li>
-									<li>
-
-										<a onclick="entrar()" class="entrar-btn">Entrar</a>
-
-									</li>
-								</ul>
-							</div>
-						</ul>
+										<li>
+											<span style="font-size: 20px"> Senha: </span> <br /><input
+												placeholder="Inserir Senha"
+												type="password"
+												id="in_senha"
+											/>
+										</li>
+										<li>
+											<a onclick="entrar()" class="entrar-btn">Entrar</a>
+										</li>
+									</ul>
+								</div>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<!-- FOOTER -->
-	<div class="footer-container">
+		<!-- FOOTER -->
+		<div class="footer-container">
+			<div class="footer-links-container">
+				<p>Soy Venture SA | CNPJ: 56.080.425/0001-02</p>
 
-		<div class="footer-links-container">
+				<ul>
+					<li>PORTABILIDADE</li>
+					<li>TRABALHE CONOSCO</li>
+					<li>SEGURANÇA</li>
+					<li>INVESTIDORES</li>
+				</ul>
+			</div>
 
-			<p>Soy Venture SA | CNPJ: 56.080.425/0001-02</p>
+			<div class="footer-endereco-container">
+				<p class="endereco">
+					Cidade de Deus, S/Nº Vila Yara | Osasco | SP | CEP: 06029-900
+				</p>
 
-			<ul>
+				<p class="copyright">
+					Copyright © 2020-2022 Soy Venture Company S.L. Todos os direitos
+					reservados.
+				</p>
+			</div>
 
-				<li>PORTABILIDADE</li>
-				<li>TRABALHE CONOSCO</li>
-				<li>SEGURANÇA</li>
-				<li>INVESTIDORES</li>
+			<div class="redes-sociais">
+				<p>Siga-nos nas redes sociais!</p>
 
-			</ul>
-
-		</div>
-
-		<div class="footer-endereco-container">
-
-			<p class="endereco">
-				Cidade de Deus, S/Nº Vila Yara | Osasco | SP | CEP: 06029-900
-			</p>
-
-			<p class="copyright">
-				Copyright © 2020-2022 Soy Venture Company S.L. Todos os direitos
-				reservados.
-			</p>
-
-		</div>
-
-		<div class="redes-sociais">
-
-			<p>Siga-nos nas redes sociais!</p>
-
-			<div class="icons-container">
-
-				<i class="fa-brands fa-twitter"></i>
-				<i class="fa-brands fa-facebook"></i>
-				<i class="fa-brands fa-instagram"></i>
-				<i class="fa-brands fa-linkedin"></i>
-
+				<div class="icons-container">
+					<i class="fa-brands fa-twitter"></i>
+					<i class="fa-brands fa-facebook"></i>
+					<i class="fa-brands fa-instagram"></i>
+					<i class="fa-brands fa-linkedin"></i>
+				</div>
 			</div>
 		</div>
-	</div>
-</body>
-
+	</body>
 </html>
 <script>
 	function entrar() {
@@ -164,63 +136,57 @@
 		fetch("/usuarios/autenticar", {
 			method: "POST",
 			headers: {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
 				emailServer: emailVar,
-				senhaServer: senhaVar
-			})
-		}).then(function (resposta) {
-			console.log("ESTOU NO THEN DO entrar()!")
-
-			if (resposta.ok) {
-				console.log(resposta);
-
-				resposta.json().then(json => {
-					console.log(json);
-					console.log(JSON.stringify(json));
-
-					sessionStorage.NOME = json.nome;
-					sessionStorage.SOBRENOME = json.sobrenome;
-					sessionStorage.EMAIL = json.email;
-					sessionStorage.CARGO = json.cargo;
-
-					sessionStorage.FUNCIONARIO = 'block'
-					sessionStorage.FAZENDA = 'block'
-
-					var primeiroAcesso = json.primeiroAcesso;
-
-					if (typeof sessionStorage.CARGO == "undefined") {
-						if (primeiroAcesso) {
-							window.location = 'primeiroCadastro.html'
-						} else {
-							window.location = 'dashboard/dashboard.html'
-						}
-					} else if (sessionStorage.CARGO == 'analista') {
-						sessionStorage.FUNCIONARIO = 'none'
-						sessionStorage.FAZENDA = 'none'
-					} else if (sessionStorage.CARGO == 'supervisor') {
-						sessionStorage.FUNCIONARIO = 'block'
-						sessionStorage.FAZENDA = 'none'
-					} else if (sessionStorage.CARGO == 'gerente') {
-						sessionStorage.FUNCIONARIO = 'block'
-						sessionStorage.FAZENDA = 'block'
-					}
-
-				});
-
-			} else {
-
-				console.log("Houve um erro ao tentar realizar o login!");
-
-				resposta.text().then(texto => {
-					console.error(texto);
-				});
-			}
-
-		}).catch(function (erro) {
-			console.log(erro);
+				senhaServer: senhaVar,
+			}),
 		})
+			.then(function (resposta) {
+				console.log("ESTOU NO THEN DO entrar()!");
+
+				if (resposta.ok) {
+					console.log(resposta);
+
+					resposta.json().then((json) => {
+						console.log(json);
+						console.log(JSON.stringify(json));
+
+						sessionStorage.NOME = json.nome;
+						sessionStorage.SOBRENOME = json.sobrenome;
+						sessionStorage.CARGO = json.cargo;
+						sessionStorage.ID_CLIENTE = json.fkCliente;
+
+						alert(json.cargo);
+
+						sessionStorage.FUNCIONARIO = "flex";
+						sessionStorage.FAZENDA = "flex";
+
+						if (sessionStorage.CARGO == "analista") {
+							alert("analista!");
+							sessionStorage.FUNCIONARIO = "none";
+							sessionStorage.FAZENDA = "none";
+						} else if (sessionStorage.CARGO == "supervisor") {
+							alert("supervisor!");
+							sessionStorage.FUNCIONARIO = "flex";
+							sessionStorage.FAZENDA = "none";
+						}
+
+						window.location = "dashboard/dashboard.html";
+					});
+				} else {
+					console.log("Houve um erro ao tentar realizar o login!");
+					alert("Usuário não cadastrado!");
+
+					resposta.text().then((texto) => {
+						console.error(texto);
+					});
+				}
+			})
+			.catch(function (erro) {
+				console.log(erro);
+			});
 
 		return false;
 	}

@@ -23,8 +23,16 @@ router.post("/cadastrarFuncionario", function (req, res) {
 	usuarioController.cadastrarFuncionario(req, res);
 });
 
+router.post("/firmarContrato", function (req, res) {
+	usuarioController.firmarContrato(req, res);
+});
+
 router.post("/autenticar", function (req, res) {
 	usuarioController.entrar(req, res);
+});
+
+router.get("/listarFazendas", function (req, res) {
+	usuarioController.listarFazendas(req, res);
 });
 
 module.exports = router;

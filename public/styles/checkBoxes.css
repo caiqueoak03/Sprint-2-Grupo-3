@@ -1,0 +1,55 @@
+#select_container {
+	width: 325px;
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+}
+
+.form-container {
+	display: flex;
+	flex-direction: column;
+	row-gap: 2px;
+}
+
+.overSelect {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
+
+#checkBoxes {
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	border: 1px #2ac28a solid;
+	border-radius: 5px;
+	width: 323px;
+	height: 120px;
+	overflow-y: auto;
+	padding: 0;
+}
+
+#checkBoxes li {
+	display: flex;
+	flex-direction: row-reverse;
+	align-items: center;
+	justify-content: flex-end;
+	padding-left: 10px;
+	column-gap: 10px;
+	margin: 0;
+	border-bottom: 1px solid #2ac28a;
+}
+
+.boxes {
+	width: 15px;
+}
+
+#checkBoxes li:hover {
+	background-color: #2ac28a;
+}
+
+.select-box-container {
+	position: relative;
+}

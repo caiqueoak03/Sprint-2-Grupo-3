@@ -1,244 +1,331 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Soy Venture</title>
+		<link rel="stylesheet" href="../styles/cadastro.css" />
+		<link rel="shortcut icon" href="../images/logo.png" type="image/x-icon" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400&family=Roboto:ital,wght@0,400;0,700;1,700&display=swap"
+			rel="stylesheet"
+		/>
+		<script
+			src="https://kit.fontawesome.com/8c4cdd8d42.js"
+			crossorigin="anonymous"
+		></script>
+		<script src="../js/funcoes.js"></script>
+	</head>
 
-<head>
-	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Soy Venture</title>
-	<link rel="stylesheet" href="../styles/cadastro.css" />
-	<link rel="shortcut icon" href="../images/logo.png" type="image/x-icon" />
-	<link rel="preconnect" href="https://fonts.googleapis.com" />
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-	<link
-		href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400&family=Roboto:ital,wght@0,400;0,700;1,700&display=swap"
-		rel="stylesheet" />
-	<script src="https://kit.fontawesome.com/8c4cdd8d42.js" crossorigin="anonymous"></script>
-</head>
+	<body>
+		<!-- HEADER -->
+		<div class="header">
+			<a href="../index.html#" class="logo">
+				<img src="../images/logo.png" alt="" class="logo-img" />
+				<h1 class="nome-empresa">Soy Venture</h1>
+			</a>
 
-<body>
-	<!-- HEADER -->
-	<div class="header">
+			<div class="main-nav">
+				<ul>
+					<li><a href="../index.html#visão-valores">Sobre</a></li>
+					<li><a href="../index.html#feature-cards-container">Serviços</a></li>
+					<li><a href="../index.html#contato-card">Fale Conosco</a></li>
+					<li><a href="calculadora.html">Calculadora</a></li>
+				</ul>
+			</div>
 
-		<a href="../index.html#" class="logo">
-			<img src="../images/logo.png" alt="" class="logo-img" />
-			<h1 class="nome-empresa">Soy Venture</h1>
-
-		</a>
-
-		<div class="main-nav">
-
-			<ul>
-				<li><a href="../index.html#visão-valores">Sobre</a></li>
-				<li><a href="../index.html#feature-cards-container">Serviços</a></li>
-				<li><a href="../index.html#contato-card">Fale Conosco</a></li>
-				<li><a href="calculadora.html">Calculadora</a></li>
-			</ul>
-
+			<div class="login-nav">
+				<ul>
+					<li><a href="cadastro.html">Cadastrar</a></li>
+					<li><a href="login.html">Entrar</a></li>
+				</ul>
+			</div>
 		</div>
 
-		<div class="login-nav">
-			<ul>
-
-				<li><a href="cadastro.html">Cadastrar</a></li>
-				<li><a href="login.html">Entrar</a></li>
-
-			</ul>
-
-		</div>
-
-	</div>
-
-	<!-- CADASTRO -->
-	<div class="cadastro">
-
-		<div class="container">
-
-			<div class="box">
-
-				<div class="box_container">
-
-					<div class="card_cadastro2">
-
-						<ul>
-
-							<h2>Cadastro</h2>
-							<li>Empresa:<br><input placeholder="Nome" type="text" id="in_nomeEmpresa"> </li>
-							<li>Telefone Fixo: <br><input id="in_telFixo" placeholder="(00)0000-0000" type="text"></li>
-							<li>Senha:<br><input id="in_senha" placeholder="Inserir Senha" type="password"></li>
-							<li>Cnpj:<br><input id="in_cnpj" placeholder="Cnpj" type="text"></li>
-							<input type="checkbox"> Sim, eu aceito receber emails da Soy Venture</input> <br><br>
-							<input type="checkbox"> Eu li e concordo com os Termos</input>
-
-						</ul>
-
-						<div class="li_card">
-
+		<!-- CADASTRO -->
+		<div class="cadastro">
+			<div class="container">
+				<div class="box">
+					<div class="box_container">
+						<div class="card_cadastro2">
 							<ul>
-
-								<li>E-mail:<br><input id="in_email" placeholder="E-mail" type="text"></li>
-								<li>Telefone Celular: <br><input id="in_telCelular" placeholder="(00)00000-0000"
-										type="text"></li>
-								<li>Confirmar Senha: <br><input id="in_confirmarSenha" placeholder="Repetir Senha"
-										type="password"></li>
-								<li><button onclick="validacao()">Criar Conta</button></li>
-
+								<h2>Cadastro</h2>
+								<li>
+									Nome:<br /><input
+										placeholder="Nome"
+										type="text"
+										id="in_nome"
+										value="John"
+									/>
+								</li>
+								<li>
+									Empresa:<br /><input
+										placeholder="Nome da empresa"
+										type="text"
+										value="teste"
+										id="in_nomeEmpresa"
+									/>
+								</li>
+								<li>
+									Telefone Fixo: <br /><input
+										id="in_telFixo"
+										placeholder="(00)0000-0000"
+										value="1159211122"
+										type="text"
+									/>
+								</li>
+								<li>
+									Senha:<br /><input
+										id="in_senha"
+										placeholder="Inserir Senha"
+										value="123"
+										type="password"
+									/>
+								</li>
+								<li>
+									Cnpj:<br /><input
+										id="in_cnpj"
+										placeholder="Cnpj"
+										value="01234567891234"
+										type="text"
+									/>
+								</li>
 							</ul>
 
-
+							<div class="li_card">
+								<ul>
+									<li>
+										Sobrenome:<br /><input
+											placeholder="Sobrenome"
+											type="text"
+											value="Doe"
+											id="in_sobrenome"
+										/>
+									</li>
+									<li>
+										E-mail:<br /><input
+											id="in_email"
+											placeholder="E-mail"
+											value="teste@gmail.com"
+											type="text"
+										/>
+									</li>
+									<li>
+										Telefone Celular: <br /><input
+											id="in_telCelular"
+											placeholder="(00)00000-0000"
+											value="11959211122"
+											type="text"
+										/>
+									</li>
+									<li>
+										Confirmar Senha: <br /><input
+											id="in_confirmarSenha"
+											placeholder="Repetir Senha"
+											value="123"
+											type="password"
+										/>
+									</li>
+									<li>
+										<button id="criar-conta" onclick="validacao()">
+											Criar Conta
+										</button>
+									</li>
+								</ul>
+							</div>
 						</div>
-
 					</div>
 
+					<div class="feito">
+						Ja tem cadastro ?
+						<a href="login.html"><span class="destaque">Login</span></a>
+					</div>
+					<div class="linha"></div>
 				</div>
+			</div>
+		</div>
 
-				<div class="feito">Ja tem cadastro ? <a href="login.html"><span class="destaque">Login</span></a></div>
-				<div class="linha"></div>
+		<!-- FOOTER -->
+		<div class="footer-container">
+			<div class="footer-links-container">
+				<p>Soy Venture SA | CNPJ: 56.080.425/0001-02</p>
 
+				<ul>
+					<li>PORTABILIDADE</li>
+					<li>TRABALHE CONOSCO</li>
+					<li>SEGURANÇA</li>
+					<li>INVESTIDORES</li>
+				</ul>
 			</div>
 
-		</div>
+			<div class="footer-endereco-container">
+				<p class="endereco">
+					Cidade de Deus, S/Nº Vila Yara | Osasco | SP | CEP: 06029-900
+				</p>
 
-	</div>
-
-	<!-- FOOTER -->
-	<div class="footer-container">
-
-		<div class="footer-links-container">
-
-			<p>Soy Venture SA | CNPJ: 56.080.425/0001-02</p>
-
-			<ul>
-
-				<li>PORTABILIDADE</li>
-				<li>TRABALHE CONOSCO</li>
-				<li>SEGURANÇA</li>
-				<li>INVESTIDORES</li>
-
-			</ul>
-
-		</div>
-
-		<div class="footer-endereco-container">
-
-			<p class="endereco">
-				Cidade de Deus, S/Nº Vila Yara | Osasco | SP | CEP: 06029-900
-			</p>
-
-			<p class="copyright">
-
-				Copyright © 2020-2022 Soy Venture Company S.L. Todos os direitos
-				reservados.
-
-			</p>
-
-		</div>
-
-		<div class="redes-sociais">
-
-			<p>Siga-nos nas redes sociais!</p>
-
-			<div class="icons-container">
-
-				<i class="fa-brands fa-twitter"></i>
-				<i class="fa-brands fa-facebook"></i>
-				<i class="fa-brands fa-instagram"></i>
-				<i class="fa-brands fa-linkedin"></i>
-
+				<p class="copyright">
+					Copyright © 2020-2022 Soy Venture Company S.L. Todos os direitos
+					reservados.
+				</p>
 			</div>
 
+			<div class="redes-sociais">
+				<p>Siga-nos nas redes sociais!</p>
+
+				<div class="icons-container">
+					<i class="fa-brands fa-twitter"></i>
+					<i class="fa-brands fa-facebook"></i>
+					<i class="fa-brands fa-instagram"></i>
+					<i class="fa-brands fa-linkedin"></i>
+				</div>
+			</div>
 		</div>
 
-	</div>
+		<script>
+			function validacao() {
+				var nome = in_nome.value;
+				var sobrenome = in_sobrenome.value;
+				var nomeEmpresa = in_nomeEmpresa.value;
+				var cnpj = in_cnpj.value;
+				var email = in_email.value;
+				var telFixo = in_telFixo.value;
+				var telCelular = in_telCelular.value;
+				var senha = in_senha.value;
+				var confirmarSenha = in_confirmarSenha.value;
+				var alerta = "";
 
-	<script>
-
-		function validacao() {
-			var nomeEmpresa = in_nomeEmpresa.value;
-			var telFixo = in_telFixo.value;
-			var senha = in_senha.value
-			var cnpj = in_cnpj.value
-			var email = in_email.value
-			var telCelular = in_telCelular.value
-			var confirmarSenha = in_confirmarSenha.value
-			var alerta = '';
-
-			if(nomeEmpresa == '') {
-				alerta += 'Insira um nome'
-			}
-			if (cnpj.length != 14) {
-				alerta += ("*CNPJ deve ter 14 números\n");
-			}
-
-			if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
-				alerta += ("*Email deve ter @ e .com/n");
-			}
-
-			if (senha != confirmarSenha) {
-				alerta += ("As senhas não conferem!!/n")
-			}
-
-			if (telFixo.length != 10) {
-				alerta += ("Telefone Fixo incorreto/n")
-			}
-
-			if (telCelular.length != 11) {
-				alerta += ("Telefone Celular incorreto/n")
-			}
-
-			if (alerta != '') {
-				alert(alerta)
-			} else {
-				cadastrarCliente()
-			}
-		}
-		function cadastrarCliente() {
-			//Recupere o valor da nova input pelo nome do id
-			// Agora vá para o método fetch logo abaixo
-			var nomeEmpresaVar = in_nomeEmpresa.value;
-			var cnpjVar = in_cnpj.value;
-			var emailVar = in_email.value;
-			var telFixoVar = in_telFixo.value;
-			var telCelularVar = in_telCelular.value;
-			var senhaVar = in_senha.value;
-
-			// Enviando o valor da nova input
-			fetch("/usuarios/cadastrarCliente", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json"
-				},
-				body: JSON.stringify({
-					// crie um atributo que recebe o valor recuperado aqui
-					// Agora vá para o arquivo routes/usuario.js
-					nomeServer: nomeEmpresaVar,
-					cnpjServer: cnpjVar,
-					emailServer: emailVar,
-					telFixoServer: telFixoVar,
-					telCelularServer: telCelularVar,
-					senhaServer: senhaVar
-				})
-			})
-			.then(function (resposta) {
-
-				console.log("resposta: ", resposta);
-				// Somente para o cadastro de cliente
-				if (resposta.ok) {
-					setTimeout(() => {
-						window.location = "login.html";
-					}, "2000")
-
-				} else {
-					throw ("Houve um erro ao tentar realizar o cadastro!");
+				if (nome == "") {
+					alerta += "*Insira um nome\n";
 				}
-			}).catch(function (resposta) {
-				console.log(`#ERRO: ${resposta}`);
-			});
+				if (sobrenome == "") {
+					alerta += "*Insira um sobrenome\n";
+				}
+				if (nomeEmpresa == "") {
+					alerta += "*Insira um nome da empresa\n";
+				}
+				if (cnpj.length != 14) {
+					alerta += "*CNPJ deve ter 14 números\n";
+				}
 
-			return false;
-		}
-	</script>
+				if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
+					alerta += "*Email deve ter @ e .com\n";
+				}
 
-</body>
+				if (senha != confirmarSenha) {
+					alerta += "*As senhas não conferem!!\n";
+				}
 
+				if (telFixo.length != 10) {
+					alerta += "*Telefone Fixo incorreto\n";
+				}
+
+				if (telCelular.length != 11) {
+					alerta += "*Telefone Celular incorreto";
+				}
+
+				if (alerta != "") {
+					alert(alerta);
+				} else {
+					cadastrarCliente();
+				}
+			}
+			function cadastrarCliente() {
+				//Recupere o valor da nova input pelo nome do id
+				// Agora vá para o método fetch logo abaixo
+				var nomeEmpresaVar = in_nomeEmpresa.value;
+				var cnpjVar = in_cnpj.value;
+
+				// Enviando o valor da nova input
+				fetch("/usuarios/cadastrarCliente", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						// crie um atributo que recebe o valor recuperado aqui
+						// Agora vá para o arquivo routes/usuario.js
+						nomeEmpresaServer: nomeEmpresaVar,
+						cnpjServer: cnpjVar,
+					}),
+				})
+					.then(function (resposta) {
+						console.log("resposta: ", resposta);
+
+						// Somente para o cadastro de cliente
+						if (resposta.ok) {
+							resposta.json().then((json) => {
+								console.log(json);
+								console.log(JSON.stringify(json));
+
+								var idCliente = json[1][0].idCliente;
+
+								cadastrarFuncionario(idCliente, "gerente");
+							});
+						} else {
+							alert("Empresa já cadastrada!");
+						}
+					})
+					.catch(function (resposta) {
+						console.log(`#ERRO: ${resposta}`);
+					});
+
+				return false;
+			}
+
+			function cadastrarFuncionario(idCliente, cargo) {
+				var nomeVar = in_nome.value;
+				var sobrenomeVar = in_sobrenome.value;
+				var emailVar = in_email.value;
+				var telFixoVar = in_telFixo.value;
+				var telCelularVar = in_telCelular.value;
+				var senhaVar = in_senha.value;
+				var idClienteVar = idCliente;
+				var cargoVar = cargo;
+
+				// Enviando o valor da nova input
+				fetch("/usuarios/cadastrarFuncionario", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						// crie um atributo que recebe o valor recuperado aqui
+						// Agora vá para o arquivo routes/usuario.js
+						nomeServer: nomeVar,
+						sobrenomeServer: sobrenomeVar,
+						emailServer: emailVar,
+						telFixoServer: telFixoVar,
+						telCelularServer: telCelularVar,
+						senhaServer: senhaVar,
+						idClienteServer: idClienteVar,
+						cargoServer: cargoVar,
+					}),
+				})
+					.then(function (resposta) {
+						console.log("resposta: ", resposta);
+
+						// Somente para o cadastro de cliente
+						if (resposta.ok) {
+							resposta.json().then((json) => {
+								console.log(json);
+								console.log(JSON.stringify(json));
+
+								window.location = "login.html";
+								alert("Empresa cadastrada com sucesso!");
+							});
+						} else {
+							alert("empresa já cadastrada!");
+						}
+					})
+					.catch(function (resposta) {
+						console.log(`#ERRO: ${resposta}`);
+					});
+
+				return false;
+			}
+		</script>
+	</body>
 </html>

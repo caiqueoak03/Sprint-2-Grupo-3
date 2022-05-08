@@ -9,49 +9,44 @@ USE soyventure;
 
 CREATE TABLE cliente (
 	idCliente int primary key AUTO_INCREMENT,
-	nomeEmpresa varchar(45) unique,
-	cnpj char(14) unique,
-	email varchar(45) unique,
-	telFixo char(10),
-	telCelular char(11),
-	primeiroAcesso tinyint
+	nomeEmpresa varchar(45) unique not null,
+	cnpj char(14) unique not null
+);
+
+CREATE TABLE funcionario (
+	idFuncionario int primary key AUTO_INCREMENT,
+	fkCliente int,
+	nome varchar(45) not null,
+	sobrenome varchar(45) not null,
+	email varchar(45) unique not null,
+	senha varchar(45) not null,
+	telFixo char(10) not null,
+	telCelular char(11) not null,
+	cargo varchar(45)  not null, check (cargo in ('analista', 'supervisor', 'gerente')),
+	foreign key (fkCliente) references cliente(idCliente)
 );
 
 CREATE TABLE fazenda (
 	idFazenda INT PRIMARY KEY AUTO_INCREMENT,
-	fkCliente int,
-	nome varchar(45),
-	cep char(8) unique,
-	telFixo char(10),
-	telCelular char(11),
-	areaHectare int,
-	qtdSensores int,
-	foreign key (fkCliente) references cliente(idCliente)
+	nome varchar(45) not null,
+	cep char(8) unique not null,
+	telFixo char(10) not null,
+	telCelular char(11) not null,
+	areaHectare int not null,
+	qtdSensores int  not null
 ); 
 
-CREATE TABLE funcionario (
-	idFuncionario int primary key AUTO_INCREMENT,
-	nome varchar(45),
-	sobrenome varchar(45),
-	email varchar(45) unique,
-	senha varchar(45) ,
-	telFixo char(10),
-	telCelular char(11)
-);
-
 create table contrato (
-	idContrato int AUTO_INCREMENT,
 	fkFuncionario int,
 	fkFazenda int,
-	cargo varchar(45), check (cargo in ('analista', 'supervisor', 'gerente')),
 	foreign key (fkFuncionario) references funcionario(idFuncionario),
 	foreign key (fkFazenda) references fazenda(idFazenda),
-	primary key (idContrato, fkFuncionario, fkFazenda)
+	primary key (fkFuncionario, fkFazenda)
 );
 
 create table sensor (
 	idSensor int primary key AUTO_INCREMENT,
-	modelo varchar(45),
+	modelo varchar(45)  not null,
 	longitude decimal(4,2),
 	latitude decimal(4,2)
 );
@@ -74,6 +69,9 @@ create table setor (
 	primary key (idSetor, fkFazenda),
 	foreign key (fkSensor) references sensor(idSensor)
 );
+
+
+
 
 
 /* para sql server - remoto - produção */

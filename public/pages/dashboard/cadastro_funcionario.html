@@ -26,6 +26,9 @@
 		></script>
 	</head>
 	<body onload="iniciarSessao(), carregarFazendas()">
+		<!-- Wrapper -->
+		<div id="wrapper_loading"></div>
+
 		<!-- HEADER -->
 		<header>
 			<span class="logo">
@@ -240,18 +243,18 @@
 		if (alerta != "") {
 			alert(alerta);
 		} else {
-			cadastrarFuncionario(sessionStorage.ID_CLIENTE);
+			cadastrarFuncionario();
 		}
 	}
 
-	function cadastrarFuncionario(idCliente) {
+	function cadastrarFuncionario() {
 		var nomeVar = in_nome.value;
 		var sobrenomeVar = in_sobrenome.value;
 		var emailVar = in_email.value;
 		var telFixoVar = in_telFixo.value;
 		var telCelularVar = in_telCelular.value;
 		var senhaVar = in_senha.value;
-		var idClienteVar = idCliente;
+		var idClienteVar = sessionStorage.ID_CLIENTE;
 		var cargoVar = in_cargo.value;
 
 		// Enviando o valor da nova input
@@ -301,6 +304,7 @@
 	function firmarContrato(idFuncionario) {
 		var idFuncionarioVar = idFuncionario;
 		var cargoVar = in_cargo.value;
+		var idFazendasVar = sessionStorage.ID_FAZENDAS;
 
 		fetch("/usuarios/firmarContrato", {
 			method: "POST",
@@ -313,6 +317,7 @@
 				idFuncionarioServer: idFuncionarioVar,
 				idFazendasChecadasServer: idFazendasChecadasVar,
 				cargoServer: cargoVar,
+				idFazendasServer: idFazendasVar,
 			}),
 		})
 			.then(function (resposta) {
@@ -334,6 +339,60 @@
 			})
 			.catch(function (resposta) {
 				console.log(`#ERRO: ${resposta}`);
+			});
+
+		return false;
+	}
+
+	function carregarFazendas() {
+		fetch("/usuarios/listarFazendas", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		})
+			.then(function (resposta) {
+				console.log("ESTOU NO THEN DO carregarFazendas()!");
+
+				if (resposta.ok) {
+					console.log(resposta);
+
+					resposta.json().then((json) => {
+						console.log("json: " + json);
+						console.log("JSON: " + JSON.stringify(json));
+
+						var idFazendas = [];
+						var nomeFazendas = [];
+
+						for (let i = 0; i < json.length; i++) {
+							idFazendas.push(json[i].idFazenda);
+							nomeFazendas.push(json[i].nome);
+						}
+
+						sessionStorage.ID_FAZENDAS = idFazendas;
+						sessionStorage.NOME_FAZENDAS = nomeFazendas;
+
+						for (let i = 0; i < json.length; i++) {
+							checkBoxes.innerHTML += `
+						<li>
+							<label class="labels">
+								${nomeFazendas[i]}
+							</label>
+							<input type="checkbox" class="boxes" id='${idFazendas[i]}'/>
+						</li>`;
+						}
+					});
+				} else {
+					console.log("Houve um erro ao tentar realizar o login!");
+					alert("Usuário não cadastrado!");
+
+					resposta.text().then((texto) => {
+						console.error(texto);
+					});
+				}
+			})
+			.catch(function (erro) {
+				console.log(erro);
 			});
 
 		return false;

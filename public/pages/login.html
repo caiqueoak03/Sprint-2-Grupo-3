@@ -158,17 +158,13 @@
 						sessionStorage.CARGO = json.cargo;
 						sessionStorage.ID_CLIENTE = json.fkCliente;
 
-						alert(json.cargo);
-
 						sessionStorage.FUNCIONARIO = "flex";
 						sessionStorage.FAZENDA = "flex";
 
 						if (sessionStorage.CARGO == "analista") {
-							alert("analista!");
 							sessionStorage.FUNCIONARIO = "none";
 							sessionStorage.FAZENDA = "none";
 						} else if (sessionStorage.CARGO == "supervisor") {
-							alert("supervisor!");
 							sessionStorage.FUNCIONARIO = "flex";
 							sessionStorage.FAZENDA = "none";
 						}

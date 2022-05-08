@@ -1,22 +1,22 @@
 var database = require("../database/config");
 
-function listar() {
-	console.log(
-		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()",
-	);
-	var instrucao = `
-        SELECT * FROM funcionario;
-    `;
-	console.log("Executando a instrução SQL: \n" + instrucao);
-	return database.executar(instrucao);
-}
-
 function listarFazendas() {
 	console.log(
 		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()",
 	);
 	var instrucao = `
         SELECT * FROM fazenda;
+    `;
+	console.log("Executando a instrução SQL: \n" + instrucao);
+	return database.executar(instrucao);
+}
+
+function listarGerentes() {
+	console.log(
+		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()",
+	);
+	var instrucao = `
+        SELECT idFuncionario FROM funcionario where cargo = 'gerente';
     `;
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);
@@ -85,27 +85,28 @@ function cadastrarFuncionario(
 	return database.executar(instrucao);
 }
 
-function firmarContrato(idFuncionario, idFazendasChecadas, cargo) {
+function firmarContrato(idFuncionario, idFazendasChecadas, cargo, idFazendas) {
 	console.log(
 		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():",
 		idFuncionario,
 		idFazendasChecadas,
 		cargo,
+		idFazendas,
 	);
 
 	var instrucao = "";
+	var arr = idFazendas.split(",");
+	var len = arr.length;
 
 	if (cargo == "gerente") {
-		for (let i = 0; i < sessionStorage.ID_FAZENDAS.length; i++) {
-			instrucao = `
-										insert into contrato (fkFuncionario, fkFazenda) values ('${idFuncionario}', '${sessionStorage.ID_FAZENDAS[i]}'); 
+		for (let i = 0; i < len; i++) {
+			instrucao += `
+										insert into contrato (fkFuncionario, fkFazenda) values ('${idFuncionario}', '${arr[i]}'); 
 										`;
 		}
 	} else {
 		for (let i = 0; i < idFazendasChecadas.length; i++) {
-			console.log(idFazendasChecadas);
-			console.log(idFazendasChecadas[i]);
-			instrucao = `
+			instrucao += `
 										insert into contrato (fkFuncionario, fkFazenda) values ('${idFuncionario}', '${idFazendasChecadas[i]}'); 
 										`;
 		}
@@ -114,7 +115,15 @@ function firmarContrato(idFuncionario, idFazendasChecadas, cargo) {
 	return database.executar(instrucao);
 }
 
-function cadastrarFazenda(nomeFazenda, telFixo, telcelular, cep, areaHectare) {
+function cadastrarFazenda(
+	nomeFazenda,
+	telFixo,
+	telcelular,
+	cep,
+	areaHectare,
+	idGerentes,
+	qtdSensores,
+) {
 	console.log(
 		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():",
 		nomeFazenda,
@@ -122,13 +131,45 @@ function cadastrarFazenda(nomeFazenda, telFixo, telcelular, cep, areaHectare) {
 		telcelular,
 		cep,
 		areaHectare,
+		idGerentes,
+		qtdSensores,
 	);
 
 	// Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
 	//  e na ordem de inserção dos dados.
 	var instrucao = `
-        INSERT INTO fazenda (nomeFazenda, telFixo, telcelular, cep) VALUES ('${nomeFazenda}', '${telFixo}','${telcelular}', '${cep}');
+        INSERT INTO fazenda 
+				(nome, telFixo, telcelular, cep, areaHectare, qtdSensores) 
+				VALUES 
+				('${nomeFazenda}', '${telFixo}','${telcelular}', '${cep}','${areaHectare}', '${qtdSensores}');
+				SELECT idFazenda FROM fazenda where cep = '${cep}';
     `;
+	console.log("Executando a instrução SQL: \n" + instrucao);
+	return database.executar(instrucao);
+}
+
+function associarFazendaGerente(idFazenda, idGerentes) {
+	console.log(
+		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():",
+		idFazenda,
+		idGerentes,
+	);
+
+	console.log("dentro do associarFazendaGerente");
+
+	// Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+	//  e na ordem de inserção dos dados.
+
+	var instrucao = "";
+	var arr = idGerentes.split(",");
+	var len = arr.length;
+
+	for (let i = 0; i < len; i++) {
+		instrucao += `
+									insert into contrato (fkFuncionario, fkFazenda) values ('${arr[i]}', '${idFazenda}'); 
+									`;
+	}
+
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);
 }
@@ -138,7 +179,8 @@ module.exports = {
 	cadastrarCliente,
 	cadastrarFuncionario,
 	cadastrarFazenda,
+	listarGerentes,
 	listarFazendas,
 	firmarContrato,
-	listar,
+	associarFazendaGerente,
 };

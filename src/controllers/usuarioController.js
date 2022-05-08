@@ -47,6 +47,26 @@ function listarFazendas(req, res) {
 		});
 }
 
+function listarGerentes(req, res) {
+	usuarioModel
+		.listarGerentes()
+		.then(function (resultado) {
+			if (resultado.length > 0) {
+				res.status(200).json(resultado);
+			} else {
+				res.status(204).send("Nenhum resultado encontrado!");
+			}
+		})
+		.catch(function (erro) {
+			console.log(erro);
+			console.log(
+				"Houve um erro ao realizar a consulta! Erro: ",
+				erro.sqlMessage,
+			);
+			res.status(500).json(erro.sqlMessage);
+		});
+}
+
 function entrar(req, res) {
 	var email = req.body.emailServer;
 	var senha = req.body.senhaServer;
@@ -110,21 +130,61 @@ function cadastrarCliente(req, res) {
 	}
 }
 
+function associarFazendaGerente(req, res) {
+	// Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+	var idFazenda = req.body.idFazendaServer;
+	var idGerentes = req.body.idGerentesServer;
+
+	console.log("id gerentes no controller: " + idGerentes);
+
+	console.log("idFazenda no controller: " + idFazenda);
+
+	// Faça as validações dos valores
+	if (idFazenda == undefined) {
+		res.status(400).send("Seu id Fazenda está undefined!");
+	} else if (idGerentes == undefined) {
+		res.status(400).send("A idgerentes está undefined!");
+	} else {
+		// Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+		usuarioModel
+			.associarFazendaGerente(idFazenda, idGerentes)
+			.then(function (resultado) {
+				console.log("Resultado: " + resultado);
+				res.json(resultado);
+			})
+			.catch(function (erro) {
+				console.log(erro);
+				console.log(
+					"\nHouve um erro ao realizar o cadastro! Erro: ",
+					erro.sqlMessage,
+				);
+				res.status(500).json(erro.sqlMessage);
+			});
+	}
+}
+
 function firmarContrato(req, res) {
 	// Crie uma variável que vá recuperar os valores do arquivo cadastro.html
 	var idFuncionario = req.body.idFuncionarioServer;
 	var idFazendasChecadas = req.body.idFazendasChecadasServer;
 	var cargo = req.body.cargoServer;
+	var idFazendas = req.body.idFazendasServer;
+
+	console.log("idFazendas no controller: " + idFazendas);
 
 	// Faça as validações dos valores
 	if (idFuncionario == undefined) {
 		res.status(400).send("Seu id funcionario está undefined!");
 	} else if (idFazendasChecadas == undefined) {
 		res.status(400).send("Sua fazendas checadas está undefined!");
+	} else if (cargo == undefined) {
+		res.status(400).send("Seu cargo está undefined!");
+	} else if (idFazendas == undefined) {
+		res.status(400).send("A idFazendas está undefined!");
 	} else {
 		// Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
 		usuarioModel
-			.firmarContrato(idFuncionario, idFazendasChecadas, cargo)
+			.firmarContrato(idFuncionario, idFazendasChecadas, cargo, idFazendas)
 			.then(function (resultado) {
 				console.log("Resultado: " + resultado);
 				res.json(resultado);
@@ -202,6 +262,20 @@ function cadastrarFazenda(req, res) {
 	var telFixo = req.body.telFixoServer;
 	var telcelular = req.body.telCelularServer;
 	var cep = req.body.cepServer;
+	var areaHectare = req.body.areaHectareServer;
+	var idGerentes = req.body.idGerentesServer;
+	var qtdSensores = req.body.qtdSensoresServer;
+
+	console.log("dentro do cadastrarFazenda()");
+	console.log(
+		`Variaveis: " ${nomeFazenda},
+		${telFixo},
+		${telcelular},
+		${cep},
+		${areaHectare},
+		${idGerentes},
+		${qtdSensores}`,
+	);
 
 	// Faça as validações dos valores
 	if (nomeFazenda == undefined) {
@@ -212,10 +286,24 @@ function cadastrarFazenda(req, res) {
 		res.status(400).send("O telefone celular está undefined!");
 	} else if (cep == undefined) {
 		res.status(400).send("O cep está undefined!");
+	} else if (areaHectare == undefined) {
+		res.status(400).send("A área em hectare está undefined!");
+	} else if (idGerentes == undefined) {
+		res.status(400).send("O idGerentes está undefined!");
+	} else if (qtdSensores == undefined) {
+		res.status(400).send("A qtdsensores está undefined!");
 	} else {
 		// Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
 		usuarioModel
-			.cadastrarFazenda(nomeFazenda, telFixo, telcelular, cep)
+			.cadastrarFazenda(
+				nomeFazenda,
+				telFixo,
+				telcelular,
+				cep,
+				areaHectare,
+				idGerentes,
+				qtdSensores,
+			)
 			.then(function (resultado) {
 				console.log("Resultado: " + resultado);
 				res.json(resultado);
@@ -235,6 +323,8 @@ module.exports = {
 	entrar,
 	cadastrarCliente,
 	cadastrarFuncionario,
+	associarFazendaGerente,
+	listarGerentes,
 	cadastrarFazenda,
 	firmarContrato,
 	listarFazendas,

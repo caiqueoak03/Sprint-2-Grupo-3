@@ -25,6 +25,9 @@
 		></script>
 	</head>
 	<body onload="iniciarSessao()">
+		<!-- Wrapper -->
+		<div id="wrapper_loading"></div>
+
 		<!-- HEADER -->
 		<header>
 			<span class="logo">
@@ -81,6 +84,7 @@
 										Nome da Fazenda<br /><input
 											placeholder="Nome da Fazenda"
 											id="in_nomeFazenda"
+											value="Fazenda rio bonito"
 											type="text"
 										/>
 									</li>
@@ -88,12 +92,14 @@
 										Numero de Telefone Fixo: <br /><input
 											placeholder="(00) 00000-0000"
 											id="in_telFixo"
+											value="1159206325"
 											type="text"
 										/>
 									</li>
 									<li>
 										Numero de Telefone Celular: <br /><input
 											placeholder="(00) 00000-0000"
+											value="11959206325"
 											id="in_telCelular"
 											type="text"
 										/>
@@ -105,6 +111,7 @@
 										<li>
 											CEP <br /><input
 												placeholder="CEP(000-00-000)"
+												value="05236985"
 												id="in_cep"
 												type="text"
 											/>
@@ -113,11 +120,15 @@
 										<li>
 											Área em Hectare <br /><input
 												placeholder="Hectares"
+												id="in_areaHectare"
+												value="50"
 												type="text"
 											/>
 										</li>
 
-										<li><button>Cadastrar Fazenda</button></li>
+										<li>
+											<button onclick="validar()">Cadastrar Fazenda</button>
+										</li>
 									</ul>
 								</div>
 							</div>
@@ -140,24 +151,37 @@
 	function validar() {
 		var nomeFazenda = in_nomeFazenda.value;
 		var telFixo = in_telFixo.value;
-		var telcelular = in_telcelular.value;
+		var telcelular = in_telCelular.value;
 		var cep = in_cep.value;
+		var areaHectare = in_areaHectare.value;
 		var alerta = "";
 
 		if (nomeFazenda == "") {
 			alerta += "\n*Insira o nome da fazenda";
 		}
 
-		if (telefone_fixo == "") {
+		if (telFixo == "") {
 			alerta += "\n*Digite um telefone fixo";
-		} else if (telefone_fixo.length != 10) {
+		} else if (telFixo.length != 10) {
 			alerta += "\n*Telefone Fixo incorreto, insira novamente!!";
 		}
 
-		if (telefone_celular == "") {
+		if (telcelular == "") {
 			alerta += "\n*Digite um telefone celular";
-		} else if (telefone_celular.length != 11) {
+		} else if (telcelular.length != 11) {
 			alerta += "\n*Telefone Celular incorreto, insira novamente!!";
+		}
+
+		if (cep == "") {
+			alerta += "\n*Digite um cep";
+		} else if (cep.length != 8) {
+			alerta += "\n*O CEP deve ter 8 dígitos!";
+		}
+
+		if (isNaN(areaHectare)) {
+			alerta += "\n*Coloque a área em hectare da fazenda!";
+		} else if (areaHectare < 0) {
+			alerta += "\n*Coloque um valor maior que zero!";
 		}
 
 		if (alerta != "") {
@@ -171,8 +195,13 @@
 		// Agora vá para o método fetch logo abaixo
 		var nomeFazendaVar = in_nomeFazenda.value;
 		var telFixoVar = in_telFixo.value;
-		var telcelularVar = in_telcelular.value;
+		var telCelularVar = in_telCelular.value;
 		var cepVar = in_cep.value;
+		var areaHectareVar = in_areaHectare.value;
+		var idGerentesVar = sessionStorage.ID_GERENTES;
+		var qtdSensoresVar = areaHectareVar * 4;
+
+		console.log(sessionStorage.ID_GERENTES);
 
 		// Enviando o valor da nova input
 		fetch("/usuarios/cadastrarFazenda", {
@@ -187,16 +216,112 @@
 				telFixoServer: telFixoVar,
 				telCelularServer: telCelularVar,
 				cepServer: cepVar,
+				areaHectareServer: areaHectareVar,
+				idGerentesServer: idGerentesVar,
+				qtdSensoresServer: qtdSensoresVar,
 			}),
 		})
 			.then(function (resposta) {
 				console.log("resposta: ", resposta);
 
 				if (resposta.ok) {
-					in_nomeFazenda.value = "";
-					in_telFixo.value = "";
-					in_telcelular.value = "";
-					in_cep.value = "";
+					resposta.json().then((json) => {
+						/*
+						in_nomeFazenda.value = "";
+						in_telFixo.value = "";
+						in_telCelular.value = "";
+						in_cep.value = "";
+						in_areaHectare.value = "";
+						*/
+						console.log("Status: fazenda cadastrada com sucesso!");
+						associarFazendaGerente(json[1][0].idFazenda);
+					});
+				} else {
+					alert("Fazenda já cadastrada!");
+				}
+			})
+			.catch(function (resposta) {
+				console.log(`#ERRO: ${resposta}`);
+			});
+
+		return false;
+	}
+
+	carregarGerentes();
+
+	function carregarGerentes() {
+		fetch("/usuarios/listarGerentes", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		})
+			.then(function (resposta) {
+				console.log("ESTOU NO THEN DO carregarGerentes()!");
+
+				if (resposta.ok) {
+					console.log(resposta);
+
+					resposta.json().then((json) => {
+						console.log("json: " + json);
+						console.log("JSON: " + JSON.stringify(json));
+
+						var idGerentes = [];
+
+						for (let i = 0; i < json.length; i++) {
+							idGerentes.push(json[i].idFuncionario);
+						}
+
+						sessionStorage.ID_GERENTES = idGerentes;
+					});
+				} else {
+					console.log("Houve um erro ao tentar realizar o login!");
+					alert("Usuário não cadastrado!");
+
+					resposta.text().then((texto) => {
+						console.error(texto);
+					});
+				}
+			})
+			.catch(function (erro) {
+				console.log(erro);
+			});
+
+		return false;
+	}
+
+	function associarFazendaGerente(idFazenda) {
+		var idFazendaVar = idFazenda;
+		var idGerentesVar = sessionStorage.ID_GERENTES;
+
+		console.log("idfazenda: " + idFazendaVar);
+		console.log("idGerentes: " + idGerentesVar);
+
+		fetch("/usuarios/associarFazendaGerente", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				// crie um atributo que recebe o valor recuperado aqui
+				// Agora vá para o arquivo routes/usuario.js
+				idFazendaServer: idFazendaVar,
+				idGerentesServer: idGerentesVar,
+			}),
+		})
+			.then(function (resposta) {
+				console.log("resposta: ", resposta);
+
+				// Somente para o cadastro de cliente
+				if (resposta.ok) {
+					resposta.json().then((json) => {
+						console.log(json);
+						console.log(JSON.stringify(json));
+
+						console.log("status: contrato firmado!");
+
+						alert("Fazenda cadastrada com sucesso!");
+					});
 				} else {
 					alert("Fazenda já cadastrada!");
 				}

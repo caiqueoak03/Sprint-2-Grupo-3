@@ -23,6 +23,10 @@ router.post("/cadastrarFuncionario", function (req, res) {
 	usuarioController.cadastrarFuncionario(req, res);
 });
 
+router.post("/associarFazendaGerente", function (req, res) {
+	usuarioController.associarFazendaGerente(req, res);
+});
+
 router.post("/firmarContrato", function (req, res) {
 	usuarioController.firmarContrato(req, res);
 });
@@ -33,6 +37,10 @@ router.post("/autenticar", function (req, res) {
 
 router.get("/listarFazendas", function (req, res) {
 	usuarioController.listarFazendas(req, res);
+});
+
+router.get("/listarGerentes", function (req, res) {
+	usuarioController.listarGerentes(req, res);
 });
 
 module.exports = router;

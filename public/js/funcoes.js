@@ -45,7 +45,3 @@ function checkGerente() {
 		select_container.style.display = "flex";
 	}
 }
-
-function carregarGerentes() {
-	fetch('/usuarios/')
-}

@@ -3,12 +3,12 @@ var router = express.Router();
 
 var usuarioController = require("../controllers/usuarioController");
 
-router.get("/", function (req, res) {
-	usuarioController.testar(req, res);
+router.post("/listarFuncionarios", function (req, res) {
+	usuarioController.listarFuncionarios(req, res);
 });
 
-router.get("/listar", function (req, res) {
-	usuarioController.listar(req, res);
+router.put("/alterarDados", function (req, res) {
+	usuarioController.alterarDados(req, res);
 });
 
 router.post("/cadastrarCliente", function (req, res) {

@@ -1,5 +1,40 @@
 var database = require("../database/config");
 
+function listarFuncionarios(idFuncionario) {
+	console.log(
+		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()",
+	);
+	var instrucao = `
+        SELECT * FROM funcionario where idFuncionario = '${idFuncionario}';
+    `;
+	console.log("Executando a instrução SQL: \n" + instrucao);
+	return database.executar(instrucao);
+}
+
+function alterarDados(
+	idFuncionario,
+	nome,
+	sobrenome,
+	telFixo,
+	telCelular,
+	email,
+	senha,
+) {
+	console.log(
+		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()",
+	);
+	var instrucao = `
+        UPDATE funcionario SET nome = '${nome}' where idFuncionario = '${idFuncionario}';
+        UPDATE funcionario SET sobrenome = '${sobrenome}' where idFuncionario = '${idFuncionario}';
+        UPDATE funcionario SET telFixo = '${telFixo}' where idFuncionario = '${idFuncionario}';
+        UPDATE funcionario SET telCelular = '${telCelular}' where idFuncionario = '${idFuncionario}';
+        UPDATE funcionario SET email = '${email}' where idFuncionario = '${idFuncionario}';
+        UPDATE funcionario SET senha = '${senha}' where idFuncionario = '${idFuncionario}';
+    `;
+	console.log("Executando a instrução SQL: \n" + instrucao);
+	return database.executar(instrucao);
+}
+
 function listarFazendas() {
 	console.log(
 		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()",
@@ -182,5 +217,7 @@ module.exports = {
 	listarGerentes,
 	listarFazendas,
 	firmarContrato,
+	listarFuncionarios,
 	associarFazendaGerente,
+	alterarDados,
 };

@@ -1,30 +1,83 @@
 var usuarioModel = require("../models/usuarioModel");
 
-var sessoes = [];
+function listarFuncionarios(req, res) {
+	var idFuncionario = req.body.idFuncionarioServer;
 
-function testar(req, res) {
-	console.log("ENTRAMOS NA usuarioController");
-	res.json("ESTAMOS FUNCIONANDO!");
+	if (idFuncionario == undefined) {
+		res.status(400).send("O idFuncionario está undefined!");
+	} else {
+		usuarioModel
+			.listarFuncionarios(idFuncionario)
+			.then(function (resultado) {
+				console.log(`\nResultados encontrados: ${resultado.length}`);
+				console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
+
+				if (resultado.length == 0) {
+					res.status(403).send("Dados não encontrados");
+				} else {
+					console.log(resultado);
+					console.log(resultado[0]);
+					res.json(resultado[0]);
+				}
+			})
+			.catch(function (erro) {
+				console.log(erro);
+				console.log(
+					"\nHouve um erro ao realizar o login! Erro: ",
+					erro.sqlMessage,
+				);
+				res.status(500).json(erro.sqlMessage);
+			});
+	}
 }
 
-function listar(req, res) {
-	usuarioModel
-		.listar()
-		.then(function (resultado) {
-			if (resultado.length > 0) {
-				res.status(200).json(resultado);
-			} else {
-				res.status(204).send("Nenhum resultado encontrado!");
-			}
-		})
-		.catch(function (erro) {
-			console.log(erro);
-			console.log(
-				"Houve um erro ao realizar a consulta! Erro: ",
-				erro.sqlMessage,
-			);
-			res.status(500).json(erro.sqlMessage);
-		});
+function alterarDados(req, res) {
+	var idFuncionario = req.body.idFuncionarioServer;
+	var nome = req.body.nomeServer;
+	var sobrenome = req.body.sobrenomeServer;
+	var telFixo = req.body.telFixoServer;
+	var telCelular = req.body.telCelularServer;
+	var email = req.body.emailServer;
+	var senha = req.body.senhaServer;
+
+	if (idFuncionario == undefined) {
+		res.status(400).send("O idFuncionario está undefined!");
+	} else if (nome == undefined) {
+		res.status(400).send("O nome está undefined!");
+	} else if (sobrenome == undefined) {
+		res.status(400).send("O sobrenome está undefined!");
+	} else if (telFixo == undefined) {
+		res.status(400).send("O telFixo está undefined!");
+	} else if (telCelular == undefined) {
+		res.status(400).send("O telCelular está undefined!");
+	} else if (email == undefined) {
+		res.status(400).send("O email está undefined!");
+	} else if (senha == undefined) {
+		res.status(400).send("O senha está undefined!");
+	} else {
+		usuarioModel
+			.alterarDados(
+				idFuncionario,
+				nome,
+				sobrenome,
+				telFixo,
+				telCelular,
+				email,
+				senha,
+			)
+			.then(function (resultado) {
+				console.log("THEN do model: " + resultado);
+				res.json(resultado);
+			})
+			.catch(function (erro) {
+				console.log(erro);
+				console.log(
+					"\nHouve um erro ao realizar o login! Erro: ",
+					erro.sqlMessage,
+				);
+				res.status(500).json(erro.sqlMessage);
+			});
+	}
 }
 
 function listarFazendas(req, res) {
@@ -328,6 +381,6 @@ module.exports = {
 	cadastrarFazenda,
 	firmarContrato,
 	listarFazendas,
-	listar,
-	testar,
+	listarFuncionarios,
+	alterarDados,
 };

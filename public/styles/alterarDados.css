@@ -68,7 +68,7 @@ button:hover {
 }
 
 li {
-	width: 300px;
+	width: 315px;
 }
 
 li input {
@@ -93,4 +93,8 @@ li input:focus {
 
 li input:hover {
 	background-color: rgb(42, 194, 138, 0.3);
+}
+
+.image-input-container span {
+	font-size: 0.8rem;
 }

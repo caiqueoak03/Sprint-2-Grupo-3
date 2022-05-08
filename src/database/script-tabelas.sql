@@ -23,6 +23,7 @@ CREATE TABLE funcionario (
 	telFixo char(10) not null,
 	telCelular char(11) not null,
 	cargo varchar(45)  not null, check (cargo in ('analista', 'supervisor', 'gerente')),
+	urlImg varchar(150),
 	foreign key (fkCliente) references cliente(idCliente)
 );
 

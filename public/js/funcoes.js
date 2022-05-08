@@ -16,6 +16,8 @@ function iniciarSessao() {
 	cad_fazenda.style.display = `${sessionStorage.FAZENDA}`;
 
 	wrapper_loading.style.display = "none";
+
+	user_profile_pic.src = "" + sessionStorage.IMG_URL;
 }
 
 function limparSessao() {

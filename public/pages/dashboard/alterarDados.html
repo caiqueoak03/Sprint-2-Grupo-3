@@ -37,7 +37,12 @@
 			</span>
 
 			<div class="usuario-container">
-				<img src="../../images/gerente-img.png" alt="" class="img" />
+				<img
+					src="../../images/gerente-img.png"
+					alt=""
+					id="user_profile_pic"
+					class="img"
+				/>
 				<p class="usuario-nome">Olá, <b id="nome_usuario"></b></p>
 			</div>
 
@@ -107,9 +112,15 @@
 							<p>Senha</p>
 							<input type="password" id="in_senha" />
 						</li>
-						<button onclick="validar()">Confirmar Alteração</button>
+						<li class="image-input-container">
+							<p>
+								URL da foto de perfil <span>(imagem com proporção 1:1)</span>
+							</p>
+							<input type="text" id="in_urlIMG" />
+						</li>
 					</ul>
 				</div>
+				<button onclick="validar()">Confirmar Alteração</button>
 			</div>
 		</div>
 	</body>
@@ -193,6 +204,7 @@
 						in_email.value = `${json.email}`;
 						in_senha.value = `${json.senha}`;
 						in_confirmarSenha.value = `${json.senha}`;
+						in_urlIMG.value = `${json.urlImg}`;
 					});
 				} else {
 					console.log("Houve um erro ao carregar os dados");
@@ -216,6 +228,7 @@
 		var telCelularVar = in_telCelular.value;
 		var emailVar = in_email.value;
 		var senhaVar = in_senha.value;
+		var urlImgVar = in_urlIMG.value;
 
 		fetch("/usuarios/alterarDados", {
 			method: "PUT",
@@ -230,6 +243,7 @@
 				emailServer: emailVar,
 				senhaServer: senhaVar,
 				idFuncionarioServer: sessionStorage.ID_FUNCIONARIO,
+				urlImgServer: urlImgVar,
 			}),
 		})
 			.then(function (resposta) {
@@ -238,21 +252,18 @@
 				if (resposta.ok) {
 					console.log(resposta);
 
-					resposta.json().then((json) => {
-						console.log(json);
-						console.log(JSON.stringify(json));
+					alert("Dados alterados com sucesso!");
 
-						alert("Dados alterados com sucesso!");
+					sessionStorage.NOME = nomeVar;
+					sessionStorage.SOBRENOME = sobrenomeVar;
 
-						/*
-						in_nome.value = `${json.nome}`;
-						in_sobrenome.value = `${json.sobrenome}`;
-						in_telFixo.value = `${json.telFixo}`;
-						in_telCelular.value = `${json.telCelular}`;
-						in_email.value = `${json.email}`;
-						in_senha.value = `${json.senha}`;
-						*/
-					});
+					if (in_urlIMG.value == "") {
+						sessionStorage.IMG_URL = "../../images/gerente-img.png";
+					} else {
+						sessionStorage.IMG_URL = in_urlIMG.value;
+					}
+
+					iniciarSessao();
 				} else {
 					console.log("Houve um erro ao carregar os dados");
 

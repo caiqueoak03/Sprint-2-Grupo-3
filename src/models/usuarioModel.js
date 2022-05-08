@@ -19,18 +19,20 @@ function alterarDados(
 	telCelular,
 	email,
 	senha,
+	urlImg,
 ) {
 	console.log(
 		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()",
 	);
 	var instrucao = `
-        UPDATE funcionario SET nome = '${nome}' where idFuncionario = '${idFuncionario}';
-        UPDATE funcionario SET sobrenome = '${sobrenome}' where idFuncionario = '${idFuncionario}';
-        UPDATE funcionario SET telFixo = '${telFixo}' where idFuncionario = '${idFuncionario}';
-        UPDATE funcionario SET telCelular = '${telCelular}' where idFuncionario = '${idFuncionario}';
+				UPDATE funcionario SET nome = '${nome}' where idFuncionario = '${idFuncionario}';
+				UPDATE funcionario SET sobrenome = '${sobrenome}' where idFuncionario = '${idFuncionario}';
+				UPDATE funcionario SET telFixo = '${telFixo}' where idFuncionario = '${idFuncionario}';
+				UPDATE funcionario SET telCelular = '${telCelular}' where idFuncionario = '${idFuncionario}';
         UPDATE funcionario SET email = '${email}' where idFuncionario = '${idFuncionario}';
         UPDATE funcionario SET senha = '${senha}' where idFuncionario = '${idFuncionario}';
-    `;
+        UPDATE funcionario SET urlImg = '${urlImg}' where idFuncionario = '${idFuncionario}';
+				`;
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);
 }

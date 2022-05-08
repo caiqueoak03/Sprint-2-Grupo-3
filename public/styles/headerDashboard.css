@@ -67,7 +67,7 @@ header {
 	align-items: center;
 	flex-direction: column;
 	row-gap: 10px;
-	margin: 40px 0 30px;
+	margin: 40px 0 20px;
 }
 
 .usuario-container b {
@@ -85,9 +85,10 @@ header {
 }
 
 .usuario-container img {
-	width: 100px;
+	width: 125px;
+	height: 125px;
 	border-radius: 50%;
-	border: 1px solid #2ac28a;
+	border: 2px solid #2ac28a;
 }
 
 .usuario-nome {

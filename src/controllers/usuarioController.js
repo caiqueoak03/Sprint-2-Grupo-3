@@ -39,6 +39,7 @@ function alterarDados(req, res) {
 	var telCelular = req.body.telCelularServer;
 	var email = req.body.emailServer;
 	var senha = req.body.senhaServer;
+	var urlImg = req.body.urlImgServer;
 
 	if (idFuncionario == undefined) {
 		res.status(400).send("O idFuncionario está undefined!");
@@ -54,6 +55,8 @@ function alterarDados(req, res) {
 		res.status(400).send("O email está undefined!");
 	} else if (senha == undefined) {
 		res.status(400).send("O senha está undefined!");
+	} else if (urlImg == undefined) {
+		res.status(400).send("O urlImg está undefined!");
 	} else {
 		usuarioModel
 			.alterarDados(
@@ -64,6 +67,7 @@ function alterarDados(req, res) {
 				telCelular,
 				email,
 				senha,
+				urlImg,
 			)
 			.then(function (resultado) {
 				console.log("THEN do model: " + resultado);

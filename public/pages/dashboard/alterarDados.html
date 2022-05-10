@@ -25,7 +25,7 @@
 		></script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	</head>
-	<body onload="iniciarSessao(), carregarDados()">
+	<body onload="iniciarSessao(), carregarDados(), validarSessao()">
 		<!-- Wrapper -->
 		<div id="wrapper_loading"></div>
 
@@ -204,7 +204,12 @@
 						in_email.value = `${json.email}`;
 						in_senha.value = `${json.senha}`;
 						in_confirmarSenha.value = `${json.senha}`;
-						in_urlIMG.value = `${json.urlImg}`;
+
+						if (json.urlImg == null) {
+							in_urlIMG.value = ``;
+						} else {
+							in_urlIMG.value = `${json.urlImg}`;
+						}
 					});
 				} else {
 					console.log("Houve um erro ao carregar os dados");

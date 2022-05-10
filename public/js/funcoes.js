@@ -1,9 +1,8 @@
 // sessão
 function validarSessao() {
-	var email = sessionStorage.NOME;
 	var nome = sessionStorage.SOBRENOME;
 
-	if (email || nome) {
+	if (nome == null) {
 		window.location = "../login.html";
 	}
 }

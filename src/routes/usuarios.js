@@ -35,7 +35,7 @@ router.post("/autenticar", function (req, res) {
 	usuarioController.entrar(req, res);
 });
 
-router.get("/listarFazendas", function (req, res) {
+router.post("/listarFazendas", function (req, res) {
 	usuarioController.listarFazendas(req, res);
 });
 

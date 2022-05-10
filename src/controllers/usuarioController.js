@@ -85,8 +85,9 @@ function alterarDados(req, res) {
 }
 
 function listarFazendas(req, res) {
+	var idFuncionario = req.body.idFuncionarioServer;
 	usuarioModel
-		.listarFazendas()
+		.listarFazendas(idFuncionario)
 		.then(function (resultado) {
 			if (resultado.length > 0) {
 				res.status(200).json(resultado);

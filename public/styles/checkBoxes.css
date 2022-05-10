@@ -53,3 +53,7 @@
 .select-box-container {
 	position: relative;
 }
+
+.labels {
+	text-transform: capitalize;
+}

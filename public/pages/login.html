@@ -157,7 +157,13 @@
 						sessionStorage.SOBRENOME = json.sobrenome;
 						sessionStorage.CARGO = json.cargo;
 						sessionStorage.ID_FUNCIONARIO = json.idFuncionario;
-						sessionStorage.IMG_URL = json.urlImg;
+						sessionStorage.ID_CLIENTE = json.fkCliente;
+
+						if (json.urlImg == null) {
+							sessionStorage.IMG_URL = "../../images/gerente-img.png";
+						} else {
+							sessionStorage.IMG_URL = json.urlImg;
+						}
 
 						sessionStorage.FUNCIONARIO = "flex";
 						sessionStorage.FAZENDA = "flex";

@@ -25,7 +25,7 @@
 			crossorigin="anonymous"
 		></script>
 	</head>
-	<body onload="iniciarSessao(), carregarFazendas()">
+	<body onload="iniciarSessao(), carregarFazendas(), validarSessao()">
 		<!-- Wrapper -->
 		<div id="wrapper_loading"></div>
 
@@ -259,25 +259,21 @@
 		var telFixoVar = in_telFixo.value;
 		var telCelularVar = in_telCelular.value;
 		var senhaVar = in_senha.value;
-		var idClienteVar = sessionStorage.ID_CLIENTE;
 		var cargoVar = in_cargo.value;
 
-		// Enviando o valor da nova input
 		fetch("/usuarios/cadastrarFuncionario", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
-				// crie um atributo que recebe o valor recuperado aqui
-				// Agora vá para o arquivo routes/usuario.js
 				nomeServer: nomeVar,
 				sobrenomeServer: sobrenomeVar,
 				emailServer: emailVar,
 				telFixoServer: telFixoVar,
 				telCelularServer: telCelularVar,
 				senhaServer: senhaVar,
-				idClienteServer: idClienteVar,
+				idClienteServer: sessionStorage.ID_CLIENTE,
 				cargoServer: cargoVar,
 			}),
 		})
@@ -290,8 +286,6 @@
 						console.log(JSON.stringify(json));
 
 						console.log("status: funcionario cadastrado!");
-
-						console.log("idFuncionario: " + json[1][0].idFuncionario);
 
 						firmarContrato(json[1][0].idFuncionario);
 					});
@@ -351,10 +345,13 @@
 
 	function carregarFazendas() {
 		fetch("/usuarios/listarFazendas", {
-			method: "GET",
+			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
+			body: JSON.stringify({
+				idFuncionarioServer: sessionStorage.ID_FUNCIONARIO,
+			}),
 		})
 			.then(function (resposta) {
 				console.log("ESTOU NO THEN DO carregarFazendas()!");
@@ -369,13 +366,18 @@
 						var idFazendas = [];
 						var nomeFazendas = [];
 
+						console.log(json[0]);
+						console.log(json[1]);
+
 						for (let i = 0; i < json.length; i++) {
-							idFazendas.push(json[i].idFazenda);
-							nomeFazendas.push(json[i].nome);
+							nomeFazendas.push(json[0][i].nome);
+							idFazendas.push(json[1][i].fkFazenda);
 						}
 
 						sessionStorage.ID_FAZENDAS = idFazendas;
 						sessionStorage.NOME_FAZENDAS = nomeFazendas;
+
+						console.log(sessionStorage.ID_FAZENDAS);
 
 						for (let i = 0; i < json.length; i++) {
 							checkBoxes.innerHTML += `

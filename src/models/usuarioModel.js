@@ -29,9 +29,9 @@ function alterarDados(
 				UPDATE funcionario SET sobrenome = '${sobrenome}' where idFuncionario = '${idFuncionario}';
 				UPDATE funcionario SET telFixo = '${telFixo}' where idFuncionario = '${idFuncionario}';
 				UPDATE funcionario SET telCelular = '${telCelular}' where idFuncionario = '${idFuncionario}';
-        UPDATE funcionario SET email = '${email}' where idFuncionario = '${idFuncionario}';
-        UPDATE funcionario SET senha = '${senha}' where idFuncionario = '${idFuncionario}';
-        UPDATE funcionario SET urlImg = '${urlImg}' where idFuncionario = '${idFuncionario}';
+				UPDATE funcionario SET email = '${email}' where idFuncionario = '${idFuncionario}';
+				UPDATE funcionario SET senha = '${senha}' where idFuncionario = '${idFuncionario}';
+				UPDATE funcionario SET urlImg = '${urlImg}' where idFuncionario = '${idFuncionario}';
 				`;
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);
@@ -42,8 +42,10 @@ function listarFazendas(idFuncionario) {
 		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()",
 	);
 	var instrucao = `
-        SELECT nome FROM fazenda;
-				select fkFazenda from contrato where fkFuncionario = '${idFuncionario}';
+					SELECT fazenda.nome, contrato.fkFazenda 
+					FROM fazenda JOIN contrato 
+					ON idFazenda = fkFazenda 
+					WHERE fkFuncionario = '${idFuncionario}';
     `;
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);
@@ -74,7 +76,7 @@ function entrar(email, senha) {
 }
 
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucao
-function cadastrarCliente(nomeEmpresa, cnpj) {
+function cadastrarEmpresa(nomeEmpresa, cnpj) {
 	console.log(
 		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():",
 		nomeEmpresa,
@@ -84,8 +86,8 @@ function cadastrarCliente(nomeEmpresa, cnpj) {
 	// Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
 	//  e na ordem de inserção dos dados.
 	var instrucao = `
-        INSERT INTO cliente (nomeEmpresa, cnpj) VALUES ('${nomeEmpresa}', '${cnpj}');
-				select idCliente from cliente where nomeEmpresa = '${nomeEmpresa}';
+        INSERT INTO empresa (nome, cnpj) VALUES ('${nomeEmpresa}', '${cnpj}');
+				select idEmpresa from empresa where nome = '${nomeEmpresa}';
 				`;
 
 	console.log("Executando a instrução SQL: \n" + instrucao);
@@ -99,9 +101,8 @@ function cadastrarFuncionario(
 	telFixo,
 	telCelular,
 	senha,
-	idCliente,
 	cargo,
-	idFuncionario,
+	idEmpresa,
 ) {
 	console.log(
 		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():",
@@ -111,14 +112,14 @@ function cadastrarFuncionario(
 		telFixo,
 		telCelular,
 		senha,
-		idCliente,
+		idEmpresa,
 		cargo,
 	);
 
 	var instrucao = `
 									INSERT INTO funcionario 
-									(nome, sobrenome, email, telFixo, telCelular, senha, fkCliente, cargo) VALUES 
-									('${nome}', '${sobrenome}','${email}', '${telFixo}', '${telCelular}', '${senha}', '${idCliente}', '${cargo}');
+									(nome, sobrenome, email, telFixo, telCelular, senha, fkEmpresa, cargo) VALUES 
+									('${nome}', '${sobrenome}','${email}', '${telFixo}', '${telCelular}', '${senha}', '${idEmpresa}', '${cargo}');
 									select idFuncionario from funcionario where email = '${email}';
 									`;
 
@@ -217,7 +218,7 @@ function associarFazendaGerente(idFazenda, idGerentes) {
 
 module.exports = {
 	entrar,
-	cadastrarCliente,
+	cadastrarEmpresa,
 	cadastrarFuncionario,
 	cadastrarFazenda,
 	listarGerentes,

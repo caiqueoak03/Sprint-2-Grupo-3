@@ -7,68 +7,67 @@ CREATE DATABASE soyventure;
 
 USE soyventure;
 
-CREATE TABLE cliente (
-	idCliente int primary key AUTO_INCREMENT,
-	nomeEmpresa varchar(45) unique not null,
+CREATE TABLE empresa (
+	idEmpresa int primary key AUTO_INCREMENT,
+	nome varchar(45) unique not null,
 	cnpj char(14) unique not null
 );
 
 CREATE TABLE funcionario (
 	idFuncionario int primary key AUTO_INCREMENT,
-	fkCliente int,
+	fkEmpresa int,
 	nome varchar(45) not null,
 	sobrenome varchar(45) not null,
 	email varchar(45) unique not null,
 	senha varchar(45) not null,
-	telFixo char(10) not null,
-	telCelular char(11) not null,
 	cargo varchar(45)  not null, check (cargo in ('analista', 'supervisor', 'gerente')),
-	urlImg varchar(150),
-	foreign key (fkCliente) references cliente(idCliente)
+	urlImg varchar(300),
+	telFixo char(10),
+	telCelular char(11),
+	foreign key (fkEmpresa) references empresa(idEmpresa)
 );
 
 CREATE TABLE fazenda (
 	idFazenda INT PRIMARY KEY AUTO_INCREMENT,
 	nome varchar(45) not null,
 	cep char(8) unique not null,
-	telFixo char(10) not null,
-	telCelular char(11) not null,
 	areaHectare int not null,
-	qtdSensores int  not null
+	qtdSensores int  not null,
+	telFixo char(10),
+	telCelular char(11)
 ); 
 
 create table contrato (
+	idContrato int,
 	fkFuncionario int,
 	fkFazenda int,
 	foreign key (fkFuncionario) references funcionario(idFuncionario),
 	foreign key (fkFazenda) references fazenda(idFazenda),
-	primary key (fkFuncionario, fkFazenda)
-);
-
-create table sensor (
-	idSensor int primary key AUTO_INCREMENT,
-	modelo varchar(45)  not null,
-	longitude decimal(4,2),
-	latitude decimal(4,2)
-);
-
-create table dados (
-	idDados int primary key AUTO_INCREMENT,
-	temperatura decimal(4,2),
-	umidade decimal(5,2),
-	dtDado date,
-	tempo time,
-	fkSensor int,
-	foreign key (fkSensor) references sensor(idSensor)
+	primary key (idContrato, fkFuncionario, fkFazenda)
 );
 
 create table setor (
 	idSetor int AUTO_INCREMENT,
-	nome varchar(45),
-	fkSensor int,
+	nome varchar(45) not null,
+	modeloSensor varchar(45),
+	longitudeSensor decimal(4,2),
+	latitudeSensor decimal(4,2),
 	fkFazenda int,
-	primary key (idSetor, fkFazenda),
-	foreign key (fkSensor) references sensor(idSensor)
+	foreign key (fkFazenda) references fazenda(idFazenda),
+	primary key (idSetor, fkFazenda)
+);
+
+create table dados (
+	idDados int AUTO_INCREMENT,
+	temperatura decimal(4,2),
+	umidade decimal(5,2),
+	dataDado date,
+	tempoDado time,
+	fkSetor int,
+	setor_fkFazenda int,
+	foreign key (fkSetor) references setor(idSetor),
+	foreign key (setor_fkFazenda) references setor(fkFazenda),
+	primary key (idDados, fkSetor, setor_fkFazenda)
 );
 
 

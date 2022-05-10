@@ -11,8 +11,8 @@ router.put("/alterarDados", function (req, res) {
 	usuarioController.alterarDados(req, res);
 });
 
-router.post("/cadastrarCliente", function (req, res) {
-	usuarioController.cadastrarCliente(req, res);
+router.post("/cadastrarEmpresa", function (req, res) {
+	usuarioController.cadastrarEmpresa(req, res);
 });
 
 router.post("/cadastrarFazenda", function (req, res) {

@@ -1,148 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Soy Venture</title>
-		<link rel="stylesheet" href="../../styles/headerDashboard.css" />
-		<link rel="stylesheet" href="../../styles/confirmationBox.css" />
-		<link rel="stylesheet" href="../../styles/cadastroFazenda.css" />
-		<link
-			rel="shortcut icon"
-			href="../../images/logo.png"
-			type="image/x-icon"
-		/>
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400&family=Roboto:ital,wght@0,400;0,700;1,700&display=swap"
-			rel="stylesheet"
-		/>
-		<script
-			src="https://kit.fontawesome.com/8c4cdd8d42.js"
-			crossorigin="anonymous"
-		></script>
-	</head>
-	<body onload="iniciarSessao(). validarSessao()">
-		<!-- Wrapper -->
-		<div id="wrapper_loading"></div>
 
-		<!-- HEADER -->
-		<header>
-			<span class="logo">
-				<img src="../../images/logo.png" alt="" class="logo-img" />
-				<h1 class="nome-empresa">Soy Venture</h1>
-			</span>
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Soy Venture</title>
+	<link rel="stylesheet" href="../../styles/headerDashboard.css" />
+	<link rel="stylesheet" href="../../styles/confirmationBox.css" />
+	<link rel="stylesheet" href="../../styles/cadastroFazenda.css" />
+	<link rel="shortcut icon" href="../../images/logo.png" type="image/x-icon" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400&family=Roboto:ital,wght@0,400;0,700;1,700&display=swap"
+		rel="stylesheet" />
+	<script src="https://kit.fontawesome.com/8c4cdd8d42.js" crossorigin="anonymous"></script>
+</head>
 
-			<div class="usuario-container">
-				<img
-					src="../../images/gerente-img.png"
-					id="user_profile_pic"
-					alt=""
-					class="img"
-				/>
-				<p class="usuario-nome">Olá, <b id="nome_usuario"></b></p>
-			</div>
+<body onload="iniciarSessao(). validarSessao()">
+	<!-- Wrapper -->
+	<div id="wrapper_loading"></div>
 
-			<div class="main-nav">
-				<ul>
-					<a class="navs nav1" href="dashboard.html">Gráficos</a>
-					<a class="navs nav2" href="KPIs.html">Indicadores de Performance</a>
-					<a class="navs nav4" id="cad_fazenda" href="cadastroFazenda.html"
-						>Cadastrar Fazenda</a
-					>
-					<a
-						class="navs nav3"
-						id="cad_funcionario"
-						href="cadastro_funcionario.html"
-						>Cadastrar Funcionário</a
-					>
-					<a class="navs nav5" href="alterarDados.html">Alterar Dados</a>
-					<a class="navs nav7" onclick="mostrarBox()">Sair</a>
-				</ul>
-			</div>
-		</header>
+	<!-- HEADER -->
+	<header>
+		<span class="logo">
+			<img src="../../images/logo.png" alt="" class="logo-img" />
+			<h1 class="nome-empresa">Soy Venture</h1>
+		</span>
 
-		<!-- Confirmation Box -->
-		<div id="confirmation_wrapper">
-			<div class="confirmation-box">
-				<p>Deseja sair da sua conta?</p>
-				<div class="sim-ou-nao">
-					<a onclick="limparSessao()">sim</a>
-					<a onclick="esconderBox()">não</a>
-				</div>
-			</div>
+		<div class="usuario-container">
+			<img src="../../images/gerente-img.png" id="user_profile_pic" alt="" class="img" />
+			<p class="usuario-nome">Olá, <b id="nome_usuario"></b></p>
 		</div>
 
-		<!-- MONITORAMENTO POR HORA -->
-		<div class="main-container">
-			<div class="cadastro">
-				<div class="container">
-					<div class="box">
-						<div class="box_container">
-							<div class="card_cadastro2">
+		<div class="main-nav">
+			<ul>
+				<a class="navs nav1" href="dashboard.html">Gráficos</a>
+				<a class="navs nav2" href="KPIs.html">Indicadores de Performance</a>
+				<a class="navs nav4" id="cad_fazenda" href="cadastroFazenda.html">Cadastrar Fazenda</a>
+				<a class="navs nav3" id="cad_funcionario" href="cadastro_funcionario.html">Cadastrar Funcionário</a>
+				<a class="navs nav5" href="alterarDados.html">Alterar Dados</a>
+				<a class="navs nav7" onclick="mostrarBox()">Sair</a>
+			</ul>
+		</div>
+	</header>
+
+	<!-- Confirmation Box -->
+	<div id="confirmation_wrapper">
+		<div class="confirmation-box">
+			<p>Deseja sair da sua conta?</p>
+			<div class="sim-ou-nao">
+				<a onclick="limparSessao()">sim</a>
+				<a onclick="esconderBox()">não</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- MONITORAMENTO POR HORA -->
+	<div class="main-container">
+		<div class="cadastro">
+			<div class="container">
+				<div class="box">
+					<div class="box_container">
+						<div class="card_cadastro2">
+							<ul>
+								<h2>Cadastro da Fazenda</h2>
+
+								<li>
+									Nome da Fazenda<br /><input placeholder="Nome da Fazenda" id="in_nomeFazenda"
+										value="Fazenda rio bonito" type="text" />
+								</li>
+								<li>
+									Numero de Telefone Fixo: <br /><input placeholder="(00) 00000-0000" id="in_telFixo"
+										value="1159206325" type="text" />
+								</li>
+								<li>
+									Numero de Telefone Celular: <br /><input placeholder="(00) 00000-0000"
+										value="11959206325" id="in_telCelular" type="text" />
+								</li>
+							</ul>
+
+							<div class="li_card">
 								<ul>
-									<h2>Cadastro da Fazenda</h2>
+									<li>
+										CEP <br /><input placeholder="CEP(000-00-000)" value="05236985" id="in_cep"
+											type="text" />
+									</li>
 
 									<li>
-										Nome da Fazenda<br /><input
-											placeholder="Nome da Fazenda"
-											id="in_nomeFazenda"
-											value="Fazenda rio bonito"
-											type="text"
-										/>
+										Área em Hectare <br /><input placeholder="Hectares" id="in_areaHectare"
+											value="50" type="text" />
 									</li>
+
 									<li>
-										Numero de Telefone Fixo: <br /><input
-											placeholder="(00) 00000-0000"
-											id="in_telFixo"
-											value="1159206325"
-											type="text"
-										/>
-									</li>
-									<li>
-										Numero de Telefone Celular: <br /><input
-											placeholder="(00) 00000-0000"
-											value="11959206325"
-											id="in_telCelular"
-											type="text"
-										/>
+										<button onclick="validar()">Cadastrar Fazenda</button>
 									</li>
 								</ul>
-
-								<div class="li_card">
-									<ul>
-										<li>
-											CEP <br /><input
-												placeholder="CEP(000-00-000)"
-												value="05236985"
-												id="in_cep"
-												type="text"
-											/>
-										</li>
-
-										<li>
-											Área em Hectare <br /><input
-												placeholder="Hectares"
-												id="in_areaHectare"
-												value="50"
-												type="text"
-											/>
-										</li>
-
-										<li>
-											<button onclick="validar()">Cadastrar Fazenda</button>
-										</li>
-									</ul>
-								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</body>
+	</div>
+</body>
+
 </html>
 <script>
 	function esconderBox() {
@@ -242,7 +205,7 @@
 						associarFazendaGerente(json[1][0].idFazenda);
 					});
 				} else {
-					alert("Fazenda já cadastrada!");
+					alert("Fazenda com CEP já cadastrado!");
 				}
 			})
 			.catch(function (resposta) {
@@ -328,7 +291,7 @@
 						alert("Fazenda cadastrada com sucesso!");
 					});
 				} else {
-					alert("Fazenda já cadastrada!");
+					alert("Fazenda com CEP já cadastrado!");
 				}
 			})
 			.catch(function (resposta) {

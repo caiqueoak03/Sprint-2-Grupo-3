@@ -159,7 +159,7 @@ function entrar(req, res) {
 	}
 }
 
-function cadastrarCliente(req, res) {
+function cadastrarEmpresa(req, res) {
 	// Crie uma variável que vá recuperar os valores do arquivo cadastro.html
 	var nomeEmpresa = req.body.nomeEmpresaServer;
 	var cnpj = req.body.cnpjServer;
@@ -172,7 +172,7 @@ function cadastrarCliente(req, res) {
 	} else {
 		// Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
 		usuarioModel
-			.cadastrarCliente(nomeEmpresa, cnpj)
+			.cadastrarEmpresa(nomeEmpresa, cnpj)
 			.then(function (resultado) {
 				console.log("Resultado: " + resultado);
 				res.json(resultado);
@@ -266,13 +266,13 @@ function cadastrarFuncionario(req, res) {
 	var telFixo = req.body.telFixoServer;
 	var telCelular = req.body.telCelularServer;
 	var senha = req.body.senhaServer;
-	var idCliente = req.body.idClienteServer;
+	var idEmpresa = req.body.idEmpresaServer;
 	var cargo = req.body.cargoServer;
 
 	// Faça as validações dos valores
 	if (email == undefined) {
 		res.status(400).send("Seu email está undefined!");
-	} else if (idCliente == undefined) {
+	} else if (idEmpresa == undefined) {
 		res.status(400).send("O id do cliente está undefined!");
 	} else if (cargo == undefined) {
 		res.status(400).send("O cargo está undefined!");
@@ -296,7 +296,7 @@ function cadastrarFuncionario(req, res) {
 				telFixo,
 				telCelular,
 				senha,
-				idCliente,
+				idEmpresa,
 				cargo,
 			)
 			.then(function (resultado) {
@@ -379,7 +379,7 @@ function cadastrarFazenda(req, res) {
 
 module.exports = {
 	entrar,
-	cadastrarCliente,
+	cadastrarEmpresa,
 	cadastrarFuncionario,
 	associarFazendaGerente,
 	listarGerentes,

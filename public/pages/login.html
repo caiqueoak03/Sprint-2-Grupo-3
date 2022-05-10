@@ -117,11 +117,27 @@
 	function entrar() {
 		var emailVar = in_email.value;
 		var senhaVar = in_senha.value;
+		var alerta = ``
 
 		if (emailVar == "" || senhaVar == "") {
+<<<<<<< HEAD
 			return
 		}
 
+=======
+            alerta += `Preencha todos os campos para prosseguir!`
+        }
+
+        else if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".com") == -1) {
+            alerta += `Ops, e-mail inválido! Verifique e tente novamente.`
+        }
+
+        if (alerta != ``) {
+            alert(alerta)
+        }
+
+		else {
+>>>>>>> 0555fc87f8afc67e56a007432e9c09c11a3cdd76
 		fetch("/usuarios/autenticar", {
 			method: "POST",
 			headers: {
@@ -181,5 +197,6 @@
 			});
 
 		return false;
+		}
 	}
 </script>

@@ -125,14 +125,21 @@
 	function entrar() {
 		var emailVar = in_email.value;
 		var senhaVar = in_senha.value;
+		var alerta = ``
 
 		if (emailVar == "" || senhaVar == "") {
-			return false;
-		}
+            alerta += `Preencha todos os campos para prosseguir!`
+        }
 
-		console.log("FORM LOGIN: ", emailVar);
-		console.log("FORM SENHA: ", senhaVar);
+        else if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".com") == -1) {
+            alerta += `Ops, e-mail inválido! Verifique e tente novamente.`
+        }
 
+        if (alerta != ``) {
+            alert(alerta)
+        }
+
+		else {
 		fetch("/usuarios/autenticar", {
 			method: "POST",
 			headers: {
@@ -192,5 +199,6 @@
 			});
 
 		return false;
+		}
 	}
 </script>

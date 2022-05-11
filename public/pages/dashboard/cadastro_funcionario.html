@@ -222,7 +222,7 @@
 				telFixoServer: telFixoVar,
 				telCelularServer: telCelularVar,
 				senhaServer: senhaVar,
-				idClienteServer: sessionStorage.ID_CLIENTE,
+				idEmpresaServer: sessionStorage.ID_EMPRESA,
 				cargoServer: cargoVar,
 			}),
 		})
@@ -304,11 +304,13 @@
 		})
 			.then(function (resposta) {
 				console.log("ESTOU NO THEN DO carregarFazendas()!");
+				console.log(resposta);
+				console.log(resposta.json());
 
 				if (resposta.ok) {
-					console.log(resposta);
 
-					resposta.json().then((json) => {
+
+					resposta.json().then(json => {
 						console.log("json: " + json);
 						console.log("JSON: " + JSON.stringify(json));
 

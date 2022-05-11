@@ -192,20 +192,15 @@
 			}
 		}
 		function cadastrarEmpresa() {
-			//Recupere o valor da nova input pelo nome do id
-			// Agora vá para o método fetch logo abaixo
 			var nomeEmpresaVar = in_nomeEmpresa.value;
 			var cnpjVar = in_cnpj.value;
 
-			// Enviando o valor da nova input
 			fetch("/usuarios/cadastrarEmpresa", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 				},
 				body: JSON.stringify({
-					// crie um atributo que recebe o valor recuperado aqui
-					// Agora vá para o arquivo routes/usuario.js
 					nomeEmpresaServer: nomeEmpresaVar,
 					cnpjServer: cnpjVar,
 				}),
@@ -213,15 +208,16 @@
 				.then(function (resposta) {
 					console.log("resposta: ", resposta);
 
-					// Somente para o cadastro de cliente
 					if (resposta.ok) {
 						resposta.json().then((json) => {
 							console.log(json);
 							console.log(JSON.stringify(json));
 
-							var fkEmpresa = json[1][0].fkEmpresa;
+							var idEmpresa = json[1][0].idEmpresa;
 
-							cadastrarFuncionario(fkEmpresa, "gerente");
+							console.log(idEmpresa)
+
+							cadastrarCliente(idEmpresa);
 						});
 					} else {
 						alert("Empresa já cadastrada!");
@@ -234,15 +230,14 @@
 			return false;
 		}
 
-		function cadastrarFuncionario(fkEmpresa, cargo) {
+		function cadastrarCliente(idEmpresa) {
 			var nomeVar = in_nome.value;
 			var sobrenomeVar = in_sobrenome.value;
 			var emailVar = in_email.value;
 			var telFixoVar = in_telFixo.value;
 			var telCelularVar = in_telCelular.value;
 			var senhaVar = in_senha.value;
-			var idEmpresaVar = fkEmpresa;
-			var cargoVar = cargo;
+			var idEmpresaVar = idEmpresa;
 
 			// Enviando o valor da nova input
 			fetch("/usuarios/cadastrarFuncionario", {
@@ -260,7 +255,7 @@
 					telCelularServer: telCelularVar,
 					senhaServer: senhaVar,
 					idEmpresaServer: idEmpresaVar,
-					cargoServer: cargoVar,
+					cargoServer: 'gerente',
 				}),
 			})
 				.then(function (resposta) {
@@ -276,14 +271,40 @@
 							alert("Empresa cadastrada com sucesso!");
 						});
 					} else {
-						alert("empresa já cadastrada!");
+						// Caso dê erro no cadastro do cliente, deletar empresa do BD
+						fetch("/usuarios/deletarEmpresa", {
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json",
+							},
+							body: JSON.stringify({
+								idEmpresaServer: idEmpresaVar,
+							}),
+						})
+							.then(function (resposta) {
+								console.log("resposta: ", resposta);
+
+								if (resposta.ok) {
+									resposta.json().then((json) => {
+										console.log(json);
+										console.log(JSON.stringify(json));
+
+										console.log('empresa deletada!')
+									});
+								} else {
+									console.log("Erro ao deletar empresa!");
+								}
+							})
+							.catch(function (resposta) {
+								console.log(`#ERRO: ${resposta}`);
+							});
+						alert("email já cadastrado!");
 					}
 				})
 				.catch(function (resposta) {
 					console.log(`#ERRO: ${resposta}`);
 				});
 
-			return false;
 		}
 	</script>
 </body>

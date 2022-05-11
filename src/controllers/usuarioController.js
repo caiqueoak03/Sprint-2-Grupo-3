@@ -168,11 +168,14 @@ function cadastrarEmpresa(req, res) {
 	if (nomeEmpresa == undefined) {
 		res.status(400).send("Seu nome está undefined!");
 	} else if (cnpj == undefined) {
-		res.status(400).send("Sua senha está undefined!");
+		res.status(400).send("Seu cnpj está undefined!");
 	} else {
 		// Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
 		usuarioModel
-			.cadastrarEmpresa(nomeEmpresa, cnpj)
+			.cadastrarEmpresa(
+				nomeEmpresa,
+				cnpj,
+			)
 			.then(function (resultado) {
 				console.log("Resultado: " + resultado);
 				res.json(resultado);
@@ -206,6 +209,66 @@ function associarFazendaGerente(req, res) {
 		// Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
 		usuarioModel
 			.associarFazendaGerente(idFazenda, idGerentes)
+			.then(function (resultado) {
+				console.log("Resultado: " + resultado);
+				res.json(resultado);
+			})
+			.catch(function (erro) {
+				console.log(erro);
+				console.log(
+					"\nHouve um erro ao realizar o cadastro! Erro: ",
+					erro.sqlMessage,
+				);
+				res.status(500).json(erro.sqlMessage);
+			});
+	}
+}
+
+function deletarEmpresa(req, res) {
+	// Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+	var idEmpresa = req.body.idEmpresaServer;
+
+	console.log("idEmpresa no controller: " + idEmpresa);
+
+	// Faça as validações dos valores
+	if (idEmpresa == undefined) {
+		res.status(400).send("Seu id Fazenda está undefined!");
+	} else {
+		// Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+		usuarioModel
+			.deletarEmpresa(idEmpresa)
+			.then(function (resultado) {
+				console.log("Resultado: " + resultado);
+				res.json(resultado);
+			})
+			.catch(function (erro) {
+				console.log(erro);
+				console.log(
+					"\nHouve um erro ao realizar o cadastro! Erro: ",
+					erro.sqlMessage,
+				);
+				res.status(500).json(erro.sqlMessage);
+			});
+	}
+}
+
+function associarFuncionario(req, res) {
+	// Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+	var idEmpresa = req.body.idEmpresaServer;
+	var idFuncionario = req.body.idFuncionarioServer;
+
+	console.log("idEmpresa no controller: " + idEmpresa);
+	console.log("idFuncionario no controller: " + idFuncionario);
+
+	// Faça as validações dos valores
+	if (idEmpresa == undefined) {
+		res.status(400).send("Seu idEmpresa está undefined!");
+	} else if (idFuncionario == undefined) {
+		res.status(400).send("Seu idFuncionario está undefined!");
+	} else {
+		// Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+		usuarioModel
+			.associarFuncionario(idEmpresa, idFuncionario)
 			.then(function (resultado) {
 				console.log("Resultado: " + resultado);
 				res.json(resultado);
@@ -382,10 +445,12 @@ module.exports = {
 	cadastrarEmpresa,
 	cadastrarFuncionario,
 	associarFazendaGerente,
+	associarFuncionario,
 	listarGerentes,
 	cadastrarFazenda,
 	firmarContrato,
 	listarFazendas,
 	listarFuncionarios,
+	deletarEmpresa,
 	alterarDados,
 };

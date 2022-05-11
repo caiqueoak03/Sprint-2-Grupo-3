@@ -38,7 +38,7 @@ CREATE TABLE fazenda (
 ); 
 
 create table contrato (
-	idContrato int,
+	idContrato int AUTO_INCREMENT,
 	fkFuncionario int,
 	fkFazenda int,
 	foreign key (fkFuncionario) references funcionario(idFuncionario),

@@ -18,7 +18,7 @@
 	<script src="https://kit.fontawesome.com/8c4cdd8d42.js" crossorigin="anonymous"></script>
 </head>
 
-<body onload="iniciarSessao(). validarSessao()">
+<body onload="iniciarSessao(), validarSessao()">
 	<!-- Wrapper -->
 	<div id="wrapper_loading"></div>
 
@@ -171,15 +171,12 @@
 
 		console.log(sessionStorage.ID_GERENTES);
 
-		// Enviando o valor da nova input
 		fetch("/usuarios/cadastrarFazenda", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
-				// crie um atributo que recebe o valor recuperado aqui
-				// Agora vá para o arquivo routes/usuario.js
 				nomeFazendaServer: nomeFazendaVar,
 				telFixoServer: telFixoVar,
 				telCelularServer: telCelularVar,

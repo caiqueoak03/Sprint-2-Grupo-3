@@ -75,7 +75,6 @@ function entrar(email, senha) {
 	return database.executar(instrucao);
 }
 
-// Coloque os mesmos parâmetros aqui. Vá para a var instrucao
 function cadastrarEmpresa(nomeEmpresa, cnpj) {
 	console.log(
 		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():",
@@ -83,11 +82,25 @@ function cadastrarEmpresa(nomeEmpresa, cnpj) {
 		cnpj,
 	);
 
+	var instrucao = `
+        		INSERT INTO empresa (nome, cnpj) VALUES ('${nomeEmpresa}', '${cnpj}');
+				SELECT idEmpresa FROM empresa WHERE nome = '${nomeEmpresa}';
+				`;
+
+	console.log("Executando a instrução SQL: \n" + instrucao);
+	return database.executar(instrucao);
+}
+
+function deletarEmpresa(idEmpresa) {
+	console.log(
+		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():",
+		idEmpresa,
+	);
+
 	// Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
 	//  e na ordem de inserção dos dados.
 	var instrucao = `
-        INSERT INTO empresa (nome, cnpj) VALUES ('${nomeEmpresa}', '${cnpj}');
-				select idEmpresa from empresa where nome = '${nomeEmpresa}';
+        		DELETE FROM empresa WHERE idEmpresa = '${idEmpresa}'
 				`;
 
 	console.log("Executando a instrução SQL: \n" + instrucao);
@@ -101,8 +114,8 @@ function cadastrarFuncionario(
 	telFixo,
 	telCelular,
 	senha,
-	cargo,
 	idEmpresa,
+	cargo,
 ) {
 	console.log(
 		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():",
@@ -117,11 +130,11 @@ function cadastrarFuncionario(
 	);
 
 	var instrucao = `
-									INSERT INTO funcionario 
-									(nome, sobrenome, email, telFixo, telCelular, senha, fkEmpresa, cargo) VALUES 
-									('${nome}', '${sobrenome}','${email}', '${telFixo}', '${telCelular}', '${senha}', '${idEmpresa}', '${cargo}');
-									select idFuncionario from funcionario where email = '${email}';
-									`;
+					INSERT INTO funcionario 
+					(nome, sobrenome, email, telFixo, telCelular, senha, fkEmpresa, cargo) VALUES 
+					('${nome}', '${sobrenome}','${email}', '${telFixo}', '${telCelular}', '${senha}', '${idEmpresa}', '${cargo}');
+					SELECT idFuncionario FROM funcionario;
+					`;
 
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);
@@ -219,6 +232,7 @@ function associarFazendaGerente(idFazenda, idGerentes) {
 module.exports = {
 	entrar,
 	cadastrarEmpresa,
+	deletarEmpresa,
 	cadastrarFuncionario,
 	cadastrarFazenda,
 	listarGerentes,

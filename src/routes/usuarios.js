@@ -15,12 +15,20 @@ router.post("/cadastrarEmpresa", function (req, res) {
 	usuarioController.cadastrarEmpresa(req, res);
 });
 
+router.post("/deletarEmpresa", function (req, res) {
+	usuarioController.deletarEmpresa(req, res);
+});
+
 router.post("/cadastrarFazenda", function (req, res) {
 	usuarioController.cadastrarFazenda(req, res);
 });
 
 router.post("/cadastrarFuncionario", function (req, res) {
 	usuarioController.cadastrarFuncionario(req, res);
+});
+
+router.post("/associarFuncionario", function (req, res) {
+	usuarioController.associarFuncionario(req, res);
 });
 
 router.post("/associarFazendaGerente", function (req, res) {

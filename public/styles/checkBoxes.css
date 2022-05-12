@@ -23,9 +23,8 @@
 	align-items: center;
 	border-radius: 5px;
 	width: 323px;
-	max-height: 120px;
-	min-height: 0;
 	height: 0;
+	min-height: 0;
 	overflow-y: auto;
 	transition: all .3s;
 	padding: 0;

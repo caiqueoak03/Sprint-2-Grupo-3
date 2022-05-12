@@ -38,12 +38,11 @@ CREATE TABLE fazenda (
 ); 
 
 create table contrato (
-	idContrato int AUTO_INCREMENT,
 	fkFuncionario int,
 	fkFazenda int,
 	foreign key (fkFuncionario) references funcionario(idFuncionario),
 	foreign key (fkFazenda) references fazenda(idFazenda),
-	primary key (idContrato, fkFuncionario, fkFazenda)
+	primary key (fkFuncionario, fkFazenda)
 );
 
 create table setor (

@@ -216,10 +216,13 @@
 
 	function carregarGerentes() {
 		fetch("/usuarios/listarGerentes", {
-			method: "GET",
+			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
+			body: JSON.stringify({
+				idEmpresaServer: sessionStorage.ID_EMPRESA,
+			}),
 		})
 			.then(function (resposta) {
 				console.log("ESTOU NO THEN DO carregarGerentes()!");

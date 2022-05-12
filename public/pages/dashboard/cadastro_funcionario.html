@@ -152,15 +152,20 @@
 		var cargo = in_cargo.value;
 
 		var alerta = "";
-		var idFazendaLength = sessionStorage.ID_FAZENDAS.length;
+		var idFazendaLength = sessionStorage.ID_FAZENDAS.split(',').length;
 		var inputFazendas = [...document.querySelectorAll(".boxes")];
+
+		console.log('input fazendas: ' + inputFazendas)
 
 		try {
 			for (let i = 0; i < idFazendaLength; i++) {
 				if (inputFazendas[i].checked) {
+					console.log(inputFazendas[i])
 					idFazendasChecadasVar.push(inputFazendas[i].id);
 				}
 			}
+
+			console.log('idfazendas checadas no HTML: ' + idFazendasChecadasVar)
 		} catch { }
 
 		if (nome == "") {
@@ -280,6 +285,8 @@
 						console.log("status: contrato firmado!");
 
 						alert("Funcionário cadastrado com sucesso!");
+
+						window.location = 'cadastro_funcionario.html'
 					});
 				} else {
 					alert("Funcionario já cadastrado!");
@@ -304,12 +311,8 @@
 		})
 			.then(function (resposta) {
 				console.log("ESTOU NO THEN DO carregarFazendas()!");
-				console.log(resposta);
-				console.log(resposta.json());
 
 				if (resposta.ok) {
-
-
 					resposta.json().then(json => {
 						console.log("json: " + json);
 						console.log("JSON: " + JSON.stringify(json));
@@ -325,7 +328,7 @@
 						sessionStorage.ID_FAZENDAS = idFazendas;
 						sessionStorage.NOME_FAZENDAS = nomeFazendas;
 
-						for (let i = 0; i < json.length; i++) {
+						for (let i = 0; i < json.length; i++) {''
 							checkBoxes.innerHTML += `
 						<li>
 							<label class="labels">

@@ -47,7 +47,7 @@ router.post("/listarFazendas", function (req, res) {
 	usuarioController.listarFazendas(req, res);
 });
 
-router.get("/listarGerentes", function (req, res) {
+router.post("/listarGerentes", function (req, res) {
 	usuarioController.listarGerentes(req, res);
 });
 

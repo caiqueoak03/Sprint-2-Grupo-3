@@ -51,12 +51,12 @@ function listarFazendas(idFuncionario) {
 	return database.executar(instrucao);
 }
 
-function listarGerentes() {
+function listarGerentes(idEmpresa) {
 	console.log(
 		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()",
 	);
 	var instrucao = `
-        SELECT idFuncionario FROM funcionario where cargo = 'gerente';
+        SELECT idFuncionario FROM funcionario where cargo = 'gerente' and fkEmpresa = '${idEmpresa}'
     `;
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);
@@ -133,7 +133,7 @@ function cadastrarFuncionario(
 					INSERT INTO funcionario 
 					(nome, sobrenome, email, telFixo, telCelular, senha, fkEmpresa, cargo) VALUES 
 					('${nome}', '${sobrenome}','${email}', '${telFixo}', '${telCelular}', '${senha}', '${idEmpresa}', '${cargo}');
-					SELECT idFuncionario FROM funcionario;
+					SELECT idFuncionario FROM funcionario where email = '${email}';
 					`;
 
 	console.log("Executando a instrução SQL: \n" + instrucao);
@@ -221,7 +221,7 @@ function associarFazendaGerente(idFazenda, idGerentes) {
 
 	for (let i = 0; i < len; i++) {
 		instrucao += `
-									insert into contrato (fkFuncionario, fkFazenda) values ('${arr[i]}', '${idFazenda}'); 
+					insert into contrato (fkFuncionario, fkFazenda) values ('${arr[i]}', '${idFazenda}'); 
 									`;
 	}
 

@@ -106,8 +106,10 @@ function listarFazendas(req, res) {
 }
 
 function listarGerentes(req, res) {
+	var idEmpresa = req.body.idEmpresaServer;
+
 	usuarioModel
-		.listarGerentes()
+		.listarGerentes(idEmpresa)
 		.then(function (resultado) {
 			if (resultado.length > 0) {
 				res.status(200).json(resultado);
@@ -292,6 +294,8 @@ function firmarContrato(req, res) {
 	var idFazendas = req.body.idFazendasServer;
 
 	console.log("idFazendas no controller: " + idFazendas);
+
+	console.log('ID fazendas checadas: ' + idFazendasChecadas)
 
 	// Faça as validações dos valores
 	if (idFuncionario == undefined) {

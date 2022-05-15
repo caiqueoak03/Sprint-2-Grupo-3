@@ -84,10 +84,11 @@ function alterarDados(req, res) {
 	}
 }
 
-function listarFazendas(req, res) {
+function carregarFazendas(req, res) {
 	var idFuncionario = req.body.idFuncionarioServer;
+
 	usuarioModel
-		.listarFazendas(idFuncionario)
+		.carregarFazendas(idFuncionario)
 		.then(function (resultado) {
 			if (resultado.length > 0) {
 				res.status(200).json(resultado);
@@ -174,10 +175,7 @@ function cadastrarEmpresa(req, res) {
 	} else {
 		// Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
 		usuarioModel
-			.cadastrarEmpresa(
-				nomeEmpresa,
-				cnpj,
-			)
+			.cadastrarEmpresa(nomeEmpresa, cnpj)
 			.then(function (resultado) {
 				console.log("Resultado: " + resultado);
 				res.json(resultado);
@@ -197,6 +195,7 @@ function associarFazendaGerente(req, res) {
 	// Crie uma variável que vá recuperar os valores do arquivo cadastro.html
 	var idFazenda = req.body.idFazendaServer;
 	var idGerentes = req.body.idGerentesServer;
+	var qtdSetores = req.body.qtdSetoresServer;
 
 	console.log("id gerentes no controller: " + idGerentes);
 
@@ -210,7 +209,7 @@ function associarFazendaGerente(req, res) {
 	} else {
 		// Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
 		usuarioModel
-			.associarFazendaGerente(idFazenda, idGerentes)
+			.associarFazendaGerente(idFazenda, idGerentes, qtdSetores)
 			.then(function (resultado) {
 				console.log("Resultado: " + resultado);
 				res.json(resultado);
@@ -286,16 +285,96 @@ function associarFuncionario(req, res) {
 	}
 }
 
+function gerarSetores(req, res) {
+	// Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+	var idFuncionario = req.body.idFuncionarioServer;
+	var idFazenda = req.body.idFazendaServer;
+
+	console.log("idFuncionario no controller: " + idFuncionario);
+	console.log("idFazenda no controller: " + idFazenda);
+
+	// Faça as validações dos valores
+	if (idFuncionario == undefined) {
+		res.status(400).send("Seu idFuncionario está undefined!");
+	} else if (idFazenda == undefined) {
+		res.status(400).send("Seu idFazenda está undefined!");
+	} else {
+		// Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+		usuarioModel
+			.gerarSetores(idFuncionario, idFazenda)
+			.then(function (resultado) {
+				console.log("Resultado: " + resultado);
+				res.json(resultado);
+			})
+			.catch(function (erro) {
+				console.log(erro);
+				console.log(
+					"\nHouve um erro ao realizar o cadastro! Erro: ",
+					erro.sqlMessage,
+				);
+				res.status(500).json(erro.sqlMessage);
+			});
+	}
+}
+
+function gerarDadosSensores(req, res) {
+	var fkFazendas = req.body.fkFazendasServer;
+	var idSetores = req.body.idSetoresServer;
+
+	if (fkFazendas == undefined) {
+		res.status(400).send("Seu temperaturaRandom está undefined!");
+	} else if (idSetores == undefined) {
+		res.status(400).send("Seu umidadeRandom está undefined!");
+	} else {
+		usuarioModel
+			.gerarDadosSensores(fkFazendas, idSetores)
+			.then(function (resultado) {
+				console.log("Resultado: " + resultado);
+				res.json(resultado);
+			})
+			.catch(function (erro) {
+				console.log(erro);
+				console.log(
+					"\nHouve um erro ao realizar o cadastro! Erro: ",
+					erro.sqlMessage,
+				);
+				res.status(500).json(erro.sqlMessage);
+			});
+	}
+}
+
+function pegarDadosSetor(req, res) {
+	var fkSetor = req.body.fkSetorServer;
+	var fkFazenda = req.body.fkFazendaServer;
+
+	if (fkSetor == undefined) {
+		res.status(400).send("Seu fkSetor está undefined!");
+	} else if (fkFazenda == undefined) {
+		res.status(400).send("Seu fkFazenda está undefined!");
+	} else {
+		usuarioModel
+			.pegarDadosSetor(fkSetor, fkFazenda)
+			.then(function (resultado) {
+				console.log("Resultado: " + resultado);
+				res.json(resultado);
+			})
+			.catch(function (erro) {
+				console.log(erro);
+				console.log(
+					"\nHouve um erro ao realizar o cadastro! Erro: ",
+					erro.sqlMessage,
+				);
+				res.status(500).json(erro.sqlMessage);
+			});
+	}
+}
+
 function firmarContrato(req, res) {
 	// Crie uma variável que vá recuperar os valores do arquivo cadastro.html
 	var idFuncionario = req.body.idFuncionarioServer;
 	var idFazendasChecadas = req.body.idFazendasChecadasServer;
 	var cargo = req.body.cargoServer;
 	var idFazendas = req.body.idFazendasServer;
-
-	console.log("idFazendas no controller: " + idFazendas);
-
-	console.log('ID fazendas checadas: ' + idFazendasChecadas)
 
 	// Faça as validações dos valores
 	if (idFuncionario == undefined) {
@@ -389,18 +468,9 @@ function cadastrarFazenda(req, res) {
 	var cep = req.body.cepServer;
 	var areaHectare = req.body.areaHectareServer;
 	var idGerentes = req.body.idGerentesServer;
-	var qtdSensores = req.body.qtdSensoresServer;
+	var qtdSetores = req.body.qtdSetoresServer;
 
 	console.log("dentro do cadastrarFazenda()");
-	console.log(
-		`Variaveis: " ${nomeFazenda},
-		${telFixo},
-		${telcelular},
-		${cep},
-		${areaHectare},
-		${idGerentes},
-		${qtdSensores}`,
-	);
 
 	// Faça as validações dos valores
 	if (nomeFazenda == undefined) {
@@ -415,8 +485,8 @@ function cadastrarFazenda(req, res) {
 		res.status(400).send("A área em hectare está undefined!");
 	} else if (idGerentes == undefined) {
 		res.status(400).send("O idGerentes está undefined!");
-	} else if (qtdSensores == undefined) {
-		res.status(400).send("A qtdsensores está undefined!");
+	} else if (qtdSetores == undefined) {
+		res.status(400).send("A qtdSetores está undefined!");
 	} else {
 		// Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
 		usuarioModel
@@ -427,7 +497,7 @@ function cadastrarFazenda(req, res) {
 				cep,
 				areaHectare,
 				idGerentes,
-				qtdSensores,
+				qtdSetores,
 			)
 			.then(function (resultado) {
 				console.log("Resultado: " + resultado);
@@ -453,8 +523,11 @@ module.exports = {
 	listarGerentes,
 	cadastrarFazenda,
 	firmarContrato,
-	listarFazendas,
+	carregarFazendas,
 	listarFuncionarios,
 	deletarEmpresa,
 	alterarDados,
+	gerarSetores,
+	gerarDadosSensores,
+	pegarDadosSetor,
 };

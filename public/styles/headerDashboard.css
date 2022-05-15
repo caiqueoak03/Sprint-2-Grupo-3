@@ -8,7 +8,7 @@
 body {
 	min-height: 100vh;
 	font-family: sans-serif;
-	background: #161618e1;
+	background: #222;
 	display: flex;
 }
 
@@ -67,7 +67,7 @@ header {
 	align-items: center;
 	flex-direction: column;
 	row-gap: 10px;
-	margin: 40px 0 20px;
+	margin: 25px 0 15px;
 }
 
 .usuario-container b {
@@ -106,7 +106,7 @@ header {
 	display: flex;
 	flex-direction: column;
 	list-style-type: none;
-	row-gap: 5px;
+	row-gap: 3px;
 	padding: 0;
 }
 
@@ -114,11 +114,11 @@ header {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: #2ac28a;
-	height: 45px;
+	height: 42px;
 	width: 300px;
 	border-radius: 10px;
 	text-align: center;
+	background-color: #2ac28a;
 	color: #002043;
 	font-size: 1.25rem;
 	font-weight: 700;
@@ -130,6 +130,18 @@ header {
 .main-nav a:hover {
 	box-shadow: none;
 	color: white;
+}
+
+.navs:last-of-type {
+	height: 40px;
+	width: 100px;
+	margin: 5px auto 0;
+	background-color: #222;
+	color: #ddd;
+}
+
+.navs:last-of-type:hover {
+	background-color: #444;
 }
 
 .nav7 {

@@ -1,4 +1,3 @@
-// sessão
 function validarSessao() {
 	var nome = sessionStorage.SOBRENOME;
 
@@ -29,13 +28,13 @@ var expanded = false;
 function mostrarBoxes() {
 	var checkboxes = document.getElementById("checkBoxes");
 	if (expanded) {
-		checkboxes.style.minHeight = '0px';
-		checkboxes.style.border = 'none';
+		checkboxes.style.maxHeight = "0px";
+		checkboxes.style.border = "none";
 		expanded = false;
 	} else {
-		checkboxes.style.minHeight = '120px';
-		checkboxes.style.border = '1px #2ac28a solid';
-		checkboxes.style.borderTop = 'none';
+		checkboxes.style.maxHeight = "120px";
+		checkboxes.style.border = "1px #2ac28a solid";
+		checkboxes.style.borderTop = "none";
 		expanded = true;
 	}
 }

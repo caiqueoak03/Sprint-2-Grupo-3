@@ -1,0 +1,2 @@
+HOBOnet T12 - Alcance: 100 hectáres
+HOBOnet rx 3000 - sistema de posicionamento dos sensores

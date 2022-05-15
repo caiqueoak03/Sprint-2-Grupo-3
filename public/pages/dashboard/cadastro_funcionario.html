@@ -1,135 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Soy Venture</title>
+		<link rel="stylesheet" href="../../styles/headerDashboard.css" />
+		<link rel="stylesheet" href="../../styles/confirmationBox.css" />
+		<link rel="stylesheet" href="../../styles/cadastro_funcionario.css" />
+		<link rel="stylesheet" href="../../styles/checkBoxes.css" />
+		<link
+			rel="shortcut icon"
+			href="../../images/logo.png"
+			type="image/x-icon"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400&family=Roboto:ital,wght@0,400;0,700;1,700&display=swap"
+			rel="stylesheet"
+		/>
+		<script
+			src="https://kit.fontawesome.com/8c4cdd8d42.js"
+			crossorigin="anonymous"
+		></script>
+		<script src="../../js/funcoes.js"></script>
+	</head>
 
-<head>
-	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Soy Venture</title>
-	<link rel="stylesheet" href="../../styles/headerDashboard.css" />
-	<link rel="stylesheet" href="../../styles/confirmationBox.css" />
-	<link rel="stylesheet" href="../../styles/cadastro_funcionario.css" />
-	<link rel="stylesheet" href="../../styles/checkBoxes.css" />
-	<link rel="shortcut icon" href="../../images/logo.png" type="image/x-icon" />
-	<link rel="preconnect" href="https://fonts.googleapis.com" />
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-	<link
-		href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400&family=Roboto:ital,wght@0,400;0,700;1,700&display=swap"
-		rel="stylesheet" />
-	<script src="https://kit.fontawesome.com/8c4cdd8d42.js" crossorigin="anonymous"></script>
-</head>
+	<body
+		onload="iniciarSessao(), carregarFazendas(), validarSessao(), carregarCargos()"
+	>
+		<!-- Wrapper -->
+		<div id="wrapper_loading"></div>
 
-<body onload="iniciarSessao(), carregarFazendas(), validarSessao()">
-	<!-- Wrapper -->
-	<div id="wrapper_loading"></div>
+		<!-- HEADER -->
+		<header>
+			<span class="logo">
+				<img src="../../images/logo.png" alt="" class="logo-img" />
+				<h1 class="nome-empresa">Soy Venture</h1>
+			</span>
 
-	<!-- HEADER -->
-	<header>
-		<span class="logo">
-			<img src="../../images/logo.png" alt="" class="logo-img" />
-			<h1 class="nome-empresa">Soy Venture</h1>
-		</span>
+			<div class="usuario-container">
+				<img
+					src="../../images/gerente-img.png"
+					alt=""
+					id="user_profile_pic"
+					class="img"
+				/>
+				<p class="usuario-nome">Olá, <b id="nome_usuario"></b></p>
+			</div>
 
-		<div class="usuario-container">
-			<img src="../../images/gerente-img.png" alt="" id="user_profile_pic" class="img" />
-			<p class="usuario-nome">Olá, <b id="nome_usuario"></b></p>
-		</div>
+			<div class="main-nav">
+				<ul>
+					<a class="navs nav1" href="dashboard.html">Gráficos</a>
+					<a class="navs nav2" href="KPIs.html">Indicadores de Performance</a>
+					<a class="navs nav3" href="muralAlertas.html">Mural de Alertas</a>
+					<a class="navs nav4" id="cad_fazenda" href="cadastroFazenda.html"
+						>Cadastrar Fazenda</a
+					>
+					<a
+						class="navs nav5"
+						id="cad_funcionario"
+						href="cadastro_funcionario.html"
+						>Cadastrar Funcionário</a
+					>
+					<a class="navs nav6" href="alterarDados.html">Alterar Dados</a>
+					<a class="navs nav7" onclick="mostrarBox()">Sair</a>
+				</ul>
+			</div>
+		</header>
 
-		<div class="main-nav">
-			<ul>
-				<a class="navs nav1" href="dashboard.html">Gráficos</a>
-				<a class="navs nav2" href="KPIs.html">Indicadores de Performance</a>
-				<a class="navs nav4" id="cad_fazenda" href="cadastroFazenda.html">Cadastrar Fazenda</a>
-				<a class="navs nav3" id="cad_funcionario" href="cadastro_funcionario.html">Cadastrar Funcionário</a>
-				<a class="navs nav5" href="alterarDados.html">Alterar Dados</a>
-				<a class="navs nav7" onclick="mostrarBox()">Sair</a>
-			</ul>
-		</div>
-	</header>
-
-	<!-- Confirmation Box -->
-	<div id="confirmation_wrapper">
-		<div class="confirmation-box">
-			<p>Deseja sair da sua conta?</p>
-			<div class="sim-ou-nao">
-				<a onclick="limparSessao()">sim</a>
-				<a onclick="esconderBox()">não</a>
+		<!-- Confirmation Box -->
+		<div id="confirmation_wrapper">
+			<div class="confirmation-box">
+				<p>Deseja sair da sua conta?</p>
+				<div class="sim-ou-nao">
+					<a onclick="limparSessao()">sim</a>
+					<a onclick="esconderBox()">não</a>
+				</div>
 			</div>
 		</div>
-	</div>
 
-	<!-- MONITORAMENTO POR HORA -->
-	<div class="main-container">
-		<div class="cadastro">
-			<div class="container">
-				<div class="box">
-					<div class="box_container">
-						<div class="card_cadastro2">
-							<ul>
-								<h2>Cadastro De Funcionário</h2>
-								<li>
-									Primeiro nome:<br /><input id="in_nome" value="teste" placeholder="Nome"
-										type="text" />
-								</li>
-								<li>
-									Email:<br /><input id="in_email" value="teste123@gmail.com"
-										placeholder="Digite o email" type="text" />
-								</li>
-								<li>
-									Numero de telefone: <br /><input id="in_telFixo" value="1112341234"
-										placeholder="(00) 00000-0000" type="text" />
-								</li>
-								<li>
-									Selecione o Cargo<select id="in_cargo" onchange="checkGerente()">
-										<option value="analista">Analista</option>
-										<option value="supervisor">Supervisor</option>
-										<option value="gerente">Gerente</option>
-									</select>
-								</li>
-								<li id="select_container">
-									Selecione as fazendas
-									<form action="" class="form-container">
-										<div class="select-box-container" onclick="mostrarBoxes()">
-											<select id="select-box">
-												<option>Selecione as fazendas</option>
-											</select>
-											<div class="overSelect"></div>
-										</div>
-										<ul id="checkBoxes"></ul>
-									</form>
-								</li>
-							</ul>
-							<div class="li_card">
-								<ul class="input_color">
+		<!-- MONITORAMENTO POR HORA -->
+		<div class="main-container">
+			<div class="cadastro">
+				<div class="container">
+					<div class="box">
+						<div class="box_container">
+							<div class="card_cadastro2">
+								<ul>
+									<h2>Cadastro De Funcionário</h2>
 									<li>
-										Sobrenome: <br /><input id="in_sobrenome" value="testee" placeholder="Sobrenome"
-											type="text" />
+										Primeiro nome:<br /><input
+											id="in_nome"
+											value="teste"
+											placeholder="Nome"
+											type="text"
+										/>
 									</li>
 									<li>
-										Senha<br /><input id="in_senha" value="123" placeholder="Digite a senha"
-											type="password" />
+										Email:<br /><input
+											id="in_email"
+											value="teste123@gmail.com"
+											placeholder="Digite o email"
+											type="text"
+										/>
 									</li>
 									<li>
-										Confirme a Senha<br /><input id="in_confirmarSenha" value="123"
-											placeholder="Confirme a senha" type="password" />
+										Numero de telefone: <br /><input
+											id="in_telFixo"
+											value="1112341234"
+											placeholder="(00) 00000-0000"
+											type="text"
+										/>
 									</li>
 									<li>
-										Telefone Celular <br /><input id="in_telCelular" value="11912341234"
-											placeholder="(00) 00000-0000" type="text" />
+										Selecione o Cargo<select
+											id="in_cargo"
+											onchange="checkGerente()"
+										>
+											<option value="analista">Analista</option>
+											<option value="supervisor">Supervisor</option>
+											<option value="gerente" id="option_gerente">
+												Gerente
+											</option>
+										</select>
 									</li>
-									<li>
-										<button onclick="validar()">Cadastrar Funcionario</button>
+									<li id="select_container">
+										Selecione as fazendas
+										<form action="" class="form-container">
+											<div
+												class="select-box-container"
+												onclick="mostrarBoxes()"
+											>
+												<select id="select-box">
+													<option>Selecione as fazendas</option>
+												</select>
+												<div class="overSelect"></div>
+											</div>
+											<ul id="checkBoxes"></ul>
+										</form>
 									</li>
 								</ul>
+								<div class="li_card">
+									<ul class="input_color">
+										<li>
+											Sobrenome: <br /><input
+												id="in_sobrenome"
+												value="testee"
+												placeholder="Sobrenome"
+												type="text"
+											/>
+										</li>
+										<li>
+											Senha<br /><input
+												id="in_senha"
+												value="123"
+												placeholder="Digite a senha"
+												type="password"
+											/>
+										</li>
+										<li>
+											Confirme a Senha<br /><input
+												id="in_confirmarSenha"
+												value="123"
+												placeholder="Confirme a senha"
+												type="password"
+											/>
+										</li>
+										<li>
+											Telefone Celular <br /><input
+												id="in_telCelular"
+												value="11912341234"
+												placeholder="(00) 00000-0000"
+												type="text"
+											/>
+										</li>
+										<li>
+											<button onclick="validar()">Cadastrar Funcionario</button>
+										</li>
+									</ul>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</body>
-
+	</body>
 </html>
 <script>
 	var idFazendasChecadasVar = [];
@@ -151,22 +209,19 @@
 		var confirmarSenha = in_confirmarSenha.value;
 		var cargo = in_cargo.value;
 
+		idFazendasChecadasVar = [];
 		var alerta = "";
-		var idFazendaLength = sessionStorage.ID_FAZENDAS.split(',').length;
+		var idFazendaLength = sessionStorage.ID_FAZENDAS.split(",").length;
 		var inputFazendas = [...document.querySelectorAll(".boxes")];
-
-		console.log('input fazendas: ' + inputFazendas)
 
 		try {
 			for (let i = 0; i < idFazendaLength; i++) {
 				if (inputFazendas[i].checked) {
-					console.log(inputFazendas[i])
+					console.log(inputFazendas[i].id);
 					idFazendasChecadasVar.push(inputFazendas[i].id);
 				}
 			}
-
-			console.log('idfazendas checadas no HTML: ' + idFazendasChecadasVar)
-		} catch { }
+		} catch {}
 
 		if (nome == "") {
 			alerta += "*Insira um nome\n";
@@ -265,8 +320,6 @@
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
-				// crie um atributo que recebe o valor recuperado aqui
-				// Agora vá para o arquivo routes/usuario.js
 				idFuncionarioServer: idFuncionarioVar,
 				idFazendasChecadasServer: idFazendasChecadasVar,
 				cargoServer: cargoVar,
@@ -276,7 +329,6 @@
 			.then(function (resposta) {
 				console.log("resposta: ", resposta);
 
-				// Somente para o cadastro de cliente
 				if (resposta.ok) {
 					resposta.json().then((json) => {
 						console.log(json);
@@ -285,8 +337,6 @@
 						console.log("status: contrato firmado!");
 
 						alert("Funcionário cadastrado com sucesso!");
-
-						window.location = 'cadastro_funcionario.html'
 					});
 				} else {
 					alert("Funcionario já cadastrado!");
@@ -299,59 +349,10 @@
 		return false;
 	}
 
-	function carregarFazendas() {
-		fetch("/usuarios/listarFazendas", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				idFuncionarioServer: sessionStorage.ID_FUNCIONARIO,
-			}),
-		})
-			.then(function (resposta) {
-				console.log("ESTOU NO THEN DO carregarFazendas()!");
-
-				if (resposta.ok) {
-					resposta.json().then(json => {
-						console.log("json: " + json);
-						console.log("JSON: " + JSON.stringify(json));
-
-						var idFazendas = [];
-						var nomeFazendas = [];
-
-						for (let i = 0; i < json.length; i++) {
-							nomeFazendas.push(json[i].nome);
-							idFazendas.push(json[i].fkFazenda);
-						}
-
-						sessionStorage.ID_FAZENDAS = idFazendas;
-						sessionStorage.NOME_FAZENDAS = nomeFazendas;
-
-						for (let i = 0; i < json.length; i++) {''
-							checkBoxes.innerHTML += `
-						<li>
-							<label class="labels">
-								${nomeFazendas[i]}
-							</label>
-							<input type="checkbox" class="boxes" id='${idFazendas[i]}'/>
-						</li>`;
-						}
-					});
-				} else {
-					console.log("Houve um erro ao tentar realizar o login!");
-					alert("Usuário não cadastrado!");
-
-					resposta.text().then((texto) => {
-						console.error(texto);
-					});
-				}
-			})
-			.catch(function (erro) {
-				console.log(erro);
-			});
-
-		return false;
+	function carregarCargos() {
+		if (sessionStorage.CARGO == "supervisor") {
+			option_gerente.style.display = "none";
+		}
 	}
 </script>
-<script src="../../js/funcoes.js"></script>
+<script src="../../js/cadastroFuncionario.js"></script>

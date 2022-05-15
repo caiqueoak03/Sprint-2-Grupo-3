@@ -43,12 +43,28 @@ router.post("/autenticar", function (req, res) {
 	usuarioController.entrar(req, res);
 });
 
-router.post("/listarFazendas", function (req, res) {
-	usuarioController.listarFazendas(req, res);
-});
-
 router.post("/listarGerentes", function (req, res) {
 	usuarioController.listarGerentes(req, res);
+});
+
+router.post("/carregarDados", function (req, res) {
+	usuarioController.carregarDados(req, res);
+});
+
+router.post("/gerarSetores", function (req, res) {
+	usuarioController.gerarSetores(req, res);
+});
+
+router.post("/gerarDadosSensores", function (req, res) {
+	usuarioController.gerarDadosSensores(req, res);
+});
+
+router.post("/carregarFazendas", function (req, res) {
+	usuarioController.carregarFazendas(req, res);
+});
+
+router.post("/pegarDadosSetor", function (req, res) {
+	usuarioController.pegarDadosSetor(req, res);
 });
 
 module.exports = router;

@@ -9,13 +9,12 @@ USE soyventure;
 
 CREATE TABLE empresa (
 	idEmpresa int primary key AUTO_INCREMENT,
-	nome varchar(45) unique not null,
+	nome varchar(45) not null,
 	cnpj char(14) unique not null
 );
 
 CREATE TABLE funcionario (
-	idFuncionario int primary key AUTO_INCREMENT,
-	fkEmpresa int,
+	idFuncionario int AUTO_INCREMENT,
 	nome varchar(45) not null,
 	sobrenome varchar(45) not null,
 	email varchar(45) unique not null,
@@ -24,18 +23,23 @@ CREATE TABLE funcionario (
 	urlImg varchar(300),
 	telFixo char(10),
 	telCelular char(11),
-	foreign key (fkEmpresa) references empresa(idEmpresa)
+	fkEmpresa int,
+	foreign key (fkEmpresa) references empresa(idEmpresa),
+	primary key (idFuncionario, fkEmpresa)
 );
 
 CREATE TABLE fazenda (
 	idFazenda INT PRIMARY KEY AUTO_INCREMENT,
 	nome varchar(45) not null,
 	cep char(8) unique not null,
-	areaHectare int not null,
-	qtdSensores int  not null,
+	areaHectare decimal(10,2) not null,
+	qtdSetores int  not null,
 	telFixo char(10),
 	telCelular char(11)
 ); 
+
+alter table fazenda modify column areaHectare decimal(10,2) not null;
+alter table setor modify column modeloSensor varchar(45) default 'HOBOnet T11';
 
 create table contrato (
 	fkFuncionario int,
@@ -56,12 +60,12 @@ create table setor (
 	primary key (idSetor, fkFazenda)
 );
 
-create table dados (
+create table dado (
 	idDados int AUTO_INCREMENT,
-	temperatura decimal(4,2),
-	umidade decimal(5,2),
-	dataDado date,
-	tempoDado time,
+	temperatura decimal(3,1),
+	umidade decimal(4,1),
+	dataDado date default(CURRENT_DATE),
+	tempoDado time default(CURRENT_TIME),
 	fkSetor int,
 	setor_fkFazenda int,
 	foreign key (fkSetor) references setor(idSetor),

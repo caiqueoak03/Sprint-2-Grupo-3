@@ -55,6 +55,10 @@ router.post("/gerarSetores", function (req, res) {
 	usuarioController.gerarSetores(req, res);
 });
 
+router.post("/gerarDias", function (req, res) {
+	usuarioController.gerarDias(req, res);
+});
+
 router.post("/gerarDadosSensores", function (req, res) {
 	usuarioController.gerarDadosSensores(req, res);
 });

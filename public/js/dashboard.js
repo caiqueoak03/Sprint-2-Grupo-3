@@ -13,6 +13,9 @@ function carregarFazendas() {
 
 			if (resposta.ok) {
 				resposta.json().then((json) => {
+					if (json[1][0].qtdFazendas == 0) {
+						return
+					}
 					console.log("json: " + json);
 					console.log("JSON: " + JSON.stringify(json));
 
@@ -33,11 +36,8 @@ function carregarFazendas() {
 						`;
 					}
 
-					gerarSetores(fazendas_select.value);
-
-					if (json[1].qtdFazendas != 0) {
-						dashboardWrapper.style.display = "none";
-					}
+					dashboardWrapper.style.display = "none";
+					gerarSetores();
 				});
 			} else {
 				console.log("Houve um erro ao tentar carregar as fazendas!");
@@ -54,7 +54,7 @@ function carregarFazendas() {
 	return false;
 }
 
-function gerarSetores(idFazenda) {
+function gerarSetores() {
 	fetch("/usuarios/gerarSetores", {
 		method: "POST",
 		headers: {
@@ -62,7 +62,7 @@ function gerarSetores(idFazenda) {
 		},
 		body: JSON.stringify({
 			idFuncionarioServer: sessionStorage.ID_FUNCIONARIO,
-			idFazendaServer: idFazenda,
+			idFazendaServer: fazendas_select.value,
 		}),
 	})
 		.then(function (resposta) {
@@ -70,7 +70,6 @@ function gerarSetores(idFazenda) {
 
 			if (resposta.ok) {
 				setor_select.innerHTML = "";
-				dia_select.innerHTML = "";
 
 				resposta.json().then((json) => {
 					console.log("json: " + json);
@@ -90,23 +89,10 @@ function gerarSetores(idFazenda) {
 						fkFazendas.push(json[1][i].fkFazenda);
 					}
 
-					for (var i = 0; i < json[2].length; i++) {
-						console.log(
-							"DATA::::::::::::::: " + json[2][i].dataDado.slice(0, 10),
-						);
-						dia_select.innerHTML += `
-							<option value="${json[2][i].dataDado.slice(0, 10)}">${json[2][i].dataDado.slice(
-							0,
-							10,
-						)}</option>
-						`;
-					}
-
-					sessionStorage.ID_SETORES = idSetores;
 					sessionStorage.FK_FAZENDAS = fkFazendas;
+					sessionStorage.ID_SETORES = idSetores;
 
-					gerarDadosSensores();
-					pegarDadosSetor(fazendas_select.value);
+					gerarDias()
 				});
 			} else {
 				console.log("Houve um erro ao tentar carregar os setores!");
@@ -142,10 +128,11 @@ function gerarDadosSensores() {
 
 				if (resposta.ok) {
 					console.log(resposta);
-
+					pegarDadosSetor()
 					resposta.json().then((json) => {
 						console.log(json);
 						console.log(JSON.stringify(json));
+
 					});
 				} else {
 					console.log("Houve um erro ao carregar os dados");
@@ -159,10 +146,57 @@ function gerarDadosSensores() {
 				console.log(erro);
 			});
 
+	clearInterval(gerar)
+
 	gerar();
 	setInterval(() => {
 		gerar();
 	}, intervalo);
+}
+
+function gerarDias() {
+	fetch("/usuarios/gerarDias", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			idFazendaServer: fazendas_select.value,
+		}),
+	})
+		.then(function (resposta) {
+			console.log("ESTOU NO THEN DO gerarDias()!");
+
+			if (resposta.ok) {
+				resposta.json().then((json) => {
+					console.log("json: " + json);
+					console.log("JSON: " + JSON.stringify(json));
+
+					dia_select.innerHTML = "";
+
+					for (var i = 0; i < json.length; i++) {
+						dia_select.innerHTML += `
+							<option value="${json[i].dataDado.slice(0, 10)}">${json[i].dataDado.slice(
+							0,
+							10,
+						)}</option>
+						`;
+					}
+					gerarDadosSensores();
+				});
+			} else {
+				console.log("Houve um erro ao tentar carregar os dias!");
+
+				resposta.text().then((texto) => {
+					console.error(texto);
+				});
+			}
+		})
+		.catch(function (erro) {
+			console.log(erro);
+		});
+
+	return false;
 }
 
 // Variáveis globais do chartJS
@@ -182,7 +216,7 @@ var primeiroRender = true;
 
 var interval;
 
-function pegarDadosSetor(fkFazenda) {
+function pegarDadosSetor() {
 	var pegar = () =>
 		fetch("/usuarios/pegarDadosSetor", {
 			method: "POST",
@@ -191,7 +225,7 @@ function pegarDadosSetor(fkFazenda) {
 			},
 			body: JSON.stringify({
 				fkSetorServer: setor_select.value,
-				fkFazendaServer: fkFazenda,
+				fkFazendaServer: fazendas_select.value,
 				dataDadoServer: dia_select.value,
 			}),
 		})
@@ -216,6 +250,10 @@ function pegarDadosSetor(fkFazenda) {
 						labelsHora = [];
 						labelsSetor = [];
 
+						if(json[0][0].temperatura > 25) {
+							alerta.innerHTML = "Valor acima do ideal!"
+						}
+
 						for (var i = 0; i < json[0].length; i++) {
 							temperaturaValuesHora.unshift(json[0][i].temperatura);
 							umidadeValuesHora.unshift(json[0][i].umidade);
@@ -229,7 +267,7 @@ function pegarDadosSetor(fkFazenda) {
 						}
 
 						if (grafico_select.value == "dia") {
-							clearInterval(interval);
+							clearInterval(interval)
 							labels = labelsSetor;
 							umidadeValues = umidadeValuesSetor;
 							temperaturaValues = temperaturaValuesSetor;
@@ -263,8 +301,8 @@ function pegarDadosSetor(fkFazenda) {
 				console.log(erro);
 			});
 
-	pegar();
 	clearInterval(interval);
+	pegar();
 
 	interval = setInterval(() => {
 		pegar();

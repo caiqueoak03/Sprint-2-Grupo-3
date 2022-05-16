@@ -317,14 +317,42 @@ function gerarSetores(req, res) {
 	}
 }
 
+function gerarDias(req, res) {
+	// Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+	var idFazenda = req.body.idFazendaServer;
+
+	console.log("idFazenda no controller: " + idFazenda);
+
+	// Faça as validações dos valores
+	if (idFazenda == undefined) {
+		res.status(400).send("Seu idFazenda está undefined!");
+	} else {
+		// Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+		usuarioModel
+			.gerarDias(idFazenda)
+			.then(function (resultado) {
+				console.log("Resultado: " + resultado);
+				res.json(resultado);
+			})
+			.catch(function (erro) {
+				console.log(erro);
+				console.log(
+					"\nHouve um erro ao realizar o cadastro! Erro: ",
+					erro.sqlMessage,
+				);
+				res.status(500).json(erro.sqlMessage);
+			});
+	}
+}
+
 function gerarDadosSensores(req, res) {
 	var fkFazendas = req.body.fkFazendasServer;
 	var idSetores = req.body.idSetoresServer;
 
 	if (fkFazendas == undefined) {
-		res.status(400).send("Seu temperaturaRandom está undefined!");
+		res.status(400).send("Seu fkFazendas está undefined!");
 	} else if (idSetores == undefined) {
-		res.status(400).send("Seu umidadeRandom está undefined!");
+		res.status(400).send("Seu idSetores está undefined!");
 	} else {
 		usuarioModel
 			.gerarDadosSensores(fkFazendas, idSetores)
@@ -533,4 +561,5 @@ module.exports = {
 	gerarSetores,
 	gerarDadosSensores,
 	pegarDadosSetor,
+	gerarDias
 };

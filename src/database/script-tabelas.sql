@@ -63,7 +63,7 @@ create table setor (
 );
 
 create table dado (
-	idDados int AUTO_INCREMENT,
+	idDado int AUTO_INCREMENT,
 	temperatura decimal(3,1),
 	umidade decimal(4,1),
 	dataDado date default(CURRENT_DATE),
@@ -72,7 +72,7 @@ create table dado (
 	setor_fkFazenda int,
 	foreign key (fkSetor) references setor(idSetor),
 	foreign key (setor_fkFazenda) references setor(fkFazenda),
-	primary key (idDados, fkSetor, setor_fkFazenda)
+	primary key (idDado, fkSetor, setor_fkFazenda)
 );
 
 

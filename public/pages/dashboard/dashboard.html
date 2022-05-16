@@ -89,7 +89,7 @@
 			</div>
 			<div class="selects">
 				<select
-					onchange="pegarDadosSetor(fazendas_select.value);"
+					onchange=";"
 					name=""
 					id="grafico_select"
 				>
@@ -98,29 +98,25 @@
 				</select>
 
 				<select
-					onchange="gerarSetores(fazendas_select.value), pegarDadosSetor(fazendas_select.value);"
+					onchange="gerarSetores()"
 					name=""
 					id="fazendas_select"
 				></select>
 
 				<select
-					onchange="pegarDadosSetor(fazendas_select.value);"
+					onchange=";"
 					name=""
 					id="dia_select"
 					style="display: none"
 				></select>
 
 				<select
-					onchange="pegarDadosSetor(fazendas_select.value);"
+					onchange=";"
 					name=""
 					id="setor_select"
 				></select>
 
-				<!--
-				<button onclick="pegarDadosSetor(setor_select.value);">
-					Mostrar Gráficos
-				</button>   
-				-->
+				<div style="background-color: white" id="alerta"></div>
 			</div>
 
 			<div class="graficos-main-container">

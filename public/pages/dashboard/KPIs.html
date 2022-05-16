@@ -25,7 +25,7 @@
 		></script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	</head>
-	<body onload="iniciarSessao(), validarSessao()">
+	<body onload="iniciarSessao(), validarSessao(), carregarKPIs()">
 		<!-- Wrapper -->
 		<div id="wrapper_loading"></div>
 
@@ -82,16 +82,18 @@
 		<div class="main-container">
 			<div class="cards-grupo1 cards-grupos">
 				<div class="cards" style="background-color: green">
-					<h2>Fazenda com maior lucro estimado (%)</h2>
-					<h3>
-						Fazenda Rio Bonito <br />
-						<span class="kpi-valores">(R$ 18.784,00)</span>
+					<h2>Fazenda com os Melhores Registros Médios</h2>
+					<h3 id="fazenda_melhor_registro">
+						Fazenda São João <br />
+						<span id="fazenda_melhor_valor" class="kpi-valores"
+							>(35°C e 88%)</span
+						>
 					</h3>
 				</div>
 
 				<div class="cards" style="background-color: red">
 					<h2>Maior Registro de Temperatura</h2>
-					<h3>
+					<h3 id="fazenda_maior_temp">
 						Fazenda São João <br />
 						Setor A | 16:00hrs | 01/01/2022 <br />
 						<span class="kpi-valores">(35°C)</span>
@@ -100,7 +102,7 @@
 
 				<div class="cards" style="background-color: blue">
 					<h2>Maior Registro de Umidade</h2>
-					<h3>
+					<h3 id="fazenda_maior_umid">
 						Fazenda São João <br />
 						Setor A | 12:00hrs | 01/01/2022 <br />
 						<span class="kpi-valores">(88%)</span>
@@ -110,16 +112,18 @@
 
 			<div class="cards-grupo2 cards-grupos">
 				<div class="cards" style="background-color: rgb(100, 200, 100)">
-					<h2>Fazenda com menor lucro estimado (%)</h2>
-					<h3>
+					<h2>Fazenda com os Piores Registros Médios</h2>
+					<h3 id="fazenda_pior_registro">
 						Fazenda São João <br />
-						<span class="kpi-valores">(R$ 9.568,50)</span>
+						<span id="fazenda_pior_valor" class="kpi-valores"
+							>(R$ 9.568,50)</span
+						>
 					</h3>
 				</div>
 
 				<div class="cards" style="background-color: rgb(200, 100, 100)">
 					<h2>Menor Registro de Temperatura</h2>
-					<h3>
+					<h3 id="fazenda_menor_temp">
 						Fazenda Rio Bonito <br />
 						Setor B | 05:00hrs | 02/01/2022 <br />
 						<span class="kpi-valores">(18°C)</span>
@@ -128,7 +132,7 @@
 
 				<div class="cards" style="background-color: rgb(100, 100, 200)">
 					<h2>Menor Registro de Umidade</h2>
-					<h3>
+					<h3 id="fazenda_menor_umid">
 						Fazenda Rio Bonito <br />
 						Setor B | 15:00hrs | 03/01/2022 <br />
 						<span class="kpi-valores">(42%)</span>
@@ -148,3 +152,4 @@
 	}
 </script>
 <script src="../../js/funcoes.js"></script>
+<script src="../../js/KPIs.js"></script>

@@ -46,6 +46,9 @@ function carregarFazendas(idFuncionario) {
 		SELECT idFazenda, fazenda.nome, fazenda.qtdSetores FROM fazenda 
 			JOIN contrato on idFazenda = fkFazenda
 				JOIN funcionario on idFuncionario = fkFuncionario where idFuncionario = ${idFuncionario} order by idFazenda;
+		SELECT count(idFazenda) as qtdFazendas FROM fazenda 
+			JOIN contrato on idFazenda = fkFazenda
+				JOIN funcionario on idFuncionario = fkFuncionario where idFuncionario = ${idFuncionario} order by idFazenda;
     `;
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);
@@ -75,11 +78,15 @@ function gerarSetores(idFuncionario, idFazenda) {
 		SELECT idSetor, setor.fkFazenda FROM setor JOIN fazenda ON setor.fkFazenda = idFazenda 
 			JOIN contrato on idFazenda = contrato.fkFazenda
 				JOIN funcionario on idFuncionario = fkFuncionario where idFuncionario = ${idFuncionario} order by idSetor;
-		SELECT DISTINCT(dataDado) FROM dado;
+		SELECT DISTINCT dataDado FROM dado JOIN fazenda on idFazenda = setor_fkFazenda WHERE setor_fkFazenda = '${idFazenda}';
     `;
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);
 }
+// Conta quantas inserções foram feitas nos dados
+var contador = 1;
+// Incrementa na data do dado
+var incrementador = 1;
 
 function gerarDadosSensores(fkFazendas, idSetores) {
 	console.log(
@@ -100,29 +107,41 @@ function gerarDadosSensores(fkFazendas, idSetores) {
 		var temperaturaRandom = Number(Math.floor(Math.random() * 26) + 10);
 		var umidadeRandom = Number(Math.floor(Math.random() * 51) + 30);
 
-		instrucao += `
+		// Insere 10 dados em uma data, depois insere mais 10 dados em outra data e assim por diante
+		if (contador == 50) {
+			instrucao += `
+			ALTER TABLE dado MODIFY COLUMN dataDado DATE 
+				DEFAULT(DATE_ADD(CURRENT_DATE(),interval ${incrementador} day));
 			INSERT INTO dado (temperatura, umidade, fkSetor, setor_fkFazenda) values 
 			('${temperaturaRandom}', '${umidadeRandom}', '${idSetores[i]}', '${fkFazendas[i]}');
-    `;
+			`;
+			incrementador++;
+			contador = 0;
+		} else {
+			instrucao += `
+			INSERT INTO dado (temperatura, umidade, fkSetor, setor_fkFazenda) values 
+			('${temperaturaRandom}', '${umidadeRandom}', '${idSetores[i]}', '${fkFazendas[i]}');
+			`;
+			contador++;
+		}
 	}
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);
 }
 
-function pegarDadosSetor(fkSetor, fkFazenda) {
+function pegarDadosSetor(fkSetor, fkFazenda, dataDado) {
 	console.log(
 		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()",
 		fkSetor,
 		fkFazenda,
+		dataDado,
 	);
 
 	var instrucao = `
 			SELECT * FROM dado WHERE fkSetor = ${fkSetor} ORDER BY idDados DESC LIMIT 8;
-			SET @fkSetorCount = (SELECT count(DISTINCT(fksetor)) FROM dado WHERE setor_fkFazenda = ${fkFazenda});
-			PREPARE STMT FROM 
-				'SELECT * FROM dado JOIN setor ON idSetor = fkSetor 
-					WHERE setor_fkFazenda = ${fkFazenda} ORDER BY idDados DESC LIMIT ?';
-			EXECUTE STMT USING @fkSetorCount;
+			SELECT nome, truncate(avg(temperatura), 2) as avgTemp, truncate(avg(umidade), 2) as avgUmid 
+				FROM dado join setor on idSetor = fkSetor 
+					WHERE setor_fkFazenda = ${fkFazenda} and dataDado = '${dataDado}' group by nome;
     `;
 
 	console.log("Executando a instrução SQL: \n" + instrucao);
@@ -263,6 +282,7 @@ function cadastrarFazenda(
 				VALUES 
 				('${nomeFazenda}', '${telFixo}','${telcelular}', '${cep}','${areaHectare}', '${qtdSetores}');
 				SELECT idFazenda FROM fazenda where cep = '${cep}';
+				SELECT * FROM setor JOIN fazenda ON idFazenda = fkFazenda WHERE cep = '${cep}'; 
     `;
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);

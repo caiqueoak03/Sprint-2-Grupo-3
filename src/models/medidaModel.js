@@ -1,32 +1,29 @@
 var database = require("../database/config");
 
-function buscarUltimasMedidas(idAquario, limite_linhas) {
-    instrucaoSql = `select 
-                        temperatura, 
-                        umidade, 
-                        momento,
-                        DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico
-                    from medida
-                    where fk_aquario = ${idAquario}
-                    order by id desc limit ${limite_linhas}`;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
+function carregarKPIs(idFuncionario) {
+	// Retorna os valores das KPIs, o último select retorna o AVG de todas as fazendas para ser filtrado no JS
+	instrucaoSql = `
+    SELECT fazenda.nome, setor.nome, tempoDado, dataDado, 
+    max(temperatura) as maxTemp, min(temperatura) as minTemp, max(umidade) as maxUmid, min(umidade) as minUmid 
+        FROM dado 
+        JOIN setor ON idSetor = fkSetor 
+        JOIN fazenda ON idFazenda = setor.fkFazenda
+        JOIN contrato ON contrato.fkFazenda = idFazenda
+        JOIN funcionario ON idFuncionario = fkFuncionario
+        WHERE idFuncionario = ${idFuncionario};
+    SELECT avg(temperatura), avg(umidade)
+        FROM dado 
+        JOIN setor ON idSetor = fkSetor 
+        JOIN fazenda ON idFazenda = setor.fkFazenda
+        JOIN contrato ON contrato.fkFazenda = idFazenda
+        JOIN funcionario ON idFuncionario = fkFuncionario
+        WHERE idFuncionario = ${idFuncionario} GROUP BY fazenda.nome;
+    `;
+
+	console.log("Executando a instrução SQL: \n" + instrucaoSql);
+	return database.executar(instrucaoSql);
 }
-
-function buscarMedidasEmTempoReal(idAquario) {
-    instrucaoSql = `select 
-                        temperatura, 
-                        umidade, DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico, 
-                        fk_aquario 
-                        from medida where fk_aquario = ${idAquario} 
-                    order by id desc limit 1`;
-
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
-}
-
 
 module.exports = {
-    buscarUltimasMedidas,
-    buscarMedidasEmTempoReal
-}
+	carregarKPIs,
+};

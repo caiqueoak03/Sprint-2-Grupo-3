@@ -9,6 +9,7 @@
 #confirmation_wrapper {
 	width: 100vw;
 	height: 100vh;
+	z-index: 998;
 	position: absolute;
 	display: none;
 	align-items: center;

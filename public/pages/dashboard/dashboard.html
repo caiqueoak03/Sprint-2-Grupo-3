@@ -26,9 +26,7 @@
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	</head>
 
-	<body
-		onload="iniciarSessao(), validarSessao(), carregarFazendas(), gerarDadosSensores()"
-	>
+	<body onload="iniciarSessao(), validarSessao(), carregarFazendas()">
 		<!-- Wrapper -->
 		<div id="wrapper_loading"></div>
 
@@ -83,31 +81,37 @@
 		<!-- DASHBOARD -->
 
 		<div class="main-container">
+			<div id="dashboardWrapper">
+				<div class="dashboardWrapper-box">
+					<p>Nenhuma fazenda cadastrada!</p>
+					<a href="cadastroFazenda.html">Ir para a tela de cadastro</a>
+				</div>
+			</div>
 			<div class="selects">
 				<select
-					onchange="pegarDadosSetor(grafico_select.value, fazendas_select.value);"
+					onchange="pegarDadosSetor(fazendas_select.value);"
 					name=""
 					id="grafico_select"
 				>
-					<option value="setor">Registro por hora</option>
-					<option value="dia">Registro por área</option>
+					<option value="setor">Registro em tempo real</option>
+					<option value="dia">Registro diário por setor</option>
 				</select>
 
 				<select
-					onchange="gerarSetores(fazendas_select.value), pegarDadosSetor(grafico_select.value, fazendas_select.value);"
+					onchange="gerarSetores(fazendas_select.value), pegarDadosSetor(fazendas_select.value);"
 					name=""
 					id="fazendas_select"
 				></select>
 
 				<select
-					onchange="pegarDadosSetor(grafico_select.value, fazendas_select.value);"
+					onchange="pegarDadosSetor(fazendas_select.value);"
 					name=""
 					id="dia_select"
 					style="display: none"
 				></select>
 
 				<select
-					onchange="pegarDadosSetor(grafico_select.value, fazendas_select.value);"
+					onchange="pegarDadosSetor(fazendas_select.value);"
 					name=""
 					id="setor_select"
 				></select>

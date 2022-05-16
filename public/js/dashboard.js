@@ -19,9 +19,9 @@ function carregarFazendas() {
 					var idFazendas = [];
 					var nomeFazendas = [];
 
-					for (let i = 0; i < json.length; i++) {
-						nomeFazendas.push(json[i].nome);
-						idFazendas.push(json[i].idFazenda);
+					for (let i = 0; i < json[0].length; i++) {
+						nomeFazendas.push(json[0][i].nome);
+						idFazendas.push(json[0][i].idFazenda);
 					}
 
 					sessionStorage.ID_FAZENDAS = idFazendas;
@@ -34,6 +34,10 @@ function carregarFazendas() {
 					}
 
 					gerarSetores(fazendas_select.value);
+
+					if (json[1].qtdFazendas != 0) {
+						dashboardWrapper.style.display = "none";
+					}
 				});
 			} else {
 				console.log("Houve um erro ao tentar carregar as fazendas!");
@@ -87,6 +91,9 @@ function gerarSetores(idFazenda) {
 					}
 
 					for (var i = 0; i < json[2].length; i++) {
+						console.log(
+							"DATA::::::::::::::: " + json[2][i].dataDado.slice(0, 10),
+						);
 						dia_select.innerHTML += `
 							<option value="${json[2][i].dataDado.slice(0, 10)}">${json[2][i].dataDado.slice(
 							0,
@@ -98,7 +105,8 @@ function gerarSetores(idFazenda) {
 					sessionStorage.ID_SETORES = idSetores;
 					sessionStorage.FK_FAZENDAS = fkFazendas;
 
-					pegarDadosSetor(setor_select.value, fazendas_select.value);
+					gerarDadosSensores();
+					pegarDadosSetor(fazendas_select.value);
 				});
 			} else {
 				console.log("Houve um erro ao tentar carregar os setores!");
@@ -115,7 +123,7 @@ function gerarSetores(idFazenda) {
 	return false;
 }
 
-var intervalo = 5 * 1000; // segundos * 1000
+var intervalo = 2 * 1000; // segundos * 1000
 
 function gerarDadosSensores() {
 	var gerar = () =>
@@ -158,8 +166,8 @@ function gerarDadosSensores() {
 }
 
 // Variáveis globais do chartJS
-var nomeTemp = "Temperatura por Hora (°C)";
-var nomeUmid = "Umidade por Hora (%)";
+var nomeTemp = "Temperatura em Tempo Real (°C)";
+var nomeUmid = "Umidade em Tempo Real (%)";
 var tipoGrafico = "line";
 var graficoUmid = {};
 var graficoTemp = {};
@@ -174,7 +182,7 @@ var primeiroRender = true;
 
 var interval;
 
-function pegarDadosSetor(grafico, fkFazenda) {
+function pegarDadosSetor(fkFazenda) {
 	var pegar = () =>
 		fetch("/usuarios/pegarDadosSetor", {
 			method: "POST",
@@ -182,8 +190,9 @@ function pegarDadosSetor(grafico, fkFazenda) {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
-				fkSetorServer: fkSetor,
+				fkSetorServer: setor_select.value,
 				fkFazendaServer: fkFazenda,
+				dataDadoServer: dia_select.value,
 			}),
 		})
 			.then(function (resposta) {
@@ -198,37 +207,46 @@ function pegarDadosSetor(grafico, fkFazenda) {
 
 						// RESET
 						temperaturaValues = [];
+						temperaturaValuesHora = [];
+						temperaturaValuesSetor = [];
 						umidadeValues = [];
+						umidadeValuesHora = [];
+						umidadeValuesSetor = [];
 						labels = [];
 						labelsHora = [];
 						labelsSetor = [];
 
 						for (var i = 0; i < json[0].length; i++) {
-							temperaturaValues.unshift(json[0][i].temperatura);
-							umidadeValues.unshift(json[0][i].umidade);
+							temperaturaValuesHora.unshift(json[0][i].temperatura);
+							umidadeValuesHora.unshift(json[0][i].umidade);
 							labelsHora.unshift(json[0][i].tempoDado);
 						}
 
-						for (var i = 0; i < json[3].length; i++) {
-							temperaturaValues.unshift(json[3][i].temperatura);
-							umidadeValues.unshift(json[3][i].umidade);
-							labelsSetor.unshift(json[3][i].nome);
+						for (var i = 0; i < json[1].length; i++) {
+							temperaturaValuesSetor.push(json[1][i].avgTemp);
+							umidadeValuesSetor.push(json[1][i].avgUmid);
+							labelsSetor.push(json[1][i].nome);
 						}
 
 						if (grafico_select.value == "dia") {
+							clearInterval(interval);
 							labels = labelsSetor;
+							umidadeValues = umidadeValuesSetor;
+							temperaturaValues = temperaturaValuesSetor;
 							setor_select.style.display = "none";
 							dia_select.style.display = "inline";
 							tipoGrafico = "bar";
-							nomeTemp = "Temperatura Média por Área (°C)";
-							nomeUmid = "Umidade Média por Área (%)";
+							nomeTemp = "Temperatura Média Diária por Setor (°C)";
+							nomeUmid = "Umidade Média Diária por Setor (%)";
 						} else {
 							labels = labelsHora;
+							umidadeValues = umidadeValuesHora;
+							temperaturaValues = temperaturaValuesHora;
 							setor_select.style.display = "inline";
 							dia_select.style.display = "none";
 							tipoGrafico = "line";
-							nomeTemp = "Temperatura por Hora (°C)";
-							nomeUmid = "Umidade por Hora (%)";
+							nomeTemp = "Temperatura em Tempo Real (°C)";
+							nomeUmid = "Umidade em Tempo Real (%)";
 						}
 
 						renderizarGraficos();
@@ -245,13 +263,7 @@ function pegarDadosSetor(grafico, fkFazenda) {
 				console.log(erro);
 			});
 
-	if (grafico == "dia") {
-		dataDado = dia_select.value;
-		pegar();
-	} else {
-		fkSetor = setor_select.value;
-		pegar();
-	}
+	pegar();
 	clearInterval(interval);
 
 	interval = setInterval(() => {
@@ -317,79 +329,3 @@ function renderizarGraficos() {
 
 	primeiroRender = false;
 }
-
-// Verifica qual gráfico foi selecionado e aplica as alterações necessárias do gráfico
-function verificar() {
-	if (grafico_select.value == "setor") {
-		setor_select.style.display = "inline";
-		dia_select.style.display = "none";
-		tipoGrafico = "line";
-		nomeTemp = "Temperatura por Hora (°C)";
-		nomeUmid = "Umidade por Hora (%)";
-		labels = labels;
-		mostrar();
-	} else {
-		setor.value = "";
-		dia.value = "01/01/2022";
-		setor.style.display = "none";
-		dia.style.display = "inline";
-		tipoGrafico = "bar";
-		nomeTemp = "Temperatura Média por Área (°C)";
-		nomeUmid = "Umidade Média por Área (%)";
-		labels = [
-			"Setor A",
-			"Setor B",
-			"Setor C",
-			"Setor D",
-			"Setor E",
-			"Setor F",
-			"Setor G",
-		];
-		mostrar();
-	}
-}
-
-/*
-// Aplica valores exemplo
-function mostrar() {
-	if (fazenda.value == "fazendaA") {
-		if (setor.value == "setorA") {
-			temperaturaValues = [20, 25, 30, 27, 21, 23, 25];
-			umidadeValues = [50, 65, 70, 85, 88, 95, 87];
-		} else if (setor.value == "setorB") {
-			temperaturaValues = [18, 17, 18, 22, 20, 19, 23];
-			umidadeValues = [30, 45, 55, 65, 70, 50, 65];
-		} else if (dia.value == "01/01/2022") {
-			temperaturaValues = [23, 25, 27, 20, 15, 17, 20];
-			umidadeValues = [50, 55, 60, 75, 65, 60, 68];
-		} else if (dia.value == "02/01/2022") {
-			temperaturaValues = [22, 26, 32, 35, 37, 32, 30];
-			umidadeValues = [40, 41, 45, 47, 50, 55, 60];
-		} else if (dia.value == "03/01/2022") {
-			temperaturaValues = [15, 17, 19, 22, 26, 30, 28];
-			umidadeValues = [30, 25, 22, 20, 24, 26, 25];
-		}
-	} else if (fazenda.value == "fazendaB") {
-		if (setor.value == "setorA") {
-			temperaturaValues = [25, 30, 32, 35, 38, 36, 32];
-			umidadeValues = [55, 60, 62, 67, 70, 68, 65];
-		} else if (setor.value == "setorB") {
-			temperaturaValues = [23, 25, 22, 21, 26, 25, 27];
-			umidadeValues = [30, 35, 37, 38, 35, 40, 38];
-		} else if (dia.value == "01/01/2022") {
-			temperaturaValues = [17, 18, 22, 25, 28, 26, 25];
-			umidadeValues = [40, 42, 45, 50, 52, 50, 47];
-		} else if (dia.value == "02/01/2022") {
-			temperaturaValues = [20, 22, 26, 22, 21, 20, 23];
-			umidadeValues = [32, 35, 37, 38, 40, 42, 45];
-		} else if (dia.value == "03/01/2022") {
-			temperaturaValues = [10, 12, 15, 18, 18, 17, 15];
-			umidadeValues = [60, 65, 65, 65, 68, 70, 88];
-		}
-	}
-
-	// Renderiza os graficos denovo
-	primeiroRender = false;
-	renderizarGraficos();
-}
-*/

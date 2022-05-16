@@ -3,6 +3,11 @@
 -- ter este arquivo aqui não significa que a tabela em seu BD estará como abaixo!
 
 /* para workbench - local - desenvolvimento */
+
+/*
+truncate table dado;
+alter table dado modify column dataDado date default(CURRENT_DATE());
+*/
 CREATE DATABASE soyventure;
 
 USE soyventure;
@@ -38,9 +43,6 @@ CREATE TABLE fazenda (
 	telCelular char(11)
 ); 
 
-alter table fazenda modify column areaHectare decimal(10,2) not null;
-alter table setor modify column modeloSensor varchar(45) default 'HOBOnet T11';
-
 create table contrato (
 	fkFuncionario int,
 	fkFazenda int,
@@ -52,7 +54,7 @@ create table contrato (
 create table setor (
 	idSetor int AUTO_INCREMENT,
 	nome varchar(45) not null,
-	modeloSensor varchar(45),
+	modeloSensor varchar(45) default 'HOBOnet T11',
 	longitudeSensor decimal(4,2),
 	latitudeSensor decimal(4,2),
 	fkFazenda int,

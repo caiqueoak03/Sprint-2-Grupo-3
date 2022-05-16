@@ -346,14 +346,17 @@ function gerarDadosSensores(req, res) {
 function pegarDadosSetor(req, res) {
 	var fkSetor = req.body.fkSetorServer;
 	var fkFazenda = req.body.fkFazendaServer;
+	var dataDado = req.body.dataDadoServer;
 
 	if (fkSetor == undefined) {
 		res.status(400).send("Seu fkSetor está undefined!");
 	} else if (fkFazenda == undefined) {
 		res.status(400).send("Seu fkFazenda está undefined!");
+	} else if (dataDado == undefined) {
+		res.status(400).send("Seu dataDado está undefined!");
 	} else {
 		usuarioModel
-			.pegarDadosSetor(fkSetor, fkFazenda)
+			.pegarDadosSetor(fkSetor, fkFazenda, dataDado)
 			.then(function (resultado) {
 				console.log("Resultado: " + resultado);
 				res.json(resultado);

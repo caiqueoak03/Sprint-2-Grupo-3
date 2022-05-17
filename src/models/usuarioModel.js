@@ -118,7 +118,7 @@ function gerarDadosSensores(fkFazendas, idSetores) {
 		var umidadeRandom = Number(Math.floor(Math.random() * 51) + 30);
 
 		// Insere 10 dados em uma data, depois insere mais 10 dados em outra data e assim por diante
-		if (contador == 50) {
+		if (contador == 10) {
 			instrucao += `
 			ALTER TABLE dado MODIFY COLUMN dataDado DATE 
 				DEFAULT(DATE_ADD(CURRENT_DATE(),interval ${incrementador} day));
@@ -341,5 +341,5 @@ module.exports = {
 	gerarSetores,
 	gerarDadosSensores,
 	pegarDadosSetor,
-	gerarDias
+	gerarDias,
 };

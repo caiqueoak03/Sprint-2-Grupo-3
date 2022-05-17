@@ -14,7 +14,7 @@ function carregarFazendas() {
 			if (resposta.ok) {
 				resposta.json().then((json) => {
 					if (json[1][0].qtdFazendas == 0) {
-						return
+						return;
 					}
 					console.log("json: " + json);
 					console.log("JSON: " + JSON.stringify(json));
@@ -92,7 +92,7 @@ function gerarSetores() {
 					sessionStorage.FK_FAZENDAS = fkFazendas;
 					sessionStorage.ID_SETORES = idSetores;
 
-					gerarDias()
+					gerarDadosSensores();
 				});
 			} else {
 				console.log("Houve um erro ao tentar carregar os setores!");
@@ -128,11 +128,9 @@ function gerarDadosSensores() {
 
 				if (resposta.ok) {
 					console.log(resposta);
-					pegarDadosSetor()
 					resposta.json().then((json) => {
 						console.log(json);
 						console.log(JSON.stringify(json));
-
 					});
 				} else {
 					console.log("Houve um erro ao carregar os dados");
@@ -146,12 +144,16 @@ function gerarDadosSensores() {
 				console.log(erro);
 			});
 
-	clearInterval(gerar)
-
+	clearInterval(gerar);
 	gerar();
+
 	setInterval(() => {
 		gerar();
 	}, intervalo);
+
+	setTimeout(() => {
+		gerarDias();
+	}, 100);
 }
 
 function gerarDias() {
@@ -182,7 +184,8 @@ function gerarDias() {
 						)}</option>
 						`;
 					}
-					gerarDadosSensores();
+
+					pegarDadosSetor();
 				});
 			} else {
 				console.log("Houve um erro ao tentar carregar os dias!");
@@ -250,10 +253,6 @@ function pegarDadosSetor() {
 						labelsHora = [];
 						labelsSetor = [];
 
-						if(json[0][0].temperatura > 25) {
-							alerta.innerHTML = "Valor acima do ideal!"
-						}
-
 						for (var i = 0; i < json[0].length; i++) {
 							temperaturaValuesHora.unshift(json[0][i].temperatura);
 							umidadeValuesHora.unshift(json[0][i].umidade);
@@ -267,7 +266,7 @@ function pegarDadosSetor() {
 						}
 
 						if (grafico_select.value == "dia") {
-							clearInterval(interval)
+							clearInterval(interval);
 							labels = labelsSetor;
 							umidadeValues = umidadeValuesSetor;
 							temperaturaValues = temperaturaValuesSetor;
@@ -302,11 +301,12 @@ function pegarDadosSetor() {
 			});
 
 	clearInterval(interval);
-	pegar();
 
 	interval = setInterval(() => {
 		pegar();
 	}, intervalo);
+
+	pegar();
 }
 
 // Renderiza o gráfico usando o chartJS

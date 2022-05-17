@@ -87,36 +87,36 @@
 					<a href="cadastroFazenda.html">Ir para a tela de cadastro</a>
 				</div>
 			</div>
-			<div class="selects">
-				<select
-					onchange=";"
-					name=""
-					id="grafico_select"
-				>
-					<option value="setor">Registro em tempo real</option>
-					<option value="dia">Registro diário por setor</option>
-				</select>
+			<div class="dashboard-navbar">
+				<div id="alerta">
+					FAZENDA RIO DOCE - SETOR 10 <br />
+					TEMPERATURA MUITO ALTA (10º)
+				</div>
+				<div class="selects">
+					<select onchange="pegarDadosSetor()" name="" id="grafico_select">
+						<option value="setor">Registro em tempo real</option>
+						<option value="dia">Registro diário por setor</option>
+					</select>
 
-				<select
-					onchange="gerarSetores()"
-					name=""
-					id="fazendas_select"
-				></select>
+					<select
+						onchange="pegarDadosSetor(), gerarSetores(), gerarDias()"
+						name=""
+						id="fazendas_select"
+					></select>
 
-				<select
-					onchange=";"
-					name=""
-					id="dia_select"
-					style="display: none"
-				></select>
+					<select
+						onchange="pegarDadosSetor()"
+						name=""
+						id="dia_select"
+						style="display: none"
+					></select>
 
-				<select
-					onchange=";"
-					name=""
-					id="setor_select"
-				></select>
-
-				<div style="background-color: white" id="alerta"></div>
+					<select
+						onchange="pegarDadosSetor()"
+						name=""
+						id="setor_select"
+					></select>
+				</div>
 			</div>
 
 			<div class="graficos-main-container">

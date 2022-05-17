@@ -114,8 +114,8 @@ function gerarDadosSensores(fkFazendas, idSetores) {
     `;
 
 	for (var i = 0; i < idSetores.length; i++) {
-		var temperaturaRandom = Number(Math.floor(Math.random() * 26) + 10);
-		var umidadeRandom = Number(Math.floor(Math.random() * 51) + 30);
+		var temperaturaRandom = Number(Math.floor(Math.random() * 51)- 5);
+		var umidadeRandom = Number(Math.floor(Math.random() * 101));
 
 		// Insere 10 dados em uma data, depois insere mais 10 dados em outra data e assim por diante
 		if (contador == 10) {
@@ -139,19 +139,26 @@ function gerarDadosSensores(fkFazendas, idSetores) {
 	return database.executar(instrucao);
 }
 
-function pegarDadosSetor(fkSetor, fkFazenda, dataDado) {
+function pegarDadosSetor(fkSetor, fkFazenda, dataDado, idFuncionario, setorLength) {
 	console.log(
 		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()",
 		fkSetor,
 		fkFazenda,
 		dataDado,
+		setorLength
 	);
 
 	var instrucao = `
-		SELECT * FROM dado WHERE fkSetor = ${fkSetor} ORDER BY idDado DESC LIMIT 8;
-		SELECT nome, truncate(avg(temperatura), 2) as avgTemp, truncate(avg(umidade), 2) as avgUmid 
-			FROM dado JOIN setor on idSetor = fkSetor 
-				WHERE setor_fkFazenda = ${fkFazenda} and dataDado = '${dataDado}' group by nome;			
+	SELECT * FROM dado JOIN setor on idSetor = fkSetor JOIN fazenda on idFazenda = fkFazenda
+		WHERE fkSetor = ${fkSetor} ORDER BY idDado DESC LIMIT 8;
+	SELECT nome, truncate(avg(temperatura), 2) as avgTemp, truncate(avg(umidade), 2) as avgUmid 
+		FROM dado JOIN setor on idSetor = fkSetor 
+			WHERE setor_fkFazenda = ${fkFazenda} and dataDado = '${dataDado}' group by nome;
+	SELECT temperatura, umidade, tempoDado, fazenda.nome as fazendaNome, setor.nome as setorNome
+		FROM dado JOIN setor on idSetor = fkSetor JOIN fazenda ON idFazenda = fkFazenda 
+			JOIN contrato ON contrato.fkFazenda = idFazenda
+				WHERE contrato.fkFuncionario = ${idFuncionario} ORDER BY idDado DESC LIMIT ${setorLength};
+					
     `;
 
 	console.log("Executando a instrução SQL: \n" + instrucao);
@@ -166,6 +173,19 @@ function entrar(email, senha) {
 	);
 	var instrucao = `
         SELECT * FROM funcionario WHERE email = '${email}' AND senha = '${senha}';
+    `;
+	console.log("Executando a instrução SQL: \n" + instrucao);
+	return database.executar(instrucao);
+}
+
+function limparDadosSensores() {
+	console.log(
+		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ",
+		email,
+		senha,
+	);
+	var instrucao = `
+        TRUNCATE TABLE dado;
     `;
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);
@@ -342,4 +362,5 @@ module.exports = {
 	gerarDadosSensores,
 	pegarDadosSetor,
 	gerarDias,
+	limparDadosSensores
 };

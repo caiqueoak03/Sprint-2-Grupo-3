@@ -54,19 +54,35 @@
 
 .dashboard-navbar {
 	display: flex;
+	justify-content: space-between;
 }
 
 #alerta {
 	color: white;
-	margin-left: 150px;
+	margin-left: 10px;
 	margin-bottom: 5px;
+	display: flex;
+	align-items: center;
+	font-size: .9rem;
+	width: 100%;
+	column-gap: 40px;
+	text-transform: capitalize;
+}
+
+.alerta-nomes-container {
+	display: flex;
+	justify-content: center;
+}
+
+.alerta-msg {
+	text-align: center;
+	width: 100%;
 }
 
 .selects {
 	display: flex;
 	align-items: center;
 	column-gap: 5px;
-	margin-left: auto;
 	margin-right: 10px;
 }
 

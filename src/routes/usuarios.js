@@ -71,4 +71,8 @@ router.post("/pegarDadosSetor", function (req, res) {
 	usuarioController.pegarDadosSetor(req, res);
 });
 
+router.post("/limparDadosSensores", function (req, res) {
+	usuarioController.limparDadosSensores(req, res);
+});
+
 module.exports = router;

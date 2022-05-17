@@ -102,5 +102,3 @@ CREATE TABLE medida (
 	momento DATETIME,
 	fk_aquario INT
 );
-
-

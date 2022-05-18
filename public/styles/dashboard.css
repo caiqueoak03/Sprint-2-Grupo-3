@@ -10,7 +10,7 @@
 	justify-content: space-evenly;
 	box-sizing: border-box;
 	width: 70%;
-	padding: 10px 0;
+	padding: 5px 0;
 	height: 100vh;
 }
 
@@ -55,28 +55,47 @@
 .dashboard-navbar {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 }
 
 #alerta {
-	color: white;
-	margin-left: 10px;
+	margin-left: 5px;
 	margin-bottom: 5px;
 	display: flex;
 	align-items: center;
-	font-size: .9rem;
-	width: 100%;
-	column-gap: 40px;
+	justify-content: center;
+	width: 500px;
+	column-gap: 20px;
 	text-transform: capitalize;
+	background-color: #555;
+	border-radius: 10px;
+	border: 2px solid #2ac28a;
+	height: 60px;
+	color: #fff;
 }
 
-.alerta-nomes-container {
+.alertas-container {
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+	row-gap: 5px;
+}
+
+#alertaTemp {
+
+} 
+
+#alertaUmid {
+
 }
 
 .alerta-msg {
 	text-align: center;
 	width: 100%;
+}
+
+.alerta-nomes-container {
+	display: flex;
+	justify-content: center;
 }
 
 .selects {

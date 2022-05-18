@@ -114,8 +114,8 @@ function gerarDadosSensores(fkFazendas, idSetores) {
     `;
 
 	for (var i = 0; i < idSetores.length; i++) {
-		var temperaturaRandom = Number(Math.floor(Math.random() * 51)- 5);
-		var umidadeRandom = Number(Math.floor(Math.random() * 101));
+		var temperaturaRandom = Math.random() * 42 - 2;
+		var umidadeRandom = Math.random() * 60 + 20;
 
 		// Insere 10 dados em uma data, depois insere mais 10 dados em outra data e assim por diante
 		if (contador == 10) {

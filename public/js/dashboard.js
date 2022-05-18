@@ -302,32 +302,40 @@ function pegarDadosSetor() {
               labelsSetor.push(json[1][i].nome);
             }
 
-			// Randomiza a ordem do Json 
-			for(var i = 0; i < json[2].length; i++) {
-				var indexRand = Math.random() * json
-			}
+            // Randomiza a ordem do Json 
+            var arr = json[2];
+            var currentIndex = arr.length;
+            var randomIndex;
+
+            while (currentIndex != 0) {
+
+              randomIndex = Math.floor(Math.random() * currentIndex);
+              currentIndex--;
+
+              [arr[currentIndex], arr[randomIndex]] = [arr[randomIndex], arr[currentIndex]];
+            }
 
             // Gerador de alertas
-            for (var i = 0; i < json[2].length; i++) {
-              if (json[2][i].temperatura >= 35) {
-                temp_nome.innerHTML = `${json[2][i].fazendaNome} - ${json[2][i].setorNome}`;
+            for (var i = 0; i < arr.length; i++) {
+              if (arr[i].temperatura >= 35) {
+                temp_nome.innerHTML = `${arr[i].fazendaNome} - ${arr[i].setorNome}`;
                 alerta_temp_msg.innerHTML =
-                  "Temperatura muito alta " + json[2][i].temperatura;
-              } else if (json[2][i].temperatura <= 10) {
-				temp_nome.innerHTML = `${json[2][i].fazendaNome} - ${json[2][i].setorNome}`;
+                  `Temperatura muito <b style='color: red'>alta ${arr[i].temperatura} ºC</b>`;
+              } else if (arr[i].temperatura <= 10) {
+                temp_nome.innerHTML = `${arr[i].fazendaNome} - ${arr[i].setorNome}`;
                 alerta_temp_msg.innerHTML =
-                  "Temperatura muito baixa " + json[2][i].temperatura;
-			  }
+                  `Temperatura muito <b style='color: rgb(255, 100, 100)'>baixa ${arr[i].temperatura} ºC</b>`;
+              }
 
-              if (json[2][i].umidade >= 80) {
-                umid_nome.innerHTML = `${json[2][i].fazendaNome} - ${json[2][i].setorNome}`;
+              if (arr[i].umidade >= 80) {
+                umid_nome.innerHTML = `${arr[i].fazendaNome} - ${arr[i].setorNome}`;
                 alerta_umid_msg.innerHTML =
-                  "Umidade muito alta " + json[2][i].umidade;
-              } else if (json[2][i].umidade <= 30) {
-				umid_nome.innerHTML = `${json[2][i].fazendaNome} - ${json[2][i].setorNome}`;
+                  `Umidade muito <b style='color: blue'>alta ${arr[i].umidade}%</b>`;
+              } else if (arr[i].umidade <= 30) {
+                umid_nome.innerHTML = `${arr[i].fazendaNome} - ${arr[i].setorNome}`;
                 alerta_umid_msg.innerHTML =
-                  "Umidade muito baixa " + json[2][i].umidade;
-			  }
+                  `Umidade muito <b style='color: rgb(100, 100, 255)'>baixa ${arr[i].umidade}%</b>`;
+              }
             }
 
             if (grafico_select.value == "dia") {

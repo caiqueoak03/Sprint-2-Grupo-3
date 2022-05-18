@@ -67,7 +67,7 @@ header {
 	align-items: center;
 	flex-direction: column;
 	row-gap: 10px;
-	margin: 25px 0 15px;
+	margin: 40px 0 30px;
 }
 
 .usuario-container b {
@@ -114,7 +114,7 @@ header {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 42px;
+	height: 45px;
 	width: 300px;
 	border-radius: 10px;
 	text-align: center;

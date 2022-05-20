@@ -187,7 +187,7 @@ function gerarDadosSensores() {
 
 	setTimeout(() => {
 		gerarDias();
-	}, 100);
+	}, 500);
 }
 
 function gerarDias() {

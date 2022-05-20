@@ -3,7 +3,7 @@ var database = require("../database/config");
 function carregarKPIs(idFuncionario) {
 	// Retorna os valores das KPIs, o último select retorna o AVG de todas as fazendas para ser filtrado no JS
 	instrucaoSql = `
-    SELECT fazenda.nome, setor.nome, tempoDado, MONTH(dataDado) as numMes, max(temperatura) as maxTemp FROM dado 
+    SELECT fazenda.nome as fazenda, setor.nome as setor, tempoDado, MONTH(dataDado) as numMes, max(temperatura) as maxTemp FROM dado 
         JOIN setor ON idSetor = fkSetor 
         JOIN fazenda ON idFazenda = setor.fkFazenda
         JOIN contrato ON contrato.fkFazenda = idFazenda
@@ -18,7 +18,7 @@ function carregarKPIs(idFuncionario) {
 			WHERE idFuncionario = ${idFuncionario} order by temperatura
             )
         group by fazenda.nome order by rand() limit 1;
-    SELECT fazenda.nome, setor.nome, tempoDado, dataDado, max(umidade) as maxUmid FROM dado 
+    SELECT fazenda.nome as fazenda, setor.nome as setor, tempoDado, dataDado, max(umidade) as maxUmid FROM dado 
         JOIN setor ON idSetor = fkSetor 
         JOIN fazenda ON idFazenda = setor.fkFazenda
         JOIN contrato ON contrato.fkFazenda = idFazenda
@@ -33,7 +33,7 @@ function carregarKPIs(idFuncionario) {
             WHERE idFuncionario = ${idFuncionario} order by umidade
             )
         group by fazenda.nome order by rand() limit 1;
-    SELECT fazenda.nome, setor.nome, tempoDado, dataDado, min(temperatura) as minTemp FROM dado 
+    SELECT fazenda.nome as fazenda, setor.nome as setor, tempoDado, dataDado, min(temperatura) as minTemp FROM dado 
         JOIN setor ON idSetor = fkSetor 
         JOIN fazenda ON idFazenda = setor.fkFazenda
         JOIN contrato ON contrato.fkFazenda = idFazenda
@@ -48,7 +48,7 @@ function carregarKPIs(idFuncionario) {
 			WHERE idFuncionario = ${idFuncionario} order by temperatura
             )
         group by fazenda.nome order by rand() limit 1;
-    SELECT fazenda.nome, setor.nome, tempoDado, dataDado, min(umidade) as minUmid FROM dado 
+    SELECT fazenda.nome as fazenda, setor.nome as setor, tempoDado, dataDado, min(umidade) as minUmid FROM dado 
         JOIN setor ON idSetor = fkSetor 
         JOIN fazenda ON idFazenda = setor.fkFazenda
         JOIN contrato ON contrato.fkFazenda = idFazenda
@@ -63,7 +63,7 @@ function carregarKPIs(idFuncionario) {
             WHERE idFuncionario = ${idFuncionario} order by umidade
             )
         group by fazenda.nome order by rand() limit 1;
-    SELECT fazenda.nome, truncate(avg(temperatura), 2) as avgTemp, truncate(avg(umidade),2) as avgUmid FROM dado
+    SELECT fazenda.nome as fazenda, truncate(avg(temperatura), 1) as avgTemp, truncate(avg(umidade),1) as avgUmid FROM dado
         JOIN setor on fkSetor = idSetor
         JOIN fazenda on idFazenda = setor.fkFazenda
         JOIN contrato on contrato.fkFazenda = idFazenda

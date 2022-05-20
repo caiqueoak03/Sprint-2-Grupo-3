@@ -1,149 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Soy Venture</title>
-		<link rel="stylesheet" href="../../styles/headerDashboard.css" />
-		<link rel="stylesheet" href="../../styles/confirmationBox.css" />
-		<link rel="stylesheet" href="../../styles/KPIs.css" />
-		<link
-			rel="shortcut icon"
-			href="../../images/logo.png"
-			type="image/x-icon"
-		/>
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400&family=Roboto:ital,wght@0,400;0,700;1,700&display=swap"
-			rel="stylesheet"
-		/>
-		<script
-			src="https://kit.fontawesome.com/8c4cdd8d42.js"
-			crossorigin="anonymous"
-		></script>
-		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-		<script src="//code.jivosite.com/widget/ENyDianWhh" async></script>
-	</head>
-	<body onload="iniciarSessao(), validarSessao(), carregarKPIs()">
-		<!-- Wrapper -->
-		<div id="wrapper_loading"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Soy Venture</title>
+    <link rel="stylesheet" href="../../styles/headerDashboard.css" />
+    <link rel="stylesheet" href="../../styles/confirmationBox.css" />
+    <link rel="stylesheet" href="../../styles/KPIs.css" />
+    <link
+      rel="shortcut icon"
+      href="../../images/logo.png"
+      type="image/x-icon"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400&family=Roboto:ital,wght@0,400;0,700;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/8c4cdd8d42.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="//code.jivosite.com/widget/ENyDianWhh" async></script>
+  </head>
+  <body onload="iniciarSessao(), validarSessao(), carregarKPIs()">
+    <!-- Wrapper -->
+    <div id="wrapper_loading"></div>
 
-		<!-- HEADER -->
-		<header>
-			<span class="logo">
-				<img src="../../images/logo.png" alt="" class="logo-img" />
-				<h1 class="nome-empresa">Soy Venture</h1>
-			</span>
+    <!-- HEADER -->
+    <header>
+      <span class="logo">
+        <img src="../../images/logo.png" alt="" class="logo-img" />
+        <h1 class="nome-empresa">Soy Venture</h1>
+      </span>
 
-			<div class="usuario-container">
-				<img
-					src="../../images/gerente-img.png"
-					id="user_profile_pic"
-					alt=""
-					class="img"
-				/>
-				<p class="usuario-nome">Olá, <b id="nome_usuario"></b></p>
-			</div>
+      <div class="usuario-container">
+        <img
+          src="../../images/gerente-img.png"
+          id="user_profile_pic"
+          alt=""
+          class="img"
+        />
+        <p class="usuario-nome">Olá, <b id="nome_usuario"></b></p>
+      </div>
 
-			<div class="main-nav">
-				<ul>
-					<a class="navs nav1" href="dashboard.html">Gráficos</a>
-					<a class="navs nav2" href="KPIs.html">Indicadores de Performance</a>
-					<a class="navs nav4" id="cad_fazenda" href="cadastroFazenda.html"
-						>Cadastrar Fazenda</a
-					>
-					<a
-						class="navs nav5"
-						id="cad_funcionario"
-						href="cadastro_funcionario.html"
-						>Cadastrar Funcionário</a
-					>
-					<a class="navs nav6" href="alterarDados.html">Alterar Dados</a>
-					<a class="navs nav7" onclick="mostrarBox()">Sair</a>
-				</ul>
-			</div>
-		</header>
+      <div class="main-nav">
+        <ul>
+          <a class="navs nav1" href="dashboard.html">Gráficos</a>
+          <a class="navs nav2" href="KPIs.html">Indicadores de Performance</a>
+          <a class="navs nav4" id="cad_fazenda" href="cadastroFazenda.html"
+            >Cadastrar Fazenda</a
+          >
+          <a
+            class="navs nav5"
+            id="cad_funcionario"
+            href="cadastro_funcionario.html"
+            >Cadastrar Funcionário</a
+          >
+          <a class="navs nav6" href="alterarDados.html">Alterar Dados</a>
+          <a class="navs nav7" onclick="mostrarBox()">Sair</a>
+        </ul>
+      </div>
+    </header>
 
-		<!-- Confirmation Box -->
-		<div id="confirmation_wrapper">
-			<div class="confirmation-box">
-				<p>Deseja sair da sua conta?</p>
-				<div class="sim-ou-nao">
-					<a onclick="limparSessao()">sim</a>
-					<a onclick="esconderBox()">não</a>
-				</div>
-			</div>
-		</div>
+    <!-- Confirmation Box -->
+    <div id="confirmation_wrapper">
+      <div class="confirmation-box">
+        <p>Deseja sair da sua conta?</p>
+        <div class="sim-ou-nao">
+          <a onclick="limparSessao()">sim</a>
+          <a onclick="esconderBox()">não</a>
+        </div>
+      </div>
+    </div>
 
-		<!-- KPIs -->
+    <!-- KPIs -->
 
-		<div class="main-container">
-			<h1 id="h1_title">Registros do Mês</h1>
-			<div class="cards-grupo1 cards-grupos">
-				<div class="cards" style="background-color: green">
-					<h2>Melhores Registros Médios</h2>
-					<h3 id="fazenda_melhor_registro">
-						Fazenda São João <br />
-						<span id="fazenda_melhor_valor" class="kpi-valores"> (35°C) </span>
-						<br />
-						Fazenda São João <br />
-						<span id="fazenda_melhor_valor" class="kpi-valores"> (35°C) </span>
-					</h3>
-				</div>
+    <div class="main-container">
+      <h1 id="h1_title">Registros do Mês</h1>
+      <div class="cards-grupo1 cards-grupos">
+        <div class="cards" style="background-color: green">
+          <h2>Melhores Registros Médios</h2>
+          <div id="melhor_registro_container">
+            <h3 id="melhor_registro_nome_temp">Fazenda São João</h3>
+            <div id="melhor_registro_valor_temp" class="kpi-valores">
+              (35°C)
+            </div>
+            <h3 id="melhor_registro_nome_umid">Fazenda rio bonito</h3>
+            <div id="melhor_registro_valor_umid" class="kpi-valores">(50%)</div>
+          </div>
+        </div>
 
-				<div class="cards" style="background-color: red">
-					<h2>Maior Registro de Temperatura</h2>
-					<h3 class="cards-conteudo" id="fazenda_maior_temp">
-						Fazenda São João <br />
-						Setor A | 16:00hrs | 01/01/2022 <br />
-						<span class="kpi-valores">(35°C)</span>
-					</h3>
-				</div>
+        <div class="cards" style="background-color: red">
+          <h2>Maior Registro de Temperatura</h2>
+          <div class="cards-conteudo" id="maior_temp_container">
+            <h3 id="maior_temp_fazenda">Fazenda teste</h3>
+            <span id="maior_temp_setor">Setor A</span>
+			<span id="maior_temp_horario">16:00hrs</span>
+			<span id="maior_temp_dia">01/01/2022</span>
+            <div id="maior_valor_temp" class="kpi-valores">(35°C)</div>
+          </div>
+        </div>
 
-				<div class="cards" style="background-color: blue">
-					<h2>Maior Registro de Umidade</h2>
-					<h3 class="cards-conteudo" id="fazenda_maior_umid">
-						Fazenda São João <br />
-						Setor A | 12:00hrs | 01/01/2022 <br />
-						<span class="kpi-valores">(88%)</span>
-					</h3>
-				</div>
-			</div>
+        <div class="cards" style="background-color: blue">
+          <h2>Maior Registro de Umidade</h2>
+          <div class="cards-conteudo" id="maior_umid_container">
+            <h3 id="maior_umid_fazenda">Fazenda teste</h3>
+            <span id="maior_umid_setor">Setor A</span>
+			<span id="maior_umid_horario">16:00hrs</span>
+			<span id="maior_umid_dia">01/01/2022</span>
+            <div id="maior_valor_umid" class="kpi-valores">(50%)</div>
+          </div>
+        </div>
+      </div>
 
-			<div class="cards-grupo2 cards-grupos">
-				<div class="cards" style="background-color: rgb(100, 200, 100)">
-					<h2 id="piores_h2">Piores Registros Médios</h2>
-					<h3 id="fazenda_pior_registro">
-						Fazenda São João <br />
-						<span id="fazenda_pior_valor" class="kpi-valores"> (35°C) </span>
-						<br />
-						Fazenda São João <br />
-						<span id="fazenda_pior_valor" class="kpi-valores"> (35°C) </span>
-					</h3>
-				</div>
+      <div class="cards-grupo2 cards-grupos">
+        <div class="cards" style="background-color: rgb(100, 200, 100)">
+          <h2 id="piores_h2">Piores Registros Médios</h2>
+          <div id="fazenda_pior_registro">
+            <h3 id="pior_registro_nome_temp">Fazenda São João</h3>
+            <div id="pior_registro_valor_temp" class="kpi-valores">(35°C)</div>
+            <h3 id="pior_registro_nome_umid">Fazenda rio bonito</h3>
+            <div id="pior_registro_valor_umid" class="kpi-valores">(50%)</div>
+          </div>
+        </div>
 
-				<div class="cards" style="background-color: rgb(200, 100, 100)">
-					<h2>Menor Registro de Temperatura</h2>
-					<h3 class="cards-conteudo" id="fazenda_menor_temp">
-						Fazenda Rio Bonito <br />
-						Setor B | 05:00hrs | 02/01/2022 <br />
-						<span class="kpi-valores">(18°C)</span>
-					</h3>
-				</div>
+        <div class="cards" style="background-color: rgb(200, 100, 100)">
+          <h2>Menor Registro de Temperatura</h2>
+          <div class="cards-conteudo" id="menor_temp_container">
+            <h3 id="menor_temp_fazenda">Fazenda teste</h3>
+            <span id="menor_temp_setor">Setor A</span>
+			<span id="menor_temp_horario">16:00hrs</span>
+			<span id="menor_temp_dia">01/01/2022</span>
+            <div id="menor_valor_temp" class="kpi-valores">(35°C)</div>
+          </div>
+        </div>
 
-				<div class="cards" style="background-color: rgb(100, 100, 200)">
-					<h2>Menor Registro de Umidade</h2>
-					<h3 class="cards-conteudo" id="fazenda_menor_umid">
-						Fazenda Rio Bonito <br />
-						Setor B | 15:00hrs | 03/01/2022 <br />
-						<span class="kpi-valores">(42%)</span>
-					</h3>
-				</div>
-			</div>
-		</div>
-	</body>
+        <div class="cards" style="background-color: rgb(100, 100, 200)">
+          <h2>Menor Registro de Umidade</h2>
+          <div class="cards-conteudo" id="menor_umid_container">
+            <h3 id="menor_umid_fazenda">Fazenda teste</h3>
+            <span id="menor_umid_setor">Setor A</span>
+			<span id="menor_umid_horario">16:00hrs</span>
+			<span id="menor_umid_dia">01/01/2022</span>
+            <div id="menor_valor_umid" class="kpi-valores">(35°C)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
 <script src="../../js/funcoes.js"></script>
 <script src="../../js/KPIs.js"></script>

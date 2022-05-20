@@ -39,6 +39,14 @@ function mostrarBoxes() {
 	}
 }
 
+function esconderBox() {
+	confirmation_wrapper.style.display = "none";
+}
+
+function mostrarBox() {
+	confirmation_wrapper.style.display = "flex";
+}
+
 function checkGerente() {
 	var cargo = in_cargo.value;
 

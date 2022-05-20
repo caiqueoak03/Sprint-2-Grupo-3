@@ -54,8 +54,9 @@
 
 .dashboard-navbar {
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
+	column-gap: 10px;
 }
 
 #alerta {
@@ -64,7 +65,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 500px;
+	width: 495px;
 	column-gap: 20px;
 	text-transform: capitalize;
 	background-color: #555;
@@ -81,11 +82,9 @@
 }
 
 #alertaTemp {
-
-} 
+}
 
 #alertaUmid {
-
 }
 
 .alerta-msg {

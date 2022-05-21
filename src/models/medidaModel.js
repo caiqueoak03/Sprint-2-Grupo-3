@@ -3,64 +3,64 @@ var database = require("../database/config");
 function carregarKPIs(idFuncionario) {
 	// Retorna os valores das KPIs, o último select retorna o AVG de todas as fazendas para ser filtrado no JS
 	instrucaoSql = `
-    SELECT fazenda.nome as fazenda, setor.nome as setor, tempoDado, MONTH(dataDado) as numMes, max(temperatura) as maxTemp FROM dado 
+    SELECT fazenda.nome as fazenda, setor.nome as setor, tempoDado, dataDado, MONTH(dataDado) as numMes, max(temperatura) as maxTemp, DATE_FORMAT(dataDado,'%d/%m/%Y') as dataDado FROM dado 
         JOIN setor ON idSetor = fkSetor 
         JOIN fazenda ON idFazenda = setor.fkFazenda
         JOIN contrato ON contrato.fkFazenda = idFazenda
         JOIN funcionario ON idFuncionario = fkFuncionario
-        WHERE idFuncionario = ${idFuncionario} and temperatura = 
+        WHERE idFuncionario = ${idFuncionario} and month(dataDado) = MONTH(CURRENT_DATE()) and temperatura = 
 			(
 			SELECT max(temperatura) FROM dado 
 			JOIN setor ON idSetor = fkSetor 
 			JOIN fazenda ON idFazenda = setor.fkFazenda
 			JOIN contrato ON contrato.fkFazenda = idFazenda
 			JOIN funcionario ON idFuncionario = fkFuncionario
-			WHERE idFuncionario = ${idFuncionario} order by temperatura
+			WHERE idFuncionario = ${idFuncionario} and month(dataDado) = MONTH(CURRENT_DATE()) order by temperatura
             )
         group by fazenda.nome order by rand() limit 1;
-    SELECT fazenda.nome as fazenda, setor.nome as setor, tempoDado, dataDado, max(umidade) as maxUmid FROM dado 
+    SELECT fazenda.nome as fazenda, setor.nome as setor, tempoDado, dataDado, max(umidade) as maxUmid, DATE_FORMAT(dataDado,'%d/%m/%Y') as dataDado FROM dado 
         JOIN setor ON idSetor = fkSetor 
         JOIN fazenda ON idFazenda = setor.fkFazenda
         JOIN contrato ON contrato.fkFazenda = idFazenda
         JOIN funcionario ON idFuncionario = fkFuncionario
-        WHERE idFuncionario = ${idFuncionario} and umidade = 
+        WHERE idFuncionario = ${idFuncionario} and month(dataDado) = MONTH(CURRENT_DATE()) and umidade = 
             (
             SELECT max(umidade) FROM dado 
             JOIN setor ON idSetor = fkSetor 
             JOIN fazenda ON idFazenda = setor.fkFazenda
             JOIN contrato ON contrato.fkFazenda = idFazenda
             JOIN funcionario ON idFuncionario = fkFuncionario
-            WHERE idFuncionario = ${idFuncionario} order by umidade
+            WHERE idFuncionario = ${idFuncionario} and month(dataDado) = MONTH(CURRENT_DATE()) order by umidade
             )
         group by fazenda.nome order by rand() limit 1;
-    SELECT fazenda.nome as fazenda, setor.nome as setor, tempoDado, dataDado, min(temperatura) as minTemp FROM dado 
+    SELECT fazenda.nome as fazenda, setor.nome as setor, tempoDado, dataDado, min(temperatura) as minTemp, DATE_FORMAT(dataDado,'%d/%m/%Y') as dataDado FROM dado 
         JOIN setor ON idSetor = fkSetor 
         JOIN fazenda ON idFazenda = setor.fkFazenda
         JOIN contrato ON contrato.fkFazenda = idFazenda
         JOIN funcionario ON idFuncionario = fkFuncionario
-        WHERE idFuncionario = ${idFuncionario} and temperatura = 
+        WHERE idFuncionario = ${idFuncionario} and month(dataDado) = MONTH(CURRENT_DATE()) and temperatura = 
 			(
 			SELECT min(temperatura) FROM dado 
 			JOIN setor ON idSetor = fkSetor 
 			JOIN fazenda ON idFazenda = setor.fkFazenda
 			JOIN contrato ON contrato.fkFazenda = idFazenda
 			JOIN funcionario ON idFuncionario = fkFuncionario
-			WHERE idFuncionario = ${idFuncionario} order by temperatura
+			WHERE idFuncionario = ${idFuncionario} and month(dataDado) = MONTH(CURRENT_DATE()) order by temperatura
             )
         group by fazenda.nome order by rand() limit 1;
-    SELECT fazenda.nome as fazenda, setor.nome as setor, tempoDado, dataDado, min(umidade) as minUmid FROM dado 
+    SELECT fazenda.nome as fazenda, setor.nome as setor, tempoDado, dataDado, min(umidade) as minUmid, DATE_FORMAT(dataDado,'%d/%m/%Y') as dataDado FROM dado 
         JOIN setor ON idSetor = fkSetor 
         JOIN fazenda ON idFazenda = setor.fkFazenda
         JOIN contrato ON contrato.fkFazenda = idFazenda
         JOIN funcionario ON idFuncionario = fkFuncionario
-        WHERE idFuncionario = ${idFuncionario} and umidade = 
+        WHERE idFuncionario = ${idFuncionario} and month(dataDado) = MONTH(CURRENT_DATE()) and umidade = 
             (
             SELECT min(umidade) FROM dado 
             JOIN setor ON idSetor = fkSetor 
             JOIN fazenda ON idFazenda = setor.fkFazenda
             JOIN contrato ON contrato.fkFazenda = idFazenda
             JOIN funcionario ON idFuncionario = fkFuncionario
-            WHERE idFuncionario = ${idFuncionario} order by umidade
+            WHERE idFuncionario = ${idFuncionario} and month(dataDado) = MONTH(CURRENT_DATE()) order by umidade
             )
         group by fazenda.nome order by rand() limit 1;
     SELECT fazenda.nome as fazenda, truncate(avg(temperatura), 1) as avgTemp, truncate(avg(umidade),1) as avgUmid FROM dado

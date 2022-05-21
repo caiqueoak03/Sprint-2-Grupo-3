@@ -17,7 +17,20 @@ function carregarKPIs() {
 					console.log("JSON: " + JSON.stringify(json));
 					// alert("JSON: " + JSON.stringify(json));
 
-					var meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+					var meses = [
+						"Janeiro",
+						"Fevereiro",
+						"Março",
+						"Abril",
+						"Maio",
+						"Junho",
+						"Julho",
+						"Agosto",
+						"Setembro",
+						"Outubro",
+						"Novembro",
+						"Dezembro",
+					];
 
 					var tempIdeal = 25,
 						umidIdeal = 65,
@@ -63,8 +76,8 @@ function carregarKPIs() {
 					}
 
 					var jsonMaxTemp = json[0][0];
-					var jsonMaxUmid = json[1][0];
 					var jsonMinTemp = json[2][0];
+					var jsonMaxUmid = json[1][0];
 					var jsonMinUmid = json[3][0];
 
 					// Renderizando os melhores registros médios no HTML
@@ -79,11 +92,45 @@ function carregarKPIs() {
 					pior_registro_nome_umid.innerHTML = jsonUmidIdealAfastado.fazenda;
 					pior_registro_valor_umid.innerHTML = `(${jsonUmidIdealAfastado.avgUmid}%)`;
 
-					// Renderizando os melhores registros de temperatura no HTML
-					melhor_registro_nome_temp.innerHTML = jsonTempIdealProx.fazenda;
-					melhor_registro_valor_temp.innerHTML = `(${jsonTempIdealProx.avgTemp} ºC)`;
-					melhor_registro_nome_umid.innerHTML = jsonUmidIdealProx.fazenda;
-					melhor_registro_valor_umid.innerHTML = `(${jsonUmidIdealProx.avgUmid}%)`;
+					// Renderizando o maior registro de temperatura no HTML
+					maior_temp_fazenda.innerHTML = jsonMaxTemp.fazenda;
+					maior_temp_setor.innerHTML = jsonMaxTemp.setor + " |&nbsp";
+					maior_temp_horario.innerHTML =
+						"" + jsonMaxTemp.tempoDado.slice(0, 5) + "hrs |&nbsp";
+					maior_temp_dia.innerHTML = jsonMaxTemp.dataDado
+						.slice(0, 10)
+						.replaceAll("-", "/");
+					maior_valor_temp.innerHTML = `(${jsonMaxTemp.maxTemp} ºC)`;
+
+					// Renderizando o menor registro de temperatura no HTML
+					menor_temp_fazenda.innerHTML = jsonMinTemp.fazenda;
+					menor_temp_setor.innerHTML = jsonMinTemp.setor + " |&nbsp";
+					menor_temp_horario.innerHTML =
+						jsonMinTemp.tempoDado.slice(0, 5) + "hrs |&nbsp";
+					menor_temp_dia.innerHTML = jsonMinTemp.dataDado
+						.slice(0, 10)
+						.replaceAll("-", "/");
+					menor_valor_temp.innerHTML = `(${jsonMinTemp.minTemp} ºC)`;
+
+					// Renderizando o maior registro de umidade no HTML
+					maior_umid_fazenda.innerHTML = jsonMaxUmid.fazenda;
+					maior_umid_setor.innerHTML = jsonMaxUmid.setor + " |&nbsp";
+					maior_umid_horario.innerHTML =
+						jsonMaxUmid.tempoDado.slice(0, 5) + "hrs |&nbsp";
+					maior_umid_dia.innerHTML = jsonMaxUmid.dataDado
+						.slice(0, 10)
+						.replaceAll("-", "/");
+					maior_valor_umid.innerHTML = `(${jsonMaxUmid.maxUmid}%)`;
+
+					// Renderizando o menor registro de umidade no HTML
+					menor_umid_fazenda.innerHTML = jsonMinUmid.fazenda;
+					menor_umid_setor.innerHTML = jsonMinUmid.setor + " |&nbsp";
+					menor_umid_horario.innerHTML =
+						jsonMinUmid.tempoDado.slice(0, 5) + "hrs |&nbsp";
+					menor_umid_dia.innerHTML = jsonMinUmid.dataDado
+						.slice(0, 10)
+						.replaceAll("-", "/");
+					menor_valor_umid.innerHTML = `(${jsonMinUmid.minUmid}%)`;
 				});
 			} else {
 				console.log("Houve um erro ao tentar carregar os dados!");

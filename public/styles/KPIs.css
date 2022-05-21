@@ -48,13 +48,38 @@
 
 .cards h3 {
 	font-size: 1.34rem;
+	text-transform: capitalize;
+}
+
+.cards span {
+	font-size: 1.2rem;
 }
 
 .cards-conteudo {
 	margin: 15px 0;
 }
 
+.dados-container {
+	display: flex;
+	margin: 10px;
+}
+
 .kpi-valores {
 	font-size: 1.5rem;
 	font-weight: 1000;
+}
+
+#pior_registro_nome_temp,
+#melhor_registro_nome_temp {
+	padding-top: 5px;
+}
+
+#pior_registro_valor_umid,
+#melhor_registro_valor_umid {
+	padding-bottom: 5px;
+}
+
+#pior_registro_valor_temp,
+#melhor_registro_valor_temp {
+	padding-bottom: 5px;
 }

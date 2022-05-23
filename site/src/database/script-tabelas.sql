@@ -81,6 +81,15 @@ create table dado (
 
 /* para sql server - remoto - produção */
 
+/*
+drop table dado;
+drop table setor;
+drop table contrato;
+drop table funcionario;
+drop table fazenda;
+drop table empresa;
+*/
+
 CREATE TABLE empresa (
 	idEmpresa int primary key IDENTITY(1,1),
 	nome varchar(45) not null,

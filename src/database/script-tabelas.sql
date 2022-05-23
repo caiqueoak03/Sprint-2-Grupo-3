@@ -112,24 +112,27 @@ CREATE TABLE fazenda (
 	telCelular char(11)
 ); 
 
+
 create table contrato (
 	fkFuncionario int,
 	fkFazenda int,
-	foreign key (fkFuncionario) references funcionario(idFuncionario),
+	fkEmpresa int,
+	foreign key (fkFuncionario, fkEmpresa) references funcionario(idFuncionario, fkEmpresa),
 	foreign key (fkFazenda) references fazenda(idFazenda),
-	primary key (fkFuncionario, fkFazenda)
+	primary key (fkEmpresa, fkFazenda, fkFuncionario)
 );
 
 create table setor (
 	idSetor int IDENTITY(1,1),
+	fkFazenda int,
 	nome varchar(45) not null,
 	modeloSensor varchar(45) default 'HOBOnet T11',
 	longitudeSensor decimal(4,2),
 	latitudeSensor decimal(4,2),
-	fkFazenda int,
 	foreign key (fkFazenda) references fazenda(idFazenda),
-	primary key (idSetor, fkFazenda)
+	primary key (fkFazenda, idSetor)
 );
+
 
 create table dado (
 	idDado int IDENTITY(1,1),
@@ -139,7 +142,6 @@ create table dado (
 	tempoDado time default CONVERT (time, SYSDATETIME()),
 	fkSetor int,
 	setor_fkFazenda int,
-	foreign key (fkSetor) references setor(idSetor),
-	foreign key (setor_fkFazenda) references setor(fkFazenda),
-	primary key (idDado, fkSetor, setor_fkFazenda)
+	foreign key (setor_fkFazenda, fkSetor) references setor(fkFazenda, idSetor),
+	primary key (setor_fkFazenda, fkSetor, idDado)
 );

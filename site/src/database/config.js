@@ -6,7 +6,7 @@ var sqlServerConfig = {
   user: "admin-acquatec-5",
   password: "#Gfgrupo5",
   database: "soyventure",
-  server: "svr-acquatec-grupo5/soyventure",
+  server: "svr-acquatec-grupo5.database.windows.net",
   pool: {
     max: 10,
     min: 0,

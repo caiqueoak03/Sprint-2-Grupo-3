@@ -8,7 +8,7 @@
 body {
 	min-height: 100vh;
 	font-family: sans-serif;
-	background: #161618e1;
+	background: #222;
 	display: flex;
 }
 
@@ -31,7 +31,7 @@ header {
 	padding: 10px 0;
 	font-family: "Fredoka", sans-serif;
 	height: 100vh;
-	width: 30%;
+	width: 25%;
 	font-size: 1.15rem;
 	background: linear-gradient(to bottom, #002043, #002043e8);
 	border-right: 4px solid #d3b04d;
@@ -85,9 +85,10 @@ header {
 }
 
 .usuario-container img {
-	width: 100px;
+	width: 125px;
+	height: 125px;
 	border-radius: 50%;
-	border: 1px solid #2ac28a;
+	border: 2px solid #2ac28a;
 }
 
 .usuario-nome {
@@ -105,7 +106,7 @@ header {
 	display: flex;
 	flex-direction: column;
 	list-style-type: none;
-	row-gap: 5px;
+	row-gap: 3px;
 	padding: 0;
 }
 
@@ -113,11 +114,11 @@ header {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: #2ac28a;
 	height: 45px;
 	width: 300px;
 	border-radius: 10px;
 	text-align: center;
+	background-color: #2ac28a;
 	color: #002043;
 	font-size: 1.25rem;
 	font-weight: 700;
@@ -131,6 +132,22 @@ header {
 	color: white;
 }
 
+.navs:last-of-type {
+	height: 40px;
+	width: 100px;
+	margin: 5px auto 0;
+	background-color: #222;
+	color: #ddd;
+}
+
+.navs:last-of-type:hover {
+	background-color: #444;
+}
+
 .nav7 {
 	cursor: pointer;
+}
+
+#nome_usuario {
+	text-transform: capitalize;
 }

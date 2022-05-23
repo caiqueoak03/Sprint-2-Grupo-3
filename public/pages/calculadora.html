@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 	<head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -17,6 +18,9 @@
 			src="https://kit.fontawesome.com/8c4cdd8d42.js"
 			crossorigin="anonymous"
 		></script>
+		<script src="//code.jivosite.com/widget/ENyDianWhh" async></script>
+
+
 	</head>
 
 	<body>
@@ -137,6 +141,21 @@
 		var nome = input_nome.value;
 		var qtd_sacas_perdidas = Number(input_qtd_sacas.value);
 		var valor_saca = Number(input_valor_saca.value);
+		var alerta = ``;
+
+		if (nome == ``) {
+			alerta += `Nome inválido!`;
+		} else if (qtd_sacas_perdidas == ``) {
+			alerta += `Quantidade de sacas perdidas inválida!`;
+		} else if (valor_saca == ``) {
+			alerta += `Valor da saca inválido!`;
+		}
+
+		if (alerta != ``) {
+			alert(alerta);
+		} else {
+			respostaText.innerHTML = `Olá ${nome}, você está perdendo ${perdaTotalExibicao} na sua produção. Com a Soy Venture você terá uma redução média de 50% no seu prejuízo, tendo um saldo de ${saldo}.`;
+		}
 
 		var perdaTotal = qtd_sacas_perdidas * valor_saca;
 		var perdaReduzida = perdaTotal / 2;
@@ -153,7 +172,5 @@
 			style: "currency",
 			currency: "BRL",
 		});
-
-		respostaText.innerHTML = `Olá ${nome}, você está perdendo ${perdaTotalExibicao} na sua produção. Com a Soy Venture você terá uma redução média de 50% no seu prejuízo, tendo um saldo de ${saldo}.`;
 	}
 </script>

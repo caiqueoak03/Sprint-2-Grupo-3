@@ -3,102 +3,146 @@
 -- ter este arquivo aqui não significa que a tabela em seu BD estará como abaixo!
 
 /* para workbench - local - desenvolvimento */
+
+/*
+truncate table dado;
+alter table dado modify column dataDado date default(CURRENT_DATE());
+*/
 CREATE DATABASE soyventure;
 
 USE soyventure;
 
-CREATE TABLE cliente (
-	idCliente int primary key AUTO_INCREMENT,
-	nomeEmpresa varchar(45) not null,
-	cnpj char(14) not null,
-	email varchar(45) not null,
+CREATE TABLE empresa (
+	idEmpresa int primary key auto_increment,
+	nome varchar(45) not null,
+	cnpj char(14) unique not null
+);
+
+CREATE TABLE funcionario (
+	idFuncionario int primary key auto_increment,
+	nome varchar(45) not null,
+	sobrenome varchar(45) not null,
+	email varchar(45) unique not null,
+	senha varchar(45) not null,
+	cargo varchar(45)  not null, check (cargo in ('analista', 'supervisor', 'gerente')),
+	urlImg varchar(300),
 	telFixo char(10),
-	telCelular char(11) not null,
-	senha varchar(45) not null
+	telCelular char(11),
+	fkEmpresa int,
+	foreign key (fkEmpresa) references empresa(idEmpresa),
 );
 
 CREATE TABLE fazenda (
-	idFazenda INT PRIMARY KEY AUTO_INCREMENT,
-	fkCliente int,
+	idFazenda INT PRIMARY KEY auto_increment,
 	nome varchar(45) not null,
-	cep char(8) not null,
+	cep char(8) unique not null,
+	areaHectare decimal(10,2) not null,
+	qtdSetores int  not null,
 	telFixo char(10),
-	telCelular char(11) not null,
-	areaHectare int not null,
-	qtdSensores int not null,
-	foreign key (fkCliente) references cliente(idCliente)
+	telCelular char(11)
 ); 
 
-CREATE TABLE funcionario (
-	idFuncionario int primary key AUTO_INCREMENT,
-	nome varchar(45) not null,
-	sobrenome varchar(45) not null,
-	email varchar(45) not null,
-	senha varchar(45) not null,
-	telFixo char(10),
-	telCelular char(11) not null
-);
-
 create table contrato (
-	idContrato int AUTO_INCREMENT,
-	fkFuncionario int not null,
-	fkFazenda int not null,
-	cargo varchar(45), check (cargo in ('analista', 'supervisor', 'gerente')),
+	fkFuncionario int,
+	fkFazenda int,
 	foreign key (fkFuncionario) references funcionario(idFuncionario),
 	foreign key (fkFazenda) references fazenda(idFazenda),
-	primary key (idContrato, fkFuncionario, fkFazenda)
-);
-
-create table sensor (
-	idSensor int primary key AUTO_INCREMENT,
-	modelo varchar(45),
-	longitude decimal(4,2),
-	latitude decimal(4,2)
-);
-
-create table dados (
-	idDados int primary key AUTO_INCREMENT,
-	temperatura decimal(4,2),
-	umidade decimal(5,2),
-	dtDado date,
-	tempo time,
-	fkSensor int,
-	foreign key (fkSensor) references sensor(idSensor)
+	primary key (fkFuncionario, fkFazenda)
 );
 
 create table setor (
-	idSetor int AUTO_INCREMENT,
-	nome varchar(45),
-	fkSensor int,
+	idSetor int auto_increment,
+	nome varchar(45) not null,
+	modeloSensor varchar(45) default 'HOBOnet T11',
 	fkFazenda int,
-	primary key (idSetor, fkFazenda),
-	foreign key (fkSensor) references sensor(idSensor)
+	foreign key (fkFazenda) references fazenda(idFazenda),
+	primary key (idSetor, fkFazenda)
 );
+
+create table dado (
+	idDado int auto_increment,
+	temperatura decimal(3,1),
+	umidade decimal(4,1),
+	dataDado date default(CURRENT_DATE),
+	tempoDado time default(CURRENT_TIME),
+	fkSetor int,
+	setor_fkFazenda int,
+	foreign key (fkSetor, setor_fkFazenda) references setor(idSetor, fkFazenda),
+	primary key (idDado, fkSetor, setor_fkFazenda)
+);
+
+
 
 
 
 /* para sql server - remoto - produção */
 
-CREATE TABLE usuario (
-	id INT PRIMARY KEY IDENTITY(1,1),
-	nome VARCHAR(50),
-	email VARCHAR(50),
-	senha VARCHAR(50),
+/*
+drop table dado;
+drop table setor;
+drop table contrato;
+drop table funcionario;
+drop table fazenda;
+drop table empresa;
+*/
+
+CREATE TABLE empresa (
+	idEmpresa int primary key IDENTITY(1,1),
+	nome varchar(45) not null,
+	cnpj char(14) unique not null
 );
 
-CREATE TABLE aviso (
-	id INT PRIMARY KEY IDENTITY(1,1),
-	titulo VARCHAR(100),
-    descricao VARCHAR(150),
-	fk_usuario INT FOREIGN KEY REFERENCES usuario(id)
+CREATE TABLE funcionario (
+	idFuncionario int primary key IDENTITY(1,1),
+	nome varchar(45) not null,
+	sobrenome varchar(45) not null,
+	email varchar(45) unique not null,
+	senha varchar(45) not null,
+	cargo varchar(45)  not null, check (cargo in ('analista', 'supervisor', 'gerente')),
+	urlImg varchar(300),
+	telFixo char(10),
+	telCelular char(11),
+	fkEmpresa int,
+	foreign key (fkEmpresa) references empresa(idEmpresa),
+);
+
+CREATE TABLE fazenda (
+	idFazenda INT PRIMARY KEY IDENTITY(1,1),
+	nome varchar(45) not null,
+	cep char(8) unique not null,
+	areaHectare decimal(10,2) not null,
+	qtdSetores int  not null,
+	telFixo char(10),
+	telCelular char(11)
 ); 
 
-CREATE TABLE medida (
-	id INT PRIMARY KEY IDENTITY(1,1),
-	temperatura DOUBLE,
-	umidade DOUBLE,
-	momento DATETIME,
-	fk_aquario INT
+
+create table contrato (
+	fkFuncionario int,
+	fkFazenda int,
+	foreign key (fkFuncionario) references funcionario(idFuncionario),
+	foreign key (fkFazenda) references fazenda(idFazenda),
+	primary key (fkFuncionario, fkFazenda)
+);
+
+create table setor (
+	idSetor int IDENTITY(1,1),
+	nome varchar(45) not null,
+	modeloSensor varchar(45) default 'HOBOnet T11',
+	fkFazenda int,
+	foreign key (fkFazenda) references fazenda(idFazenda),
+	primary key (fkFazenda, idSetor)
 );
 
 
+create table dado (
+	idDado int IDENTITY(1,1),
+	temperatura decimal(3,1),
+	umidade decimal(4,1),
+	dataDado date default CONVERT (date, SYSDATETIME()),
+	tempoDado time default CONVERT (time, SYSDATETIME()),
+	fkSetor int,
+	setor_fkFazenda int,
+	foreign key (setor_fkFazenda, fkSetor) references setor(fkFazenda, idSetor),
+	primary key (setor_fkFazenda, fkSetor, idDado)
+);

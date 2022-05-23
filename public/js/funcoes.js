@@ -1,57 +1,58 @@
-// sessão
 function validarSessao() {
-    // aguardar();
+	var nome = sessionStorage.SOBRENOME;
 
-    var email = sessionStorage.EMAIL_USUARIO;
-    var nome = sessionStorage.NOME_USUARIO;
+	if (nome == null) {
+		window.location = "../login.html";
+	}
+}
 
-    var h1LoginUsuario = document.getElementById("h1_login_usuario");
+function iniciarSessao() {
+	nome_usuario.innerHTML = `${
+		sessionStorage.NOME + " " + sessionStorage.SOBRENOME
+	}`;
+	cad_funcionario.style.display = `${sessionStorage.FUNCIONARIO}`;
+	cad_fazenda.style.display = `${sessionStorage.FAZENDA}`;
 
-    if (email != null && nome != null) {
-        // window.alert(`Seja bem-vindo, ${nome}!`);
-        if (h1LoginUsuario != undefined) {
-            h1LoginUsuario.innerHTML = email;
-        }
-        b_usuario.innerHTML = nome;
+	wrapper_loading.style.display = "none";
 
-        // finalizarAguardar();
-    } else {
-        window.location = "../login.html";
-    }
+	user_profile_pic.src = "" + sessionStorage.IMG_URL;
 }
 
 function limparSessao() {
-    // aguardar();
-    sessionStorage.clear();
-    // finalizarAguardar();
-    window.location = "../login.html";
+	sessionStorage.clear();
+	window.location = "../login.html";
 }
 
-// carregamento (loading)
-function aguardar() {
-    var divAguardar = document.getElementById("div_aguardar");
-    divAguardar.style.display = "flex";
+var expanded = false;
+
+function mostrarBoxes() {
+	var checkboxes = document.getElementById("checkBoxes");
+	if (expanded) {
+		checkboxes.style.maxHeight = "0px";
+		checkboxes.style.border = "none";
+		expanded = false;
+	} else {
+		checkboxes.style.maxHeight = "120px";
+		checkboxes.style.border = "1px #2ac28a solid";
+		checkboxes.style.borderTop = "none";
+		expanded = true;
+	}
 }
 
-function finalizarAguardar(texto) {
-    var divAguardar = document.getElementById("div_aguardar");
-    divAguardar.style.display = "none";
-
-    var divErrosLogin = document.getElementById("div_erros_login");
-    if (texto) {
-        divErrosLogin.innerHTML = texto;
-    }
+function esconderBox() {
+	confirmation_wrapper.style.display = "none";
 }
 
-
-// modal
-function mostrarModal() {
-    var divModal = document.getElementById("div_modal");
-    divModal.style.display = "flex";
+function mostrarBox() {
+	confirmation_wrapper.style.display = "flex";
 }
 
-function fecharModal() {
-    var divModal = document.getElementById("div_modal");
-    divModal.style.display = "none";
-}
+function checkGerente() {
+	var cargo = in_cargo.value;
 
+	if (cargo == "gerente") {
+		select_container.style.display = "none";
+	} else {
+		select_container.style.display = "flex";
+	}
+}

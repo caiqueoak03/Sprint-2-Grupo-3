@@ -8,7 +8,11 @@
 		<link rel="stylesheet" href="../../styles/headerDashboard.css" />
 		<link rel="stylesheet" href="../../styles/confirmationBox.css" />
 		<link rel="stylesheet" href="../../styles/dashboard.css" />
-		<link rel="shortcut icon" href="../../images/logo.png" type="image/x-icon" />
+		<link
+			rel="shortcut icon"
+			href="../../images/logo.png"
+			type="image/x-icon"
+		/>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -20,8 +24,13 @@
 			crossorigin="anonymous"
 		></script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<script src="//code.jivosite.com/widget/ENyDianWhh" async></script>
 	</head>
-	<body>
+
+	<body onload="iniciarSessao(), validarSessao(), carregarFazendas()">
+		<!-- Wrapper -->
+		<div id="wrapper_loading"></div>
+
 		<!-- HEADER -->
 		<header>
 			<span class="logo">
@@ -30,19 +39,29 @@
 			</span>
 
 			<div class="usuario-container">
-				<img src="../../images/gerente-img.png" alt="" class="img" />
-				<p class="usuario-nome">Olá, <b>Luís Nascimento</b></p>
+				<img
+					src="../../images/gerente-img.png"
+					id="user_profile_pic"
+					alt=""
+					class="img"
+				/>
+				<p class="usuario-nome">Olá, <b id="nome_usuario"></b></p>
 			</div>
 
 			<div class="main-nav">
 				<ul>
 					<a class="navs nav1" href="dashboard.html">Gráficos</a>
 					<a class="navs nav2" href="KPIs.html">Indicadores de Performance</a>
-					<a class="navs nav3" href="cadastro_funcionario.html"
+					<a class="navs nav4" id="cad_fazenda" href="cadastroFazenda.html"
+						>Cadastrar Fazenda</a
+					>
+					<a
+						class="navs nav5"
+						id="cad_funcionario"
+						href="cadastro_funcionario.html"
 						>Cadastrar Funcionário</a
 					>
-					<a class="navs nav4" href="cadastroFazenda.html">Cadastrar Fazenda</a>
-					<a class="navs nav5" href="alterarDados.html">Alterar Dados</a>
+					<a class="navs nav6" href="alterarDados.html">Alterar Dados</a>
 					<a class="navs nav7" onclick="mostrarBox()">Sair</a>
 				</ul>
 			</div>
@@ -53,7 +72,7 @@
 			<div class="confirmation-box">
 				<p>Deseja sair da sua conta?</p>
 				<div class="sim-ou-nao">
-					<a href="../../index.html">sim</a>
+					<a onclick="limparSessao()">sim</a>
 					<a onclick="esconderBox()">não</a>
 				</div>
 			</div>
@@ -62,29 +81,51 @@
 		<!-- DASHBOARD -->
 
 		<div class="main-container">
-			<div class="selects">
-				<select onchange="verificar()" name="" id="grafico">
-					<option value="porHora">Registro por hora</option>
-					<option value="porArea">Registro por área</option>
-				</select>
+			<div id="dashboardWrapper">
+				<div class="dashboardWrapper-box">
+					<p>Nenhuma fazenda cadastrada!</p>
+					<a href="cadastroFazenda.html">Ir para a tela de cadastro</a>
+				</div>
+			</div>
+			<div class="dashboard-navbar">
+				<div id="alerta">
+					<p id="msg_alerta">Nenhum alerta registrado</p>
+					<div class="alertas-container" id="alertaTemp">
+						<div class="alerta-msg" id="alerta_temp_msg"></div>
+						<hr />
+						<div class="alerta-nomes-container" id="temp_nome"></div>
+					</div>
+					<div class="alertas-container" id="alertaUmid">
+						<div class="alerta-msg" id="alerta_umid_msg"></div>
+						<hr />
+						<div class="alerta-nomes-container" id="umid_nome"></div>
+					</div>
+				</div>
+				<div class="selects">
+					<select onchange="pegarDadosSetor()" name="" id="grafico_select">
+						<option value="setor">Registro em tempo real</option>
+						<option value="dia">Registro diário por setor</option>
+					</select>
 
-				<select name="" id="fazenda">
-					<option value="fazendaA">Fazenda São João</option>
-					<option value="fazendaB">Fazenda Rio Bonito</option>
-				</select>
+					<select
+						onchange="pegarDadosSetor(), gerarSetores(), gerarDias()"
+						name=""
+						id="fazendas_select"
+					></select>
 
-				<select name="" id="dia" style="display: none">
-					<option value="01/01/2022">01/01/2022</option>
-					<option value="02/01/2022">02/01/2022</option>
-					<option value="03/01/2022">03/01/2022</option>
-				</select>
+					<select
+						onchange="pegarDadosSetor()"
+						name=""
+						id="dia_select"
+						style="display: none"
+					></select>
 
-				<select name="" id="setor">
-					<option value="setorA">Setor A</option>
-					<option value="setorB">Setor B</option>
-				</select>
-
-				<button onclick="mostrar()">Mostrar Gráficos</button>
+					<select
+						onchange="pegarDadosSetor()"
+						name=""
+						id="setor_select"
+					></select>
+				</div>
 			</div>
 
 			<div class="graficos-main-container">
@@ -139,13 +180,5 @@
 		</div>
 	</body>
 </html>
-<script>
-	function esconderBox() {
-		confirmation_wrapper.style.display = "none";
-	}
-
-	function mostrarBox() {
-		confirmation_wrapper.style.display = "flex";
-	}
-</script>
 <script src="../../js/dashboard.js"></script>
+<script src="../../js/funcoes.js"></script>

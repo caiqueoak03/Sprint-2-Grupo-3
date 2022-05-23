@@ -1,4 +1,4 @@
-.nav3 {
+.nav5 {
 	background-color: #d3b04d;
 }
 
@@ -7,9 +7,8 @@
 .main-container {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	justify-content: space-between;
-	width: 70%;
+	width: 75%;
 	height: 100vh;
 }
 
@@ -31,9 +30,10 @@
 	display: flex;
 	margin: 0;
 	padding: 0;
-	justify-content: center;
 	flex-direction: column;
 	border-radius: 20px 40px 20px 40px;
+	padding: 50px 0 0 0;
+	box-sizing: border-box;
 }
 
 .card_cadastro2 {
@@ -55,7 +55,7 @@
 }
 
 .card_cadastro2 li {
-	margin-bottom: 30px;
+	margin-bottom: 20px;
 	list-style: none;
 }
 

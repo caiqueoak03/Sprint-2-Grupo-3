@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 	<head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -8,7 +9,11 @@
 		<link rel="stylesheet" href="../../styles/headerDashboard.css" />
 		<link rel="stylesheet" href="../../styles/confirmationBox.css" />
 		<link rel="stylesheet" href="../../styles/cadastroFazenda.css" />
-		<link rel="shortcut icon" href="../../images/logo.png" type="image/x-icon" />
+		<link
+			rel="shortcut icon"
+			href="../../images/logo.png"
+			type="image/x-icon"
+		/>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -19,8 +24,14 @@
 			src="https://kit.fontawesome.com/8c4cdd8d42.js"
 			crossorigin="anonymous"
 		></script>
+		<script src="//code.jivosite.com/widget/ENyDianWhh" async></script>
+
 	</head>
-	<body>
+
+	<body onload="iniciarSessao(), validarSessao()">
+		<!-- Wrapper -->
+		<div id="wrapper_loading"></div>
+
 		<!-- HEADER -->
 		<header>
 			<span class="logo">
@@ -29,19 +40,29 @@
 			</span>
 
 			<div class="usuario-container">
-				<img src="../../images/gerente-img.png" alt="" class="img" />
-				<p class="usuario-nome">Olá, <b>Luís Nascimento</b></p>
+				<img
+					src="../../images/gerente-img.png"
+					id="user_profile_pic"
+					alt=""
+					class="img"
+				/>
+				<p class="usuario-nome">Olá, <b id="nome_usuario"></b></p>
 			</div>
 
 			<div class="main-nav">
 				<ul>
 					<a class="navs nav1" href="dashboard.html">Gráficos</a>
 					<a class="navs nav2" href="KPIs.html">Indicadores de Performance</a>
-					<a class="navs nav3" href="cadastro_funcionario.html"
+					<a class="navs nav4" id="cad_fazenda" href="cadastroFazenda.html"
+						>Cadastrar Fazenda</a
+					>
+					<a
+						class="navs nav5"
+						id="cad_funcionario"
+						href="cadastro_funcionario.html"
 						>Cadastrar Funcionário</a
 					>
-					<a class="navs nav4" href="cadastroFazenda.html">Cadastrar Fazenda</a>
-					<a class="navs nav5" href="alterarDados.html">Alterar Dados</a>
+					<a class="navs nav6" href="alterarDados.html">Alterar Dados</a>
 					<a class="navs nav7" onclick="mostrarBox()">Sair</a>
 				</ul>
 			</div>
@@ -52,7 +73,7 @@
 			<div class="confirmation-box">
 				<p>Deseja sair da sua conta?</p>
 				<div class="sim-ou-nao">
-					<a href="../../index.html">sim</a>
+					<a onclick="limparSessao()">sim</a>
 					<a onclick="esconderBox()">não</a>
 				</div>
 			</div>
@@ -71,61 +92,52 @@
 									<li>
 										Nome da Fazenda<br /><input
 											placeholder="Nome da Fazenda"
+											id="in_nomeFazenda"
+											value="Fazenda rio bonito"
 											type="text"
-											id="fazenda"
 										/>
 									</li>
 									<li>
-
 										Numero de Telefone Fixo: <br /><input
 											placeholder="(00) 00000-0000"
+											id="in_telFixo"
+											value="1159206325"
 											type="text"
-											id="telefone_fixo"
 										/>
 									</li>
 									<li>
-
 										Numero de Telefone Celular: <br /><input
 											placeholder="(00) 00000-0000"
+											value="11959206325"
+											id="in_telCelular"
 											type="text"
-											id="telefone_celular"
-
 										/>
 									</li>
 								</ul>
 
 								<div class="li_card">
-
 									<ul>
-										
 										<li>
-
 											CEP <br /><input
 												placeholder="CEP(000-00-000)"
-												type="text"
+												value="05236985"
 												id="in_cep"
+												type="text"
 											/>
 										</li>
-										
-										<li>
 
+										<li>
 											Área em Hectare <br /><input
 												placeholder="Hectares"
-												type="number"
-												id="area"
+												id="in_areaHectare"
+												value="50"
+												type="text"
 											/>
 										</li>
+
 										<li>
-
-										Senha: <br /><input
-												placeholder="Sua senha"
-												type="password"
-												id="in_senha"
-											/>
+											<button onclick="validar()">Cadastrar Fazenda</button>
 										</li>
-
-
-										<li><button onclick="verificar()">Cadastrar Fazenda</button></li>
 									</ul>
 								</div>
 							</div>
@@ -137,72 +149,205 @@
 	</body>
 </html>
 <script>
-		function esconderBox() {
-			confirmation_wrapper.style.display = "none";
-		}
-
-		function mostrarBox() {
-			confirmation_wrapper.style.display = "flex";
-		}
-		function verificar(){
-		var nome = fazenda.value;
-		var fixo = telefone_fixo.value;
-		var celular = telefone_celular.value;
-		var cep = in_cep.value;
-		var hectare = area.value;
-		var senha = in_senha.value;
-		var vazio = "";
-		
-		if (nome == "") {
-			vazio += "\n-Insira seu nome";
-		} else if (nome.length < 3) {
-			
-			vazio += "\n-Seu nome deve conter pelo menos 3 caracteres";
-		}	
-			 if (fixo == ""){
-				vazio +="\n-Telefone fixo nao pode ser vazio";
-			}
-			else if (fixo.length != 10){
-				vazio +="\n-O seu telefone celular precisa ter exatamente 10 digitos (somente numeros)";
-			}
-			if (celular == ""){
-				vazio +="\n-Telefone celular nao pode ser vazio";
-			}
-			
-			else if (celular.length != 11){
-				vazio +="\n-O seu telefone fixo precisa ter exatamente 11 digitos (somente numeros)";
-			}
-			 if (cep == ""){
-				vazio +="\n-CEP nao pode ser vazio";
-			}
-			else if (cep.length != 8 ){
-				vazio +="\n-O seu cep precisa ter exatamente 8 digitos (somente numeros)";
-			}
-
-			 if (hectare == ""){
-				vazio +="\n-Precisamos da area em hectare da sua Fazenda";
-			}
-			 if (senha == ""){
-				vazio +="\n-Senha nao pode ser vazio";
-			}
-			else if (senha.length <6 || senha.length >=30){
-				vazio += "\n-preencha uma senha com mais de 6 caracteres até 30 caracteres";
-			}	
-
-			if(vazio != ""){
-				alert(vazio.trim());
-			} else{
-				alert("cadastro feito com sucesso")
-			}
-		
-		
-		
-		
-		
-		
-		
-		
+	function esconderBox() {
+		confirmation_wrapper.style.display = "none";
 	}
-	
 
+	function mostrarBox() {
+		confirmation_wrapper.style.display = "flex";
+	}
+
+	function validar() {
+		var nomeFazenda = in_nomeFazenda.value;
+		var telFixo = in_telFixo.value;
+		var telcelular = in_telCelular.value;
+		var cep = in_cep.value;
+		var areaHectare = in_areaHectare.value;
+		var alerta = "";
+
+		if (nomeFazenda == "") {
+			alerta += "\n*Insira o nome da fazenda";
+		}
+
+		if (telFixo == "") {
+			alerta += "\n*Digite um telefone fixo";
+		} else if (telFixo.length != 10) {
+			alerta += "\n*Telefone Fixo incorreto, insira novamente!!";
+		}
+
+		if (telcelular == "") {
+			alerta += "\n*Digite um telefone celular";
+		} else if (telcelular.length != 11) {
+			alerta += "\n*Telefone Celular incorreto, insira novamente!!";
+		}
+
+		if (cep == "") {
+			alerta += "\n*Digite um cep";
+		} else if (cep.length != 8) {
+			alerta += "\n*O CEP deve ter 8 dígitos!";
+		}
+
+		if (isNaN(areaHectare)) {
+			alerta += "\n*Coloque a área em hectare da fazenda!";
+		} else if (areaHectare <= 0) {
+			alerta += "\n*Coloque um valor maior que zero!";
+		}
+
+		if (alerta != "") {
+			alert(alerta.trim());
+		} else {
+			cadastrarFazenda();
+		}
+	}
+
+	var qtdSetoresVar = 0;
+
+	function cadastrarFazenda() {
+		var nomeFazendaVar = in_nomeFazenda.value;
+		var telFixoVar = in_telFixo.value;
+		var telCelularVar = in_telCelular.value;
+		var cepVar = in_cep.value;
+		var areaHectareVar = in_areaHectare.value;
+		var idGerentesVar = sessionStorage.ID_GERENTES;
+
+		if (areaHectareVar <= 100) {
+			// Sitio ou chácara (menor que 100 hectares)
+			qtdSetoresVar = 1;
+		} else if (areaHectareVar % 100 <= 13) {
+			// Fazenda com um setor de no máximo 113 hectares
+			qtdSetoresVar = Math.floor(areaHectareVar / 100);
+		} else if (areaHectareVar % 100 > 13) {
+			// Fazenda com um setor de no mínimo 14 hectares
+			qtdSetoresVar = Math.ceil(areaHectareVar / 100);
+		}
+
+		fetch("/usuarios/cadastrarFazenda", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				nomeFazendaServer: nomeFazendaVar,
+				telFixoServer: telFixoVar,
+				telCelularServer: telCelularVar,
+				cepServer: cepVar,
+				areaHectareServer: areaHectareVar,
+				idGerentesServer: idGerentesVar,
+				qtdSetoresServer: qtdSetoresVar,
+			}),
+		})
+			.then(function (resposta) {
+				console.log("resposta: ", resposta);
+
+				if (resposta.ok) {
+					resposta.json().then((json) => {
+						console.log("Status: fazenda cadastrada com sucesso!");
+
+						var nomeSetores = [];
+
+						for (var i = 0; i < json[2].length; i++) {
+							nomeSetores.push(json[2][i].setor.nome);
+						}
+
+						sessionStorage.NOME_SETORES = nomeSetores;
+						associarFazendaGerente(json[1][0].idFazenda);
+					});
+				} else {
+					alert("Fazenda com CEP já cadastrado!");
+				}
+			})
+			.catch(function (resposta) {
+				console.log(`#ERRO: ${resposta}`);
+			});
+
+		return false;
+	}
+
+	carregarGerentes();
+
+	function carregarGerentes() {
+		fetch("/usuarios/listarGerentes", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				idEmpresaServer: sessionStorage.ID_EMPRESA,
+			}),
+		})
+			.then(function (resposta) {
+				console.log("ESTOU NO THEN DO carregarGerentes()!");
+
+				if (resposta.ok) {
+					console.log(resposta);
+
+					resposta.json().then((json) => {
+						console.log("json: " + json);
+						console.log("JSON: " + JSON.stringify(json));
+
+						var idGerentes = [];
+
+						for (let i = 0; i < json.length; i++) {
+							idGerentes.push(json[i].idFuncionario);
+						}
+
+						sessionStorage.ID_GERENTES = idGerentes;
+					});
+				} else {
+					console.log("Houve um erro ao tentar realizar o login!");
+					alert("Usuário não cadastrado!");
+
+					resposta.text().then((texto) => {
+						console.error(texto);
+					});
+				}
+			})
+			.catch(function (erro) {
+				console.log(erro);
+			});
+
+		return false;
+	}
+
+	function associarFazendaGerente(idFazenda) {
+		var idFazendaVar = idFazenda;
+		var idGerentesVar = sessionStorage.ID_GERENTES;
+
+		fetch("/usuarios/associarFazendaGerente", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				// crie um atributo que recebe o valor recuperado aqui
+				// Agora vá para o arquivo routes/usuario.js
+				idFazendaServer: idFazendaVar,
+				idGerentesServer: idGerentesVar,
+				qtdSetoresServer: qtdSetoresVar,
+			}),
+		})
+			.then(function (resposta) {
+				console.log("resposta: ", resposta);
+
+				// Somente para o cadastro de cliente
+				if (resposta.ok) {
+					resposta.json().then((json) => {
+						console.log(json);
+						console.log(JSON.stringify(json));
+
+						console.log("status: contrato firmado!");
+
+						alert("Fazenda cadastrada com sucesso!");
+					});
+				} else {
+					alert("Fazenda com CEP já cadastrado!");
+				}
+			})
+			.catch(function (resposta) {
+				console.log(`#ERRO: ${resposta}`);
+			});
+
+		return false;
+	}
 </script>
+<script src="../../js/funcoes.js"></script>

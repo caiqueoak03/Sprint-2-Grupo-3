@@ -24,8 +24,12 @@
 			crossorigin="anonymous"
 		></script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<script src="//code.jivosite.com/widget/ENyDianWhh" async></script>
 	</head>
-	<body>
+	<body onload="iniciarSessao(), carregarDados(), validarSessao()">
+		<!-- Wrapper -->
+		<div id="wrapper_loading"></div>
+
 		<!-- HEADER -->
 		<header>
 			<span class="logo">
@@ -34,19 +38,29 @@
 			</span>
 
 			<div class="usuario-container">
-				<img src="../../images/gerente-img.png" alt="" class="img" />
-				<p class="usuario-nome">Olá, <b>Luís Nascimento</b></p>
+				<img
+					src="../../images/gerente-img.png"
+					alt=""
+					id="user_profile_pic"
+					class="img"
+				/>
+				<p class="usuario-nome">Olá, <b id="nome_usuario"></b></p>
 			</div>
 
 			<div class="main-nav">
 				<ul>
 					<a class="navs nav1" href="dashboard.html">Gráficos</a>
 					<a class="navs nav2" href="KPIs.html">Indicadores de Performance</a>
-					<a class="navs nav3" href="cadastro_funcionario.html"
+					<a class="navs nav4" id="cad_fazenda" href="cadastroFazenda.html"
+						>Cadastrar Fazenda</a
+					>
+					<a
+						class="navs nav5"
+						id="cad_funcionario"
+						href="cadastro_funcionario.html"
 						>Cadastrar Funcionário</a
 					>
-					<a class="navs nav4" href="cadastroFazenda.html">Cadastrar Fazenda</a>
-					<a class="navs nav5" href="alterarDados.html">Alterar Dados</a>
+					<a class="navs nav6" href="alterarDados.html">Alterar Dados</a>
 					<a class="navs nav7" onclick="mostrarBox()">Sair</a>
 				</ul>
 			</div>
@@ -57,7 +71,7 @@
 			<div class="confirmation-box">
 				<p>Deseja sair da sua conta?</p>
 				<div class="sim-ou-nao">
-					<a href="../../index.html">sim</a>
+					<a onclick="limparSessao()">sim</a>
 					<a onclick="esconderBox()">não</a>
 				</div>
 			</div>
@@ -65,69 +79,95 @@
 
 		<!-- Alterar Dados -->
 		<div class="main-container">
-
 			<div class="alterar-dados-container">
-
 				<h2>Alterar Dados</h2>
-
 				<div class="inputs-container">
-
 					<ul class="inputs1">
-
 						<li>
-
 							<p>Primeiro nome:</p>
-							<input type="text" id="primeiro_nome" value="Luís" />
-
+							<input type="text" id="in_nome" />
 						</li>
 						<li>
-
 							<p>Telefone fixo</p>
-							<input type="text" id="email" value="(11) 5921-8598" />
-
+							<input type="text" id="in_telFixo" />
 						</li>
 						<li>
-
 							<p>Email</p>
-							<input type="text" id="email" value="luis_nascimento@gmail.com" />
-
+							<input type="text" id="in_email" />
 						</li>
 						<li>
-
 							<p>Confirmação de senha:</p>
-							<input type="text" id="email" value="" />
-
+							<input type="password" id="in_confirmarSenha" />
 						</li>
 					</ul>
-
 					<ul class="inputs2">
 						<li>
-
 							<p>Sobrenome:</p>
-							<input type="text" id="primeiro_nome" value="Nascimento" />
-
+							<input type="text" id="in_sobrenome" />
 						</li>
 						<li>
-
 							<p>Telefone celular</p>
-							<input type="text" id="email" value="(11) 99536-0354" />
-
+							<input type="text" id="in_telCelular" />
 						</li>
 						<li>
-
 							<p>Senha</p>
-							<input type="text" id="email" value="123456" />
-							
+							<input type="password" id="in_senha" />
 						</li>
-						<button>Confirmar Alteração</button>
-
+						<li class="image-input-container">
+							<p>
+								URL da foto de perfil <span>(imagem com proporção 1:1)</span>
+							</p>
+							<input type="text" id="in_urlIMG" />
+						</li>
 					</ul>
 				</div>
+				<button onclick="validar()">Confirmar Alteração</button>
 			</div>
 		</div>
 	</body>
 </html>
 <script>
+	function validar() {
+		var nome = in_nome.value;
+		var sobrenome = in_sobrenome.value;
+		var email = in_email.value;
+		var telFixo = in_telFixo.value;
+		var telCelular = in_telCelular.value;
+		var senha = in_senha.value;
+		var confirmarSenha = in_confirmarSenha.value;
+
+		var alerta = "";
+
+		if (nome == "") {
+			alerta += "*Insira um nome\n";
+		}
+		if (sobrenome == "") {
+			alerta += "*Insira um sobrenome\n";
+		}
+
+		if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
+			alerta += "*Email deve ter @ e .com\n";
+		}
+
+		if (senha != confirmarSenha) {
+			alerta += "*As senhas não conferem!!\n";
+		}
+
+		if (telFixo.length != 10) {
+			alerta += "*Telefone Fixo incorreto\n";
+		}
+
+		if (telCelular.length != 11) {
+			alerta += "*Telefone Celular incorreto";
+		}
+
+		if (alerta != "") {
+			alert(alerta);
+		} else {
+			alterarDados();
+		}
+	}
+
 	function esconderBox() {
 		confirmation_wrapper.style.display = "none";
 	}
@@ -135,4 +175,114 @@
 	function mostrarBox() {
 		confirmation_wrapper.style.display = "flex";
 	}
+
+	function carregarDados() {
+		var idFuncionarioVar = sessionStorage.ID_FUNCIONARIO;
+
+		fetch("/usuarios/listarFuncionarios", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				idFuncionarioServer: idFuncionarioVar,
+			}),
+		})
+			.then(function (resposta) {
+				console.log("ESTOU NO THEN DO entrar()!");
+
+				if (resposta.ok) {
+					console.log(resposta);
+
+					resposta.json().then((json) => {
+						console.log(json);
+						console.log(JSON.stringify(json));
+
+						in_nome.value = `${json.nome}`;
+						in_sobrenome.value = `${json.sobrenome}`;
+						in_telFixo.value = `${json.telFixo}`;
+						in_telCelular.value = `${json.telCelular}`;
+						in_email.value = `${json.email}`;
+						in_senha.value = `${json.senha}`;
+						in_confirmarSenha.value = `${json.senha}`;
+
+						if (json.urlImg == null) {
+							in_urlIMG.value = ``;
+						} else {
+							in_urlIMG.value = `${json.urlImg}`;
+						}
+					});
+				} else {
+					console.log("Houve um erro ao carregar os dados");
+
+					resposta.text().then((texto) => {
+						console.error(texto);
+					});
+				}
+			})
+			.catch(function (erro) {
+				console.log(erro);
+			});
+
+		return false;
+	}
+
+	function alterarDados() {
+		var nomeVar = in_nome.value;
+		var sobrenomeVar = in_sobrenome.value;
+		var telFixoVar = in_telFixo.value;
+		var telCelularVar = in_telCelular.value;
+		var emailVar = in_email.value;
+		var senhaVar = in_senha.value;
+		var urlImgVar = in_urlIMG.value;
+
+		fetch("/usuarios/alterarDados", {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				nomeServer: nomeVar,
+				sobrenomeServer: sobrenomeVar,
+				telFixoServer: telFixoVar,
+				telCelularServer: telCelularVar,
+				emailServer: emailVar,
+				senhaServer: senhaVar,
+				idFuncionarioServer: sessionStorage.ID_FUNCIONARIO,
+				urlImgServer: urlImgVar,
+			}),
+		})
+			.then(function (resposta) {
+				console.log("ESTOU NO THEN DO entrar()!");
+
+				if (resposta.ok) {
+					console.log(resposta);
+
+					alert("Dados alterados com sucesso!");
+
+					sessionStorage.NOME = nomeVar;
+					sessionStorage.SOBRENOME = sobrenomeVar;
+
+					if (in_urlIMG.value == "") {
+						sessionStorage.IMG_URL = "../../images/gerente-img.png";
+					} else {
+						sessionStorage.IMG_URL = in_urlIMG.value;
+					}
+
+					iniciarSessao();
+				} else {
+					console.log("Houve um erro ao carregar os dados");
+
+					resposta.text().then((texto) => {
+						console.error(texto);
+					});
+				}
+			})
+			.catch(function (erro) {
+				console.log(erro);
+			});
+
+		return false;
+	}
 </script>
+<script src="../../js/funcoes.js"></script>

@@ -214,50 +214,8 @@
 							console.log(json);
 							console.log(JSON.stringify(json));
 
-							console.log(
-								"IDEMPRESA1:::::::::::::" + json[0].idEmpresa
-							)
-							console.log(
-								"IDEMPRESA:2::::::::::::" + json[1].idEmpresa
-							)
-							console.log(
-								"IDEMPRESA::3:::::::::::" + json[0][0].idEmpresa
-							)
-							console.log(
-								"IDEMPRESA:::4::::::::::" + json[0][1].idEmpresa
-							)
-							console.log(
-								"IDEMPRESA::::5:::::::::" + json[1][0].idEmpresa
-							)
-							console.log(
-								"IDEMPRESA:::::6::::::::" + json[1][1].idEmpresa
-							)
-							console.log(
-								"IDEMPRESA::::::7:::::::" + json[0]['idEmpresa']
-							)
-							console.log(
-								"IDEMPRESA:::::::8::::::" + json[1]['idEmpresa']
-							)
-							console.log(
-								"IDEMPRESA::::::::9:::::" + json[0][0]['idEmpresa']
-							)
-							console.log(
-								"IDEMPRESA:::::::::10::::" + json[0][1]['idEmpresa']
-							)
-							console.log(
-								"IDEMPRESA11:::::::::::::" + json[1][0]['idEmpresa']
-							)
-							console.log(
-								"IDEMPRESA::12:::::::::::" + json[1][1]['idEmpresa']
-							)
-							console.log(
-								"IDEMPRESA::::13:::::::::" + json[0]['idEmpresa']
-							)
-							console.log(
-								"IDEMPRESA::::::14:::::::" + json[1]['idEmpresa']
-							)
-
 							cadastrarCliente(
+								json[0]['idEmpresa']
 							);
 						});
 					} else {

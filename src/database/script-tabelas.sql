@@ -29,7 +29,7 @@ CREATE TABLE funcionario (
 	telFixo char(10),
 	telCelular char(11),
 	fkEmpresa int,
-	foreign key (fkEmpresa) references empresa(idEmpresa),
+	foreign key (fkEmpresa) references empresa(idEmpresa)
 );
 
 CREATE TABLE fazenda (

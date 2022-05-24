@@ -255,11 +255,24 @@
 								console.log(json);
 								console.log(JSON.stringify(json));
 
-								var idEmpresa = json[0].o.idEmpresa;
+								console.log(
+									"IDEMPRESA:::::::::::::" +
+										json[0].idEmpresa +
+										json[1].idEmpresa +
+										json[0][0].idEmpresa +
+										json[0][1].idEmpresa +
+										json[1][0].idEmpresa +
+										json[1][1].idEmpresa
+								);
 
-								console.log(idEmpresa);
-
-								cadastrarCliente(idEmpresa);
+								cadastrarCliente(
+									json[0].idEmpresa ||
+										json[1].idEmpresa ||
+										json[0][0].idEmpresa ||
+										json[0][1].idEmpresa ||
+										json[1][0].idEmpresa ||
+										json[1][1].idEmpresa,
+								);
 							});
 						} else {
 							alert("Empresa já cadastrada!");

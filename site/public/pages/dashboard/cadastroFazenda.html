@@ -243,17 +243,9 @@
 					resposta.json().then((json) => {
 						console.log("json: " + json);
 						console.log("JSON: " + JSON.stringify(json));
-
 						console.log("Status: fazenda cadastrada com sucesso!");
 
-						var nomeSetores = [];
-
-						for (var i = 0; i < json[0][1].length; i++) {
-							nomeSetores.push(json[0][1][i].setor.nome);
-						}
-
-						sessionStorage.NOME_SETORES = nomeSetores;
-						associarFazendaGerente(json[0][0].idFazenda || json[0].idFazenda);
+						associarFazendaGerente(json[0].idFazenda);
 					});
 				} else {
 					alert("Fazenda com CEP já cadastrado!");
@@ -337,6 +329,14 @@
 					resposta.json().then((json) => {
 						console.log(json);
 						console.log(JSON.stringify(json));
+						
+						var nomeSetores = [];
+
+						for (var i = 0; i < json[0].length; i++) {
+							nomeSetores.push(json[0][i].setor.nome);
+						}
+
+						sessionStorage.NOME_SETORES = nomeSetores;
 
 						console.log("status: contrato firmado!");
 

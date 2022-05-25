@@ -317,8 +317,7 @@ function cadastrarFazenda(
 				(nome, telFixo, telcelular, cep, areaHectare, qtdSetores) 
 				VALUES 
 				('${nomeFazenda}', '${telFixo}','${telcelular}', '${cep}','${areaHectare}', '${qtdSetores}');
-				SELECT idFazenda FROM fazenda where cep = '${cep}';
-				SELECT * FROM setor JOIN fazenda ON idFazenda = fkFazenda WHERE cep = '${cep}'; 
+				SELECT idFazenda FROM fazenda WHERE cep = '${cep}';
     `;
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);
@@ -347,6 +346,9 @@ function associarFazendaGerente(idFazenda, idGerentes, qtdSetores) {
 					INSERT INTO setor (nome, fkFazenda) values ('Setor ${i}', '${idFazenda}'); 
 					`;
 	}
+
+				 
+	instrucao += `SELECT * FROM setor JOIN fazenda ON idFazenda = fkFazenda WHERE idFazenda = '${idFazenda}';`
 
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);

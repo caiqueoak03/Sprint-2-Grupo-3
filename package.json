@@ -4,6 +4,10 @@
   "private": true,
   "scripts": {
     "start": "node ./site/app.js",
+    "dev": "nodemon --exec node app.js",
     "postinstall": "cd site && npm install"
+  },
+  "dependencies": {
+    "nodemon": "^2.0.7"
   }
 }

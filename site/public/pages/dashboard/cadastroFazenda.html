@@ -241,12 +241,15 @@
 
 				if (resposta.ok) {
 					resposta.json().then((json) => {
+						console.log("json: " + json);
+						console.log("JSON: " + JSON.stringify(json));
+
 						console.log("Status: fazenda cadastrada com sucesso!");
 
 						var nomeSetores = [];
 
-						for (var i = 0; i < json[1].length; i++) {
-							nomeSetores.push(json[1][i].setor.nome);
+						for (var i = 0; i < json[0][1].length; i++) {
+							nomeSetores.push(json[0][1][i].setor.nome);
 						}
 
 						sessionStorage.NOME_SETORES = nomeSetores;

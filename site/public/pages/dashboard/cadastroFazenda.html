@@ -245,12 +245,12 @@
 
 						var nomeSetores = [];
 
-						for (var i = 0; i < json[2].length; i++) {
-							nomeSetores.push(json[2][i].setor.nome);
+						for (var i = 0; i < json[1].length; i++) {
+							nomeSetores.push(json[1][i].setor.nome);
 						}
 
 						sessionStorage.NOME_SETORES = nomeSetores;
-						associarFazendaGerente(json[1][0].idFazenda);
+						associarFazendaGerente(json[0][0].idFazenda || json[0].idFazenda);
 					});
 				} else {
 					alert("Fazenda com CEP já cadastrado!");

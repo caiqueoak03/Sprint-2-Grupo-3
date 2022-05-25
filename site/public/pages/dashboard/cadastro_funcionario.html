@@ -288,7 +288,7 @@
 		})
 			.then(function (resposta) {
 				console.log("resposta: ", resposta);
-
+				
 				if (resposta.ok) {
 					resposta.json().then((json) => {
 						console.log("json novo: " + json[0]);
@@ -296,7 +296,7 @@
 
 						console.log("status: funcionario cadastrado!");
 
-						firmarContrato(json[1][0].idFuncionario);
+						firmarContrato(json[0].idFuncionario);
 					});
 				} else {
 					alert("Funcionario já cadastrado!");

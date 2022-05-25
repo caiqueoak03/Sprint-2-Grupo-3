@@ -57,7 +57,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	column-gap: 10px;
+	column-gap: 5px;
 	width: 100%;
 }
 
@@ -67,7 +67,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 480px;
+	width: 525px;
 	column-gap: 20px;
 	text-transform: capitalize;
 	background-color: #555;

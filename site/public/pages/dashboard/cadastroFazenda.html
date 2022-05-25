@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 	<head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -25,7 +24,6 @@
 			crossorigin="anonymous"
 		></script>
 		<script src="//code.jivosite.com/widget/ENyDianWhh" async></script>
-
 	</head>
 
 	<body onload="iniciarSessao(), validarSessao()">
@@ -245,7 +243,10 @@
 						console.log("JSON: " + JSON.stringify(json));
 						console.log("Status: fazenda cadastrada com sucesso!");
 
-						associarFazendaGerente(json[0].idFazenda);
+						var idFazenda = json[0].idFazenda;
+						// var idFazenda = json[1][0].idFazenda; //local
+
+						associarFazendaGerente(idFazenda);
 					});
 				} else {
 					alert("Fazenda com CEP já cadastrado!");
@@ -326,16 +327,50 @@
 					resposta.json().then((json) => {
 						console.log(json);
 						console.log(JSON.stringify(json));
-						
+
+						listarSetores(idFazenda);
+
+						console.log("status: contrato firmado!");
+					});
+				} else {
+					console.log("status: erro no contrato!");
+				}
+			})
+			.catch(function (resposta) {
+				console.log(`#ERRO: ${resposta}`);
+			});
+
+		return false;
+	}
+
+	function listarSetores(idFazenda) {
+		fetch("/usuarios/listarSetores", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				idFazendaServer: idFazenda,
+			}),
+		})
+			.then(function (resposta) {
+				console.log("resposta: ", resposta);
+
+				// Somente para o cadastro de cliente
+				if (resposta.ok) {
+					resposta.json().then((json) => {
+						console.log(json);
+						console.log(JSON.stringify(json));
+
+						var obj = json;
+
 						var nomeSetores = [];
 
-						for (var i = 0; i < json[0].length; i++) {
-							nomeSetores.push(json[0][i].setor.nome);
+						for (var i = 0; i < obj.length; i++) {
+							nomeSetores.push(obj[i].nome);
 						}
 
 						sessionStorage.NOME_SETORES = nomeSetores;
-
-						console.log("status: contrato firmado!");
 
 						alert("Fazenda cadastrada com sucesso!");
 					});

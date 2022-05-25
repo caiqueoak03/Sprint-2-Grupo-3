@@ -7,6 +7,10 @@ router.post("/listarFuncionarios", function (req, res) {
 	usuarioController.listarFuncionarios(req, res);
 });
 
+router.post("/listarSetores", function (req, res) {
+	usuarioController.listarSetores(req, res);
+});
+
 router.put("/alterarDados", function (req, res) {
 	usuarioController.alterarDados(req, res);
 });

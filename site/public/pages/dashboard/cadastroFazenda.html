@@ -305,9 +305,6 @@
 	}
 
 	function associarFazendaGerente(idFazenda) {
-		var idFazendaVar = idFazenda;
-		var idGerentesVar = sessionStorage.ID_GERENTES;
-
 		fetch("/usuarios/associarFazendaGerente", {
 			method: "POST",
 			headers: {
@@ -316,8 +313,8 @@
 			body: JSON.stringify({
 				// crie um atributo que recebe o valor recuperado aqui
 				// Agora vá para o arquivo routes/usuario.js
-				idFazendaServer: idFazendaVar,
-				idGerentesServer: idGerentesVar,
+				idFazendaServer: idFazenda,
+				idGerentesServer: sessionStorage.ID_GERENTES,
 				qtdSetoresServer: qtdSetoresVar,
 			}),
 		})

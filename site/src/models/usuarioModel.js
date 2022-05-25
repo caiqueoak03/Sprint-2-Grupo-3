@@ -325,7 +325,7 @@ function cadastrarFazenda(
 
 function associarFazendaGerente(idFazenda, idGerentes, qtdSetores) {
 	console.log(
-		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():",
+		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function associarFazendaGerente():",
 		idFazenda,
 		idGerentes,
 		qtdSetores,
@@ -348,7 +348,9 @@ function associarFazendaGerente(idFazenda, idGerentes, qtdSetores) {
 	}
 
 				 
-	instrucao += `SELECT * FROM setor JOIN fazenda ON idFazenda = fkFazenda WHERE idFazenda = '${idFazenda}';`
+	instrucao += `
+		SELECT * FROM setor JOIN fazenda ON idFazenda = fkFazenda WHERE idFazenda = '${idFazenda}';
+	`
 
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);

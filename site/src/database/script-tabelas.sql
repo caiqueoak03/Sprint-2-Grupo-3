@@ -13,13 +13,13 @@ CREATE DATABASE soyventure;
 USE soyventure;
 
 CREATE TABLE empresa (
-	idEmpresa int primary key IDENTITY(1,1),
+	idEmpresa int primary key auto_increment,
 	nome varchar(45) not null,
 	cnpj char(14) unique not null
 );
 
 CREATE TABLE funcionario (
-	idFuncionario int IDENTITY(1,1),
+	idFuncionario int auto_increment,
 	nome varchar(45) not null,
 	sobrenome varchar(45) not null,
 	email varchar(45) unique not null,
@@ -34,7 +34,7 @@ CREATE TABLE funcionario (
 );
 
 CREATE TABLE fazenda (
-	idFazenda INT PRIMARY KEY IDENTITY(1,1),
+	idFazenda INT PRIMARY KEY auto_increment,
 	nome varchar(45) not null,
 	cep char(8) unique not null,
 	areaHectare decimal(10,2) not null,
@@ -52,7 +52,7 @@ create table contrato (
 );
 
 create table setor (
-	idSetor int IDENTITY(1,1),
+	idSetor int auto_increment,
 	nome varchar(45) not null,
 	modeloSensor varchar(45) default 'HOBOnet T11',
 	longitudeSensor decimal(4,2),
@@ -63,7 +63,7 @@ create table setor (
 );
 
 create table dado (
-	idDado int IDENTITY(1,1),
+	idDado int auto_increment,
 	temperatura decimal(3,1),
 	umidade decimal(4,1),
 	dataDado date default(CURRENT_DATE),

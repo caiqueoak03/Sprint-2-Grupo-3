@@ -206,6 +206,8 @@ function associarFazendaGerente(req, res) {
     res.status(400).send("Seu id Fazenda está undefined!");
   } else if (idGerentes == undefined) {
     res.status(400).send("A idgerentes está undefined!");
+  } else if (qtdSetores == undefined) {
+    res.status(400).send("A qtdSetores está undefined!");
   } else {
     // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
     usuarioModel

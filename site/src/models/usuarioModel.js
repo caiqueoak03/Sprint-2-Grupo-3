@@ -146,6 +146,9 @@ function gerarDadosSensores(fkFazendas, idSetores) {
 			contador++;
 		}
 	}
+	instrucao += `
+	SELECT idDado FROM dado ORDER BY idDado DESC LIMIT 1;
+	`;
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);
 }
@@ -175,7 +178,6 @@ function pegarDadosSetor(
 		FROM dado JOIN setor on idSetor = fkSetor JOIN fazenda ON idFazenda = fkFazenda 
 			JOIN contrato ON contrato.fkFazenda = idFazenda
 				WHERE contrato.fkFuncionario = ${idFuncionario} ORDER BY idDado DESC LIMIT ${setorLength};
-					
     `;
 
 	console.log("Executando a instrução SQL: \n" + instrucao);

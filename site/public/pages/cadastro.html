@@ -326,12 +326,7 @@
 									console.log("resposta: ", resposta);
 
 									if (resposta.ok) {
-										resposta.json().then((json) => {
-											console.log(json);
-											console.log(JSON.stringify(json));
-
-											console.log("empresa deletada!");
-										});
+										console.log("empresa deletada!");
 									} else {
 										console.log("Erro ao deletar empresa!");
 									}

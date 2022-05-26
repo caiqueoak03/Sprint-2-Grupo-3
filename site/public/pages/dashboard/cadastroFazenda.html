@@ -324,14 +324,9 @@
 
 				// Somente para o cadastro de cliente
 				if (resposta.ok) {
-					resposta.json().then((json) => {
-						console.log(json);
-						console.log(JSON.stringify(json));
+					listarSetores(idFazenda);
 
-						listarSetores(idFazenda);
-
-						console.log("status: contrato firmado!");
-					});
+					console.log("status: contrato firmado!");
 				} else {
 					console.log("status: erro no contrato!");
 				}

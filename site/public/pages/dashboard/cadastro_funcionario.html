@@ -333,14 +333,9 @@
 				console.log("resposta: ", resposta);
 
 				if (resposta.ok) {
-					resposta.json().then((json) => {
-						console.log(json);
-						console.log(JSON.stringify(json));
+					console.log("status: contrato firmado!");
 
-						console.log("status: contrato firmado!");
-
-						alert("Funcionário cadastrado com sucesso!");
-					});
+					alert("Funcionário cadastrado com sucesso!");
 				} else {
 					alert("Funcionario já cadastrado!");
 				}

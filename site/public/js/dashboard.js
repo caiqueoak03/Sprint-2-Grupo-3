@@ -124,10 +124,6 @@ function limparDadosSensores() {
 
 			if (resposta.ok) {
 				console.log(resposta);
-				resposta.json().then((json) => {
-					console.log(json);
-					console.log(JSON.stringify(json));
-				});
 			} else {
 				console.log("Houve um erro ao carregar os dados");
 

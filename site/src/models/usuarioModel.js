@@ -346,6 +346,8 @@ function associarFazendaGerente(idFazenda, idGerentes, qtdSetores) {
 	var arr = idGerentes.split(",");
 	var len = arr.length;
 
+	console.log(arr);
+
 	for (let i = 0; i < len; i++) {
 		instrucao += `
 					INSERT INTO contrato (fkFuncionario, fkFazenda) values (${arr[i]}, ${idFazenda}); 

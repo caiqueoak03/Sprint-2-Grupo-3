@@ -243,8 +243,8 @@
 						console.log("JSON: " + JSON.stringify(json));
 						console.log("Status: fazenda cadastrada com sucesso!");
 
-						// var idFazenda = json[0].idFazenda;
-						var idFazenda = json[1][0].idFazenda; //local
+						var idFazenda = json[0].idFazenda;
+						// var idFazenda = json[1][0].idFazenda; //local
 
 						associarFazendaGerente(idFazenda);
 					});

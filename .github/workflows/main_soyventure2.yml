@@ -23,11 +23,10 @@ jobs:
 
       - name: npm install, build, and test
         run: |
-          cd ./site &&
-          npm install &&
-          node app.js
+          npm install
           npm run build --if-present
           npm run test --if-present
+        working-directory: ./site/
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
@@ -55,4 +54,4 @@ jobs:
           app-name: 'soyventure2'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F6AC2B562E1E43258B3B3E47DBEE25E1 }}
-          package: .
+          package: ./site/

@@ -97,7 +97,7 @@ CREATE TABLE empresa (
 );
 
 CREATE TABLE funcionario (
-	idFuncionario int IDENTITY(1,1),
+	idFuncionario int primary key IDENTITY(1,1),
 	nome varchar(45) not null,
 	sobrenome varchar(45) not null,
 	email varchar(45) unique not null,
@@ -108,7 +108,6 @@ CREATE TABLE funcionario (
 	telCelular char(11),
 	fkEmpresa int,
 	foreign key (fkEmpresa) references empresa(idEmpresa),
-	primary key (idFuncionario, fkEmpresa)
 );
 
 CREATE TABLE fazenda (
@@ -125,10 +124,9 @@ CREATE TABLE fazenda (
 create table contrato (
 	fkFuncionario int,
 	fkFazenda int,
-	fkEmpresa int,
-	foreign key (fkFuncionario, fkEmpresa) references funcionario(idFuncionario, fkEmpresa),
+	foreign key (fkFuncionario) references funcionario(idFuncionario),
 	foreign key (fkFazenda) references fazenda(idFazenda),
-	primary key (fkEmpresa, fkFazenda, fkFuncionario)
+	primary key (fkFazenda, fkFuncionario)
 );
 
 create table setor (

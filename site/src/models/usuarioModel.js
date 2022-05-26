@@ -348,13 +348,13 @@ function associarFazendaGerente(idFazenda, idGerentes, qtdSetores) {
 
 	for (let i = 0; i < len; i++) {
 		instrucao += `
-					INSERT INTO contrato (fkFuncionario, fkFazenda) values ('${arr[i]}', '${idFazenda}'); 
+					INSERT INTO contrato (fkFuncionario, fkFazenda) values (${arr[i]}, ${idFazenda}); 
 					`;
 	}
 
 	for (let i = 1; i <= qtdSetores; i++) {
 		instrucao += `
-					INSERT INTO setor (nome, fkFazenda) values ('Setor ${i}', '${idFazenda}'); 
+					INSERT INTO setor (nome, fkFazenda) values ('Setor ${i}', ${idFazenda}); 
 					`;
 	}
 

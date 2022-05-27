@@ -65,12 +65,13 @@ function carregarFazendas(idFuncionario) {
 		idFuncionario,
 	);
 	var instrucao = `
-		SELECT idFazenda, fazenda.nome, fazenda.qtdSetores FROM fazenda 
-			JOIN contrato on idFazenda = fkFazenda
-				JOIN funcionario on idFuncionario = fkFuncionario where idFuncionario = ${idFuncionario} order by idFazenda;
-		SELECT count(idFazenda) as qtdFazendas FROM fazenda 
-			JOIN contrato on idFazenda = fkFazenda
-				JOIN funcionario on idFuncionario = fkFuncionario where idFuncionario = ${idFuncionario} order by idFazenda;
+		SELECT idFazenda, fazenda.nome, fazenda.qtdSetores,
+			(SELECT count(idFazenda) as qtdFazendas FROM fazenda 
+				JOIN contrato on idFazenda = fkFazenda
+					JOIN funcionario on idFuncionario = fkFuncionario where idFuncionario = ${idFuncionario} order by idFazenda )
+			FROM fazenda 
+				JOIN contrato on idFazenda = fkFazenda
+					JOIN funcionario on idFuncionario = fkFuncionario where idFuncionario = ${idFuncionario} order by idFazenda;
     `;
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);
@@ -191,8 +192,8 @@ function entrar(email, senha) {
 		senha,
 	);
 	var instrucao = `
-        SELECT * FROM funcionario WHERE email = '${email}' AND senha = '${senha}';
-        SELECT idFuncionario FROM funcionario WHERE email = '${email}' AND senha = '${senha}';
+        SELECT *, (SELECT idFuncionario FROM funcionario WHERE email = '${email}' AND senha = '${senha}') 
+					FROM funcionario WHERE email = '${email}' AND senha = '${senha}';
     `;
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);

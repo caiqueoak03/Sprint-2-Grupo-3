@@ -1,167 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Soy Venture</title>
+		<link rel="stylesheet" href="../../styles/headerDashboard.css" />
+		<link rel="stylesheet" href="../../styles/confirmationBox.css" />
+		<link rel="stylesheet" href="../../styles/dashboard.css" />
+		<link
+			rel="shortcut icon"
+			href="../../images/logo.png"
+			type="image/x-icon"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400&family=Roboto:ital,wght@0,400;0,700;1,700&display=swap"
+			rel="stylesheet"
+		/>
+		<script
+			src="https://kit.fontawesome.com/8c4cdd8d42.js"
+			crossorigin="anonymous"
+		></script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<script src="//code.jivosite.com/widget/ENyDianWhh" async></script>
+	</head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Soy Venture</title>
-  <link rel="stylesheet" href="../../styles/headerDashboard.css" />
-  <link rel="stylesheet" href="../../styles/confirmationBox.css" />
-  <link rel="stylesheet" href="../../styles/dashboard.css" />
-  <link rel="shortcut icon" href="../../images/logo.png" type="image/x-icon" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400&family=Roboto:ital,wght@0,400;0,700;1,700&display=swap"
-    rel="stylesheet" />
-  <script src="https://kit.fontawesome.com/8c4cdd8d42.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="//code.jivosite.com/widget/ENyDianWhh" async></script>
-</head>
+	<body onload="iniciarSessao(), validarSessao(), carregarFazendas()">
+		<!-- Wrapper -->
+		<div id="wrapper_loading"></div>
 
-<body onload="iniciarSessao(), /*validarSessao(),*/ carregarFazendas()">
-  <!-- Wrapper -->
-  <div id="wrapper_loading"></div>
+		<!-- HEADER -->
+		<header>
+			<span class="logo">
+				<img src="../../images/logo.png" alt="" class="logo-img" />
+				<h1 class="nome-empresa">Soy Venture</h1>
+			</span>
 
-  <!-- HEADER -->
-  <header>
-    <span class="logo">
-      <img src="../../images/logo.png" alt="" class="logo-img" />
-      <h1 class="nome-empresa">Soy Venture</h1>
-    </span>
+			<div class="usuario-container">
+				<img
+					src="../../images/gerente-img.png"
+					id="user_profile_pic"
+					alt=""
+					class="img"
+				/>
+				<p class="usuario-nome">Olá, <b id="nome_usuario"></b></p>
+			</div>
 
-    <div class="usuario-container">
-      <img src="../../images/gerente-img.png" id="user_profile_pic" alt="" class="img" />
-      <p class="usuario-nome">Olá, <b id="nome_usuario"></b></p>
-    </div>
+			<div class="main-nav">
+				<ul>
+					<a class="navs nav1" href="dashboard.html">
+						<i class="fa-solid fa-chart-column"></i>
+						Gráficos
+					</a>
+					<a class="navs nav2" href="KPIs.html">
+						<i class="fa-solid fa-chart-pie"></i>
+						Indicadores de Performance</a
+					>
+					<a class="navs nav4" id="cad_fazenda" href="cadastroFazenda.html">
+						<i class="fa-solid fa-tractor"></i>
+						Cadastrar Fazenda</a
+					>
+					<a
+						class="navs nav5"
+						id="cad_funcionario"
+						href="cadastro_funcionario.html"
+					>
+						<i class="fa-solid fa-user"></i>
+						Cadastrar Funcionário
+					</a>
+					<a class="navs nav6" href="alterarDados.html">
+						<i class="fa-solid fa-user-pen"></i>
+						Alterar Dados</a
+					>
+					<a class="navs nav7" onclick="mostrarBox()">
+						<i class="fa-solid fa-right-from-bracket"></i>
+						Sair
+					</a>
+				</ul>
+			</div>
+		</header>
 
-    <div class="main-nav">
-      <ul>
-        <a class="navs nav1" href="dashboard.html">
-          <i class="fa-solid fa-chart-column"></i>
-          Gráficos
-        </a>
-        <a class="navs nav2" href="KPIs.html">
-          <i class="fa-solid fa-chart-pie"></i>
-          Indicadores de Performance</a>
-        <a class="navs nav4" id="cad_fazenda" href="cadastroFazenda.html">
-            <i class="fa-solid fa-tractor"></i>
-          Cadastrar Fazenda</a>
-        <a class="navs nav5" id="cad_funcionario" href="cadastro_funcionario.html">
-          <i class="fa-solid fa-user"></i>
-          Cadastrar Funcionário
-        </a>
-        <a class="navs nav6" href="alterarDados.html">
-          <i class="fa-solid fa-user-pen"></i>
-          Alterar Dados</a>
-        <a class="navs nav7" onclick="mostrarBox()">
-          <i class="fa-solid fa-right-from-bracket"></i>
-          Sair
-        </a>
-      </ul>
-    </div>
-  </header>
+		<!-- Confirmation Box -->
+		<div id="confirmation_wrapper">
+			<div class="confirmation-box">
+				<p>Deseja sair da sua conta?</p>
+				<div class="sim-ou-nao">
+					<a onclick="limparSessao()">sim</a>
+					<a onclick="esconderBox()">não</a>
+				</div>
+			</div>
+		</div>
 
-  <!-- Confirmation Box -->
-  <div id="confirmation_wrapper">
-    <div class="confirmation-box">
-      <p>Deseja sair da sua conta?</p>
-      <div class="sim-ou-nao">
-        <a onclick="limparSessao()">sim</a>
-        <a onclick="esconderBox()">não</a>
-      </div>
-    </div>
-  </div>
+		<!-- DASHBOARD -->
 
-  <!-- DASHBOARD -->
+		<div class="main-container">
+			<div id="dashboardWrapper">
+				<div class="dashboardWrapper-box">
+					<p>Nenhuma fazenda cadastrada!</p>
+					<a href="cadastroFazenda.html">Ir para a tela de cadastro</a>
+				</div>
+			</div>
+			<div class="dashboard-navbar">
+				<div id="alerta">
+					<div class="alertas-container" id="alertaTemp">
+						<div class="alerta-msg" id="alerta_temp_msg"></div>
+						<hr />
+						<div class="alerta-nomes-container" id="temp_nome"></div>
+					</div>
+					<div class="alertas-container" id="alertaUmid">
+						<div class="alerta-msg" id="alerta_umid_msg"></div>
+						<hr />
+						<div class="alerta-nomes-container" id="umid_nome"></div>
+					</div>
+				</div>
+				<div class="selects">
+					<select onchange="pegarDadosSetor()" name="" id="grafico_select">
+						<option value="setor">Registro em tempo real</option>
+						<option value="dia">Registro diário por setor</option>
+					</select>
 
-  <div class="main-container">
-    <div id="dashboardWrapper">
-      <div class="dashboardWrapper-box">
-        <p>Nenhuma fazenda cadastrada!</p>
-        <a href="cadastroFazenda.html">Ir para a tela de cadastro</a>
-      </div>
-    </div>
-    <div class="dashboard-navbar">
-      <div id="alerta">
-        <div class="alertas-container" id="alertaTemp">
-          <div class="alerta-msg" id="alerta_temp_msg"></div>
-          <hr />
-          <div class="alerta-nomes-container" id="temp_nome"></div>
-        </div>
-        <div class="alertas-container" id="alertaUmid">
-          <div class="alerta-msg" id="alerta_umid_msg"></div>
-          <hr />
-          <div class="alerta-nomes-container" id="umid_nome"></div>
-        </div>
-      </div>
-      <div class="selects">
-        <select onchange="pegarDadosSetor()" name="" id="grafico_select">
-          <option value="setor">Registro em tempo real</option>
-          <option value="dia">Registro diário por setor</option>
-        </select>
+					<select
+						onchange="pegarDadosSetor(), gerarSetores(), gerarDias()"
+						name=""
+						id="fazendas_select"
+					></select>
 
-        <select onchange="pegarDadosSetor(), gerarSetores(), gerarDias()" name="" id="fazendas_select"></select>
+					<select
+						onchange="pegarDadosSetor()"
+						name=""
+						id="dia_select"
+						style="display: none"
+					></select>
 
-        <select onchange="pegarDadosSetor()" name="" id="dia_select" style="display: none"></select>
+					<select
+						onchange="pegarDadosSetor()"
+						name=""
+						id="setor_select"
+					></select>
+				</div>
+			</div>
 
-        <select onchange="pegarDadosSetor()" name="" id="setor_select"></select>
-      </div>
-    </div>
+			<div class="graficos-main-container">
+				<div class="indicadores-container">
+					<div class="temperatura-container indicadores-row">
+						<h3>Temperatura</h3>
+						<div class="cards-container">
+							<div style="background-color: yellow" class="cards">
+								<p>Alerta</p>
+								<div class="indicador-valores">10°C</div>
+							</div>
+							<div style="background-color: green" class="cards">
+								<p>Ideal</p>
+								<div class="indicador-valores">25°C</div>
+							</div>
+							<div style="background-color: red" class="cards">
+								<p>Alerta</p>
+								<div class="indicador-valores">35°C</div>
+							</div>
+						</div>
+					</div>
 
-    <div class="graficos-main-container">
-      <div class="indicadores-container">
-        <div class="temperatura-container indicadores-row">
-          <h3>Temperatura</h3>
-          <div class="cards-container">
-            <div style="background-color: yellow" class="cards">
-              <p>Alerta</p>
-              <div class="indicador-valores">10°C</div>
-            </div>
-            <div style="background-color: green" class="cards">
-              <p>Ideal</p>
-              <div class="indicador-valores">25°C</div>
-            </div>
-            <div style="background-color: red" class="cards">
-              <p>Alerta</p>
-              <div class="indicador-valores">35°C</div>
-            </div>
-          </div>
-        </div>
+					<div class="umidade-container indicadores-row">
+						<h3>Umidade</h3>
+						<div class="cards-container">
+							<div style="background-color: yellow" class="cards">
+								<p>Alerta</p>
+								<div class="indicador-valores">30%</div>
+							</div>
+							<div style="background-color: green" class="cards">
+								<p>Ideal</p>
+								<div class="indicador-valores">65%</div>
+							</div>
+							<div style="background-color: red" class="cards">
+								<p>Alerta</p>
+								<div class="indicador-valores">80%</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-        <div class="umidade-container indicadores-row">
-          <h3>Umidade</h3>
-          <div class="cards-container">
-            <div style="background-color: yellow" class="cards">
-              <p>Alerta</p>
-              <div class="indicador-valores">30%</div>
-            </div>
-            <div style="background-color: green" class="cards">
-              <p>Ideal</p>
-              <div class="indicador-valores">65%</div>
-            </div>
-            <div style="background-color: red" class="cards">
-              <p>Alerta</p>
-              <div class="indicador-valores">80%</div>
-            </div>
-          </div>
-        </div>
-      </div>
+				<div class="graficos-container">
+					<div class="graficos">
+						<canvas id="graficoTemperatura"></canvas>
+					</div>
 
-      <div class="graficos-container">
-        <div class="graficos">
-          <canvas id="graficoTemperatura"></canvas>
-        </div>
-
-        <div class="graficos">
-          <canvas id="graficoUmidade"></canvas>
-        </div>
-      </div>
-    </div>
-  </div>
-</body>
-
+					<div class="graficos">
+						<canvas id="graficoUmidade"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
 </html>
 <script src="../../js/dashboard.js"></script>
 <script src="../../js/funcoes.js"></script>

@@ -27,6 +27,11 @@ function entrar() {
 					console.log(json);
 					console.log(JSON.stringify(json));
 
+					alert("JSON.stringify(json)::::" + JSON.stringify(json));
+					alert("json:::::" + json);
+					alert("json:::::" + json[0]);
+					alert("json:::::" + json[1]);
+
 					sessionStorage.ID_FUNCIONARIO = json.idFuncionario;
 					sessionStorage.NOME = json.nome;
 					sessionStorage.SOBRENOME = json.sobrenome;

@@ -113,9 +113,11 @@ header {
 .navs {
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-start;
+	column-gap: 10px;
 	height: 45px;
 	width: 300px;
+	padding-left: 20px;
 	border-radius: 10px;
 	text-align: center;
 	background-color: #2ac28a;
@@ -125,6 +127,10 @@ header {
 	box-shadow: 0 3px 5px -2px #000;
 	border: 3px solid #000;
 	transition: all 0.1s;
+}
+
+.navs i {
+	width: 30px;
 }
 
 .main-nav a:hover {

@@ -251,3 +251,31 @@ li input:hover {
 .redes-sociais i {
 	font-size: 1.8rem;
 }
+
+.card_recuperar{
+	list-style-type: none;
+	color: white;
+}
+
+.card_recuperar li{
+	margin-top: 50px;
+}
+
+li button {
+	color: white;
+	background-color: transparent;
+	height: 50px;
+	width: 150px;
+	border-radius: 0 10px 0 10px;
+	border: #2ac28a 1px solid;
+	cursor: pointer;
+	transition: 1s ease;
+	margin-left: 35px;
+}
+
+li button:hover {
+	background: #2ac28a;
+	border: #2ac28a 1px solid;
+}
+
+

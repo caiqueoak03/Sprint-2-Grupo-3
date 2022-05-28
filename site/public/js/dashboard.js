@@ -80,7 +80,7 @@ function gerarSetores() {
 					var fkFazendas = [];
 
 					for (var i = 0; i < json.length; i++) {
-						if (json.idFazenda == idFazenda_selecionada) {
+						if (json[i].fkFazenda == idFazenda_selecionada) {
 							setor_select.innerHTML += `
 							<option value="${json[i].idSetor}">${json[i].nome}</option>
 						`;
@@ -112,7 +112,7 @@ function gerarSetores() {
 	return false;
 }
 
-var intervalo = 3 * 1000; // segundos * 1000
+var intervalo = 5 * 1000; // segundos * 1000
 
 function limparDadosSensores() {
 	fetch("/usuarios/limparDadosSensores", {
@@ -161,7 +161,11 @@ function gerarDadosSensores() {
 						console.log(json);
 						console.log(JSON.stringify(json));
 
-						if (json[0].idDado >= 500) {
+						var qtdDados = json[0].idDado;
+						// var qtdDados = json[json.length - 1][0].idDado; // local
+
+						if (qtdDados >= 500) {
+							alert("Dados limpados do BD para não travar a aplicação");
 							limparDadosSensores();
 						}
 					});
@@ -271,8 +275,6 @@ function pegarDados() {
 				console.log("ESTOU NO THEN DO entrar()!");
 
 				if (resposta.ok) {
-					console.log(resposta);
-
 					resposta.json().then((json) => {
 						console.log(json);
 						console.log("json dados: " + JSON.stringify(json));

@@ -150,31 +150,50 @@ function gerarDadosSensores(fkFazendas, idSetores) {
 	return database.executar(instrucao);
 }
 
-function pegarDadosHora(
-	fkSetor,
-	fkFazenda,
-	dataDado,
-	idFuncionario,
-	setorLength,
-) {
+function pegarDadosHora(fkSetor) {
 	console.log(
 		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()",
 		fkSetor,
-		fkFazenda,
-		dataDado,
-		setorLength,
 	);
 
 	var instrucao = `
 	SELECT * FROM dado JOIN setor on idSetor = fkSetor JOIN fazenda on idFazenda = fkFazenda
 		WHERE fkSetor = ${fkSetor} ORDER BY idDado DESC LIMIT 8;
+    `;
+
+	console.log("Executando a instrução SQL: \n" + instrucao);
+	return database.executar(instrucao);
+}
+
+function pegarDadosSetor(fkFazenda, dataDado) {
+	console.log(
+		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()",
+		fkFazenda,
+		dataDado,
+	);
+
+	var instrucao = `
 	SELECT nome, truncate(avg(temperatura), 2) as avgTemp, truncate(avg(umidade), 2) as avgUmid 
 		FROM dado JOIN setor on idSetor = fkSetor 
 			WHERE setor_fkFazenda = ${fkFazenda} and dataDado = '${dataDado}' group by nome;
-	SELECT temperatura, umidade, tempoDado, fazenda.nome as fazendaNome, setor.nome as setorNome
-		FROM dado JOIN setor on idSetor = fkSetor JOIN fazenda ON idFazenda = fkFazenda 
-			JOIN contrato ON contrato.fkFazenda = idFazenda
-				WHERE contrato.fkFuncionario = ${idFuncionario} ORDER BY idDado DESC LIMIT ${setorLength};
+    `;
+
+	console.log("Executando a instrução SQL: \n" + instrucao);
+	return database.executar(instrucao);
+}
+
+function pegarDadosAlerta(idFuncionario, setorLength) {
+	console.log(
+		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()",
+		setorLength,
+		idFuncionario,
+	);
+
+	var instrucao = `
+		SELECT temperatura, umidade, tempoDado, fazenda.nome as fazendaNome, setor.nome as setorNome
+			FROM dado JOIN setor on idSetor = fkSetor JOIN fazenda ON idFazenda = fkFazenda 
+				JOIN contrato ON contrato.fkFazenda = idFazenda
+					WHERE contrato.fkFuncionario = ${idFuncionario} ORDER BY idDado DESC LIMIT ${setorLength};
     `;
 
 	console.log("Executando a instrução SQL: \n" + instrucao);
@@ -198,11 +217,11 @@ function entrar(email, senha) {
 function limparDadosSensores() {
 	console.log(
 		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ",
-		email,
-		senha,
 	);
 	var instrucao = `
         TRUNCATE TABLE dado;
+				ALTER TABLE dado MODIFY COLUMN dataDado DATE 
+				DEFAULT(CURRENT_DATE());
     `;
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);
@@ -380,6 +399,7 @@ module.exports = {
 	gerarDadosSensores,
 	pegarDadosHora,
 	pegarDadosSetor,
+	pegarDadosAlerta,
 	gerarDias,
 	listarSetores,
 	limparDadosSensores,

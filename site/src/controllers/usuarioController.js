@@ -420,11 +420,35 @@ function pegarDados(req, res) {
 		res.status(400).send("Seu setorLength está undefined!");
 	} else {
 		usuarioModel
-			.pegarDadosHora(fkSetor, fkFazenda, dataDado, idFuncionario, setorLength)
-			.then(function (resposta) {
-				console.log("resposta: " + resposta);
-				resultado.push(resposta);
-				res.json(resposta);
+			.pegarDadosHora(fkSetor)
+			.then(function (resposta1) {
+				var resposta1Arr = [];
+				for (var i = 0; i < resposta1.length; i++) {
+					resposta1Arr.push(resposta1[i]);
+				}
+				resultado.push(resposta1Arr);
+
+				usuarioModel
+					.pegarDadosSetor(fkFazenda, dataDado)
+					.then(function (resposta2) {
+						var resposta2Arr = [];
+						for (var i = 0; i < resposta2.length; i++) {
+							resposta2Arr.push(resposta2[i]);
+						}
+						resultado.push(resposta2Arr);
+
+						usuarioModel
+							.pegarDadosAlerta(idFuncionario, setorLength)
+							.then(function (resposta3) {
+								var resposta3Arr = [];
+								for (var i = 0; i < resposta3.length; i++) {
+									resposta3Arr.push(resposta3[i]);
+								}
+								resultado.push(resposta3Arr);
+
+								res.json(resultado);
+							});
+					});
 			})
 			.catch(function (erro) {
 				console.log(erro);

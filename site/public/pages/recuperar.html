@@ -49,7 +49,13 @@
 		<!-- LOGIN -->
 		<div class="login">
 			<div class="container">
-				
+				<div class="box">
+					<div class="card_recuperar">
+						<li><h2>RECUPERAR SENHA</h2></li>
+						<li>Email:<input id="inp_email" placeholder="Exemplo@hotmail.com" type="text"></li>
+						<li><button onclick="recuperar()">Recuperar</button></li>
+					</div>
+				</div>
 			</div>
 		</div>
 
@@ -91,3 +97,15 @@
 	</body>
 </html>
 
+<script>
+	function recuperar(){
+
+		var emailVar = (inp_email.value)
+
+		if (emailVar == "" || senhaVar == "") {
+
+				alert("Preencha todos os campos");
+
+	    } 
+	}
+</script>

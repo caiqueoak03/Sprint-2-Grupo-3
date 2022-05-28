@@ -110,7 +110,7 @@ var incrementador = 1;
 
 function gerarDadosSensores(fkFazendas, idSetores) {
 	console.log(
-		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()",
+		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function gerarDadosSensores()",
 		fkFazendas,
 		idSetores,
 	);
@@ -128,8 +128,8 @@ function gerarDadosSensores(fkFazendas, idSetores) {
 		// Insere 10 dados em uma data, depois insere mais 10 dados em outra data e assim por diante
 		if (contador == 10) {
 			instrucao += `
-			ALTER TABLE dado MODIFY COLUMN dataDado DATE 
-				DEFAULT(DATE_ADD(CURRENT_DATE(),interval ${incrementador} day));
+			ALTER TABLE dado DROP CONSTRAINT df_dataDado;
+			ALTER TABLE dado ADD CONSTRAINT df_dadoDado DEFAULT DATEADD(day, ${incrementador}, GETDATE()) FOR dataDado;
 			INSERT INTO dado (temperatura, umidade, fkSetor, setor_fkFazenda) values 
 			('${temperaturaRandom}', '${umidadeRandom}', '${idSetores[i]}', '${fkFazendas[i]}');
 			`;
@@ -233,8 +233,8 @@ function limparDadosSensores() {
 	);
 	var instrucao = `
         TRUNCATE TABLE dado;
-				ALTER TABLE dado MODIFY COLUMN dataDado DATE 
-				DEFAULT(CURRENT_DATE());
+				ALTER TABLE dado DROP CONSTRAINT df_dataDado;
+				ALTER TABLE dado ADD CONSTRAINT df_dadoDado DEFAULT GETDATE() FOR dataDado;
     `;
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);

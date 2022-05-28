@@ -191,10 +191,17 @@ function entrar(email, senha) {
 		email,
 		senha,
 	);
+
 	var instrucao = `
-						SELECT *, (SELECT idFuncionario FROM funcionario WHERE email = '${email}' AND senha = '${senha}') as idFuncionarioTeste
-							FROM funcionario WHERE email = '${email}' AND senha = '${senha}';
-    `;
+	SELECT *
+		FROM funcionario WHERE email = 'teste@gmail.com' AND senha = '123' 
+			UNION
+	SELECT * FROM funcionario order by idFuncionario;`;
+	// var instrucao = `
+	// 					SELECT *
+	// 						FROM funcionario WHERE email = '${email}' AND senha = '${senha}'
+	// 						union SELECT idFuncionario FROM funcionario WHERE email = '${email}' AND senha = '${senha}') as idFuncionarioTeste
+	//   `;
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);
 }

@@ -15,7 +15,6 @@ function carregarKPIs() {
 				resposta.json().then((json) => {
 					console.log("json: " + json);
 					console.log("JSON: " + JSON.stringify(json));
-					// alert("JSON: " + JSON.stringify(json));
 
 					var meses = [
 						"Janeiro",
@@ -76,8 +75,8 @@ function carregarKPIs() {
 					}
 
 					var jsonMaxTemp = json[0][0];
-					var jsonMinTemp = json[2][0];
-					var jsonMaxUmid = json[1][0];
+					var jsonMinTemp = json[1][0];
+					var jsonMaxUmid = json[2][0];
 					var jsonMinUmid = json[3][0];
 
 					// Renderizando os melhores registros médios no HTML

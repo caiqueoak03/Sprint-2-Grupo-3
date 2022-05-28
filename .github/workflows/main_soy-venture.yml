@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'soy-venture'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9586CA8925D84AD5882455A7738389E2 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BB3FEEC255624BEDB0D07222F9809CF4 }}
           package: .

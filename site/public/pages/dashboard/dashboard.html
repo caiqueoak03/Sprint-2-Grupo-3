@@ -116,29 +116,25 @@
 					</div>
 				</div>
 				<div class="selects">
-					<select onchange="pegarDadosSetor()" name="" id="grafico_select">
+					<select onchange="pegarDados()" name="" id="grafico_select">
 						<option value="setor">Registro em tempo real</option>
 						<option value="dia">Registro diário por setor</option>
 					</select>
 
 					<select
-						onchange="pegarDadosSetor(), gerarSetores(), gerarDias()"
+						onchange="pegarDados(), gerarSetores(), gerarDias()"
 						name=""
 						id="fazendas_select"
 					></select>
 
 					<select
-						onchange="pegarDadosSetor()"
+						onchange="pegarDados()"
 						name=""
 						id="dia_select"
 						style="display: none"
 					></select>
 
-					<select
-						onchange="pegarDadosSetor()"
-						name=""
-						id="setor_select"
-					></select>
+					<select onchange="pegarDados()" name="" id="setor_select"></select>
 				</div>
 			</div>
 

@@ -13,7 +13,7 @@ function carregarFazendas() {
 
 			if (resposta.ok) {
 				resposta.json().then((json) => {
-					if (json[1][0].qtdFazendas == 0) {
+					if (json[0].qtdFazendas == 0) {
 						return;
 					}
 					console.log("json: " + json);
@@ -22,9 +22,9 @@ function carregarFazendas() {
 					var idFazendas = [];
 					var nomeFazendas = [];
 
-					for (let i = 0; i < json[0].length; i++) {
-						nomeFazendas.push(json[0][i].nome);
-						idFazendas.push(json[0][i].idFazenda);
+					for (let i = 0; i < json.length; i++) {
+						nomeFazendas.push(json[i].nome);
+						idFazendas.push(json[i].idFazenda);
 					}
 
 					sessionStorage.ID_FAZENDAS = idFazendas;
@@ -55,6 +55,8 @@ function carregarFazendas() {
 }
 
 function gerarSetores() {
+	var idFazenda_selecionada = fazendas_select.value;
+
 	fetch("/usuarios/gerarSetores", {
 		method: "POST",
 		headers: {
@@ -62,7 +64,6 @@ function gerarSetores() {
 		},
 		body: JSON.stringify({
 			idFuncionarioServer: sessionStorage.ID_FUNCIONARIO,
-			idFazendaServer: fazendas_select.value,
 		}),
 	})
 		.then(function (resposta) {
@@ -78,15 +79,17 @@ function gerarSetores() {
 					var idSetores = [];
 					var fkFazendas = [];
 
-					for (var i = 0; i < json[0].length; i++) {
-						setor_select.innerHTML += `
-							<option value="${json[0][i].idSetor}">${json[0][i].nome}</option>
+					for (var i = 0; i < json.length; i++) {
+						if (json[i].fkFazenda == idFazenda_selecionada) {
+							setor_select.innerHTML += `
+							<option value="${json[i].idSetor}">${json[i].nome}</option>
 						`;
+						}
 					}
 
-					for (var i = 0; i < json[1].length; i++) {
-						idSetores.push(json[1][i].idSetor);
-						fkFazendas.push(json[1][i].fkFazenda);
+					for (var i = 0; i < json.length; i++) {
+						idSetores.push(json[i].idSetor);
+						fkFazendas.push(json[i].fkFazenda);
 					}
 
 					sessionStorage.FK_FAZENDAS = fkFazendas;
@@ -109,7 +112,7 @@ function gerarSetores() {
 	return false;
 }
 
-var intervalo = 3 * 1000; // segundos * 1000
+var intervalo = 5 * 1000; // segundos * 1000
 
 function limparDadosSensores() {
 	fetch("/usuarios/limparDadosSensores", {
@@ -157,13 +160,19 @@ function gerarDadosSensores() {
 					resposta.json().then((json) => {
 						console.log(json);
 						console.log(JSON.stringify(json));
+						console.log("DADOS GERADOS");
 
-						if (json[0].idDado >= 500) {
+						var qtdDados = json[0].idDado;
+						// var qtdDados = json[json.length - 1][0].idDado; // local
+
+						if (qtdDados >= 500) {
+							alert("Dados limpados do BD para não travar a aplicação");
 							limparDadosSensores();
 						}
 					});
 				} else {
 					console.log("Houve um erro ao carregar os dados");
+					clearInterval(gerar);
 
 					resposta.text().then((texto) => {
 						console.error(texto);
@@ -187,6 +196,7 @@ function gerarDadosSensores() {
 }
 
 function gerarDias() {
+	console.log("FAZENDAS_SELECT::: " + fazendas_select.value);
 	fetch("/usuarios/gerarDias", {
 		method: "POST",
 		headers: {
@@ -215,7 +225,7 @@ function gerarDias() {
 						`;
 					}
 
-					pegarDadosSetor();
+					pegarDados();
 				});
 			} else {
 				console.log("Houve um erro ao tentar carregar os dias!");
@@ -249,9 +259,9 @@ var primeiroRender = true;
 
 var interval;
 
-function pegarDadosSetor() {
+function pegarDados() {
 	var pegar = () =>
-		fetch("/usuarios/pegarDadosSetor", {
+		fetch("/usuarios/pegarDados", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -268,8 +278,6 @@ function pegarDadosSetor() {
 				console.log("ESTOU NO THEN DO entrar()!");
 
 				if (resposta.ok) {
-					console.log(resposta);
-
 					resposta.json().then((json) => {
 						console.log(json);
 						console.log("json dados: " + JSON.stringify(json));

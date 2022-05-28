@@ -372,12 +372,10 @@
 						console.log(json);
 						console.log(JSON.stringify(json));
 
-						var obj = json;
-
 						var nomeSetores = [];
 
-						for (var i = 0; i < obj.length; i++) {
-							nomeSetores.push(obj[i].nome);
+						for (var i = 0; i < json.length; i++) {
+							nomeSetores.push(json[i].nome);
 						}
 
 						sessionStorage.NOME_SETORES = nomeSetores;

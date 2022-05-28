@@ -65,29 +65,25 @@ function carregarFazendas(idFuncionario) {
 		idFuncionario,
 	);
 	var instrucao = `
-		SELECT idFazenda, fazenda.nome, fazenda.qtdSetores,
-			(SELECT count(idFazenda) as qtdFazendas FROM fazenda 
-				JOIN contrato on idFazenda = fkFazenda
-					JOIN funcionario on idFuncionario = fkFuncionario where idFuncionario = ${idFuncionario} order by idFazenda )
-			FROM fazenda 
-				JOIN contrato on idFazenda = fkFazenda
-					JOIN funcionario on idFuncionario = fkFuncionario where idFuncionario = ${idFuncionario} order by idFazenda;
+	SELECT idFazenda, fazenda.nome, fazenda.qtdSetores,
+		(SELECT count(idFazenda) as qtdFazendas FROM fazenda 
+			JOIN contrato on idFazenda = fkFazenda
+				JOIN funcionario on idFuncionario = fkFuncionario where idFuncionario = ${idFuncionario}) as qtdFazendas
+		FROM fazenda 
+			JOIN contrato on idFazenda = fkFazenda
+				JOIN funcionario on idFuncionario = fkFuncionario where idFuncionario = ${idFuncionario} order by idFazenda;
     `;
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);
 }
 
-function gerarSetores(idFuncionario, idFazenda) {
+function gerarSetores(idFuncionario) {
 	console.log(
 		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function gerarSetores()",
 		idFuncionario,
-		idFazenda,
 	);
 	var instrucao = `
-		SELECT idSetor, setor.nome FROM setor JOIN fazenda ON setor.fkFazenda = idFazenda 
-			JOIN contrato on idFazenda = contrato.fkFazenda
-				JOIN funcionario on idFuncionario = fkFuncionario where idFuncionario = ${idFuncionario} and idFazenda = ${idFazenda};
-		SELECT idSetor, setor.fkFazenda FROM setor JOIN fazenda ON setor.fkFazenda = idFazenda 
+		SELECT idSetor, setor.fkFazenda, setor.nome FROM setor JOIN fazenda ON setor.fkFazenda = idFazenda 
 			JOIN contrato on idFazenda = contrato.fkFazenda
 				JOIN funcionario on idFuncionario = fkFuncionario where idFuncionario = ${idFuncionario} order by idSetor;
     `;
@@ -154,7 +150,7 @@ function gerarDadosSensores(fkFazendas, idSetores) {
 	return database.executar(instrucao);
 }
 
-function pegarDadosSetor(
+function pegarDadosHora(
 	fkSetor,
 	fkFazenda,
 	dataDado,
@@ -193,15 +189,8 @@ function entrar(email, senha) {
 	);
 
 	var instrucao = `
-	SELECT *
-		FROM funcionario WHERE email = 'teste@gmail.com' AND senha = '123' 
-			UNION
-	SELECT * FROM funcionario order by idFuncionario;`;
-	// var instrucao = `
-	// 					SELECT *
-	// 						FROM funcionario WHERE email = '${email}' AND senha = '${senha}'
-	// 						union SELECT idFuncionario FROM funcionario WHERE email = '${email}' AND senha = '${senha}') as idFuncionarioTeste
-	//   `;
+						SELECT * FROM funcionario WHERE email = '${email}' AND senha = '${senha}';
+	  `;
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);
 }
@@ -389,6 +378,7 @@ module.exports = {
 	alterarDados,
 	gerarSetores,
 	gerarDadosSensores,
+	pegarDadosHora,
 	pegarDadosSetor,
 	gerarDias,
 	listarSetores,

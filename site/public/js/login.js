@@ -27,21 +27,16 @@ function entrar() {
 					console.log(json);
 					console.log(JSON.stringify(json));
 
-					alert("JSON.stringify(json)::::" + JSON.stringify(json));
-					alert("JSON[0]::::" + JSON[0]);
-					alert("JSON[1]::::" + JSON[1]);
-					alert("JSON[2]::::" + JSON[2]);
+					sessionStorage.ID_FUNCIONARIO = json[0].idFuncionario;
+					sessionStorage.NOME = json[0].nome;
+					sessionStorage.SOBRENOME = json[0].sobrenome;
+					sessionStorage.CARGO = json[0].cargo;
+					sessionStorage.ID_EMPRESA = json[0].fkEmpresa;
 
-					sessionStorage.ID_FUNCIONARIO = json.idFuncionario;
-					sessionStorage.NOME = json.nome;
-					sessionStorage.SOBRENOME = json.sobrenome;
-					sessionStorage.CARGO = json.cargo;
-					sessionStorage.ID_EMPRESA = json.fkEmpresa;
-
-					if (json.urlImg == null) {
+					if (json[0].urlImg == null) {
 						sessionStorage.IMG_URL = "../../images/gerente-img.png";
 					} else {
-						sessionStorage.IMG_URL = json.urlImg;
+						sessionStorage.IMG_URL = json[0].urlImg;
 					}
 
 					sessionStorage.FUNCIONARIO = "flex";

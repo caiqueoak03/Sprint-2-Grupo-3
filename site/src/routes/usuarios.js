@@ -71,8 +71,8 @@ router.post("/carregarFazendas", function (req, res) {
 	usuarioController.carregarFazendas(req, res);
 });
 
-router.post("/pegarDadosSetor", function (req, res) {
-	usuarioController.pegarDadosSetor(req, res);
+router.post("/pegarDados", function (req, res) {
+	usuarioController.pegarDados(req, res);
 });
 
 router.post("/limparDadosSensores", function (req, res) {

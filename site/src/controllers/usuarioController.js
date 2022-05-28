@@ -321,20 +321,16 @@ function associarFuncionario(req, res) {
 function gerarSetores(req, res) {
 	// Crie uma variável que vá recuperar os valores do arquivo cadastro.html
 	var idFuncionario = req.body.idFuncionarioServer;
-	var idFazenda = req.body.idFazendaServer;
 
 	console.log("idFuncionario no controller: " + idFuncionario);
-	console.log("idFazenda no controller: " + idFazenda);
 
 	// Faça as validações dos valores
 	if (idFuncionario == undefined) {
 		res.status(400).send("Seu idFuncionario está undefined!");
-	} else if (idFazenda == undefined) {
-		res.status(400).send("Seu idFazenda está undefined!");
 	} else {
 		// Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
 		usuarioModel
-			.gerarSetores(idFuncionario, idFazenda)
+			.gerarSetores(idFuncionario)
 			.then(function (resultado) {
 				console.log("Resultado: " + resultado);
 				res.json(resultado);
@@ -404,12 +400,13 @@ function gerarDadosSensores(req, res) {
 	}
 }
 
-function pegarDadosSetor(req, res) {
+function pegarDados(req, res) {
 	var fkSetor = req.body.fkSetorServer;
 	var fkFazenda = req.body.fkFazendaServer;
 	var dataDado = req.body.dataDadoServer;
 	var idFuncionario = req.body.idFuncionarioServer;
 	var setorLength = req.body.setorLengthServer;
+	var resultado = [];
 
 	if (fkSetor == undefined) {
 		res.status(400).send("Seu fkSetor está undefined!");
@@ -423,10 +420,11 @@ function pegarDadosSetor(req, res) {
 		res.status(400).send("Seu setorLength está undefined!");
 	} else {
 		usuarioModel
-			.pegarDadosSetor(fkSetor, fkFazenda, dataDado, idFuncionario, setorLength)
-			.then(function (resultado) {
-				console.log("Resultado: " + resultado);
-				res.json(resultado);
+			.pegarDadosHora(fkSetor, fkFazenda, dataDado, idFuncionario, setorLength)
+			.then(function (resposta) {
+				console.log("resposta: " + resposta);
+				resultado.push(resposta);
+				res.json(resposta);
 			})
 			.catch(function (erro) {
 				console.log(erro);
@@ -617,7 +615,7 @@ module.exports = {
 	gerarSetores,
 	listarSetores,
 	gerarDadosSensores,
-	pegarDadosSetor,
+	pegarDados,
 	gerarDias,
 	limparDadosSensores,
 };

@@ -13,7 +13,7 @@ function carregarFazendas() {
 
 			if (resposta.ok) {
 				resposta.json().then((json) => {
-					if (json[1][0].qtdFazendas == 0) {
+					if (json[0].qtdFazendas == 0) {
 						return;
 					}
 					console.log("json: " + json);
@@ -22,9 +22,9 @@ function carregarFazendas() {
 					var idFazendas = [];
 					var nomeFazendas = [];
 
-					for (let i = 0; i < json[0].length; i++) {
-						nomeFazendas.push(json[0][i].nome);
-						idFazendas.push(json[0][i].idFazenda);
+					for (let i = 0; i < json.length; i++) {
+						nomeFazendas.push(json[i].nome);
+						idFazendas.push(json[i].idFazenda);
 					}
 
 					sessionStorage.ID_FAZENDAS = idFazendas;
@@ -55,6 +55,8 @@ function carregarFazendas() {
 }
 
 function gerarSetores() {
+	var idFazenda_selecionada = fazendas_select.value;
+
 	fetch("/usuarios/gerarSetores", {
 		method: "POST",
 		headers: {
@@ -62,7 +64,6 @@ function gerarSetores() {
 		},
 		body: JSON.stringify({
 			idFuncionarioServer: sessionStorage.ID_FUNCIONARIO,
-			idFazendaServer: fazendas_select.value,
 		}),
 	})
 		.then(function (resposta) {
@@ -78,15 +79,17 @@ function gerarSetores() {
 					var idSetores = [];
 					var fkFazendas = [];
 
-					for (var i = 0; i < json[0].length; i++) {
-						setor_select.innerHTML += `
-							<option value="${json[0][i].idSetor}">${json[0][i].nome}</option>
+					for (var i = 0; i < json.length; i++) {
+						if (json.idFazenda == idFazenda_selecionada) {
+							setor_select.innerHTML += `
+							<option value="${json[i].idSetor}">${json[i].nome}</option>
 						`;
+						}
 					}
 
-					for (var i = 0; i < json[1].length; i++) {
-						idSetores.push(json[1][i].idSetor);
-						fkFazendas.push(json[1][i].fkFazenda);
+					for (var i = 0; i < json.length; i++) {
+						idSetores.push(json[i].idSetor);
+						fkFazendas.push(json[i].fkFazenda);
 					}
 
 					sessionStorage.FK_FAZENDAS = fkFazendas;
@@ -215,7 +218,7 @@ function gerarDias() {
 						`;
 					}
 
-					pegarDadosSetor();
+					pegarDados();
 				});
 			} else {
 				console.log("Houve um erro ao tentar carregar os dias!");
@@ -249,9 +252,9 @@ var primeiroRender = true;
 
 var interval;
 
-function pegarDadosSetor() {
+function pegarDados() {
 	var pegar = () =>
-		fetch("/usuarios/pegarDadosSetor", {
+		fetch("/usuarios/pegarDados", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

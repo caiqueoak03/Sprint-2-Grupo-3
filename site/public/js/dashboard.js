@@ -160,6 +160,7 @@ function gerarDadosSensores() {
 					resposta.json().then((json) => {
 						console.log(json);
 						console.log(JSON.stringify(json));
+						console.log("DADOS GERADOS");
 
 						var qtdDados = json[0].idDado;
 						// var qtdDados = json[json.length - 1][0].idDado; // local

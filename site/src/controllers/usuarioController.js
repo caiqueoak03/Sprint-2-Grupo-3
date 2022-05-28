@@ -388,9 +388,9 @@ function gerarDadosSensores(req, res) {
 			.then(function (resultado) {
 				console.log("Resultado: " + resultado);
 
-				usuarioModel.pegarQtdDados().then(function (resultado) {
-					console.log("Resultado: " + resultado);
-					res.json(resultado);
+				usuarioModel.pegarQtdDados().then(function (resposta) {
+					console.log("resposta: " + resposta);
+					res.json(resposta);
 				});
 			})
 			.catch(function (erro) {

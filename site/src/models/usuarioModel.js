@@ -192,7 +192,7 @@ function entrar(email, senha) {
 		senha,
 	);
 	var instrucao = `
-						SELECT *, (SELECT idFuncionario FROM funcionario WHERE email = '${email}' AND senha = '${senha}') as idFuncionario
+						SELECT *, (SELECT idFuncionario FROM funcionario WHERE email = '${email}' AND senha = '${senha}') as idFuncionarioTeste
 							FROM funcionario WHERE email = '${email}' AND senha = '${senha}';
     `;
 	console.log("Executando a instrução SQL: \n" + instrucao);

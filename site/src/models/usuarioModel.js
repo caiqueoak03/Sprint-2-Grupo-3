@@ -143,9 +143,9 @@ function gerarDadosSensores(fkFazendas, idSetores) {
 			contador++;
 		}
 	}
-	instrucao += `
-	SELECT idDado FROM dado ORDER BY idDado DESC LIMIT 1;
-	`;
+	// instrucao += `
+	// SELECT idDado FROM dado ORDER BY idDado DESC LIMIT 1;
+	// `;
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);
 }

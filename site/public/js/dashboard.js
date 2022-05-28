@@ -171,6 +171,7 @@ function gerarDadosSensores() {
 					});
 				} else {
 					console.log("Houve um erro ao carregar os dados");
+					clearInterval(gerar);
 
 					resposta.text().then((texto) => {
 						console.error(texto);
@@ -194,6 +195,7 @@ function gerarDadosSensores() {
 }
 
 function gerarDias() {
+	console.log("FAZENDAS_SELECT::: " + fazendas_select.value);
 	fetch("/usuarios/gerarDias", {
 		method: "POST",
 		headers: {

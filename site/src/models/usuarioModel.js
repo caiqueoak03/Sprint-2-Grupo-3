@@ -150,6 +150,20 @@ function gerarDadosSensores(fkFazendas, idSetores) {
 	return database.executar(instrucao);
 }
 
+function pegarQtdDados() {
+	console.log(
+		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()",
+		fkSetor,
+	);
+
+	var instrucao = `
+	SELECT idDado FROM dado ORDER BY idDado DESC LIMIT 1;
+    `;
+
+	console.log("Executando a instrução SQL: \n" + instrucao);
+	return database.executar(instrucao);
+}
+
 function pegarDadosHora(fkSetor) {
 	console.log(
 		"ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()",
@@ -392,6 +406,7 @@ module.exports = {
 	listarGerentes,
 	carregarFazendas,
 	firmarContrato,
+	pegarQtdDados,
 	listarFuncionarios,
 	associarFazendaGerente,
 	alterarDados,

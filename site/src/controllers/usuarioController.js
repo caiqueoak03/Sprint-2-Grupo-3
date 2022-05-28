@@ -387,7 +387,11 @@ function gerarDadosSensores(req, res) {
 			.gerarDadosSensores(fkFazendas, idSetores)
 			.then(function (resultado) {
 				console.log("Resultado: " + resultado);
-				res.json(resultado);
+
+				usuarioModel.pegarQtdDados().then(function (resultado) {
+					console.log("Resultado: " + resultado);
+					res.json(resultado);
+				});
 			})
 			.catch(function (erro) {
 				console.log(erro);

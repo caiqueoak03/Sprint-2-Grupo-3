@@ -97,7 +97,7 @@ function gerarDias(idFazenda) {
 		idFazenda,
 	);
 	var instrucao = `
-		SELECT DISTINCT dataDado FROM dado JOIN fazenda on idFazenda = setor_fkFazenda WHERE setor_fkFazenda = '${idFazenda}';
+	SELECT DISTINCT dataDado FROM dado JOIN fazenda on idFazenda = setor_fkFazenda where setor_fkFazenda = '${idFazenda}';
     `;
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);
@@ -128,8 +128,8 @@ function gerarDadosSensores(fkFazendas, idSetores) {
 		// Insere 10 dados em uma data, depois insere mais 10 dados em outra data e assim por diante
 		if (contador == 10) {
 			instrucao += `
-			ALTER TABLE dado DROP CONSTRAINT df_dataDado;
-			ALTER TABLE dado ADD CONSTRAINT df_dadoDado DEFAULT DATEADD(day, ${incrementador}, GETDATE()) FOR dataDado;
+			ALTER TABLE dado DROP df_dataDado;
+			ALTER TABLE dado ADD CONSTRAINT df_dataDado DEFAULT DATEADD(day, ${incrementador}, GETDATE()) FOR dataDado;
 			INSERT INTO dado (temperatura, umidade, fkSetor, setor_fkFazenda) values 
 			('${temperaturaRandom}', '${umidadeRandom}', '${idSetores[i]}', '${fkFazendas[i]}');
 			`;
@@ -143,9 +143,6 @@ function gerarDadosSensores(fkFazendas, idSetores) {
 			contador++;
 		}
 	}
-	// instrucao += `
-	// SELECT idDado FROM dado ORDER BY idDado DESC LIMIT 1;
-	// `;
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);
 }
@@ -156,7 +153,8 @@ function pegarQtdDados() {
 	);
 
 	var instrucao = `
-		SELECT idDado FROM dado ORDER BY idDado DESC LIMIT 1;
+		SELECT TOP 1 * FROM dado ORDER BY idDado DESC;
+	;
     `;
 
 	console.log("Executando a instrução SQL: \n" + instrucao);
@@ -170,8 +168,8 @@ function pegarDadosHora(fkSetor) {
 	);
 
 	var instrucao = `
-	SELECT * FROM dado JOIN setor on idSetor = fkSetor JOIN fazenda on idFazenda = fkFazenda
-		WHERE fkSetor = ${fkSetor} ORDER BY idDado DESC LIMIT 8;
+	SELECT TOP 8 * FROM dado JOIN setor on idSetor = fkSetor JOIN fazenda on idFazenda = fkFazenda
+		WHERE fkSetor = ${fkSetor} ORDER BY idDado DESC;
     `;
 
 	console.log("Executando a instrução SQL: \n" + instrucao);
@@ -186,7 +184,7 @@ function pegarDadosSetor(fkFazenda, dataDado) {
 	);
 
 	var instrucao = `
-	SELECT nome, truncate(avg(temperatura), 2) as avgTemp, truncate(avg(umidade), 2) as avgUmid 
+	SELECT nome, round(avg(temperatura), 2) as avgTemp, round(avg(umidade), 2) as avgUmid 
 		FROM dado JOIN setor on idSetor = fkSetor 
 			WHERE setor_fkFazenda = ${fkFazenda} and dataDado = '${dataDado}' group by nome;
     `;
@@ -203,10 +201,10 @@ function pegarDadosAlerta(idFuncionario, setorLength) {
 	);
 
 	var instrucao = `
-		SELECT temperatura, umidade, tempoDado, fazenda.nome as fazendaNome, setor.nome as setorNome
+		SELECT TOP ${setorLength} temperatura, umidade, tempoDado, fazenda.nome as fazendaNome, setor.nome as setorNome
 			FROM dado JOIN setor on idSetor = fkSetor JOIN fazenda ON idFazenda = fkFazenda 
 				JOIN contrato ON contrato.fkFazenda = idFazenda
-					WHERE contrato.fkFuncionario = ${idFuncionario} ORDER BY idDado DESC LIMIT ${setorLength};
+					WHERE contrato.fkFuncionario = ${idFuncionario} ORDER BY idDado DESC;
     `;
 
 	console.log("Executando a instrução SQL: \n" + instrucao);
@@ -233,8 +231,8 @@ function limparDadosSensores() {
 	);
 	var instrucao = `
         TRUNCATE TABLE dado;
-				ALTER TABLE dado DROP CONSTRAINT df_dataDado;
-				ALTER TABLE dado ADD CONSTRAINT df_dadoDado DEFAULT GETDATE() FOR dataDado;
+				ALTER TABLE dado DROP df_dataDado;
+				ALTER TABLE dado ADD CONSTRAINT df_dataDado DEFAULT GETDATE() FOR dataDado;
     `;
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);
@@ -266,7 +264,7 @@ function deletarEmpresa(idEmpresa) {
 	//  e na ordem de inserção dos dados.
 	var instrucao = `
         		DELETE FROM empresa WHERE idEmpresa = '${idEmpresa}'
-				`;
+	`;
 
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);

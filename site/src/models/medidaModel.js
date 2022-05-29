@@ -2,21 +2,20 @@ var database = require("../database/config");
 
 function listarMinUmid(idFuncionario) {
 	instrucaoSql = `
-    SELECT fazenda.nome as fazenda, setor.nome as setor, tempoDado, dataDado, min(umidade) as minUmid, DATE_FORMAT(dataDado,'%d/%m/%Y') as dataDado FROM dado 
-    JOIN setor ON idSetor = fkSetor 
+    SELECT TOP 1 fazenda.nome as fazenda, setor.nome as setor, tempoDado, dataDado, umidade as minUmid, FORMAT(dataDado, 'dd/MM/yyyy') as dataDado
+    FROM dado 
+    JOIN setor ON idSetor = dado.fkSetor 
     JOIN fazenda ON idFazenda = setor.fkFazenda
     JOIN contrato ON contrato.fkFazenda = idFazenda
     JOIN funcionario ON idFuncionario = fkFuncionario
-    WHERE idFuncionario = ${idFuncionario} and month(dataDado) = MONTH(CURRENT_DATE()) and umidade = 
-        (
+    WHERE idFuncionario = 1 and MONTH(dataDado) = MONTH(GETDATE()) and umidade = (
         SELECT min(umidade) FROM dado 
-        JOIN setor ON idSetor = fkSetor 
+        JOIN setor ON idSetor = dado.fkSetor 
         JOIN fazenda ON idFazenda = setor.fkFazenda
         JOIN contrato ON contrato.fkFazenda = idFazenda
         JOIN funcionario ON idFuncionario = fkFuncionario
-        WHERE idFuncionario = ${idFuncionario} and month(dataDado) = MONTH(CURRENT_DATE()) order by umidade
-        )
-    group by fazenda.nome order by rand() limit 1;
+        WHERE idFuncionario = ${idFuncionario} and MONTH(dataDado) = MONTH(GETDATE())
+    ) order by newid();
     `;
 
 	console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -25,21 +24,20 @@ function listarMinUmid(idFuncionario) {
 
 function listarMaxUmid(idFuncionario) {
 	instrucaoSql = `
-    SELECT fazenda.nome as fazenda, setor.nome as setor, tempoDado, dataDado, max(umidade) as maxUmid, DATE_FORMAT(dataDado,'%d/%m/%Y') as dataDado FROM dado 
-        JOIN setor ON idSetor = fkSetor 
+    SELECT TOP 1 idDado, fazenda.nome as fazenda, setor.nome as setor, tempoDado, dataDado, umidade as maxUmid, FORMAT(dataDado, 'dd/MM/yyyy') as dataDado
+    FROM dado 
+    JOIN setor ON idSetor = dado.fkSetor 
+    JOIN fazenda ON idFazenda = setor.fkFazenda
+    JOIN contrato ON contrato.fkFazenda = idFazenda
+    JOIN funcionario ON idFuncionario = fkFuncionario
+    WHERE idFuncionario = ${idFuncionario} and MONTH(dataDado) = MONTH(GETDATE()) and umidade = (
+        SELECT max(umidade) FROM dado 
+        JOIN setor ON idSetor = dado.fkSetor 
         JOIN fazenda ON idFazenda = setor.fkFazenda
         JOIN contrato ON contrato.fkFazenda = idFazenda
         JOIN funcionario ON idFuncionario = fkFuncionario
-        WHERE idFuncionario = ${idFuncionario} and month(dataDado) = MONTH(CURRENT_DATE()) and umidade = 
-            (
-            SELECT max(umidade) FROM dado 
-            JOIN setor ON idSetor = fkSetor 
-            JOIN fazenda ON idFazenda = setor.fkFazenda
-            JOIN contrato ON contrato.fkFazenda = idFazenda
-            JOIN funcionario ON idFuncionario = fkFuncionario
-            WHERE idFuncionario = ${idFuncionario} and month(dataDado) = MONTH(CURRENT_DATE()) order by umidade
-            )
-        group by fazenda.nome order by rand() limit 1;
+        WHERE idFuncionario = ${idFuncionario} and MONTH(dataDado) = MONTH(GETDATE())
+    ) order by newid();
     `;
 
 	console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -48,21 +46,20 @@ function listarMaxUmid(idFuncionario) {
 
 function listarMinTemp(idFuncionario) {
 	instrucaoSql = `
-    SELECT fazenda.nome as fazenda, setor.nome as setor, tempoDado, dataDado, min(temperatura) as minTemp, DATE_FORMAT(dataDado,'%d/%m/%Y') as dataDado FROM dado 
-    JOIN setor ON idSetor = fkSetor 
+    SELECT TOP 1 fazenda.nome as fazenda, setor.nome as setor, tempoDado, dataDado, temperatura as minTemp, FORMAT(dataDado, 'dd/MM/yyyy') as dataDado
+    FROM dado 
+    JOIN setor ON idSetor = dado.fkSetor 
     JOIN fazenda ON idFazenda = setor.fkFazenda
     JOIN contrato ON contrato.fkFazenda = idFazenda
     JOIN funcionario ON idFuncionario = fkFuncionario
-    WHERE idFuncionario = ${idFuncionario} and month(dataDado) = MONTH(CURRENT_DATE()) and temperatura = 
-        (
+    WHERE idFuncionario = ${idFuncionario} and MONTH(dataDado) = MONTH(GETDATE()) and temperatura = (
         SELECT min(temperatura) FROM dado 
-        JOIN setor ON idSetor = fkSetor 
+        JOIN setor ON idSetor = dado.fkSetor 
         JOIN fazenda ON idFazenda = setor.fkFazenda
         JOIN contrato ON contrato.fkFazenda = idFazenda
         JOIN funcionario ON idFuncionario = fkFuncionario
-        WHERE idFuncionario = ${idFuncionario} and month(dataDado) = MONTH(CURRENT_DATE()) order by temperatura
-        )
-    group by fazenda.nome order by rand() limit 1;
+        WHERE idFuncionario = ${idFuncionario} and MONTH(dataDado) = MONTH(GETDATE())
+    ) order by newid();
     `;
 
 	console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -72,21 +69,20 @@ function listarMinTemp(idFuncionario) {
 function listarMaxTemp(idFuncionario) {
 	// Retorna os valores das KPIs, o último select retorna o AVG de todas as fazendas para ser filtrado no JS
 	instrucaoSql = `
-    SELECT fazenda.nome as fazenda, setor.nome as setor, tempoDado, dataDado, MONTH(dataDado) as numMes, max(temperatura) as maxTemp, DATE_FORMAT(dataDado,'%d/%m/%Y') as dataDado FROM dado 
-        JOIN setor ON idSetor = fkSetor 
+    SELECT TOP 1 fazenda.nome as fazenda, setor.nome as setor, tempoDado, dataDado, temperatura as maxTemp, FORMAT(dataDado, 'dd/MM/yyyy') as dataDado
+    FROM dado 
+    JOIN setor ON idSetor = dado.fkSetor 
+    JOIN fazenda ON idFazenda = setor.fkFazenda
+    JOIN contrato ON contrato.fkFazenda = idFazenda
+    JOIN funcionario ON idFuncionario = fkFuncionario
+    WHERE idFuncionario = ${idFuncionario} and MONTH(dataDado) = MONTH(GETDATE()) and temperatura = (
+        SELECT max(temperatura) FROM dado 
+        JOIN setor ON idSetor = dado.fkSetor 
         JOIN fazenda ON idFazenda = setor.fkFazenda
         JOIN contrato ON contrato.fkFazenda = idFazenda
         JOIN funcionario ON idFuncionario = fkFuncionario
-        WHERE idFuncionario = ${idFuncionario} and month(dataDado) = MONTH(CURRENT_DATE()) and temperatura = 
-			(
-			SELECT max(temperatura) FROM dado 
-			JOIN setor ON idSetor = fkSetor 
-			JOIN fazenda ON idFazenda = setor.fkFazenda
-			JOIN contrato ON contrato.fkFazenda = idFazenda
-			JOIN funcionario ON idFuncionario = fkFuncionario
-			WHERE idFuncionario = ${idFuncionario} and month(dataDado) = MONTH(CURRENT_DATE()) order by temperatura
-            )
-        group by fazenda.nome order by rand() limit 1;
+        WHERE idFuncionario = ${idFuncionario} and MONTH(dataDado) = MONTH(GETDATE())
+    ) order by newid();
     `;
 
 	console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -96,12 +92,13 @@ function listarMaxTemp(idFuncionario) {
 function listarAvgs(idFuncionario) {
 	// Retorna os valores das KPIs, o último select retorna o AVG de todas as fazendas para ser filtrado no JS
 	instrucaoSql = `
-    SELECT fazenda.nome as fazenda, truncate(avg(temperatura), 1) as avgTemp, truncate(avg(umidade),1) as avgUmid FROM dado
-    JOIN setor on fkSetor = idSetor
+    SELECT fazenda.nome as fazenda, round(avg(temperatura), 1) as avgTemp, round(avg(umidade),1) as avgUmid 
+    FROM dado
+    JOIN setor on idSetor = dado.fkSetor
     JOIN fazenda on idFazenda = setor.fkFazenda
     JOIN contrato on contrato.fkFazenda = idFazenda
-    JOIN funcionario on idFuncionario = fkFuncionario WHERE idFuncionario = ${idFuncionario} 
-    AND month(dataDado) = MONTH(CURRENT_DATE()) GROUP BY fazenda.nome;
+    JOIN funcionario on idFuncionario = fkFuncionario 
+    WHERE idFuncionario = ${idFuncionario} AND month(dataDado) = MONTH(GETDATE()) GROUP BY fazenda.nome;
     `;
 
 	console.log("Executando a instrução SQL: \n" + instrucaoSql);

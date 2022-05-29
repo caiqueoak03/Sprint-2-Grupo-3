@@ -141,6 +141,7 @@
 		var nome = input_nome.value;
 		var qtd_sacas_perdidas = Number(input_qtd_sacas.value);
 		var valor_saca = Number(input_valor_saca.value);
+		var saldo = (valor_saca * qtd_sacas_perdidas) * 0.50
 		var alerta = ``;
 
 		if (nome == ``) {
@@ -154,7 +155,8 @@
 		if (alerta != ``) {
 			alert(alerta);
 		} else {
-			respostaText.innerHTML = `Olá ${nome}, você está perdendo ${perdaTotalExibicao} na sua produção. Com a Soy Venture você terá uma redução média de 50% no seu prejuízo, tendo um saldo de ${saldo}.`;
+			respostaText.innerHTML = `Olá ${nome}, você está perdendo ${perdaTotalExibicao} na sua produção.
+			 Com a Soy Venture você terá uma redução média de 50% no seu prejuízo, tendo um saldo de ${saldo}.`;
 		}
 
 		var perdaTotal = qtd_sacas_perdidas * valor_saca;

@@ -218,6 +218,10 @@
 				if (senha != confirmarSenha) {
 					alerta += "*As senhas não conferem!!\n";
 				}
+				if (senha == "") {
+					alerta += "*Senha não pode ser vazio!!\n";
+				}
+				
 
 				if (telFixo.length != 10) {
 					alerta += "*Telefone Fixo incorreto\n";

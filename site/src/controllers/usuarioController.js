@@ -416,7 +416,7 @@ function pegarDados(req, res) {
 		res.status(400).send("Seu fkSetor está undefined!");
 	} else if (fkFazenda == undefined) {
 		res.status(400).send("Seu fkFazenda está undefined!");
-	} else if (dataDado == undefined) {
+	} else if (dataDado == undefined || dataDado.length <= 0) {
 		res.status(400).send("Seu dataDado está undefined!");
 	} else if (idFuncionario == undefined) {
 		res.status(400).send("Seu idFuncionario está undefined!");

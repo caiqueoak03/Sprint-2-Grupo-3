@@ -233,7 +233,7 @@ function limparDadosSensores() {
 	var instrucao = `
         TRUNCATE TABLE dado;
 				ALTER TABLE dado DROP df_dataDado;
-				ALTER TABLE dado ADD CONSTRAINT df_dataDado DEFAULT GETDATE() FOR dataDado;
+				ALTER TABLE dado ADD CONSTRAINT df_dataDado DEFAULT FORMAT(GETDATE(), 'dd/MM/yyyy') FOR dataDado;
     `;
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);

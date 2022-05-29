@@ -259,6 +259,17 @@ var primeiroRender = true;
 var interval;
 
 function pegarDados() {
+	console.log(
+		"DATADADO::::::::::::::::::::::::::::::::::::::::::: " + dia_select.value,
+	);
+	console.log(
+		"fazendas_select::::::::::::::::::::::::::::::::::::::::::: " +
+			fazendas_select.value,
+	);
+	console.log(
+		"setor_select::::::::::::::::::::::::::::::::::::::::::: " +
+			setor_select.value,
+	);
 	var pegar = () =>
 		fetch("/usuarios/pegarDados", {
 			method: "POST",

@@ -2,7 +2,7 @@ var database = require("../database/config");
 
 function listarMinUmid(idFuncionario) {
 	instrucaoSql = `
-    SELECT TOP 1 fazenda.nome as fazenda, setor.nome as setor, tempoDado, dataDado, umidade as minUmid, FORMAT(dataDado, 'dd/MM/yyyy') as dataDado
+    SELECT TOP 1 fazenda.nome as fazenda, setor.nome as setor, FORMAT(DATEADD(HOUR, -3, GETUTCDATE()), 'hh:mm:ss') as tempoDado, umidade as minUmid, FORMAT(dataDado, 'dd/MM/yyyy') as dataDado
     FROM dado 
     JOIN setor ON idSetor = dado.fkSetor 
     JOIN fazenda ON idFazenda = setor.fkFazenda
@@ -24,7 +24,7 @@ function listarMinUmid(idFuncionario) {
 
 function listarMaxUmid(idFuncionario) {
 	instrucaoSql = `
-    SELECT TOP 1 idDado, fazenda.nome as fazenda, setor.nome as setor, tempoDado, dataDado, umidade as maxUmid, FORMAT(dataDado, 'dd/MM/yyyy') as dataDado
+    SELECT TOP 1 idDado, fazenda.nome as fazenda, setor.nome as setor, FORMAT(DATEADD(HOUR, -3, GETUTCDATE()), 'hh:mm:ss') as tempoDado, umidade as maxUmid, FORMAT(dataDado, 'dd/MM/yyyy') as dataDado
     FROM dado 
     JOIN setor ON idSetor = dado.fkSetor 
     JOIN fazenda ON idFazenda = setor.fkFazenda
@@ -46,7 +46,7 @@ function listarMaxUmid(idFuncionario) {
 
 function listarMinTemp(idFuncionario) {
 	instrucaoSql = `
-    SELECT TOP 1 fazenda.nome as fazenda, setor.nome as setor, tempoDado, dataDado, temperatura as minTemp, FORMAT(dataDado, 'dd/MM/yyyy') as dataDado
+    SELECT TOP 1 fazenda.nome as fazenda, setor.nome as setor, FORMAT(DATEADD(HOUR, -3, GETUTCDATE()), 'hh:mm:ss') as tempoDado, temperatura as minTemp, FORMAT(dataDado, 'dd/MM/yyyy') as dataDado
     FROM dado 
     JOIN setor ON idSetor = dado.fkSetor 
     JOIN fazenda ON idFazenda = setor.fkFazenda
@@ -69,7 +69,7 @@ function listarMinTemp(idFuncionario) {
 function listarMaxTemp(idFuncionario) {
 	// Retorna os valores das KPIs, o último select retorna o AVG de todas as fazendas para ser filtrado no JS
 	instrucaoSql = `
-    SELECT TOP 1 fazenda.nome as fazenda, setor.nome as setor, tempoDado, dataDado, temperatura as maxTemp, FORMAT(dataDado, 'dd/MM/yyyy') as dataDado
+    SELECT TOP 1 MONTH(GETDATE()) as numMes, fazenda.nome as fazenda, setor.nome as setor, FORMAT(DATEADD(HOUR, -3, GETUTCDATE()), 'hh:mm:ss') as tempoDado, temperatura as maxTemp, FORMAT(dataDado, 'dd/MM/yyyy') as dataDado
     FROM dado 
     JOIN setor ON idSetor = dado.fkSetor 
     JOIN fazenda ON idFazenda = setor.fkFazenda

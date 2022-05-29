@@ -218,10 +218,9 @@ function gerarDias() {
 
 					for (var i = 0; i < json.length; i++) {
 						dia_select.innerHTML += `
-							<option value="${json[i].dataDado.slice(0, 10)}">${json[i].dataDado.slice(
-							0,
-							10,
-						)}</option>
+							<option value="${json[i].dataDado}">
+							${json[i].dataDado}
+							</option>
 						`;
 					}
 

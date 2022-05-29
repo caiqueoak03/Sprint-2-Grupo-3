@@ -97,7 +97,7 @@ function gerarDias(idFazenda) {
 		idFazenda,
 	);
 	var instrucao = `
-	SELECT DISTINCT dataDado FROM dado JOIN fazenda on idFazenda = setor_fkFazenda where setor_fkFazenda = '${idFazenda}';
+	SELECT DISTINCT FORMAT(dataDado, 'dd/MM/yyyy') as dataDado FROM dado JOIN fazenda on idFazenda = setor_fkFazenda where setor_fkFazenda = '${idFazenda}';
     `;
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);
@@ -168,8 +168,9 @@ function pegarDadosHora(fkSetor) {
 	);
 
 	var instrucao = `
-	SELECT TOP 8 * FROM dado JOIN setor on idSetor = fkSetor JOIN fazenda on idFazenda = fkFazenda
-		WHERE fkSetor = ${fkSetor} ORDER BY idDado DESC;
+	SELECT TOP 8 temperatura, umidade, FORMAT(DATEADD(HOUR, -3, GETUTCDATE()), 'hh:mm:ss') as tempoDado 
+		FROM dado JOIN setor on idSetor = fkSetor JOIN fazenda on idFazenda = fkFazenda
+			WHERE fkSetor = ${fkSetor} ORDER BY idDado DESC;
     `;
 
 	console.log("Executando a instrução SQL: \n" + instrucao);
@@ -201,7 +202,7 @@ function pegarDadosAlerta(idFuncionario, setorLength) {
 	);
 
 	var instrucao = `
-		SELECT TOP ${setorLength} temperatura, umidade, tempoDado, fazenda.nome as fazendaNome, setor.nome as setorNome
+		SELECT TOP ${setorLength} temperatura, umidade, fazenda.nome as fazendaNome, setor.nome as setorNome
 			FROM dado JOIN setor on idSetor = fkSetor JOIN fazenda ON idFazenda = fkFazenda 
 				JOIN contrato ON contrato.fkFazenda = idFazenda
 					WHERE contrato.fkFuncionario = ${idFuncionario} ORDER BY idDado DESC;

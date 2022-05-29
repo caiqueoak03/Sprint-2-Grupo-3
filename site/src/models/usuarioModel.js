@@ -184,10 +184,12 @@ function pegarDadosSetor(fkFazenda, dataDado) {
 		dataDado,
 	);
 
+	dataDadoFormatado = dataDado.split("/").reverse().join("-");
+
 	var instrucao = `
 	SELECT nome, round(avg(temperatura), 2) as avgTemp, round(avg(umidade), 2) as avgUmid 
 		FROM dado JOIN setor on idSetor = fkSetor 
-			WHERE setor_fkFazenda = ${fkFazenda} and dataDado = '${dataDado}' group by nome;
+			WHERE setor_fkFazenda = ${fkFazenda} and dataDado = '${dataDadoFormatado}' group by nome;
     `;
 
 	console.log("Executando a instrução SQL: \n" + instrucao);

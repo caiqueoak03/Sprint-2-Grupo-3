@@ -112,7 +112,7 @@ function gerarSetores() {
 	return false;
 }
 
-var intervalo = 5 * 1000; // segundos * 1000
+var intervalo = 3 * 1000; // segundos * 1000
 
 function limparDadosSensores() {
 	fetch("/usuarios/limparDadosSensores", {
@@ -259,17 +259,6 @@ var primeiroRender = true;
 var interval;
 
 function pegarDados() {
-	console.log(
-		"DATADADO::::::::::::::::::::::::::::::::::::::::::: " + dia_select.value,
-	);
-	console.log(
-		"fazendas_select::::::::::::::::::::::::::::::::::::::::::: " +
-			fazendas_select.value,
-	);
-	console.log(
-		"setor_select::::::::::::::::::::::::::::::::::::::::::: " +
-			setor_select.value,
-	);
 	var pegar = () =>
 		fetch("/usuarios/pegarDados", {
 			method: "POST",

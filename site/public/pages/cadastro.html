@@ -280,15 +280,12 @@
 				var senhaVar = in_senha.value;
 				var idEmpresaVar = idEmpresa;
 
-				// Enviando o valor da nova input
 				fetch("/usuarios/cadastrarFuncionario", {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
 					},
 					body: JSON.stringify({
-						// crie um atributo que recebe o valor recuperado aqui
-						// Agora vá para o arquivo routes/usuario.js
 						nomeServer: nomeVar,
 						sobrenomeServer: sobrenomeVar,
 						emailServer: emailVar,
@@ -302,7 +299,6 @@
 					.then(function (resposta) {
 						console.log("resposta: ", resposta);
 
-						// Somente para o cadastro de cliente
 						if (resposta.ok) {
 							resposta.json().then((json) => {
 								console.log(json);

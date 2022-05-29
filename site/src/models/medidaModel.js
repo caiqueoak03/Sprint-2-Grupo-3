@@ -8,7 +8,7 @@ function listarMinUmid(idFuncionario) {
     JOIN fazenda ON idFazenda = setor.fkFazenda
     JOIN contrato ON contrato.fkFazenda = idFazenda
     JOIN funcionario ON idFuncionario = fkFuncionario
-    WHERE idFuncionario = 1 and MONTH(dataDado) = MONTH(GETDATE()) and umidade = (
+    WHERE idFuncionario = ${idFuncionario} and MONTH(dataDado) = MONTH(GETDATE()) and umidade = (
         SELECT min(umidade) FROM dado 
         JOIN setor ON idSetor = dado.fkSetor 
         JOIN fazenda ON idFazenda = setor.fkFazenda

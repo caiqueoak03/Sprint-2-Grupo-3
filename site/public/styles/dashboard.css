@@ -63,7 +63,6 @@
 
 #alerta {
 	margin-left: 5px;
-	margin-bottom: 5px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -145,7 +144,7 @@ button:active {
 	margin: 0 auto;
 	box-shadow: 0 0 5px 0 black;
 	width: 98%;
-	height: 85%;
+	height: 88%;
 }
 
 .indicadores-container {

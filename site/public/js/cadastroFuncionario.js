@@ -29,6 +29,20 @@ function carregarFazendas() {
 
 					sessionStorage.ID_FAZENDAS = idFazendas;
 					sessionStorage.NOME_FAZENDAS = nomeFazendas;
+
+					var len = sessionStorage.ID_FAZENDAS.split(",").length;
+					var idFazendas = sessionStorage.ID_FAZENDAS.split(",");
+					var nomeFazendas = sessionStorage.NOME_FAZENDAS.split(",");
+
+					for (let i = 0; i < len; i++) {
+						checkBoxes.innerHTML += `
+                    <li>
+                      <label class="labels">
+                        ${nomeFazendas[i]}
+                      </label>
+                      <input type="checkbox" class="boxes" id='${idFazendas[i]}'/>
+                    </li>`;
+					}
 				});
 			} else {
 				console.log("Houve um erro ao tentar carregar as fazendas!");
@@ -41,20 +55,6 @@ function carregarFazendas() {
 		.catch(function (erro) {
 			console.log(erro);
 		});
-
-	var len = sessionStorage.ID_FAZENDAS.split(",").length;
-	var idFazendas = sessionStorage.ID_FAZENDAS.split(",");
-	var nomeFazendas = sessionStorage.NOME_FAZENDAS.split(",");
-
-	for (let i = 0; i < len; i++) {
-		checkBoxes.innerHTML += `
-            <li>
-              <label class="labels">
-                ${nomeFazendas[i]}
-              </label>
-              <input type="checkbox" class="boxes" id='${idFazendas[i]}'/>
-            </li>`;
-	}
 
 	return false;
 }

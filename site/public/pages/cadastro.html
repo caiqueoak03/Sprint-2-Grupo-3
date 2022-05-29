@@ -59,14 +59,12 @@
 										placeholder="Nome"
 										type="text"
 										id="in_nome"
-										value="John"
 									/>
 								</li>
 								<li>
 									Empresa:<br /><input
 										placeholder="Nome da empresa"
 										type="text"
-										value="teste"
 										id="in_nomeEmpresa"
 									/>
 								</li>
@@ -74,7 +72,6 @@
 									Telefone Fixo: <br /><input
 										id="in_telFixo"
 										placeholder="(00)0000-0000"
-										value="1159211122"
 										type="text"
 									/>
 								</li>
@@ -82,7 +79,6 @@
 									Senha:<br /><input
 										id="in_senha"
 										placeholder="Inserir Senha"
-										value="123"
 										type="password"
 									/>
 								</li>
@@ -90,7 +86,6 @@
 									Cnpj:<br /><input
 										id="in_cnpj"
 										placeholder="Cnpj"
-										value="01234567891234"
 										type="text"
 									/>
 								</li>
@@ -102,7 +97,6 @@
 										Sobrenome:<br /><input
 											placeholder="Sobrenome"
 											type="text"
-											value="Doe"
 											id="in_sobrenome"
 										/>
 									</li>
@@ -110,7 +104,6 @@
 										E-mail:<br /><input
 											id="in_email"
 											placeholder="E-mail"
-											value="teste@gmail.com"
 											type="text"
 										/>
 									</li>
@@ -118,7 +111,6 @@
 										Telefone Celular: <br /><input
 											id="in_telCelular"
 											placeholder="(00)00000-0000"
-											value="11959211122"
 											type="text"
 										/>
 									</li>
@@ -126,7 +118,6 @@
 										Confirmar Senha: <br /><input
 											id="in_confirmarSenha"
 											placeholder="Repetir Senha"
-											value="123"
 											type="password"
 										/>
 									</li>
@@ -218,10 +209,6 @@
 				if (senha != confirmarSenha) {
 					alerta += "*As senhas não conferem!!\n";
 				}
-				if (senha == "") {
-					alerta += "*Senha não pode ser vazio!!\n";
-				}
-				
 
 				if (telFixo.length != 10) {
 					alerta += "*Telefone Fixo incorreto\n";

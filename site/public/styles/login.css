@@ -42,8 +42,8 @@ a {
 	text-shadow: 1px 1px #d3b04d;
 }
 
-.main-nav a:hover,
-.login-nav a:hover {
+ a:hover,
+ a:hover {
 	color: var(--terciary-color);
 	text-decoration: underline;
 }
@@ -278,4 +278,8 @@ li button:hover {
 	border: #2ac28a 1px solid;
 }
 
+li p{
+	margin-left: 25px;
+	margin: 25px 0 0 25px;
+}
 

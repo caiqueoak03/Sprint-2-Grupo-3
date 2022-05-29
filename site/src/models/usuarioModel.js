@@ -97,7 +97,7 @@ function gerarDias(idFazenda) {
 		idFazenda,
 	);
 	var instrucao = `
-	SELECT DISTINCT FORMAT(dataDado, 'dd/MM/yyyy') as dataDado FROM dado JOIN fazenda on idFazenda = setor_fkFazenda where setor_fkFazenda = '${idFazenda}';
+	SELECT DISTINCT FORMAT(dataDado, 'dd/MM/yyyy') as dataDado FROM dado JOIN fazenda on idFazenda = setor_fkFazenda 		where setor_fkFazenda = '${idFazenda}';
     `;
 	console.log("Executando a instrução SQL: \n" + instrucao);
 	return database.executar(instrucao);

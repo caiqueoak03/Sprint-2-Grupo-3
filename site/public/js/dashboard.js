@@ -165,9 +165,9 @@ function gerarDadosSensores() {
 						var qtdDados = json[0].idDado;
 						// var qtdDados = json[json.length - 1][0].idDado; // local
 
-						if (qtdDados >= 500) {
-							alert("Dados limpados do BD para não travar a aplicação");
-							limparDadosSensores();
+						if (qtdDados >= 1500) {
+							alert("Parando de gerar dados");
+							clearInterval(gerar);
 						}
 					});
 				} else {

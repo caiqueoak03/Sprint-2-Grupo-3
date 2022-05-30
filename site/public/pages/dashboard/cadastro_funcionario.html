@@ -246,6 +246,10 @@
 			alerta += "*Email deve ter @ e .com\n";
 		}
 
+		if (senha == ""){
+			alerta+= "*Insira uma senha!!\n"
+		}
+
 		if (senha != confirmarSenha) {
 			alerta += "*As senhas não conferem!!\n";
 		}

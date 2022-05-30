@@ -205,8 +205,13 @@
 				if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
 					alerta += "*Email deve ter @ e .com\n";
 				}
-
-				if (senha != confirmarSenha) {
+				if (senha == "" ) {
+					alerta += "*A senha não pode ser vazia!!\n";
+				}
+				if (senha.length <= 3 ) {
+					alerta += "*A senha não pode ter menos de tres digitos!!\n";
+				}
+				if (senha != confirmarSenha ) {
 					alerta += "*As senhas não conferem!!\n";
 				}
 

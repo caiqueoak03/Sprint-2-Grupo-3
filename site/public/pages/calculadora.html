@@ -134,16 +134,30 @@
 			</div>
 		</div>
 	</body>
-</html>
-
-<script>
-	function calcular() {
-		var nome = input_nome.value;
+	</html>
+	
+	<script>
+		function calcular() {
+			var nome = input_nome.value;
 		var qtd_sacas_perdidas = Number(input_qtd_sacas.value);
 		var valor_saca = Number(input_valor_saca.value);
 		var saldo = (valor_saca * qtd_sacas_perdidas) * 0.50
 		var alerta = ``;
-
+		var perdaTotal = qtd_sacas_perdidas * valor_saca;
+		var perdaReduzida = perdaTotal / 2;
+		var perdaTotalExibicao = perdaTotal.toLocaleString("pt-BR", {
+			style: "currency",
+			currency: "BRL",
+		});
+		var perdaReduzidaExibicao = perdaReduzida.toLocaleString("pt-BR", {
+			style: "currency",
+			currency: "BRL",
+		});
+		var saldo = (perdaTotal - perdaReduzida).toLocaleString("pt-BR", {
+			style: "currency",
+			currency: "BRL",
+		});
+		
 		if (nome == ``) {
 			alerta += `Nome inválido!`;
 		} else if (qtd_sacas_perdidas == ``) {
@@ -159,20 +173,6 @@
 			 Com a Soy Venture você terá uma redução média de 50% no seu prejuízo, tendo um saldo de ${saldo}.`;
 		}
 
-		var perdaTotal = qtd_sacas_perdidas * valor_saca;
-		var perdaReduzida = perdaTotal / 2;
 
-		var perdaTotalExibicao = perdaTotal.toLocaleString("pt-BR", {
-			style: "currency",
-			currency: "BRL",
-		});
-		var perdaReduzidaExibicao = perdaReduzida.toLocaleString("pt-BR", {
-			style: "currency",
-			currency: "BRL",
-		});
-		var saldo = (perdaTotal - perdaReduzida).toLocaleString("pt-BR", {
-			style: "currency",
-			currency: "BRL",
-		});
 	}
 </script>

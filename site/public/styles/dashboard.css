@@ -55,7 +55,7 @@
 
 .dashboard-navbar {
 	display: flex;
-	justify-content: center;
+	justify-content: space-around;
 	align-items: center;
 	column-gap: 5px;
 	width: 100%;
